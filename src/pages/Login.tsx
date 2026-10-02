@@ -12,6 +12,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -29,6 +30,31 @@ const Login = () => {
       return;
     }
     navigate('/admin');
+  };
+
+  const handleForgotPassword = async () => {
+    setError('');
+    setMessage('');
+    if (!supabase) {
+      setError(t('login.notConfigured'));
+      return;
+    }
+    if (!email.trim()) {
+      setError(t('login.enterEmail'));
+      return;
+    }
+
+    setIsLoading(true);
+    const { error: resetError } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    setIsLoading(false);
+
+    if (resetError) {
+      setError(t('login.resetError'));
+      return;
+    }
+    setMessage(t('login.resetSent'));
   };
 
   return (
@@ -67,7 +93,7 @@ const Login = () => {
             <div className="space-y-2">
               <div className="flex justify-between items-center">
                 <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">{t('login.password')}</label>
-                <button type="button" className="text-xs font-bold text-blue-600 hover:text-blue-700">{t('login.forgot')}</button>
+                <button type="button" onClick={handleForgotPassword} disabled={isLoading} className="text-xs font-bold text-blue-600 hover:text-blue-700 disabled:opacity-50">{t('login.forgot')}</button>
               </div>
               <div className="relative">
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
@@ -87,6 +113,7 @@ const Login = () => {
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             {error && <p role="alert" className="rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-800">{error}</p>}
+            {message && <p role="status" className="rounded-xl bg-green-50 px-4 py-3 text-sm text-green-800">{message}</p>}
           </form>
 
           <div className="mt-8 pt-6 border-t border-slate-50 text-center">

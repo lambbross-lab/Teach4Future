@@ -442,7 +442,21 @@ export const translations: any = {
       secure: 'Secure administrative access only.',
       back: 'Back to public website',
       error: 'We could not sign you in. Check your email and password.',
-      notConfigured: 'The secure dashboard will be available after the data service is connected.'
+      notConfigured: 'The secure dashboard will be available after the data service is connected.',
+      enterEmail: 'Enter your email address first.',
+      resetSent: 'If the email belongs to an administrator, you will receive a secure password reset link shortly.',
+      resetError: 'We could not send the reset email. Please try again in a few minutes.',
+      createPassword: 'Create a new password',
+      createPasswordDesc: 'Choose a new password of at least 8 characters for your administrative account.',
+      newPassword: 'New password',
+      confirmPassword: 'Confirm password',
+      savePassword: 'Save new password',
+      passwordTooShort: 'The password must contain at least 8 characters.',
+      passwordMismatch: 'The passwords do not match.',
+      invalidResetLink: 'This recovery link is invalid or has expired. Request a new one from the login page.',
+      passwordUpdated: 'Password updated',
+      passwordUpdatedDesc: 'You can now sign in to the dashboard with your new password.',
+      goToLogin: 'Go to login'
     },
     admin: {
       nav: {
@@ -953,7 +967,21 @@ export const translations: any = {
       secure: 'Acceso administrativo seguro solamente.',
       back: 'Volver a la web pública',
       error: 'No hemos podido iniciar sesión. Comprueba el correo y la contraseña.',
-      notConfigured: 'El panel seguro estará disponible cuando se conecte el servicio de datos.'
+      notConfigured: 'El panel seguro estará disponible cuando se conecte el servicio de datos.',
+      enterEmail: 'Escribe primero tu dirección de correo.',
+      resetSent: 'Si el correo pertenece a una persona administradora, recibirás en breve un enlace seguro para restablecer la contraseña.',
+      resetError: 'No hemos podido enviar el correo de recuperación. Inténtalo de nuevo dentro de unos minutos.',
+      createPassword: 'Crea una contraseña nueva',
+      createPasswordDesc: 'Elige una contraseña nueva de al menos 8 caracteres para tu cuenta administrativa.',
+      newPassword: 'Contraseña nueva',
+      confirmPassword: 'Confirmar contraseña',
+      savePassword: 'Guardar contraseña nueva',
+      passwordTooShort: 'La contraseña debe tener al menos 8 caracteres.',
+      passwordMismatch: 'Las contraseñas no coinciden.',
+      invalidResetLink: 'El enlace de recuperación no es válido o ha caducado. Solicita uno nuevo desde la página de acceso.',
+      passwordUpdated: 'Contraseña actualizada',
+      passwordUpdatedDesc: 'Ya puedes entrar al dashboard con tu nueva contraseña.',
+      goToLogin: 'Ir al acceso'
     },
     admin: {
       nav: {
