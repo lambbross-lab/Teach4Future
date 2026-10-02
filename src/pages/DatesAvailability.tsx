@@ -11,7 +11,7 @@ import { useAcademyData } from '../contexts/AcademyDataContext';
 const DatesAvailability = () => {
   const [selectedCity, setSelectedCity] = useState('all');
   const { language, t } = useLanguage();
-  const { sessions } = useAcademyData();
+  const { sessions, loading } = useAcademyData();
 
   const filteredSessions = sessions.filter(s =>
     isCurrentOrUpcoming(s.endDate) && (selectedCity === 'all' || s.cityId === selectedCity)
@@ -36,7 +36,7 @@ const DatesAvailability = () => {
               selectedCity === 'all' ? "bg-blue-600 text-white shadow-md" : "bg-white text-slate-600 hover:bg-slate-100"
             )}
           >
-            {t('coursesSpain.allCities')}
+            {t('common.allCities')}
           </button>
           {CITIES.map(city => (
             <button
@@ -65,6 +65,13 @@ const DatesAvailability = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50">
+              {filteredSessions.length === 0 && (
+                <tr>
+                  <td colSpan={5} className="px-8 py-12 text-center text-sm text-slate-500">
+                    {loading ? t('common.loading') : t('common.noSessions')}
+                  </td>
+                </tr>
+              )}
               {filteredSessions.map((session) => {
                 const course = COURSES.find(c => c.id === session.courseId);
                 const city = CITIES.find(c => c.id === session.cityId);
@@ -131,6 +138,11 @@ const DatesAvailability = () => {
 
         {/* Card View (Mobile) */}
         <div className="md:hidden space-y-4">
+          {filteredSessions.length === 0 && (
+            <div className="bg-white p-6 rounded-2xl text-center text-sm text-slate-500 shadow-sm border border-slate-100">
+              {loading ? t('common.loading') : t('common.noSessions')}
+            </div>
+          )}
           {filteredSessions.map((session) => {
             const course = COURSES.find(c => c.id === session.courseId);
             const city = CITIES.find(c => c.id === session.cityId);
