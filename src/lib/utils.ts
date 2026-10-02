@@ -19,3 +19,9 @@ export function formatDate(dateString: string, lang: 'en' | 'es' = 'en') {
     year: 'numeric'
   });
 }
+
+export function isCurrentOrUpcoming(endDate: string) {
+  const now = new Date();
+  const localToday = new Date(now.getTime() - now.getTimezoneOffset() * 60_000).toISOString().slice(0, 10);
+  return endDate >= localToday;
+}

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Users, GraduationCap, FileCheck, ShieldCheck, Globe, MessageSquare, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Users, FileCheck, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -36,8 +36,8 @@ const ForSchools = () => {
           <div className="relative">
             <div className="absolute -inset-4 bg-blue-600/5 rounded-[2.5rem] rotate-3" />
             <img 
-              src="https://picsum.photos/seed/school-team/800/600" 
-              alt="Teachers team" 
+              src="https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&w=1200&q=80"
+              alt={t('forSchools.imageAlt')}
               className="relative rounded-[2rem] shadow-2xl w-full h-full object-cover"
               referrerPolicy="no-referrer"
             />
@@ -96,27 +96,9 @@ const ForSchools = () => {
                 </Button>
               </Link>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-4">
-                <div className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
-                  <h4 className="text-2xl font-bold mb-1">500+</h4>
-                  <p className="text-xs text-slate-400 uppercase tracking-widest">{t('forSchools.stats.schools')}</p>
-                </div>
-                <div className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
-                  <h4 className="text-2xl font-bold mb-1">25+</h4>
-                  <p className="text-xs text-slate-400 uppercase tracking-widest">{t('forSchools.stats.countries')}</p>
-                </div>
-              </div>
-              <div className="space-y-4 pt-8">
-                <div className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
-                  <h4 className="text-2xl font-bold mb-1">98%</h4>
-                  <p className="text-xs text-slate-400 uppercase tracking-widest">{t('forSchools.stats.satisfaction')}</p>
-                </div>
-                <div className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
-                  <h4 className="text-2xl font-bold mb-1">10k+</h4>
-                  <p className="text-xs text-slate-400 uppercase tracking-widest">{t('forSchools.stats.certificates')}</p>
-                </div>
-              </div>
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 md:p-10">
+              <h3 className="text-2xl font-bold mb-4">{t('forSchools.tailored.commitmentTitle')}</h3>
+              <p className="text-slate-300 leading-relaxed">{t('forSchools.tailored.commitmentDesc')}</p>
             </div>
           </div>
         </div>

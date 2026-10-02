@@ -15,19 +15,44 @@ const LegalLayout = ({ title, children }: { title: string, children: React.React
   </div>
 );
 
+const IdentityBlock = () => {
+  const { t } = useLanguage();
+  return (
+    <>
+      <h2>{t('legal.identity.title')}</h2>
+      <p><strong>{t('legal.identity.nameLabel')}:</strong> {t('legal.identity.name')}</p>
+      <p><strong>{t('legal.identity.registryLabel')}:</strong> {t('legal.identity.registry')}</p>
+      <p><strong>{t('legal.identity.contactLabel')}:</strong> <a href="mailto:teach4futureacademy@gmail.com">teach4futureacademy@gmail.com</a> · {t('footer.location')}</p>
+    </>
+  );
+};
+const Sections = ({ prefix, count }: { prefix: string, count: number }) => {
+  const { t } = useLanguage();
+  return <>{Array.from({ length: count }, (_, index) => index + 1).map((number) => (
+    <React.Fragment key={number}>
+      <h2>{t(`${prefix}.s${number}Title`)}</h2>
+      <p>{t(`${prefix}.s${number}Content`)}</p>
+    </React.Fragment>
+  ))}</>;
+};
+
+export const LegalNotice = () => {
+  const { t } = useLanguage();
+  return (
+    <LegalLayout title={t('legal.notice.title')}>
+      <p>{t('legal.notice.updated')}</p>
+      <IdentityBlock />
+      <Sections prefix="legal.notice" count={7} />
+    </LegalLayout>
+  );
+};
 export const PrivacyPolicy = () => {
   const { t } = useLanguage();
   return (
     <LegalLayout title={t('legal.privacy.title')}>
       <p>{t('legal.privacy.updated')}</p>
-      <h2>{t('legal.privacy.s1Title')}</h2>
-      <p>{t('legal.privacy.s1Content')}</p>
-      <h2>{t('legal.privacy.s2Title')}</h2>
-      <p>{t('legal.privacy.s2Content')}</p>
-      <h2>{t('legal.privacy.s3Title')}</h2>
-      <p>{t('legal.privacy.s3Content')}</p>
-      <h2>{t('legal.privacy.s4Title')}</h2>
-      <p>{t('legal.privacy.s4Content')}</p>
+      <IdentityBlock />
+      <Sections prefix="legal.privacy" count={7} />
     </LegalLayout>
   );
 };
@@ -37,12 +62,7 @@ export const CookiePolicy = () => {
   return (
     <LegalLayout title={t('legal.cookies.title')}>
       <p>{t('legal.cookies.updated')}</p>
-      <h2>{t('legal.cookies.s1Title')}</h2>
-      <p>{t('legal.cookies.s1Content')}</p>
-      <h2>{t('legal.cookies.s2Title')}</h2>
-      <p>{t('legal.cookies.s2Content')}</p>
-      <h2>{t('legal.cookies.s3Title')}</h2>
-      <p>{t('legal.cookies.s3Content')}</p>
+      <Sections prefix="legal.cookies" count={3} />
     </LegalLayout>
   );
 };
@@ -52,27 +72,8 @@ export const TermsConditions = () => {
   return (
     <LegalLayout title={t('legal.terms.title')}>
       <p>{t('legal.terms.updated')}</p>
-      <h2>{t('legal.terms.s1Title')}</h2>
-      <p>{t('legal.terms.s1Content')}</p>
-      <h2>{t('legal.terms.s2Title')}</h2>
-      <p>{t('legal.terms.s2Content')}</p>
-      <h2>{t('legal.terms.s3Title')}</h2>
-      <p>{t('legal.terms.s3Content')}</p>
+      <Sections prefix="legal.terms" count={8} />
     </LegalLayout>
   );
 };
 
-export const RefundPolicy = () => {
-  const { t } = useLanguage();
-  return (
-    <LegalLayout title={t('legal.refunds.title')}>
-      <p>{t('legal.refunds.updated')}</p>
-      <h2>{t('legal.refunds.s1Title')}</h2>
-      <p>{t('legal.refunds.s1Content')}</p>
-      <h2>{t('legal.refunds.s2Title')}</h2>
-      <p>{t('legal.refunds.s2Content')}</p>
-      <h2>{t('legal.refunds.s3Title')}</h2>
-      <p>{t('legal.refunds.s3Content')}</p>
-    </LegalLayout>
-  );
-};

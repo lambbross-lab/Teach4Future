@@ -2,15 +2,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { ArrowRight, CheckCircle2, Globe, Users, BookOpen, Star, ChevronRight, Sparkles } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Globe, Users, BookOpen, ChevronRight, Sparkles, MapPin } from 'lucide-react';
 import Button from '../components/ui/Button';
 import CourseCard from '../components/CourseCard';
-import { COURSES, SESSIONS, CITIES, TESTIMONIALS, FAQS } from '../mockData';
+import { COURSES, CITIES } from '../mockData';
 import { useLanguage } from '../contexts/LanguageContext';
-import { getText } from '../lib/utils';
+import { getText, isCurrentOrUpcoming } from '../lib/utils';
+import { useAcademyData } from '../contexts/AcademyDataContext';
 
 const Home = () => {
   const { language, t } = useLanguage();
+  const { sessions } = useAcademyData();
   const featuredCourses = COURSES.filter(c => c.featured);
 
   return (
@@ -60,20 +62,6 @@ const Home = () => {
                 </Link>
               </div>
 
-              <div className="mt-12 grid grid-cols-3 gap-8 pt-8 border-t border-slate-100">
-                <div>
-                  <div className="text-3xl font-bold text-slate-900">5,000+</div>
-                  <div className="text-xs text-slate-500 font-medium uppercase tracking-wide">{t('hero.stats.teachers')}</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-slate-900">98%</div>
-                  <div className="text-xs text-slate-500 font-medium uppercase tracking-wide">{t('hero.stats.satisfaction')}</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-slate-900">25+</div>
-                  <div className="text-xs text-slate-500 font-medium uppercase tracking-wide">{t('hero.stats.countries')}</div>
-                </div>
-              </div>
             </motion.div>
 
             <motion.div
@@ -99,26 +87,12 @@ const Home = () => {
                     <CheckCircle2 className="h-5 w-5 text-green-600" />
                   </div>
                   <div>
-                    <div className="text-sm font-bold text-slate-900">Erasmus+ Funded</div>
-                    <div className="text-[10px] text-slate-500">KA1 Mobility Projects</div>
+                    <div className="text-sm font-bold text-slate-900">{t('common.funded')}</div>
+                    <div className="text-[10px] text-slate-500">{t('common.mobility')}</div>
                   </div>
                 </div>
               </div>
 
-              <div className="absolute -bottom-10 -left-10 bg-white p-6 rounded-3xl shadow-xl z-20">
-                <div className="flex -space-x-3 mb-3">
-                  {[1, 2, 3, 4].map(i => (
-                    <img 
-                      key={i}
-                      src={`https://i.pravatar.cc/150?u=${i}`} 
-                      className="w-10 h-10 rounded-full border-2 border-white shadow-sm" 
-                      alt="User"
-                    />
-                  ))}
-                </div>
-                <div className="text-sm font-bold text-slate-900">Join our community</div>
-                <div className="text-[10px] text-slate-500">Connect with expert trainers</div>
-              </div>
             </motion.div>
           </div>
         </div>
@@ -162,6 +136,46 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Spanish-language courses across Europe */}
+      <section className="py-20 bg-blue-50/60">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-[1.1fr_.9fr] overflow-hidden rounded-[2.5rem] bg-slate-950 shadow-2xl">
+            <div className="p-10 md:p-16">
+              <p className="text-sm font-bold uppercase tracking-[0.2em] text-cyan-300 mb-5">{t('home.europe.eyebrow')}</p>
+              <h2 className="text-3xl md:text-5xl font-black text-white leading-tight mb-6">{t('home.europe.title')}</h2>
+              <p className="text-lg text-slate-300 leading-relaxed mb-9 max-w-2xl">{t('home.europe.desc')}</p>
+              <div className="space-y-4 mb-10">
+                {['point1', 'point2', 'point3'].map((point) => (
+                  <div key={point} className="flex items-center gap-3 text-white">
+                    <CheckCircle2 className="h-5 w-5 text-cyan-300 flex-none" />
+                    <span>{t(`home.europe.${point}`)}</span>
+                  </div>
+                ))}
+              </div>
+              <Link to="/courses-europe">
+                <Button size="lg" className="bg-cyan-400 text-slate-950 hover:bg-cyan-300 px-8">
+                  {t('home.europe.cta')}
+                </Button>
+              </Link>
+            </div>
+            <div className="relative min-h-[340px] bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-500 p-10 md:p-14 flex flex-col justify-between">
+              <Globe className="h-24 w-24 text-white/90" strokeWidth={1.25} />
+              <div>
+                <div className="grid grid-cols-2 gap-3 mb-8">
+                  {['Lisboa', 'Roma', 'Berlín', 'Praga'].map((city) => (
+                    <div key={city} className="flex items-center gap-2 rounded-2xl bg-white/15 px-4 py-3 text-white backdrop-blur-sm border border-white/20">
+                      <MapPin className="h-4 w-4" />
+                      <span className="font-semibold">{city}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-white/80 text-sm">{t('common.europeCaption')}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Featured Courses */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -182,7 +196,7 @@ const Home = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {featuredCourses.map((course) => {
-              const session = SESSIONS.find(s => s.courseId === course.id);
+              const session = sessions.find(s => s.courseId === course.id && isCurrentOrUpcoming(s.endDate));
               return <CourseCard key={course.id} course={course} session={session} />;
             })}
           </div>
@@ -235,37 +249,6 @@ const Home = () => {
                   </div>
                 </div>
               </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{t('home.testimonials.title')}</h2>
-            <p className="text-slate-600 max-w-2xl mx-auto text-lg">
-              {t('home.testimonials.subtitle')}
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {TESTIMONIALS.map((t_item) => (
-              <div key={t_item.id} className="bg-slate-50 p-10 rounded-[2.5rem] border border-slate-100 hover:border-blue-100 transition-colors">
-                <div className="flex items-center space-x-1 text-orange-400 mb-8">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="h-5 w-5 fill-current" />)}
-                </div>
-                <p className="text-slate-700 italic mb-10 text-lg leading-relaxed">"{getText(t_item.content, language)}"</p>
-                <div className="flex items-center space-x-4">
-                  <img src={t_item.avatar} alt={t_item.name} className="w-14 h-14 rounded-full border-2 border-white shadow-md" referrerPolicy="no-referrer" />
-                  <div>
-                    <h4 className="font-bold text-slate-900">{t_item.name}</h4>
-                    <p className="text-xs text-slate-500 font-medium mb-1">{getText(t_item.role, language)}</p>
-                    <p className="text-xs text-blue-600 font-bold">{t_item.institution}</p>
-                  </div>
-                </div>
-              </div>
             ))}
           </div>
         </div>

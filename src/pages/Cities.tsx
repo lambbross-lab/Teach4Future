@@ -1,15 +1,17 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { cn, getText } from '../lib/utils';
+import { cn, getText, isCurrentOrUpcoming } from '../lib/utils';
 import { MapPin, Sun, Waves, History, Utensils, ArrowRight, CheckCircle2 } from 'lucide-react';
-import { CITIES, COURSES, SESSIONS } from '../mockData';
+import { CITIES, COURSES } from '../mockData';
 import CourseCard from '../components/CourseCard';
 import Button from '../components/ui/Button';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAcademyData } from '../contexts/AcademyDataContext';
 
 const Cities = () => {
   const { language, t } = useLanguage();
+  const { sessions } = useAcademyData();
 
   return (
     <div className="pt-32 pb-20 bg-white">
@@ -23,7 +25,7 @@ const Cities = () => {
 
         <div className="space-y-32">
           {CITIES.map((city, idx) => {
-            const cityCourses = SESSIONS.filter(s => s.cityId === city.id);
+            const cityCourses = sessions.filter(s => s.cityId === city.id && isCurrentOrUpcoming(s.endDate));
             const isEven = idx % 2 === 0;
 
             return (

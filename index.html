@@ -1,26 +1,29 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <script>
-      // Workaround for sandboxed/iframe environments where window.fetch is read-only
-      // and assignments like window.fetch = ... throw TypeErrors.
-      (function() {
-        try {
-          var _fetch = window.fetch;
-          Object.defineProperty(window, 'fetch', {
-            get: function() { return _fetch; },
-            set: function(val) { _fetch = val; },
-            configurable: true,
-            enumerable: true
-          });
-        } catch (e) {
-          console.warn('Failed to define fetch setter workaround:', e);
-        }
-      })();
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
+    <meta name="description" content="Practical Erasmus+ teacher training in Spain and tailor-made courses in Spanish across Europe." />
+    <meta name="theme-color" content="#082b62" />
+    <meta name="application-name" content="Teach4Future Academy" />
+    <meta name="apple-mobile-web-app-title" content="Teach4Future" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://teach4-future.vercel.app/" />
+    <meta property="og:title" content="Teach4Future Academy" />
+    <meta property="og:description" content="Practical Erasmus+ teacher training in Spain and tailor-made courses across Europe." />
+    <meta property="og:image" content="https://teach4-future.vercel.app/og-teach4future.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Teach4Future Academy" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Teach4Future Academy" />
+    <meta name="twitter:description" content="Practical Erasmus+ teacher training in Spain and tailor-made courses across Europe." />
+    <meta name="twitter:image" content="https://teach4-future.vercel.app/og-teach4future.png" />
+    <title>Teach4Future Academy · Erasmus+ Teacher Training</title>
   </head>
   <body>
     <div id="root"></div>

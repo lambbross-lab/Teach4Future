@@ -1,9 +1,24 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Globe, GraduationCap, ChevronDown } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { useLanguage } from '../contexts/LanguageContext';
+
+const Flag = ({ language }: { language: 'en' | 'es' }) => language === 'es' ? (
+  <svg aria-hidden="true" viewBox="0 0 30 20" className="h-4 w-6 rounded-[2px] shadow-sm">
+    <rect width="30" height="20" fill="#AA151B" />
+    <rect y="5" width="30" height="10" fill="#F1BF00" />
+  </svg>
+) : (
+  <svg aria-hidden="true" viewBox="0 0 60 40" className="h-4 w-6 rounded-[2px] shadow-sm">
+    <rect width="60" height="40" fill="#012169" />
+    <path d="M0 0L60 40M60 0L0 40" stroke="#fff" strokeWidth="8" />
+    <path d="M0 0L60 40M60 0L0 40" stroke="#C8102E" strokeWidth="3" />
+    <path d="M30 0V40M0 20H60" stroke="#fff" strokeWidth="13" />
+    <path d="M30 0V40M0 20H60" stroke="#C8102E" strokeWidth="7" />
+  </svg>
+);
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,9 +53,12 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center space-x-2">
-            <div className="bg-blue-600 p-2 rounded-lg shadow-lg shadow-blue-200">
-              <GraduationCap className="h-6 w-6 text-white" />
-            </div>
+            <img
+              src="/brand/teach4future-book.png"
+              alt=""
+              aria-hidden="true"
+              className="h-11 w-11 object-contain"
+            />
             <span className="text-xl font-bold tracking-tight text-slate-900">
               Teach4Future <span className="text-blue-600">Academy</span>
             </span>
@@ -65,21 +83,25 @@ const Header = () => {
             <div className="flex items-center space-x-2 border-l border-slate-200 pl-6 ml-2">
               <button 
                 onClick={() => setLanguage('en')}
+                aria-label="View website in English"
+                title="English"
                 className={cn(
-                  "text-xs font-bold transition-all px-2 py-1 rounded",
-                  language === 'en' ? "bg-blue-600 text-white" : "text-slate-400 hover:text-slate-600"
+                  "leading-none transition-all px-2 py-2 rounded-lg",
+                  language === 'en' ? "bg-blue-50 ring-2 ring-blue-600" : "opacity-60 hover:opacity-100"
                 )}
               >
-                EN
+                <Flag language="en" />
               </button>
               <button 
                 onClick={() => setLanguage('es')}
+                aria-label="Ver la web en español"
+                title="Español"
                 className={cn(
-                  "text-xs font-bold transition-all px-2 py-1 rounded",
-                  language === 'es' ? "bg-blue-600 text-white" : "text-slate-400 hover:text-slate-600"
+                  "leading-none transition-all px-2 py-2 rounded-lg",
+                  language === 'es' ? "bg-blue-50 ring-2 ring-blue-600" : "opacity-60 hover:opacity-100"
                 )}
               >
-                ES
+                <Flag language="es" />
               </button>
             </div>
 
@@ -96,26 +118,30 @@ const Header = () => {
             <div className="flex items-center space-x-1 bg-slate-100 rounded-lg p-1">
               <button 
                 onClick={() => setLanguage('en')}
+                aria-label="View website in English"
                 className={cn(
-                  "text-[10px] font-bold px-2 py-1 rounded",
-                  language === 'en' ? "bg-white text-blue-600 shadow-sm" : "text-slate-500"
+                  "leading-none px-2 py-2 rounded",
+                  language === 'en' ? "bg-white shadow-sm ring-1 ring-blue-500" : "opacity-60"
                 )}
               >
-                EN
+                <Flag language="en" />
               </button>
               <button 
                 onClick={() => setLanguage('es')}
+                aria-label="Ver la web en español"
                 className={cn(
-                  "text-[10px] font-bold px-2 py-1 rounded",
-                  language === 'es' ? "bg-white text-blue-600 shadow-sm" : "text-slate-500"
+                  "leading-none px-2 py-2 rounded",
+                  language === 'es' ? "bg-white shadow-sm ring-1 ring-blue-500" : "opacity-60"
                 )}
               >
-                ES
+                <Flag language="es" />
               </button>
             </div>
             <button
               className="p-2 text-slate-600"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label={isMenuOpen ? t('common.closeMenu') : t('common.openMenu')}
+              aria-expanded={isMenuOpen}
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>

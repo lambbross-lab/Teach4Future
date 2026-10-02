@@ -1,212 +1,162 @@
-
-import React, { useState } from 'react';
-import { 
-  Users, BookOpen, Calendar, MapPin, 
-  TrendingUp, Plus, Search, Filter, 
-  MoreVertical, Edit, Trash2, CheckCircle2, 
-  XCircle, Clock, GraduationCap, LogOut,
-  LayoutDashboard, MessageSquare, Settings
-} from 'lucide-react';
-import { COURSES, SESSIONS, CITIES } from '../mockData';
-import { formatDate, cn } from '../lib/utils';
-import Button from '../components/ui/Button';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Calendar, Check, Database, GraduationCap, LogOut, Plus, Save, Trash2, Users } from 'lucide-react';
+import Button from '../components/ui/Button';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAcademyData } from '../contexts/AcademyDataContext';
+import { COURSES, CITIES } from '../mockData';
+import { getText, isCurrentOrUpcoming } from '../lib/utils';
+import { supabase } from '../lib/supabase';
+import type { CourseSession } from '../types';
 
 const AdminDashboard = () => {
-  const { t } = useLanguage();
-  const [activeTab, setActiveTab] = useState('enrolments');
+  const { language, t } = useLanguage();
+  const { sessions, mode, updateSession, deleteSession } = useAcademyData();
+  const [drafts, setDrafts] = useState<CourseSession[]>(sessions);
+  const [savingId, setSavingId] = useState<string | null>(null);
+  const [savedId, setSavedId] = useState<string | null>(null);
+  const [saveError, setSaveError] = useState('');
+  const [authChecked, setAuthChecked] = useState(!supabase);
   const navigate = useNavigate();
 
-  const stats = [
-    { label: t('admin.stats.totalEnrolments'), value: '124', icon: Users, color: 'text-blue-600', bg: 'bg-blue-50' },
-    { label: t('admin.stats.activeCourses'), value: '12', icon: BookOpen, color: 'text-green-600', bg: 'bg-green-50' },
-    { label: t('admin.stats.upcomingSessions'), value: '8', icon: Calendar, color: 'text-orange-600', bg: 'bg-orange-50' },
-    { label: t('admin.stats.revenue'), value: '€60,760', icon: TrendingUp, color: 'text-purple-600', bg: 'bg-purple-50' },
-  ];
+  useEffect(() => setDrafts(sessions), [sessions]);
 
-  const handleLogout = () => {
+  useEffect(() => {
+    if (!supabase) return;
+    supabase.auth.getUser().then(({ data }) => {
+      if (!data.user) navigate('/login', { replace: true });
+      setAuthChecked(true);
+    });
+  }, [navigate]);
+
+  const stats = useMemo(() => ({
+    courses: new Set(sessions.map((session) => session.courseId)).size,
+    sessions: sessions.filter((session) => isCurrentOrUpcoming(session.endDate)).length,
+    seats: sessions.reduce((total, session) => total + session.seatsLeft, 0),
+  }), [sessions]);
+
+  const patchDraft = (id: string, patch: Partial<CourseSession>) => {
+    setDrafts((current) => current.map((session) => session.id === id ? { ...session, ...patch } : session));
+  };
+
+  const saveSession = async (session: CourseSession) => {
+    if (session.endDate < session.startDate) {
+      setSaveError(t('admin.invalidDate'));
+      return;
+    }
+    setSavingId(session.id);
+    setSavedId(null);
+    setSaveError('');
+    try {
+      await updateSession(session);
+      setSavedId(session.id);
+    } catch {
+      setSaveError(t('admin.saveFailed'));
+    } finally {
+      setSavingId(null);
+    }
+  };
+
+  const addSession = () => {
+    const start = new Date();
+    start.setDate(start.getDate() + 30);
+    const end = new Date(start);
+    end.setDate(end.getDate() + 4);
+    setDrafts((current) => [...current, {
+      id: crypto.randomUUID(),
+      courseId: COURSES[0].id,
+      cityId: CITIES[0].id,
+      startDate: start.toISOString().slice(0, 10),
+      endDate: end.toISOString().slice(0, 10),
+      seatsTotal: 20,
+      seatsLeft: 20,
+      status: 'Open',
+      schedule: 'morning',
+    }]);
+  };
+
+  const removeSession = async (id: string) => {
+    if (!window.confirm(t('admin.deleteConfirm'))) return;
+    setSaveError('');
+    try {
+      if (sessions.some((session) => session.id === id)) await deleteSession(id);
+      setDrafts((current) => current.filter((session) => session.id !== id));
+    } catch {
+      setSaveError(t('admin.deleteFailed'));
+    }
+  };
+
+  const logout = async () => {
+    await supabase?.auth.signOut();
     navigate('/login');
   };
 
+  if (!authChecked) return <div className="min-h-screen grid place-items-center text-slate-500">{t('common.loading')}</div>;
+
   return (
-    <div className="min-h-screen bg-slate-50 flex">
-      {/* Sidebar */}
-      <aside className="w-64 bg-white border-r border-slate-200 hidden lg:flex flex-col fixed inset-y-0 left-0 z-50">
-        <div className="p-6 border-b border-slate-100">
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="bg-blue-600 p-1.5 rounded-lg">
-              <GraduationCap className="h-5 w-5 text-white" />
-            </div>
-            <span className="text-lg font-bold tracking-tight text-slate-900">
-              Teach4Future
-            </span>
-          </Link>
+    <div className="min-h-screen bg-slate-50 pt-24 pb-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 mb-8">
+          <div>
+            <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 mb-3">
+              <GraduationCap className="h-5 w-5" /> Teach4Future Academy
+            </Link>
+            <h1 className="text-3xl font-black text-slate-900">{t('admin.nav.dashboard')}</h1>
+            <p className="text-slate-500 mt-2">{t('admin.sessionsHelp')}</p>
+          </div>
+          {supabase && <Button variant="outline" onClick={logout}><LogOut className="h-4 w-4 mr-2" />{t('admin.nav.logout')}</Button>}
         </div>
-        
-        <nav className="flex-grow p-4 space-y-1">
+
+        <div className={`mb-8 rounded-2xl border p-4 flex items-center gap-3 ${mode === 'live' ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-amber-50 border-amber-200 text-amber-900'}`}>
+          <Database className="h-5 w-5 flex-none" />
+          <div>
+            <p className="font-bold">{mode === 'live' ? t('admin.live') : t('admin.preview')}</p>
+            {mode === 'preview' && <p className="text-sm mt-0.5">{t('login.notConfigured')}</p>}
+          </div>
+        </div>
+
+        <div className="grid sm:grid-cols-3 gap-5 mb-8">
           {[
-            { id: 'dashboard', label: t('admin.nav.dashboard'), icon: LayoutDashboard },
-            { id: 'enrolments', label: t('admin.nav.enrolments'), icon: Users },
-            { id: 'courses', label: t('admin.nav.courses'), icon: BookOpen },
-            { id: 'sessions', label: t('admin.nav.sessions'), icon: Calendar },
-            { id: 'requests', label: t('admin.nav.requests'), icon: MessageSquare },
-            { id: 'settings', label: t('admin.nav.settings'), icon: Settings },
-          ].map((item) => (
-            <button
-              key={item.id}
-              onClick={() => setActiveTab(item.id)}
-              className={cn(
-                "w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all",
-                activeTab === item.id ? "bg-blue-50 text-blue-600" : "text-slate-600 hover:bg-slate-50"
-              )}
-            >
-              <item.icon className="h-5 w-5" />
-              <span>{item.label}</span>
-            </button>
+            { label: t('admin.stats.activeCourses'), value: stats.courses, icon: GraduationCap },
+            { label: t('admin.stats.upcomingSessions'), value: stats.sessions, icon: Calendar },
+            { label: t('admin.seats'), value: stats.seats, icon: Users },
+          ].map(({ label, value, icon: Icon }) => (
+            <div key={label} className="rounded-2xl bg-white border border-slate-200 p-6 shadow-sm">
+              <Icon className="h-6 w-6 text-blue-600 mb-4" />
+              <p className="text-sm text-slate-500">{label}</p>
+              <p className="text-3xl font-black text-slate-900 mt-1">{value}</p>
+            </div>
           ))}
-        </nav>
-        
-        <div className="p-4 border-t border-slate-100">
-          <button 
-            onClick={handleLogout}
-            className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-red-600 hover:bg-red-50 transition-all"
-          >
-            <LogOut className="h-5 w-5" />
-            <span>{t('admin.nav.logout')}</span>
-          </button>
         </div>
-      </aside>
 
-      {/* Main Content */}
-      <main className="flex-grow lg:pl-64 pt-24 lg:pt-0">
-        {/* Top Header */}
-        <header className="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-8 sticky top-0 z-40">
-          <h2 className="text-xl font-bold text-slate-900 capitalize">
-            {activeTab === 'enrolments' ? t('admin.nav.enrolments') : 
-             activeTab === 'dashboard' ? t('admin.nav.dashboard') :
-             activeTab === 'courses' ? t('admin.nav.courses') :
-             activeTab === 'sessions' ? t('admin.nav.sessions') :
-             activeTab === 'requests' ? t('admin.nav.requests') :
-             activeTab === 'settings' ? t('admin.nav.settings') : activeTab}
-          </h2>
-          <div className="flex items-center space-x-4">
-            <div className="relative hidden md:block">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-              <input 
-                type="text" 
-                placeholder={t('common.search')} 
-                className="pl-10 pr-4 py-2 rounded-lg border border-slate-200 text-sm focus:ring-2 focus:ring-blue-500 outline-none w-64"
-              />
-            </div>
-            <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold">
-              AD
-            </div>
+        <section className="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
+          <div className="p-6 md:p-8 border-b border-slate-100 flex items-center justify-between gap-4">
+            <h2 className="text-xl font-bold text-slate-900">{t('admin.sessionsTitle')}</h2>
+            <Button size="sm" disabled={mode !== 'live'} onClick={addSession}><Plus className="h-4 w-4 mr-2" />{t('admin.addSession')}</Button>
           </div>
-        </header>
-
-        <div className="p-8">
-          {/* Stats Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-            {stats.map((stat, idx) => (
-              <div key={idx} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                <div className="flex justify-between items-start mb-4">
-                  <div className={cn("p-3 rounded-xl", stat.bg)}>
-                    <stat.icon className={cn("h-6 w-6", stat.color)} />
-                  </div>
-                  <span className="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded-md">+12%</span>
-                </div>
-                <h3 className="text-sm font-medium text-slate-500 mb-1">{stat.label}</h3>
-                <p className="text-2xl font-bold text-slate-900">{stat.value}</p>
-              </div>
-            ))}
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[1080px] text-left">
+              <thead className="bg-slate-50 text-xs uppercase tracking-wider text-slate-500"><tr>
+                <th className="px-6 py-4">{t('admin.table.course')}</th><th className="px-6 py-4">{t('coursesSpain.city')}</th><th className="px-6 py-4">{t('admin.table.startDate')}</th><th className="px-6 py-4">{t('admin.table.endDate')}</th><th className="px-6 py-4">{t('admin.seats')}</th><th className="px-6 py-4">{t('admin.table.status')}</th><th className="px-6 py-4 text-right">{t('admin.table.actions')}</th>
+              </tr></thead>
+              <tbody className="divide-y divide-slate-100">
+                {drafts.map((session) => {
+                  return <tr key={session.id}>
+                    <td className="px-6 py-5 font-semibold text-slate-900"><select value={session.courseId} onChange={(event) => patchDraft(session.id, { courseId: event.target.value })} className="max-w-64 rounded-lg border border-slate-200 px-3 py-2 bg-white">{COURSES.map((item) => <option key={item.id} value={item.id}>{getText(item.title, language)}</option>)}</select></td>
+                    <td className="px-6 py-5 text-slate-600"><select value={session.cityId} onChange={(event) => patchDraft(session.id, { cityId: event.target.value })} className="rounded-lg border border-slate-200 px-3 py-2 bg-white">{CITIES.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}</select></td>
+                    <td className="px-6 py-5"><input aria-label={t('admin.table.startDate')} type="date" max={session.endDate} value={session.startDate} onChange={(event) => patchDraft(session.id, { startDate: event.target.value })} className="rounded-lg border border-slate-200 px-3 py-2" /></td>
+                    <td className="px-6 py-5"><input aria-label={t('admin.table.endDate')} type="date" min={session.startDate} value={session.endDate} onChange={(event) => patchDraft(session.id, { endDate: event.target.value })} className="rounded-lg border border-slate-200 px-3 py-2" /></td>
+                    <td className="px-6 py-5"><div className="flex gap-2"><input aria-label={t('admin.totalSeats')} type="number" min="1" value={session.seatsTotal} onChange={(event) => patchDraft(session.id, { seatsTotal: Number(event.target.value) })} className="w-20 rounded-lg border border-slate-200 px-3 py-2" /><input aria-label={t('admin.seats')} type="number" min="0" max={session.seatsTotal} value={session.seatsLeft} onChange={(event) => patchDraft(session.id, { seatsLeft: Number(event.target.value) })} className="w-20 rounded-lg border border-slate-200 px-3 py-2" /></div></td>
+                    <td className="px-6 py-5"><select value={session.status} onChange={(event) => patchDraft(session.id, { status: event.target.value as CourseSession['status'] })} className="rounded-lg border border-slate-200 px-3 py-2 bg-white"><option value="Open">{t('admin.status.open')}</option><option value="Almost Full">{t('admin.status.almostFull')}</option><option value="Waiting List">{t('admin.status.waitingList')}</option><option value="Closed">{t('admin.status.closed')}</option></select></td>
+                    <td className="px-6 py-5 text-right"><div className="flex justify-end gap-2"><Button size="sm" disabled={mode !== 'live' || savingId === session.id} onClick={() => saveSession(session)}>{savedId === session.id ? <Check className="h-4 w-4 mr-2" /> : <Save className="h-4 w-4 mr-2" />}{savedId === session.id ? t('admin.saved') : t('admin.save')}</Button><Button variant="outline" size="sm" disabled={mode !== 'live'} onClick={() => removeSession(session.id)} aria-label={t('admin.deleteSession')}><Trash2 className="h-4 w-4" /></Button></div></td>
+                  </tr>;
+                })}
+              </tbody>
+            </table>
           </div>
-
-          {/* Content Area */}
-          <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-            <div className="p-6 border-b border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4">
-              <div className="flex items-center space-x-4">
-                <h3 className="font-bold text-slate-900">{t('admin.recentEnrolments')}</h3>
-                <span className="bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-md">
-                  {t('admin.last24h')}
-                </span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Button size="sm" variant="outline" className="flex items-center gap-2">
-                  <Filter className="h-4 w-4" />
-                  {t('admin.filter')}
-                </Button>
-                <Button size="sm" className="flex items-center gap-2">
-                  <Plus className="h-4 w-4" />
-                  {t('admin.addNew')}
-                </Button>
-              </div>
-            </div>
-
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="bg-slate-50 border-b border-slate-100">
-                    <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">{t('admin.table.student')}</th>
-                    <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">{t('admin.table.course')}</th>
-                    <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">{t('admin.table.date')}</th>
-                    <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">{t('admin.table.status')}</th>
-                    <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider text-right">{t('admin.table.actions')}</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-50">
-                  {[
-                    { name: 'Maria Rossi', email: 'maria@school.it', course: 'AI for Education', date: '2026-07-06', status: t('admin.status.confirmed') },
-                    { name: 'Jan Kowalski', email: 'jan@liceum.pl', course: 'Inclusion & SEN', date: '2026-07-13', status: t('admin.status.pending') },
-                    { name: 'Elena Garcia', email: 'elena@ies.es', course: 'Wellbeing', date: '2026-09-14', status: t('admin.status.confirmed') },
-                    { name: 'Thomas Müller', email: 'thomas@gym.de', course: 'Digital Competence', date: '2026-10-19', status: t('admin.status.cancelled') },
-                    { name: 'Sophie Laurent', email: 'sophie@ecole.fr', course: 'CLIL / English', date: '2026-11-09', status: t('admin.status.confirmed') },
-                  ].map((row, idx) => (
-                    <tr key={idx} className="hover:bg-slate-50/50 transition-colors">
-                      <td className="px-6 py-4">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">
-                            {row.name.charAt(0)}
-                          </div>
-                          <div>
-                            <p className="text-sm font-bold text-slate-900">{row.name}</p>
-                            <p className="text-xs text-slate-400">{row.email}</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 text-sm text-slate-600">{row.course}</td>
-                      <td className="px-6 py-4 text-sm text-slate-600">{formatDate(row.date)}</td>
-                      <td className="px-6 py-4">
-                        <span className={cn(
-                          "inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider",
-                          row.status === t('admin.status.confirmed') ? "bg-green-100 text-green-700" : 
-                          row.status === t('admin.status.pending') ? "bg-orange-100 text-orange-700" : 
-                          "bg-red-100 text-red-700"
-                        )}>
-                          {row.status}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 text-right">
-                        <button className="p-2 text-slate-400 hover:text-slate-600">
-                          <MoreVertical className="h-5 w-5" />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            
-            <div className="p-6 border-t border-slate-100 flex items-center justify-between">
-              <p className="text-xs text-slate-500">{t('admin.showing')} 5 {t('admin.of')} 124 {t('admin.nav.enrolments').toLowerCase()}</p>
-              <div className="flex space-x-2">
-                <Button size="sm" variant="outline">{t('admin.previous')}</Button>
-                <Button size="sm" variant="outline">{t('admin.next')}</Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
+          {saveError && <p role="alert" className="border-t border-red-100 bg-red-50 px-6 py-4 text-sm font-semibold text-red-700">{saveError}</p>}
+        </section>
+      </div>
     </div>
   );
 };

@@ -8,7 +8,7 @@ export interface Course {
   id: string;
   title: BilingualText;
   subtitle: BilingualText;
-  category: 'AI' | 'Inclusion' | 'Wellbeing' | 'Digital' | 'CLIL';
+  category: 'AI' | 'Inclusion' | 'Wellbeing' | 'Digital' | 'Europe' | 'Sustainability';
   description: BilingualText;
   learningOutcomes: BilingualText[];
   programmeOverview: BilingualText[];
@@ -41,15 +41,6 @@ export interface CourseSession {
   seatsLeft: number;
   status: 'Open' | 'Almost Full' | 'Waiting List' | 'Closed';
   schedule: 'morning' | 'afternoon';
-}
-
-export interface Testimonial {
-  id: string;
-  name: string;
-  role: BilingualText;
-  institution: string;
-  content: BilingualText;
-  avatar: string;
 }
 
 export interface FAQItem {

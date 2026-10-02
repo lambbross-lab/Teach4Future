@@ -2,17 +2,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Calendar, MapPin, Users, Search, Filter, ArrowRight, ChevronRight, Sun, Clock } from 'lucide-react';
-import { COURSES, SESSIONS, CITIES } from '../mockData';
-import { formatDate, cn, getText } from '../lib/utils';
+import { COURSES, CITIES } from '../mockData';
+import { formatDate, cn, getText, isCurrentOrUpcoming } from '../lib/utils';
 import Button from '../components/ui/Button';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAcademyData } from '../contexts/AcademyDataContext';
 
 const DatesAvailability = () => {
   const [selectedCity, setSelectedCity] = useState('all');
   const { language, t } = useLanguage();
+  const { sessions } = useAcademyData();
 
-  const filteredSessions = SESSIONS.filter(s => 
-    selectedCity === 'all' || s.cityId === selectedCity
+  const filteredSessions = sessions.filter(s =>
+    isCurrentOrUpcoming(s.endDate) && (selectedCity === 'all' || s.cityId === selectedCity)
   ).sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
 
   return (
@@ -84,7 +86,7 @@ const DatesAvailability = () => {
                       <div className="flex items-center text-sm text-slate-600">
                         <Calendar className="h-4 w-4 mr-2 text-blue-500" />
                         <div>
-                          <p>{formatDate(session.startDate, language)}</p>
+                          <p>{formatDate(session.startDate, language)} – {formatDate(session.endDate, language)}</p>
                           <p className="text-[10px] text-slate-400 font-bold uppercase mt-1 flex items-center">
                             {session.schedule === 'morning' ? (
                               <><Sun className="h-3 w-3 mr-1 text-orange-400" /> {t('common.morning')}</>
@@ -105,6 +107,7 @@ const DatesAvailability = () => {
                         )}>
                           {session.status === 'Open' ? t('admin.status.open') : 
                            session.status === 'Almost Full' ? t('admin.status.almostFull') : 
+                           session.status === 'Waiting List' ? t('admin.status.waitingList') :
                            t('admin.status.closed')}
                         </span>
                         <span className="text-[10px] text-slate-400 font-medium">
@@ -143,6 +146,7 @@ const DatesAvailability = () => {
                   )}>
                     {session.status === 'Open' ? t('admin.status.open') : 
                      session.status === 'Almost Full' ? t('admin.status.almostFull') : 
+                     session.status === 'Waiting List' ? t('admin.status.waitingList') :
                      t('admin.status.closed')}
                   </span>
                 </div>
@@ -153,7 +157,7 @@ const DatesAvailability = () => {
                   </div>
                   <div className="flex items-center text-xs text-slate-500">
                     <Calendar className="h-4 w-4 mr-2 text-blue-500" />
-                    <span>{formatDate(session.startDate, language)} ({session.schedule === 'morning' ? t('common.morning') : t('common.afternoon')})</span>
+                    <span>{formatDate(session.startDate, language)} – {formatDate(session.endDate, language)} ({session.schedule === 'morning' ? t('common.morning') : t('common.afternoon')})</span>
                   </div>
                   <div className="flex items-center text-xs text-slate-500">
                     <Users className="h-4 w-4 mr-2 text-blue-500" />

@@ -1,5 +1,5 @@
 
-import { Course, City, CourseSession, Testimonial, FAQItem } from './types';
+import { Course, City, FAQItem } from './types';
 
 // City Images: We use local static assets for maximum reliability.
 export const CITIES: City[] = [
@@ -56,228 +56,213 @@ export const CITIES: City[] = [
 export const COURSES: Course[] = [
   {
     id: 'ai-education',
-    title: { en: 'AI for Education: Artificial Intelligence in the Classroom', es: 'IA para la Educación: Inteligencia Artificial en el Aula' },
-    subtitle: { en: 'Master the tools that are reshaping the future of learning.', es: 'Domina las herramientas que están rediseñando el futuro del aprendizaje.' },
+    title: { en: 'Practical and Responsible AI for Teachers', es: 'IA práctica y responsable para docentes' },
+    subtitle: { en: 'Save time and design better learning without giving up professional judgement.', es: 'Ahorra tiempo y diseña mejores aprendizajes sin renunciar al criterio profesional.' },
     category: 'AI',
     description: {
-      en: 'This course provides a comprehensive introduction to AI tools and their practical application in the classroom. From generative AI for lesson planning to personalized learning paths.',
-      es: 'Este curso ofrece una introducción completa a las herramientas de IA y su aplicación práctica en el aula. Desde IA generativa para planificación hasta rutas de aprendizaje personalizadas.'
+      en: 'A hands-on course on using AI to plan, adapt resources and assess learning with attention to privacy, ethics and inclusive practice.',
+      es: 'Un curso práctico para utilizar la IA en la planificación, la adaptación de materiales y la evaluación, atendiendo a la privacidad, la ética y la inclusión.'
     },
     learningOutcomes: [
-      { en: 'Understand the fundamentals of Generative AI', es: 'Comprender los fundamentos de la IA Generativa' },
-      { en: 'Create high-quality educational content with AI', es: 'Crear contenido educativo de alta calidad con IA' },
-      { en: 'Implement AI-driven assessment strategies', es: 'Implementar estrategias de evaluación impulsadas por IA' },
-      { en: 'Discuss ethics and critical thinking in the age of AI', es: 'Debatit sobre ética y pensamiento crítico en la era de la IA' }
+      { en: 'Use generative AI for realistic teaching tasks', es: 'Utilizar la IA generativa en tareas docentes reales' },
+      { en: 'Create and adapt classroom resources', es: 'Crear y adaptar materiales para el aula' },
+      { en: 'Review AI outputs with professional judgement', es: 'Revisar los resultados de la IA con criterio profesional' },
+      { en: 'Apply basic privacy and responsible-use criteria', es: 'Aplicar criterios básicos de privacidad y uso responsable' }
     ],
     programmeOverview: [
-      { en: 'Day 1: Introduction to AI in Education', es: 'Día 1: Introducción a la IA en Educación' },
-      { en: 'Day 2: Prompt Engineering for Teachers', es: 'Día 2: Ingeniería de Prompts para Profesores' },
-      { en: 'Day 3: AI Tools for Content Creation', es: 'Día 3: Herramientas de IA para Creación de Contenido' },
-      { en: 'Day 4: Personalized Learning & Assessment', es: 'Día 4: Aprendizaje Personalizado y Evaluación' },
-      { en: 'Day 5: Ethics, Future Trends & Final Project', es: 'Día 5: Ética, Tendencias Futuras y Proyecto Final' }
+      { en: 'AI foundations for educators', es: 'Fundamentos de IA para docentes' },
+      { en: 'Planning and resource creation', es: 'Planificación y creación de recursos' },
+      { en: 'Adaptation and inclusive learning', es: 'Adaptación y aprendizaje inclusivo' },
+      { en: 'Assessment and feedback', es: 'Evaluación y retroalimentación' },
+      { en: 'Privacy, ethics and classroom action plan', es: 'Privacidad, ética y plan de aplicación al aula' }
     ],
     targetAudience: { en: 'Primary and Secondary Teachers, School Leaders, ICT Coordinators', es: 'Profesores de Primaria y Secundaria, Directivos, Coordinadores TIC' },
-    duration: { en: '5 Days (30 hours)', es: '5 Días (30 horas)' },
-    price: 490,
-    language: 'English',
+    duration: { en: '5 Days (25 hours)', es: '5 Días (25 horas)' },
+    price: 480,
+    language: 'Spanish',
     includes: [
-      { en: 'Course materials', es: 'Materiales del curso' },
+      { en: '25 guided learning hours', es: '25 horas lectivas guiadas' },
       { en: 'Certificate of attendance', es: 'Certificado de asistencia' },
-      { en: 'Cultural activities', es: 'Actividades culturales' },
-      { en: 'Coffee breaks', es: 'Pausas para café' }
+      { en: 'Digital course materials', es: 'Materiales digitales del curso' },
     ],
-    erasmusRelevance: { en: 'Aligned with the Digital Education Action Plan (2021-2027)', es: 'Alineado con el Plan de Acción de Educación Digital (2021-2027)' },
+    erasmusRelevance: { en: 'Supports digital transformation, critical use of technology and the exchange of classroom practices across Europe.', es: 'Apoya la transformación digital, el uso crítico de la tecnología y el intercambio de prácticas docentes en Europa.' },
     courseImage: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80',
     featured: true
   },
   {
     id: 'inclusion-sen',
-    title: { en: 'Inclusion and Special Educational Needs', es: 'Inclusión y Necesidades Educativas Especiales' },
-    subtitle: { en: 'Creating truly inclusive learning environments for all students.', es: 'Creando entornos de aprendizaje verdaderamente inclusivos para todos.' },
+    title: { en: 'Inclusion by Design', es: 'Inclusión por diseño' },
+    subtitle: { en: 'Accessible learning environments that anticipate learner diversity.', es: 'Entornos de aprendizaje accesibles que anticipan la diversidad del alumnado.' },
     category: 'Inclusion',
     description: {
-      en: 'Focus on practical strategies for supporting students with diverse needs, including ADHD, Autism, and Dyslexia, within the mainstream classroom.',
-      es: 'Enfoque en estrategias prácticas para apoyar a estudiantes con necesidades diversas, incluyendo TDAH, Autismo y Dislexia, en el aula ordinaria.'
+      en: 'Practical approaches to Universal Design for Learning, accessibility and classroom support for different ways of learning and participating.',
+      es: 'Estrategias prácticas de Diseño Universal para el Aprendizaje, accesibilidad y apoyo en el aula para distintas formas de aprender y participar.'
     },
     learningOutcomes: [
-      { en: 'Identify different learning profiles and needs', es: 'Identificar diferentes perfiles y necesidades de aprendizaje' },
-      { en: 'Apply Universal Design for Learning (UDL) principles', es: 'Aplicar los principios del Diseño Universal para el Aprendizaje (DUA)' },
-      { en: 'Develop Individualized Education Programs (IEPs)', es: 'Desarrollar Programas de Educación Individualizados (PEI)' },
-      { en: 'Foster a culture of empathy and belonging', es: 'Fomentar una cultura de empatía y pertenencia' }
+      { en: 'Apply Universal Design for Learning principles', es: 'Aplicar los principios del Diseño Universal para el Aprendizaje' },
+      { en: 'Identify barriers to participation', es: 'Identificar barreras para la participación' },
+      { en: 'Adapt activities without lowering expectations', es: 'Adaptar actividades sin reducir las expectativas' },
+      { en: 'Strengthen belonging and classroom participation', es: 'Fortalecer la pertenencia y la participación en el aula' }
     ],
     programmeOverview: [
-      { en: 'Day 1: The Inclusive Mindset', es: 'Día 1: La Mentalidad Inclusiva' },
-      { en: 'Day 2: Neurodiversity in the Classroom', es: 'Día 2: Neurodiversidad en el Aula' },
-      { en: 'Day 3: UDL: Practical Implementation', es: 'Día 3: DUA: Implementación Práctica' },
-      { en: 'Day 4: Collaborative Teaching & Support', es: 'Día 4: Enseñanza Colaborativa y Apoyo' },
-      { en: 'Day 5: Case Studies & Action Planning', es: 'Día 5: Casos de Estudio y Plan de Acción' }
+      { en: 'Inclusion and barriers to learning', es: 'Inclusión y barreras para el aprendizaje' },
+      { en: 'Neurodiversity and learner variability', es: 'Neurodiversidad y variabilidad del alumnado' },
+      { en: 'Universal Design for Learning', es: 'Diseño Universal para el Aprendizaje' },
+      { en: 'Accessible activities and assessment', es: 'Actividades y evaluación accesibles' },
+      { en: 'Classroom casework and action plan', es: 'Casos de aula y plan de aplicación' }
     ],
-    targetAudience: { en: 'All Teachers, SENCOs, Educational Psychologists', es: 'Todos los profesores, coordinadores de NEE, psicopedagogos' },
-    duration: { en: '5 Days (30 hours)', es: '5 Días (30 horas)' },
+    targetAudience: { en: 'Teachers, inclusion coordinators and school leaders', es: 'Docentes, coordinadores de inclusión y equipos directivos' },
+    duration: { en: '5 Days (25 hours)', es: '5 Días (25 horas)' },
     price: 480,
-    language: 'English',
+    language: 'Spanish',
     includes: [
-      { en: 'Course materials', es: 'Materiales del curso' },
+      { en: '25 guided learning hours', es: '25 horas lectivas guiadas' },
       { en: 'Certificate of attendance', es: 'Certificado de asistencia' },
-      { en: 'Cultural activities', es: 'Actividades culturales' },
-      { en: 'Coffee breaks', es: 'Pausas para café' }
+      { en: 'Digital course materials', es: 'Materiales digitales del curso' },
     ],
-    erasmusRelevance: { en: 'Supports the European Strategy for the Rights of Persons with Disabilities', es: 'Apoya la Estrategia Europea sobre los Derechos de las Personas con Discapacidad' },
+    erasmusRelevance: { en: 'Directly supports the Erasmus+ priority of inclusion and diversity.', es: 'Contribuye directamente a la prioridad Erasmus+ de inclusión y diversidad.' },
     courseImage: 'https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=800&q=80',
+    featured: false
+  },
+  {
+    id: 'digital-citizenship',
+    title: { en: 'Digital Citizenship and Critical Thinking', es: 'Ciudadanía digital y pensamiento crítico' },
+    subtitle: { en: 'Teach students to navigate AI, information and digital life with confidence.', es: 'Ayuda a tu alumnado a desenvolverse ante la IA, la información y la vida digital.' },
+    category: 'Digital',
+    description: {
+      en: 'Classroom strategies for media literacy, misinformation, privacy, online safety and responsible participation in the digital world.',
+      es: 'Estrategias de aula sobre alfabetización mediática, desinformación, privacidad, seguridad y participación responsable en el entorno digital.'
+    },
+    learningOutcomes: [
+      { en: 'Recognise common forms of misinformation', es: 'Reconocer formas habituales de desinformación' },
+      { en: 'Design media-literacy activities', es: 'Diseñar actividades de alfabetización mediática' },
+      { en: 'Address privacy and online safety', es: 'Abordar la privacidad y la seguridad en línea' },
+      { en: 'Promote responsible digital participation', es: 'Promover una participación digital responsable' }
+    ],
+    programmeOverview: [
+      { en: 'Digital citizenship today', es: 'La ciudadanía digital actual' },
+      { en: 'Information, sources and verification', es: 'Información, fuentes y verificación' },
+      { en: 'AI-generated content and critical thinking', es: 'Contenido generado por IA y pensamiento crítico' },
+      { en: 'Privacy, safety and digital wellbeing', es: 'Privacidad, seguridad y bienestar digital' },
+      { en: 'Classroom project and shared European practices', es: 'Proyecto de aula e intercambio de prácticas europeas' }
+    ],
+    targetAudience: { en: 'Teachers, digital coordinators and school leadership teams', es: 'Docentes, coordinadores digitales y equipos directivos' },
+    duration: { en: '5 Days (25 hours)', es: '5 Días (25 horas)' },
+    price: 480,
+    language: 'Spanish',
+    includes: [
+      { en: '25 guided learning hours', es: '25 horas lectivas guiadas' },
+      { en: 'Certificate of attendance', es: 'Certificado de asistencia' },
+      { en: 'Digital course materials', es: 'Materiales digitales del curso' },
+    ],
+    erasmusRelevance: { en: 'Connects digital transformation with participation in democratic life, media literacy and critical thinking.', es: 'Conecta la transformación digital con la participación democrática, la alfabetización mediática y el pensamiento crítico.' },
+    courseImage: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80',
     featured: true
+  },
+  {
+    id: 'europe-classroom',
+    title: { en: 'Europe in the Classroom', es: 'Europa en el aula' },
+    subtitle: { en: 'Turn European cooperation into meaningful classroom learning.', es: 'Convierte la cooperación europea en aprendizaje significativo para el aula.' },
+    category: 'Europe',
+    description: {
+      en: 'A practical course on collaborative projects, active learning, intercultural dialogue, European values and the exchange of teaching practices.',
+      es: 'Un curso práctico sobre proyectos colaborativos, aprendizaje activo, diálogo intercultural, valores europeos e intercambio de prácticas docentes.'
+    },
+    learningOutcomes: [
+      { en: 'Design collaborative European learning experiences', es: 'Diseñar experiencias europeas de aprendizaje colaborativo' },
+      { en: 'Use project-based and cooperative methodologies', es: 'Utilizar metodologías basadas en proyectos y cooperación' },
+      { en: 'Integrate intercultural dialogue and common values', es: 'Integrar el diálogo intercultural y los valores comunes' },
+      { en: 'Plan the transfer of learning back to school', es: 'Planificar la transferencia del aprendizaje al centro' }
+    ],
+    programmeOverview: [
+      { en: 'European dimension and shared challenges', es: 'Dimensión europea y retos compartidos' },
+      { en: 'Collaborative and project-based learning', es: 'Aprendizaje colaborativo y basado en proyectos' },
+      { en: 'Intercultural dialogue and participation', es: 'Diálogo intercultural y participación' },
+      { en: 'Exchange of practices between schools', es: 'Intercambio de prácticas entre centros' },
+      { en: 'European classroom project', es: 'Proyecto europeo para el aula' }
+    ],
+    targetAudience: { en: 'Teachers, Erasmus+ coordinators and internationalisation teams', es: 'Docentes, coordinadores Erasmus+ y equipos de internacionalización' },
+    duration: { en: '5 Days (25 hours)', es: '5 Días (25 horas)' },
+    price: 480,
+    language: 'Spanish',
+    includes: [
+      { en: '25 guided learning hours', es: '25 horas lectivas guiadas' },
+      { en: 'Certificate of attendance', es: 'Certificado de asistencia' },
+      { en: 'Digital course materials', es: 'Materiales digitales del curso' },
+    ],
+    erasmusRelevance: { en: 'Strengthens the European dimension, transnational exchange and participation in common European values.', es: 'Refuerza la dimensión europea, el intercambio transnacional y la participación en valores europeos comunes.' },
+    courseImage: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80',
+    featured: true
+  },
+  {
+    id: 'green-classroom',
+    title: { en: 'The Green Classroom', es: 'Aula verde' },
+    subtitle: { en: 'Turn sustainability into projects that matter to learners and communities.', es: 'Convierte la sostenibilidad en proyectos relevantes para el alumnado y la comunidad.' },
+    category: 'Sustainability',
+    description: {
+      en: 'Sustainability education, outdoor learning and classroom projects connected to local environmental challenges and European cooperation.',
+      es: 'Educación para la sostenibilidad, aprendizaje al aire libre y proyectos conectados con retos ambientales locales y la cooperación europea.'
+    },
+    learningOutcomes: [
+      { en: 'Connect sustainability with curriculum goals', es: 'Conectar la sostenibilidad con los objetivos curriculares' },
+      { en: 'Design outdoor and place-based learning', es: 'Diseñar aprendizaje al aire libre y vinculado al entorno' },
+      { en: 'Create learner-led environmental projects', es: 'Crear proyectos ambientales liderados por el alumnado' },
+      { en: 'Share green practices across European schools', es: 'Compartir prácticas sostenibles entre centros europeos' }
+    ],
+    programmeOverview: [
+      { en: 'Sustainability and education', es: 'Sostenibilidad y educación' },
+      { en: 'Learning from the local environment', es: 'Aprender del entorno local' },
+      { en: 'Outdoor and experiential methodologies', es: 'Metodologías al aire libre y experienciales' },
+      { en: 'School projects with community impact', es: 'Proyectos escolares con impacto comunitario' },
+      { en: 'Green action plan for the classroom', es: 'Plan de acción verde para el aula' }
+    ],
+    targetAudience: { en: 'Primary, secondary and adult-education teachers', es: 'Docentes de primaria, secundaria y educación de personas adultas' },
+    duration: { en: '5 Days (25 hours)', es: '5 Días (25 horas)' },
+    price: 480,
+    language: 'Spanish',
+    includes: [
+      { en: '25 guided learning hours', es: '25 horas lectivas guiadas' },
+      { en: 'Certificate of attendance', es: 'Certificado de asistencia' },
+      { en: 'Digital course materials', es: 'Materiales digitales del curso' },
+    ],
+    erasmusRelevance: { en: 'Addresses the Erasmus+ priority on environment and the fight against climate change.', es: 'Aborda la prioridad Erasmus+ de medio ambiente y lucha contra el cambio climático.' },
+    courseImage: 'https://upload.wikimedia.org/wikipedia/commons/d/d5/Playa_de_M%C3%B3nsul%2C_San_Jos%C3%A9%2C_Almer%C3%ADa.jpg',
+    featured: false
   },
   {
     id: 'wellbeing-teachers',
-    title: { en: 'Mindfulness, Wellbeing and Burnout Prevention', es: 'Mindfulness, Bienestar y Prevención del Burnout' },
-    subtitle: { en: 'Prioritize your mental health to be a better educator.', es: 'Prioriza tu salud mental para ser un mejor educador.' },
+    title: { en: 'Teacher Wellbeing and Positive School Climate', es: 'Bienestar docente y clima escolar positivo' },
+    subtitle: { en: 'Build sustainable ways of working and healthier learning environments.', es: 'Construye formas sostenibles de trabajar y entornos de aprendizaje más saludables.' },
     category: 'Wellbeing',
     description: {
-      en: 'A transformative course designed to help teachers manage stress, build resilience, and integrate mindfulness into their daily lives and classrooms.',
-      es: 'Un curso transformador diseñado para ayudar a los profesores a gestionar el estrés, desarrollar resiliencia e integrar el mindfulness en su vida diaria y en el aula.'
+      en: 'Educational and preventive strategies for workload organisation, communication, emotional regulation, coexistence and a positive school climate.',
+      es: 'Estrategias educativas y preventivas para la organización del trabajo, la comunicación, la regulación emocional, la convivencia y un clima escolar positivo.'
     },
     learningOutcomes: [
-      { en: 'Practice evidence-based mindfulness techniques', es: 'Practicar técnicas de mindfulness basadas en la evidencia' },
-      { en: 'Develop emotional regulation strategies', es: 'Desarrollar estrategias de regulación emocional' },
-      { en: 'Create a sustainable self-care plan', es: 'Crear un plan de autocuidado sostenible' },
-      { en: 'Teach mindfulness to students', es: 'Enseñar mindfulness a los estudiantes' }
+      { en: 'Identify factors that affect teacher wellbeing', es: 'Identificar factores que influyen en el bienestar docente' },
+      { en: 'Use sustainable organisation strategies', es: 'Utilizar estrategias de organización sostenibles' },
+      { en: 'Improve communication and classroom climate', es: 'Mejorar la comunicación y el clima del aula' },
+      { en: 'Create a realistic personal and school action plan', es: 'Crear un plan de acción personal y de centro realista' }
     ],
     programmeOverview: [
-      { en: 'Day 1: Understanding Teacher Stress & Burnout', es: 'Día 1: Entendiendo el Estrés y Burnout Docente' },
-      { en: 'Day 2: Foundations of Mindfulness', es: 'Día 2: Fundamentos del Mindfulness' },
-      { en: 'Day 3: Emotional Intelligence & Resilience', es: 'Día 3: Inteligencia Emocional y Resiliencia' },
-      { en: 'Day 4: Mindful Communication', es: 'Día 4: Comunicación Consciente' },
-      { en: 'Day 5: Integration & Sustaining Practice', es: 'Día 5: Integración y Mantenimiento de la Práctica' }
+      { en: 'Teacher wellbeing and school conditions', es: 'Bienestar docente y condiciones escolares' },
+      { en: 'Workload, boundaries and organisation', es: 'Carga de trabajo, límites y organización' },
+      { en: 'Communication and emotional regulation', es: 'Comunicación y regulación emocional' },
+      { en: 'Coexistence and positive school climate', es: 'Convivencia y clima escolar positivo' },
+      { en: 'Sustainable action plan', es: 'Plan de acción sostenible' }
     ],
-    targetAudience: { en: 'Teachers of all levels, School Staff', es: 'Profesores de todos los niveles, personal escolar' },
-    duration: { en: '5 Days (30 hours)', es: '5 Días (30 horas)' },
-    price: 460,
-    language: 'English',
+    targetAudience: { en: 'Teachers, tutors and school leadership teams', es: 'Docentes, tutores y equipos directivos' },
+    duration: { en: '5 Days (25 hours)', es: '5 Días (25 horas)' },
+    price: 480,
+    language: 'Spanish',
     includes: [
-      { en: 'Course materials', es: 'Materiales del curso' },
+      { en: '25 guided learning hours', es: '25 horas lectivas guiadas' },
       { en: 'Certificate of attendance', es: 'Certificado de asistencia' },
-      { en: 'Cultural activities', es: 'Actividades culturales' },
-      { en: 'Coffee breaks', es: 'Pausas para café' }
+      { en: 'Digital course materials', es: 'Materiales digitales del curso' },
     ],
-    erasmusRelevance: { en: 'Aligned with the European Education Area priority on wellbeing', es: 'Alineado con la prioridad del Espacio Europeo de Educación sobre el bienestar' },
+    erasmusRelevance: { en: 'Supports teacher development, collaboration and more inclusive and sustainable learning environments.', es: 'Apoya el desarrollo profesional docente, la colaboración y unos entornos de aprendizaje más inclusivos y sostenibles.' },
     courseImage: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80',
-    featured: true
-  },
-  {
-    id: 'digital-competence',
-    title: { en: 'Digital Competence and Innovative Methodologies', es: 'Competencia Digital y Metodologías Innovadoras' },
-    subtitle: { en: 'Beyond the screen: Engaging students through active learning.', es: 'Más allá de la pantalla: Motivando alumnos mediante aprendizaje activo.' },
-    category: 'Digital',
-    description: {
-      en: 'Explore Gamification, Flipped Classroom, and Project-Based Learning (PBL) supported by the latest digital tools.',
-      es: 'Explora la Gamificación, Flipped Classroom y el Aprendizaje Basado en Proyectos (ABP) apoyado por las últimas herramientas digitales.'
-    },
-    learningOutcomes: [
-      { en: 'Master innovative teaching methodologies', es: 'Dominar metodologías de enseñanza innovadoras' },
-      { en: 'Select the right digital tools for specific goals', es: 'Seleccionar las herramientas digitales adecuadas para objetivos específicos' },
-      { en: 'Design engaging, student-centered projects', es: 'Diseñar proyectos motivadores centrados en el alumno' },
-      { en: 'Assess digital competence in students', es: 'Evaluar la competencia digital en los estudiantes' }
-    ],
-    programmeOverview: [
-      { en: 'Day 1: Active Learning Methodologies', es: 'Día 1: Metodologías de Aprendizaje Activo' },
-      { en: 'Day 2: Gamification in Education', es: 'Día 2: Gamificación en Educación' },
-      { en: 'Day 3: The Flipped Classroom Model', es: 'Día 3: El Modelo de Flipped Classroom' },
-      { en: 'Day 4: Project-Based Learning (PBL)', es: 'Día 4: Aprendizaje Basado en Proyectos (ABP)' },
-      { en: 'Day 5: Digital Portfolio & Assessment', es: 'Día 5: Portfolio Digital y Evaluación' }
-    ],
-    targetAudience: { en: 'Primary and Secondary Teachers, Innovation Leaders', es: 'Profesores de Primaria y Secundaria, líderes de innovación' },
-    duration: { en: '5 Days (30 hours)', es: '5 Días (30 horas)' },
-    price: 490,
-    language: 'English',
-    includes: [
-      { en: 'Course materials', es: 'Materiales del curso' },
-      { en: 'Certificate of attendance', es: 'Certificado de asistencia' },
-      { en: 'Cultural activities', es: 'Actividades culturales' },
-      { en: 'Coffee breaks', es: 'Pausas para café' }
-    ],
-    erasmusRelevance: { en: 'Directly supports the DigCompEdu framework', es: 'Apoya directamente el marco DigCompEdu' },
-    courseImage: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80',
     featured: false
-  },
-  {
-    id: 'clil-english',
-    title: { en: 'CLIL / English for Teachers', es: 'AICLE / Inglés para Profesores' },
-    subtitle: { en: 'Enhance your language skills and content-teaching strategies.', es: 'Mejora tus habilidades lingüísticas y estrategias de enseñanza de contenidos.' },
-    category: 'CLIL',
-    description: {
-      en: 'Improve your English proficiency while learning the best practices for teaching non-linguistic subjects through a foreign language.',
-      es: 'Mejora tu nivel de inglés mientras aprendes las mejores prácticas para enseñar asignaturas no lingüísticas a través de una lengua extranjera.'
-    },
-    learningOutcomes: [
-      { en: 'Improve English fluency and accuracy', es: 'Mejorar la fluidez y precisión en inglés' },
-      { en: 'Apply CLIL scaffolding techniques', es: 'Aplicar técnicas de andamiaje AICLE' },
-      { en: 'Adapt materials for language learners', es: 'Adaptar materiales para aprendices de lengua' },
-      { en: 'Assess content and language simultaneously', es: 'Evaluar contenido y lengua simultáneamente' }
-    ],
-    programmeOverview: [
-      { en: 'Day 1: Introduction to CLIL Principles', es: 'Día 1: Introducción a los principios AICLE' },
-      { en: 'Day 2: Language for the Classroom', es: 'Día 2: Lenguaje para el aula' },
-      { en: 'Day 3: Scaffolding Content & Language', es: 'Día 3: Andamiaje de Contenido y Lengua' },
-      { en: 'Day 4: Material Design & Adaptation', es: 'Día 4: Diseño y Adaptación de Materiales' },
-      { en: 'Day 5: Assessment in CLIL & Final Presentation', es: 'Día 5: Evaluación en AICLE y Presentación Final' }
-    ],
-    targetAudience: { en: 'Bilingual Teachers, English Teachers', es: 'Profesores bilingües, profesores de inglés' },
-    duration: { en: '5 Days (30 hours)', es: '5 Días (30 horas)' },
-    price: 490,
-    language: 'English',
-    includes: [
-      { en: 'Course materials', es: 'Materiales del curso' },
-      { en: 'Certificate of attendance', es: 'Certificado de asistencia' },
-      { en: 'Cultural activities', es: 'Actividades culturales' },
-      { en: 'Coffee breaks', es: 'Pausas para café' }
-    ],
-    erasmusRelevance: { en: 'Promotes multilingualism and language learning in the EEA', es: 'Promueve el multilingüismo y el aprendizaje de lenguas en el EEE' },
-    courseImage: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=800&q=80',
-    featured: false
-  }
-];
-
-export const SESSIONS: CourseSession[] = [
-  { id: 's1', courseId: 'ai-education', cityId: 'malaga', startDate: '2026-07-06', endDate: '2026-07-10', seatsTotal: 20, seatsLeft: 5, status: 'Almost Full', schedule: 'morning' },
-  { id: 's2', courseId: 'ai-education', cityId: 'granada', startDate: '2026-08-10', endDate: '2026-08-14', seatsTotal: 20, seatsLeft: 18, status: 'Open', schedule: 'afternoon' },
-  { id: 's3', courseId: 'inclusion-sen', cityId: 'almeria', startDate: '2026-07-13', endDate: '2026-07-17', seatsTotal: 15, seatsLeft: 0, status: 'Closed', schedule: 'morning' },
-  { id: 's4', courseId: 'wellbeing-teachers', cityId: 'malaga', startDate: '2026-09-14', endDate: '2026-09-18', seatsTotal: 20, seatsLeft: 12, status: 'Open', schedule: 'morning' },
-  { id: 's5', courseId: 'digital-competence', cityId: 'granada', startDate: '2026-10-19', endDate: '2026-10-23', seatsTotal: 20, seatsLeft: 2, status: 'Almost Full', schedule: 'afternoon' },
-  { id: 's6', courseId: 'clil-english', cityId: 'almeria', startDate: '2026-11-09', endDate: '2026-11-13', seatsTotal: 15, seatsLeft: 15, status: 'Open', schedule: 'morning' }
-];
-
-export const TESTIMONIALS: Testimonial[] = [
-  {
-    id: 't1',
-    name: 'Maria Rossi',
-    role: { en: 'Primary Teacher', es: 'Profesora de Primaria' },
-    institution: 'Scuola Elementare Dante Alighieri (Italy)',
-    content: {
-      en: 'The AI for Education course in Málaga was eye-opening. Teach4Future Academy provided excellent training and a wonderful cultural experience.',
-      es: 'El curso de IA para la Educación en Málaga fue revelador. Teach4Future Academy ofreció una formación excelente y una experiencia cultural maravillosa.'
-    },
-    avatar: 'https://i.pravatar.cc/150?u=maria'
-  },
-  {
-    id: 't2',
-    name: 'Jan Kowalski',
-    role: { en: 'Principal', es: 'Director' },
-    institution: 'Liceum Ogólnokształcące (Poland)',
-    content: {
-      en: 'We sent a group of 5 teachers to Granada for the Inclusion course. The organization was flawless, and our teachers came back inspired.',
-      es: 'Enviamos un grupo de 5 profesores a Granada para el curso de Inclusión. La organización fue impecable y nuestros profesores volvieron inspirados.'
-    },
-    avatar: 'https://i.pravatar.cc/150?u=jan'
-  },
-  {
-    id: 't3',
-    name: 'Elena Garcia',
-    role: { en: 'Secondary Teacher', es: 'Profesora de Secundaria' },
-    institution: 'IES Mediterráneo (Spain)',
-    content: {
-      en: 'I requested a custom course in Berlin for my team, and Teach4Future organized everything in Spanish. It was exactly what we needed.',
-      es: 'Solicité un curso a medida en Berlín para mi equipo, y Teach4Future organizó todo en español. Fue exactamente lo que necesitábamos.'
-    },
-    avatar: 'https://i.pravatar.cc/150?u=elena'
   }
 ];
 
@@ -286,8 +271,8 @@ export const FAQS: FAQItem[] = [
     id: 'f1',
     question: { en: 'How do I pay for the course with Erasmus+ funds?', es: '¿Cómo pago el curso con fondos Erasmus+?' },
     answer: {
-      en: 'Once you are enrolled, we will send you an invoice that you can pay using your school\'s Erasmus+ grant. We also provide the necessary documentation for your final report.',
-      es: 'Una vez inscrito, te enviaremos una factura que podrás pagar con la subvención Erasmus+ de tu centro. También proporcionamos la documentación necesaria para tu informe final.'
+      en: 'After the course is confirmed in writing, the proposal will state the invoicing details and agreed documents. Your school must check whether and how the fee can be charged to its own Erasmus+ grant.',
+      es: 'Cuando el curso esté confirmado por escrito, la propuesta indicará los datos de facturación y los documentos acordados. Tu centro debe comprobar si la cuota puede imputarse a su propia subvención Erasmus+ y de qué forma.'
     },
     category: { en: 'Payment', es: 'Pago' }
   },
@@ -295,8 +280,8 @@ export const FAQS: FAQItem[] = [
     id: 'f2',
     question: { en: 'What is included in the course fee?', es: '¿Qué incluye la cuota del curso?' },
     answer: {
-      en: 'The fee includes 30 hours of intensive training, all course materials, a certificate of attendance, coffee breaks, and at least two cultural activities (e.g., guided city tour). All our courses are fully Erasmus+ eligible.',
-      es: 'La cuota incluye 30 horas de formación intensiva, todos los materiales del curso, certificado de asistencia, pausas para café y al menos dos actividades culturales (ej. visita guiada por la ciudad). Todos nuestros cursos son totalmente elegibles para Erasmus+.'
+      en: 'The exact services are listed in the written proposal. A standard five-day programme includes at least 25 guided learning hours, digital course materials and, when the participation requirements are met, an attendance and learning-outcomes certificate.',
+      es: 'Los servicios exactos figuran en la propuesta escrita. Un programa estándar de cinco días incluye al menos 25 horas lectivas guiadas, materiales digitales y, cuando se cumplan los requisitos de participación, un certificado de asistencia y resultados de aprendizaje.'
     },
     category: { en: 'General', es: 'General' }
   },
@@ -304,8 +289,8 @@ export const FAQS: FAQItem[] = [
     id: 'f3',
     question: { en: 'Can you help with accommodation?', es: '¿Podéis ayudar con el alojamiento?' },
     answer: {
-      en: 'Yes, we provide a list of recommended hotels and apartments near our training centers in Almería, Granada, and Málaga.',
-      es: 'Sí, proporcionamos una lista de hoteles y apartamentos recomendados cerca de nuestros centros de formación en Almería, Granada y Málaga.'
+      en: 'We can provide general orientation once the venue is confirmed. Unless the written proposal says otherwise, participants or their organisation book and pay for accommodation and travel.',
+      es: 'Podemos facilitar orientación general cuando se confirme la sede. Salvo que la propuesta escrita diga otra cosa, las personas participantes o su organización reservan y pagan el alojamiento y el viaje.'
     },
     category: { en: 'Logistics', es: 'Logística' }
   },
@@ -313,8 +298,8 @@ export const FAQS: FAQItem[] = [
     id: 'f4',
     question: { en: 'How can I request a custom course in Europe?', es: '¿Cómo puedo solicitar un curso a medida en Europa?' },
     answer: {
-      en: 'If you are a group of at least 8 teachers from Spain, you can choose any European city and topic. We will organize the training there, delivered in Spanish.',
-      es: 'Si sois un grupo de al menos 8 profesores de España, podéis elegir cualquier ciudad europea y tema. Organizaremos la formación allí, impartida en español.'
+      en: 'Tell us the preferred European city, topic, dates and approximate group size. Every course has the same €480 fee per participant. Editions outside Spain are normally confirmed from 15 participants in total, who may come from several organisations; smaller groups can register their interest. The written proposal will confirm the local host or venue and any exceptional destination costs before booking.',
+      es: 'Indícanos la ciudad europea preferida, el tema, las fechas y el tamaño aproximado del grupo. Todos los cursos tienen el mismo precio de 480 € por participante. Las ediciones fuera de España se confirman normalmente desde 15 participantes en total, que pueden proceder de varios centros; los grupos más pequeños pueden registrar su interés. La propuesta escrita confirmará la organización anfitriona o sede y cualquier coste extraordinario del destino antes de reservar.'
     },
     category: { en: 'Custom Courses', es: 'Cursos a Medida' }
   }

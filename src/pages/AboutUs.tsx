@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { GraduationCap, Award, Heart, Globe, Users, CheckCircle2 } from 'lucide-react';
+import { Award, Heart, Globe } from 'lucide-react';
 import Button from '../components/ui/Button';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -39,8 +39,8 @@ const AboutUs = () => {
           <div className="relative">
             <div className="absolute -inset-4 bg-blue-600/5 rounded-[2.5rem] -rotate-3" />
             <img 
-              src="https://picsum.photos/seed/academy-team/800/600" 
-              alt="Academy team" 
+              src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80"
+              alt={t('about.imageAlt')}
               className="relative rounded-[2rem] shadow-2xl w-full h-full object-cover"
               referrerPolicy="no-referrer"
             />
@@ -76,38 +76,15 @@ const AboutUs = () => {
           ))}
         </div>
 
-        {/* Stats */}
-        <div className="bg-blue-600 rounded-[3rem] p-12 md:p-20 text-white text-center mb-24">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
-            <div>
-              <h4 className="text-4xl md:text-5xl font-black mb-2">5k+</h4>
-              <p className="text-blue-100 text-sm font-bold uppercase tracking-widest">{t('about.stats.teachers')}</p>
-            </div>
-            <div>
-              <h4 className="text-4xl md:text-5xl font-black mb-2">30+</h4>
-              <p className="text-blue-100 text-sm font-bold uppercase tracking-widest">{t('about.stats.trainers')}</p>
-            </div>
-            <div>
-              <h4 className="text-4xl md:text-5xl font-black mb-2">15+</h4>
-              <p className="text-blue-100 text-sm font-bold uppercase tracking-widest">{t('about.stats.topics')}</p>
-            </div>
-            <div>
-              <h4 className="text-4xl md:text-5xl font-black mb-2">3</h4>
-              <p className="text-blue-100 text-sm font-bold uppercase tracking-widest">{t('about.stats.hubs')}</p>
-            </div>
-          </div>
-        </div>
-
         {/* Team Section Placeholder */}
         <div className="text-center">
           <h2 className="text-3xl font-bold text-slate-900 mb-4">{t('about.joinTitle')}</h2>
           <p className="text-slate-600 max-w-2xl mx-auto mb-10">
             {t('about.joinDesc')}
           </p>
-          <div className="flex justify-center space-x-6">
-            <Button variant="outline">{t('about.followLinkedIn')}</Button>
+          <a href="https://www.instagram.com/teach4future_academy/" target="_blank" rel="noreferrer">
             <Button variant="outline">{t('about.followInstagram')}</Button>
-          </div>
+          </a>
         </div>
       </div>
     </div>

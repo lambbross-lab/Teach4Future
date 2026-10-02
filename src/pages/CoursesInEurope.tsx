@@ -4,20 +4,43 @@ import { Globe, Send, CheckCircle2, MapPin, Calendar, Users, Sparkles } from 'lu
 import Button from '../components/ui/Button';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { submitEnquiry } from '../services/enquiries';
+import EnquiryProtectionFields from '../components/EnquiryProtectionFields';
 
 const CoursesInEurope = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const { language, t } = useLanguage();
+  const [formData, setFormData] = useState({ city: '', topic: '', dates: '', size: 1, email: '', school: '', notes: '', privacyAccepted: false, website: '' });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
+    setSubmitError('');
+    try {
+      await submitEnquiry({
+        kind: 'europe',
+        fullName: formData.school,
+        email: formData.email,
+        institution: formData.school,
+        city: formData.city,
+        topic: formData.topic,
+        preferredDates: formData.dates,
+        groupSize: formData.size,
+        notes: formData.notes,
+        language,
+        privacyAccepted: formData.privacyAccepted,
+        website: formData.website,
+      });
       setIsSubmitted(true);
-    }, 1500);
+    } catch (error) {
+      setSubmitError(error instanceof Error && error.message === 'RATE_LIMITED'
+        ? t('common.formRateLimited')
+        : t('common.formUnavailable'));
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -39,9 +62,9 @@ const CoursesInEurope = () => {
 
             <div className="space-y-6 mb-10">
               {[
-                { icon: MapPin, title: 'Any European City', desc: 'Berlin, Rome, Paris, Prague, Helsinki... you name it.' },
-                { icon: Globe, title: 'Delivered in Spanish', desc: 'No language barriers. All training is conducted by our Spanish experts.' },
-                { icon: Sparkles, title: 'Tailored Curriculum', desc: 'We adapt the course content to your school\'s specific needs and goals.' }
+                { icon: MapPin, title: t('coursesEurope.featureCityTitle'), desc: t('coursesEurope.featureCityDesc') },
+                { icon: Globe, title: t('coursesEurope.featureLanguageTitle'), desc: t('coursesEurope.featureLanguageDesc') },
+                { icon: Sparkles, title: t('coursesEurope.featureTailoredTitle'), desc: t('coursesEurope.featureTailoredDesc') }
               ].map((item, idx) => (
                 <div key={idx} className="flex items-start space-x-4">
                   <div className="bg-blue-50 p-3 rounded-xl">
@@ -78,19 +101,22 @@ const CoursesInEurope = () => {
                           <input 
                             required 
                             type="text" 
-                            placeholder="e.g. Berlin" 
+                            placeholder={t('coursesEurope.cityPlaceholder')}
+                            value={formData.city}
+                            onChange={(event) => setFormData({ ...formData, city: event.target.value })}
                             className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
                           />
                         </div>
                         <div className="space-y-2">
                           <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">{t('coursesEurope.formTopic')}</label>
-                          <select required className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none bg-white">
-                            <option value="">Select a topic</option>
-                            <option value="ai">AI for Education</option>
-                            <option value="inclusion">Inclusion & SEN</option>
-                            <option value="wellbeing">Wellbeing & Mindfulness</option>
-                            <option value="digital">Digital Competence</option>
-                            <option value="clil">CLIL / English</option>
+                          <select required value={formData.topic} onChange={(event) => setFormData({ ...formData, topic: event.target.value })} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none bg-white">
+                            <option value="">{t('coursesEurope.topicPlaceholder')}</option>
+                            <option value="ai">{t('coursesEurope.topics.ai')}</option>
+                            <option value="inclusion">{t('coursesEurope.topics.inclusion')}</option>
+                            <option value="digital">{t('coursesEurope.topics.digital')}</option>
+                            <option value="europe">{t('coursesEurope.topics.europe')}</option>
+                            <option value="sustainability">{t('coursesEurope.topics.sustainability')}</option>
+                            <option value="wellbeing">{t('coursesEurope.topics.wellbeing')}</option>
                           </select>
                         </div>
                       </div>
@@ -101,7 +127,9 @@ const CoursesInEurope = () => {
                           <input 
                             required 
                             type="text" 
-                            placeholder="e.g. July 2026" 
+                            placeholder={t('coursesEurope.datesPlaceholder')}
+                            value={formData.dates}
+                            onChange={(event) => setFormData({ ...formData, dates: event.target.value })}
                             className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
                           />
                         </div>
@@ -110,8 +138,10 @@ const CoursesInEurope = () => {
                           <input 
                             required 
                             type="number" 
-                            min="8" 
-                            placeholder="Min. 8 teachers" 
+                            min="1"
+                            placeholder={t('coursesEurope.sizePlaceholder')}
+                            value={formData.size}
+                            onChange={(event) => setFormData({ ...formData, size: Number(event.target.value) })}
                             className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
                           />
                         </div>
@@ -122,7 +152,9 @@ const CoursesInEurope = () => {
                         <input 
                           required 
                           type="email" 
-                          placeholder="your@email.com" 
+                          placeholder="your@email.com"
+                          value={formData.email}
+                          onChange={(event) => setFormData({ ...formData, email: event.target.value })}
                           className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
                         />
                       </div>
@@ -132,7 +164,9 @@ const CoursesInEurope = () => {
                         <input 
                           required 
                           type="text" 
-                          placeholder="Name of your school" 
+                          placeholder={t('coursesEurope.schoolPlaceholder')}
+                          value={formData.school}
+                          onChange={(event) => setFormData({ ...formData, school: event.target.value })}
                           className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
                         />
                       </div>
@@ -141,15 +175,26 @@ const CoursesInEurope = () => {
                         <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">{t('coursesEurope.formNotes')}</label>
                         <textarea 
                           rows={3} 
-                          placeholder="Tell us more about your needs..." 
+                          placeholder={t('coursesEurope.notesPlaceholder')}
+                          value={formData.notes}
+                          onChange={(event) => setFormData({ ...formData, notes: event.target.value })}
                           className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all resize-none"
                         ></textarea>
                       </div>
+
+                      <EnquiryProtectionFields
+                        consent={formData.privacyAccepted}
+                        onConsentChange={(privacyAccepted) => setFormData({ ...formData, privacyAccepted })}
+                        website={formData.website}
+                        onWebsiteChange={(website) => setFormData({ ...formData, website })}
+                      />
 
                       <Button type="submit" size="lg" className="w-full" isLoading={isLoading}>
                         {t('coursesEurope.formSubmit')}
                         <Send className="ml-2 h-4 w-4" />
                       </Button>
+                      <p className="text-xs leading-relaxed text-slate-500">{t('coursesEurope.priceNote')}</p>
+                      {submitError && <p role="alert" className="rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-800">{submitError}</p>}
                     </form>
                   </motion.div>
                 ) : (

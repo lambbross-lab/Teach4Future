@@ -1,23 +1,44 @@
 
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle2, MessageSquare, Globe, Clock } from 'lucide-react';
+import { Mail, MapPin, Send, CheckCircle2 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { submitEnquiry } from '../services/enquiries';
+import EnquiryProtectionFields from '../components/EnquiryProtectionFields';
 
 const Contact = () => {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
+  const [website, setWebsite] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
+    setSubmitError('');
+    const data = new FormData(e.currentTarget);
+    try {
+      await submitEnquiry({
+        kind: 'contact',
+        fullName: String(data.get('name') || ''),
+        email: String(data.get('email') || ''),
+        subject: String(data.get('subject') || ''),
+        message: String(data.get('message') || ''),
+        language,
+        privacyAccepted,
+        website,
+      });
       setIsSubmitted(true);
-    }, 1500);
+    } catch (error) {
+      setSubmitError(error instanceof Error && error.message === 'RATE_LIMITED'
+        ? t('common.formRateLimited')
+        : t('common.formUnavailable'));
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -39,34 +60,20 @@ const Contact = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-12">
               {[
-                { icon: Mail, title: t('contact.info.email.title'), value: 'info@teach4future.eu', desc: t('contact.info.email.desc') },
-                { icon: Phone, title: t('contact.info.phone.title'), value: '+34 950 000 000', desc: t('contact.info.phone.desc') },
-                { icon: MapPin, title: t('contact.info.office.title'), value: 'Almería, Spain', desc: t('contact.info.office.desc') },
-                { icon: Clock, title: t('contact.info.response.title'), value: t('contact.info.response.value'), desc: t('contact.info.response.desc') }
+                { icon: Mail, title: t('contact.info.email.title'), value: 'teach4futureacademy@gmail.com', desc: t('contact.info.email.desc'), href: 'mailto:teach4futureacademy@gmail.com' },
+                { icon: MapPin, title: t('contact.info.office.title'), value: t('footer.location'), desc: t('contact.info.office.desc') },
               ].map((item, idx) => (
                 <div key={idx} className="flex flex-col items-start p-6 bg-slate-50 rounded-2xl border border-slate-100">
                   <div className="bg-white w-10 h-10 rounded-xl flex items-center justify-center shadow-sm mb-4">
                     <item.icon className="h-5 w-5 text-blue-600" />
                   </div>
                   <h3 className="font-bold text-slate-900 text-sm mb-1">{item.title}</h3>
-                  <p className="text-blue-600 font-bold text-sm mb-1">{item.value}</p>
+                  {item.href ? <a href={item.href} className="text-blue-600 font-bold text-sm mb-1 break-all hover:underline">{item.value}</a> : <p className="text-blue-600 font-bold text-sm mb-1">{item.value}</p>}
                   <p className="text-xs text-slate-400">{item.desc}</p>
                 </div>
               ))}
             </div>
 
-            {/* Location Blocks Preview */}
-            <div className="space-y-4 pt-8 border-t border-slate-100">
-              <h3 className="font-bold text-slate-900 mb-4">{t('contact.hubs')}</h3>
-              <div className="flex flex-wrap gap-3">
-                {['Almería', 'Granada', 'Málaga'].map((city) => (
-                  <div key={city} className="flex items-center space-x-2 bg-slate-100 px-4 py-2 rounded-full text-sm font-medium text-slate-700">
-                    <MapPin className="h-4 w-4 text-blue-500" />
-                    <span>{city}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
 
           {/* Form */}
@@ -89,6 +96,7 @@ const Contact = () => {
                         <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">{t('contact.form.name')}</label>
                         <input 
                           required 
+                          name="name"
                           type="text" 
                           placeholder="John Doe" 
                           className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
@@ -99,6 +107,7 @@ const Contact = () => {
                         <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">{t('contact.form.email')}</label>
                         <input 
                           required 
+                          name="email"
                           type="email" 
                           placeholder="john@example.com" 
                           className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
@@ -107,7 +116,7 @@ const Contact = () => {
 
                       <div className="space-y-2">
                         <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">{t('contact.form.subject')}</label>
-                        <select required className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none bg-white">
+                        <select required name="subject" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none bg-white">
                           <option value="">{t('contact.form.subjectPlaceholder')}</option>
                           <option value="general">{t('contact.form.subjects.general')}</option>
                           <option value="enrolment">{t('contact.form.subjects.enrolment')}</option>
@@ -121,16 +130,25 @@ const Contact = () => {
                         <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">{t('contact.form.message')}</label>
                         <textarea 
                           required 
+                          name="message"
                           rows={4} 
                           placeholder={t('contact.form.messagePlaceholder')}
                           className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all resize-none"
                         ></textarea>
                       </div>
 
+                      <EnquiryProtectionFields
+                        consent={privacyAccepted}
+                        onConsentChange={setPrivacyAccepted}
+                        website={website}
+                        onWebsiteChange={setWebsite}
+                      />
+
                       <Button type="submit" size="lg" className="w-full" isLoading={isLoading}>
                         {t('contact.form.submit')}
                         <Send className="ml-2 h-4 w-4" />
                       </Button>
+                      {submitError && <p role="alert" className="rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-800">{submitError}</p>}
                     </form>
                   </motion.div>
                 ) : (

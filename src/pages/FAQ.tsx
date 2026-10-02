@@ -27,9 +27,9 @@ const FAQ = () => {
     <div className="pt-32 pb-20 bg-slate-50 min-h-screen">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">Frequently Asked Questions</h1>
+          <h1 className="text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">{t('faq.title')}</h1>
           <p className="text-lg text-slate-600">
-            Find answers to common questions about our courses, Erasmus+ funding, and logistics.
+            {t('faq.moreDesc')}
           </p>
         </div>
 
@@ -85,9 +85,9 @@ const FAQ = () => {
         <div className="bg-blue-600 rounded-[2.5rem] p-10 text-white text-center relative overflow-hidden">
           <div className="absolute -top-12 -right-12 w-48 h-48 bg-white/10 rounded-full blur-3xl" />
           <HelpCircle className="h-12 w-12 text-blue-200 mx-auto mb-6" />
-          <h2 className="text-2xl font-bold mb-4">Still have questions?</h2>
+          <h2 className="text-2xl font-bold mb-4">{t('faq.moreTitle')}</h2>
           <p className="text-blue-100 mb-8 max-w-md mx-auto">
-            Our team is here to help you with any specific queries you might have about your Erasmus+ mobility.
+            {t('faq.moreDesc')}
           </p>
           <Link to="/contact">
             <Button variant="secondary" className="bg-white text-blue-600 hover:bg-slate-100">

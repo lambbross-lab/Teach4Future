@@ -30,7 +30,15 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, session, className }) =
         />
         <div className="absolute top-4 left-4">
           <span className="bg-white/90 backdrop-blur-sm text-blue-600 text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">
-            {course.category}
+            {t(`categories.${course.category.toLowerCase()}`)}
+          </span>
+        </div>
+        <div className="absolute top-4 right-4">
+          <span className={cn(
+            "backdrop-blur-sm text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm",
+            course.featured ? "bg-blue-600/95 text-white" : "bg-slate-900/80 text-white"
+          )}>
+            {course.featured ? t('common.priorityCourse') : t('common.groupsCourse')}
           </span>
         </div>
       </div>
@@ -56,7 +64,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, session, className }) =
               </div>
               <div className="flex items-center text-xs text-slate-600">
                 <Calendar className="h-4 w-4 mr-2 text-blue-500" />
-                <span>{formatDate(session.startDate, language)}</span>
+                <span>{formatDate(session.startDate, language)} – {formatDate(session.endDate, language)}</span>
               </div>
               <div className="flex items-center text-xs text-slate-600 font-medium">
                 <Users className="h-4 w-4 mr-2 text-blue-500" />
@@ -73,7 +81,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, session, className }) =
         <div className="flex items-center justify-between pt-4 border-t border-slate-50">
           <div className="flex flex-col">
             <span className="text-lg font-bold text-slate-900">{course.price}€</span>
-            <span className="text-[10px] text-slate-400 font-medium tracking-wide uppercase">Erasmus+ Eligible</span>
+            <span className="text-[10px] text-slate-400 font-medium tracking-wide uppercase">{t('common.fundingSubject')}</span>
           </div>
           <div className="flex items-center space-x-2">
             <Link to={`/course/${course.id}`}>

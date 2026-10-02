@@ -1,11 +1,12 @@
 
 import React, { useState, useMemo } from 'react';
 import { Search, Filter, SlidersHorizontal, X } from 'lucide-react';
-import { COURSES, SESSIONS, CITIES } from '../mockData';
+import { COURSES, CITIES } from '../mockData';
 import CourseCard from '../components/CourseCard';
 import Button from '../components/ui/Button';
-import { cn, getText } from '../lib/utils';
+import { cn, getText, isCurrentOrUpcoming } from '../lib/utils';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAcademyData } from '../contexts/AcademyDataContext';
 
 const CoursesInSpain = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -13,23 +14,24 @@ const CoursesInSpain = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const { language, t } = useLanguage();
+  const { sessions } = useAcademyData();
 
-  const filteredSessions = useMemo(() => {
-    return SESSIONS.filter(session => {
-      const course = COURSES.find(c => c.id === session.courseId);
-      if (!course) return false;
-
+  const filteredCourses = useMemo(() => {
+    return COURSES.filter(course => {
       const title = getText(course.title, language).toLowerCase();
       const description = getText(course.description, language).toLowerCase();
       const query = searchQuery.toLowerCase();
-
       const matchesSearch = title.includes(query) || description.includes(query);
-      const matchesCity = selectedCity === 'all' || session.cityId === selectedCity;
       const matchesCategory = selectedCategory === 'all' || course.category === selectedCategory;
+      const matchesCity = selectedCity === 'all' || sessions.some(session =>
+        session.courseId === course.id &&
+        session.cityId === selectedCity &&
+        isCurrentOrUpcoming(session.endDate)
+      );
 
       return matchesSearch && matchesCity && matchesCategory;
-    });
-  }, [searchQuery, selectedCity, selectedCategory, language]);
+    }).sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)));
+  }, [searchQuery, selectedCity, selectedCategory, language, sessions]);
 
   const categories = Array.from(new Set(COURSES.map(c => c.category)));
 
@@ -41,6 +43,9 @@ const CoursesInSpain = () => {
           <h1 className="text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">{t('nav.coursesSpain')}</h1>
           <p className="text-lg text-slate-600 max-w-2xl">
             {t('coursesSpain.subtitle')}
+          </p>
+          <p className="mt-3 text-sm font-medium text-blue-700 max-w-3xl">
+            {t('coursesSpain.minimumNote')}
           </p>
         </div>
 
@@ -79,7 +84,7 @@ const CoursesInSpain = () => {
               >
                 <option value="all">{t('common.allCategories')}</option>
                 {categories.map(cat => (
-                  <option key={cat} value={cat}>{cat}</option>
+                  <option key={cat} value={cat}>{t(`categories.${cat.toLowerCase()}`)}</option>
                 ))}
               </select>
             </div>
@@ -144,7 +149,7 @@ const CoursesInSpain = () => {
                       )}
                       onClick={() => setSelectedCategory(cat)}
                     >
-                      {cat}
+                      {t(`categories.${cat.toLowerCase()}`)}
                     </button>
                   ))}
                 </div>
@@ -154,11 +159,13 @@ const CoursesInSpain = () => {
         </div>
 
         {/* Results */}
-        {filteredSessions.length > 0 ? (
+        {filteredCourses.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredSessions.map((session) => {
-              const course = COURSES.find(c => c.id === session.courseId)!;
-              return <CourseCard key={session.id} course={course} session={session} />;
+            {filteredCourses.map((course) => {
+              const nextSession = sessions
+                .filter(session => session.courseId === course.id && isCurrentOrUpcoming(session.endDate))
+                .sort((a, b) => a.startDate.localeCompare(b.startDate))[0];
+              return <CourseCard key={course.id} course={course} session={nextSession} />;
             })}
           </div>
         ) : (

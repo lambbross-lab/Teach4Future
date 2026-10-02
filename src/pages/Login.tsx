@@ -4,22 +4,31 @@ import { useNavigate, Link } from 'react-router-dom';
 import { GraduationCap, Lock, Mail, ArrowRight, ShieldCheck } from 'lucide-react';
 import Button from '../components/ui/Button';
 import { useLanguage } from '../contexts/LanguageContext';
+import { isSupabaseConfigured, supabase } from '../lib/supabase';
 
 const Login = () => {
   const { t } = useLanguage();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!supabase) {
+      setError(t('login.notConfigured'));
+      return;
+    }
     setIsLoading(true);
-    // Simulate login
-    setTimeout(() => {
+    setError('');
+    const { error: authError } = await supabase.auth.signInWithPassword({ email, password });
+    if (authError) {
+      setError(t('login.error'));
       setIsLoading(false);
-      navigate('/admin');
-    }, 1500);
+      return;
+    }
+    navigate('/admin');
   };
 
   return (
@@ -73,10 +82,11 @@ const Login = () => {
               </div>
             </div>
 
-            <Button type="submit" size="lg" className="w-full" isLoading={isLoading}>
+            <Button type="submit" size="lg" className="w-full" isLoading={isLoading} disabled={!isSupabaseConfigured}>
               {t('login.signIn')}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
+            {error && <p role="alert" className="rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-800">{error}</p>}
           </form>
 
           <div className="mt-8 pt-6 border-t border-slate-50 text-center">

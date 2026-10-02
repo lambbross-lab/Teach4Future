@@ -3,6 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import { LanguageProvider } from './contexts/LanguageContext';
+import { AcademyDataProvider } from './contexts/AcademyDataContext';
 
 // Pages
 import Home from './pages/Home';
@@ -21,13 +22,14 @@ import AdminDashboard from './pages/AdminDashboard';
 import PrivacyPolicy from './pages/legal/PrivacyPolicy';
 import CookiePolicy from './pages/legal/CookiePolicy';
 import TermsConditions from './pages/legal/TermsConditions';
-import RefundPolicy from './pages/legal/RefundPolicy';
+import LegalNotice from './pages/legal/LegalNotice';
 
 export default function App() {
   return (
     <LanguageProvider>
-      <Router>
-        <Layout>
+      <AcademyDataProvider>
+        <Router>
+          <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/courses-spain" element={<CoursesInSpain />} />
@@ -44,16 +46,17 @@ export default function App() {
             <Route path="/admin" element={<AdminDashboard />} />
             
             {/* Legal */}
+            <Route path="/legal-notice" element={<LegalNotice />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/cookies" element={<CookiePolicy />} />
             <Route path="/terms" element={<TermsConditions />} />
-            <Route path="/refunds" element={<RefundPolicy />} />
             
             {/* Fallback */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
-        </Layout>
-      </Router>
+          </Layout>
+        </Router>
+      </AcademyDataProvider>
     </LanguageProvider>
   );
 }
