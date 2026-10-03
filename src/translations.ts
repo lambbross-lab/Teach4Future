@@ -105,6 +105,33 @@ export const translations: any = {
       priorityCourse: 'Priority course',
       groupsCourse: 'For groups',
     },
+    guidedHelp: {
+      title: 'Need help?',
+      subtitle: 'Quick information assistant',
+      open: 'Need help?',
+      close: 'Close help',
+      welcome: 'Hello! We cannot attend this chat live right now, but I can guide you to the information you need. What would you like to know?',
+      options: {
+        courses: 'I want to explore the courses',
+        dates: 'Dates and available places',
+        schools: 'Information for my school',
+        enrolment: 'I want to request information',
+      },
+      answers: {
+        courses: 'You can explore our practical, five-day teacher-training courses in Spanish. Each course includes its objectives, programme and relevant details.',
+        dates: 'Confirmed dates and available places are shown separately. If a course is available on request, you can ask us to open an edition in Almería, Granada or Málaga.',
+        schools: 'We prepare group-training proposals for schools and Erasmus+ coordinators. In Spain, group editions normally require at least 10 confirmed participants.',
+        enrolment: 'You can send us your details and preferred course through a short form. Sending the request does not reserve a place or create any payment obligation.',
+      },
+      actions: {
+        courses: 'Explore courses',
+        dates: 'View dates and places',
+        schools: 'Information for schools',
+        enrolment: 'Open information form',
+      },
+      anotherQuestion: 'Ask another question',
+      note: 'This assistant uses the information published on Teach4Future and does not collect messages or personal data.',
+    },
     categories: {
       ai: 'AI',
       inclusion: 'Inclusion',
@@ -301,7 +328,8 @@ export const translations: any = {
         eyebrow: 'For schools in Andalusia',
         title: 'Make the most of Google resources with your Educa Andalucía account.',
         desc: 'Discover the Google Workspace for Education tools available through the Andalusian Department of Educational Development and Vocational Training.',
-        moreInfo: 'More information'
+        moreInfo: 'More information',
+        trainingCta: 'Train your teaching team'
       },
       services: {
         bookings: {
@@ -488,6 +516,17 @@ export const translations: any = {
         revenue: 'Revenue (MTD)'
       },
       recentEnrolments: 'Recent Enrolments',
+      enquiries: {
+        title: 'New information requests',
+        help: 'Requests sent through the public forms appear here. Reply by email and update their status.',
+        new: 'new',
+        empty: 'There are no requests yet.',
+        loadError: 'Requests could not be loaded. Check that this user is an administrator in Supabase.',
+        people: 'people',
+        statusLabel: 'Request status',
+        kinds: { course: 'Course', europe: 'Europe', contact: 'Contact' },
+        status: { new: 'New', contacted: 'Contacted', closed: 'Closed' }
+      },
       live: 'Live data',
       preview: 'Setup preview',
       sessionsTitle: 'Course dates and places',
@@ -651,6 +690,33 @@ export const translations: any = {
       europeCaption: 'Erasmus+ · Formación en español · Grupos de docentes',
       priorityCourse: 'Curso prioritario',
       groupsCourse: 'Para grupos',
+    },
+    guidedHelp: {
+      title: '¿Necesitas ayuda?',
+      subtitle: 'Asistente de información rápida',
+      open: '¿Necesitas ayuda?',
+      close: 'Cerrar ayuda',
+      welcome: '¡Hola! Ahora mismo no podemos atender este chat en directo, pero puedo guiarte a la información que necesitas. ¿Qué quieres consultar?',
+      options: {
+        courses: 'Quiero ver los cursos',
+        dates: 'Fechas y plazas disponibles',
+        schools: 'Información para mi centro',
+        enrolment: 'Quiero pedir información',
+      },
+      answers: {
+        courses: 'Puedes explorar nuestros cursos prácticos de formación docente en español, de cinco días. Cada curso muestra sus objetivos, programa y datos relevantes.',
+        dates: 'Las fechas y plazas confirmadas se muestran por separado. Si un curso está disponible bajo demanda, puedes solicitar una edición en Almería, Granada o Málaga.',
+        schools: 'Preparamos propuestas de formación para grupos, centros y coordinadores Erasmus+. En España, las ediciones de grupo normalmente requieren al menos 10 participantes confirmados.',
+        enrolment: 'Puedes enviarnos tus datos y el curso que te interesa mediante un formulario breve. La solicitud no reserva plaza ni genera ninguna obligación de pago.',
+      },
+      actions: {
+        courses: 'Explorar cursos',
+        dates: 'Ver fechas y plazas',
+        schools: 'Información para centros',
+        enrolment: 'Abrir formulario de información',
+      },
+      anotherQuestion: 'Hacer otra consulta',
+      note: 'Este asistente usa la información publicada en Teach4Future y no recoge mensajes ni datos personales.',
     },
     categories: {
       ai: 'IA',
@@ -848,7 +914,8 @@ export const translations: any = {
         eyebrow: 'Para centros de Andalucía',
         title: 'Aprovecha todos los recursos de Google con tu cuenta Educa Andalucía de la Junta de Andalucía.',
         desc: 'Descubre las herramientas de Google Workspace para Educación disponibles a través de la Consejería de Desarrollo Educativo y Formación Profesional.',
-        moreInfo: 'Más información'
+        moreInfo: 'Más información',
+        trainingCta: 'Forma a tu equipo docente'
       },
       services: {
         bookings: {
@@ -1035,6 +1102,17 @@ export const translations: any = {
         revenue: 'Ingresos (Mes)'
       },
       recentEnrolments: 'Inscripciones Recientes',
+      enquiries: {
+        title: 'Nuevas solicitudes de información',
+        help: 'Aquí aparecen las solicitudes enviadas desde los formularios públicos. Responde por correo y actualiza su estado.',
+        new: 'nuevas',
+        empty: 'Todavía no hay solicitudes.',
+        loadError: 'No se han podido cargar las solicitudes. Comprueba que este usuario sea administrador en Supabase.',
+        people: 'personas',
+        statusLabel: 'Estado de la solicitud',
+        kinds: { course: 'Curso', europe: 'Europa', contact: 'Contacto' },
+        status: { new: 'Nueva', contacted: 'Contactada', closed: 'Cerrada' }
+      },
       live: 'Datos en directo',
       preview: 'Vista previa de configuración',
       sessionsTitle: 'Fechas y plazas de los cursos',

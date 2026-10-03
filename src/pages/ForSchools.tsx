@@ -60,15 +60,23 @@ const ForSchools = () => {
                 </p>
               </div>
             </div>
-            <a
-              href="https://www.juntadeandalucia.es/educacion/eaprendizajeservicios-educativos-digitales-2/workspace/"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl border border-blue-200 bg-white px-5 py-3 text-sm font-bold text-blue-700 shadow-sm transition-colors hover:border-blue-300 hover:bg-blue-50"
-            >
-              {t('forSchools.educaAndalucia.moreInfo')}
-              <ExternalLink className="h-4 w-4" aria-hidden="true" />
-            </a>
+            <div className="flex shrink-0 flex-col gap-2 sm:flex-row lg:flex-col xl:flex-row">
+              <a
+                href="https://www.juntadeandalucia.es/educacion/eaprendizajeservicios-educativos-digitales-2/workspace/"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-blue-200 bg-white px-5 py-3 text-sm font-bold text-blue-700 shadow-sm transition-colors hover:border-blue-300 hover:bg-blue-50"
+              >
+                {t('forSchools.educaAndalucia.moreInfo')}
+                <ExternalLink className="h-4 w-4" aria-hidden="true" />
+              </a>
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-blue-700"
+              >
+                {t('forSchools.educaAndalucia.trainingCta')}
+              </Link>
+            </div>
           </div>
         </section>
 

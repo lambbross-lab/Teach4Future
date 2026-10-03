@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Calendar, Check, Database, GraduationCap, LogOut, Plus, Save, Trash2, Users } from 'lucide-react';
+import { Calendar, Check, Database, GraduationCap, LogOut, Mail, Plus, Save, Trash2, Users } from 'lucide-react';
 import Button from '../components/ui/Button';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAcademyData } from '../contexts/AcademyDataContext';
@@ -10,6 +10,22 @@ import { supabase } from '../lib/supabase';
 import type { CourseSession } from '../types';
 
 type SessionCreatorDraft = Omit<CourseSession, 'id' | 'cityId'> & { cityIds: string[] };
+type EnquiryRecord = {
+  id: string;
+  kind: 'course' | 'europe' | 'contact';
+  full_name: string;
+  email: string;
+  institution: string | null;
+  course_id: string | null;
+  city: string | null;
+  topic: string | null;
+  preferred_dates: string | null;
+  group_size: number | null;
+  subject: string | null;
+  message: string | null;
+  status: 'new' | 'contacted' | 'closed';
+  created_at: string;
+};
 
 const toLocalDate = (date: Date) => {
   const offset = date.getTimezoneOffset();
@@ -47,6 +63,8 @@ const AdminDashboard = () => {
   const [isCreatorOpen, setIsCreatorOpen] = useState(false);
   const [creatorDraft, setCreatorDraft] = useState<SessionCreatorDraft>(createSessionDraft);
   const [isCreating, setIsCreating] = useState(false);
+  const [enquiries, setEnquiries] = useState<EnquiryRecord[]>([]);
+  const [enquiriesError, setEnquiriesError] = useState(false);
   const [authChecked, setAuthChecked] = useState(!supabase);
   const navigate = useNavigate();
   const today = useMemo(() => toLocalDate(new Date()), []);
@@ -60,6 +78,22 @@ const AdminDashboard = () => {
       setAuthChecked(true);
     });
   }, [navigate]);
+
+  useEffect(() => {
+    if (!supabase) return;
+    supabase
+      .from('enquiries')
+      .select('id, kind, full_name, email, institution, course_id, city, topic, preferred_dates, group_size, subject, message, status, created_at')
+      .order('created_at', { ascending: false })
+      .limit(20)
+      .then(({ data, error }) => {
+        if (error) {
+          setEnquiriesError(true);
+          return;
+        }
+        setEnquiries((data ?? []) as EnquiryRecord[]);
+      });
+  }, []);
 
   const stats = useMemo(() => {
     const upcoming = sessions.filter((session) => isCurrentOrUpcoming(session.endDate));
@@ -161,6 +195,12 @@ const AdminDashboard = () => {
     navigate('/login');
   };
 
+  const setEnquiryStatus = async (id: string, status: EnquiryRecord['status']) => {
+    if (!supabase) return;
+    const { error } = await supabase.from('enquiries').update({ status }).eq('id', id);
+    if (!error) setEnquiries((current) => current.map((enquiry) => enquiry.id === id ? { ...enquiry, status } : enquiry));
+  };
+
   if (!authChecked) return <div className="min-h-screen grid place-items-center text-slate-500">{t('common.loading')}</div>;
 
   return (
@@ -198,6 +238,46 @@ const AdminDashboard = () => {
             </div>
           ))}
         </div>
+
+        <section className="mb-8 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+          <div className="flex items-center justify-between gap-4 border-b border-slate-100 p-6 md:p-8">
+            <div>
+              <h2 className="flex items-center gap-2 text-xl font-bold text-slate-900"><Mail className="h-5 w-5 text-blue-600" />{t('admin.enquiries.title')}</h2>
+              <p className="mt-1 text-sm text-slate-500">{t('admin.enquiries.help')}</p>
+            </div>
+            <span className="rounded-full bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">{enquiries.filter((enquiry) => enquiry.status === 'new').length} {t('admin.enquiries.new')}</span>
+          </div>
+          {enquiriesError ? (
+            <p className="p-6 text-sm font-semibold text-red-700">{t('admin.enquiries.loadError')}</p>
+          ) : enquiries.length === 0 ? (
+            <p className="p-6 text-sm text-slate-500">{t('admin.enquiries.empty')}</p>
+          ) : (
+            <div className="divide-y divide-slate-100">
+              {enquiries.map((enquiry) => (
+                <article key={enquiry.id} className="p-6 md:px-8">
+                  <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <h3 className="font-bold text-slate-900">{enquiry.full_name}</h3>
+                        <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-bold text-slate-600">{t(`admin.enquiries.kinds.${enquiry.kind}`)}</span>
+                        <span className={`rounded-full px-2.5 py-1 text-xs font-bold ${enquiry.status === 'new' ? 'bg-blue-50 text-blue-700' : enquiry.status === 'contacted' ? 'bg-amber-50 text-amber-700' : 'bg-slate-100 text-slate-600'}`}>{t(`admin.enquiries.status.${enquiry.status}`)}</span>
+                      </div>
+                      <a className="mt-1 inline-block text-sm font-semibold text-blue-600 hover:underline" href={`mailto:${enquiry.email}`}>{enquiry.email}</a>
+                      <p className="mt-2 text-sm text-slate-600">{[enquiry.institution, enquiry.course_id, enquiry.city, enquiry.topic, enquiry.preferred_dates, enquiry.group_size ? `${enquiry.group_size} ${t('admin.enquiries.people')}` : null].filter(Boolean).join(' · ')}</p>
+                      {(enquiry.subject || enquiry.message) && <p className="mt-3 whitespace-pre-wrap rounded-xl bg-slate-50 p-3 text-sm leading-relaxed text-slate-700">{enquiry.subject && <strong>{enquiry.subject}{enquiry.message ? ': ' : ''}</strong>}{enquiry.message}</p>}
+                      <p className="mt-3 text-xs text-slate-400">{new Intl.DateTimeFormat(language === 'es' ? 'es-ES' : 'en-GB', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(enquiry.created_at))}</p>
+                    </div>
+                    <select aria-label={t('admin.enquiries.statusLabel')} value={enquiry.status} onChange={(event) => setEnquiryStatus(enquiry.id, event.target.value as EnquiryRecord['status'])} className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700">
+                      <option value="new">{t('admin.enquiries.status.new')}</option>
+                      <option value="contacted">{t('admin.enquiries.status.contacted')}</option>
+                      <option value="closed">{t('admin.enquiries.status.closed')}</option>
+                    </select>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+        </section>
 
         <section className="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
           <div className="p-6 md:p-8 border-b border-slate-100 flex items-center justify-between gap-4">

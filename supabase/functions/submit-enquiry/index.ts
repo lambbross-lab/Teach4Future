@@ -26,6 +26,8 @@ interface EnquiryPayload {
 
 const defaultOrigins = [
   'https://teach4-future.vercel.app',
+  'https://teach4future.eu',
+  'https://www.teach4future.eu',
   'http://localhost:3000',
   'http://127.0.0.1:3000',
   'http://127.0.0.1:4173',
