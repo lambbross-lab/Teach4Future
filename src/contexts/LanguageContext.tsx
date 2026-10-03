@@ -23,14 +23,29 @@ import { translations } from '../translations';
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [language, setLanguage] = useState<Language>(() => {
-    const saved = localStorage.getItem('language');
-    return (saved as Language) || 'en';
+    const savedPreference = localStorage.getItem('languagePreference');
+    if (savedPreference === 'en' || savedPreference === 'es') {
+      return savedPreference;
+    }
+
+    const browserLanguage = navigator.languages?.[0] || navigator.language || 'en';
+    return browserLanguage.toLowerCase().startsWith('es') ? 'es' : 'en';
   });
 
   useEffect(() => {
-    localStorage.setItem('language', language);
     document.documentElement.lang = language;
   }, [language]);
+
+  useEffect(() => {
+    // The old key did not distinguish an automatic default from a choice made by the visitor.
+    // Removing it lets existing Spanish-speaking visitors receive the new browser-based default.
+    localStorage.removeItem('language');
+  }, []);
+
+  const chooseLanguage = (lang: Language) => {
+    localStorage.setItem('languagePreference', lang);
+    setLanguage(lang);
+  };
 
   const t = (key: string): string => {
     const keys = key.split('.');
@@ -48,7 +63,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage: chooseLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );

@@ -297,6 +297,12 @@ export const translations: any = {
       imageAlt: 'Educators participating in group training',
       ctaInfo: 'Request Institutional Info',
       ctaCustom: 'Custom Group Mobility',
+      educaAndalucia: {
+        eyebrow: 'For schools in Andalusia',
+        title: 'Make the most of Google resources with your Educa Andalucía account.',
+        desc: 'Discover the Google Workspace for Education tools available through the Andalusian Department of Educational Development and Vocational Training.',
+        moreInfo: 'More information'
+      },
       services: {
         bookings: {
           title: 'Group Bookings',
@@ -838,6 +844,12 @@ export const translations: any = {
       imageAlt: 'Docentes participando en una formación de grupo',
       ctaInfo: 'Solicitar Información Institucional',
       ctaCustom: 'Movilidad de Grupo a Medida',
+      educaAndalucia: {
+        eyebrow: 'Para centros de Andalucía',
+        title: 'Aprovecha todos los recursos de Google con tu cuenta Educa Andalucía de la Junta de Andalucía.',
+        desc: 'Descubre las herramientas de Google Workspace para Educación disponibles a través de la Consejería de Desarrollo Educativo y Formación Profesional.',
+        moreInfo: 'Más información'
+      },
       services: {
         bookings: {
           title: 'Reservas de Grupo',

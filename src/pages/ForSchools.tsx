@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Users, FileCheck, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { Users, FileCheck, ShieldCheck, CheckCircle2, ExternalLink, Laptop } from 'lucide-react';
 import Button from '../components/ui/Button';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -40,6 +40,37 @@ const ForSchools = () => {
             />
           </div>
         </div>
+
+        {/* Educa Andalucía resource */}
+        <section className="mb-24 rounded-3xl border border-blue-100 bg-gradient-to-r from-blue-50 via-white to-cyan-50 p-6 md:p-8">
+          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            <div className="flex gap-4 md:gap-5">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-sm">
+                <Laptop className="h-6 w-6" aria-hidden="true" />
+              </div>
+              <div>
+                <p className="mb-1 text-xs font-bold uppercase tracking-[0.14em] text-blue-700">
+                  {t('forSchools.educaAndalucia.eyebrow')}
+                </p>
+                <h2 className="text-xl font-bold text-slate-900 md:text-2xl">
+                  {t('forSchools.educaAndalucia.title')}
+                </h2>
+                <p className="mt-2 max-w-3xl text-sm leading-relaxed text-slate-600 md:text-base">
+                  {t('forSchools.educaAndalucia.desc')}
+                </p>
+              </div>
+            </div>
+            <a
+              href="https://www.juntadeandalucia.es/educacion/eaprendizajeservicios-educativos-digitales-2/workspace/"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl border border-blue-200 bg-white px-5 py-3 text-sm font-bold text-blue-700 shadow-sm transition-colors hover:border-blue-300 hover:bg-blue-50"
+            >
+              {t('forSchools.educaAndalucia.moreInfo')}
+              <ExternalLink className="h-4 w-4" aria-hidden="true" />
+            </a>
+          </div>
+        </section>
 
         {/* Services */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-24">
