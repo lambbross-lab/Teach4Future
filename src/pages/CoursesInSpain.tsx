@@ -23,13 +23,7 @@ const CoursesInSpain = () => {
       const query = searchQuery.toLowerCase();
       const matchesSearch = title.includes(query) || description.includes(query);
       const matchesCategory = selectedCategory === 'all' || course.category === selectedCategory;
-      const matchesCity = selectedCity === 'all' || sessions.some(session =>
-        session.courseId === course.id &&
-        session.cityId === selectedCity &&
-        isCurrentOrUpcoming(session.endDate)
-      );
-
-      return matchesSearch && matchesCity && matchesCategory;
+      return matchesSearch && matchesCategory;
     }).sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)));
   }, [searchQuery, selectedCity, selectedCategory, language, sessions]);
 
@@ -163,9 +157,10 @@ const CoursesInSpain = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredCourses.map((course) => {
               const nextSession = sessions
-                .filter(session => session.courseId === course.id && isCurrentOrUpcoming(session.endDate))
+                .filter(session => session.courseId === course.id && isCurrentOrUpcoming(session.endDate) && (selectedCity === 'all' || session.cityId === selectedCity))
                 .sort((a, b) => a.startDate.localeCompare(b.startDate))[0];
-              return <CourseCard key={course.id} course={course} session={nextSession} />;
+              const selectedCityName = selectedCity === 'all' ? undefined : CITIES.find((city) => city.id === selectedCity)?.name;
+              return <CourseCard key={course.id} course={course} session={nextSession} demandCityName={selectedCityName} />;
             })}
           </div>
         ) : (

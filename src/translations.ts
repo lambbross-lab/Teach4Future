@@ -71,6 +71,7 @@ export const translations: any = {
       search: 'Search...',
       details: 'View Details',
       back: 'Back',
+      cancel: 'Cancel',
       loading: 'Loading...',
       error: 'Something went wrong',
       seatsLeft: 'seats left',
@@ -134,6 +135,8 @@ export const translations: any = {
       customGroup: 'Need a custom group training?',
       customGroupDesc: 'Private sessions in Spain normally require at least 10 confirmed participants. We will confirm dates, venue and conditions in writing.',
       contactTeam: 'Contact our team',
+      onDemandTitle: 'Available on request',
+      onDemandDesc: 'This course can be requested in Almería, Granada or Málaga. We confirm an edition after reaching a minimum of 10 participants and checking trainer and venue availability.',
     },
     cities: {
       title: 'Course Destinations',
@@ -148,7 +151,10 @@ export const translations: any = {
     },
     coursesSpain: {
       subtitle: 'Explore six unique teacher-training courses in Spanish, designed around current European educational priorities. Dates and destinations appear inside each course.',
-      minimumNote: 'Scheduled and private courses in Spain normally require at least 10 confirmed participants. The final proposal confirms viability, venue and included services.',
+      minimumNote: 'Every course can be requested in Almería, Granada and Málaga. On-demand editions are confirmed after reaching a minimum of 10 participants and checking trainer and venue availability. Confirmed dates and places are shown separately.',
+      onDemandLabel: 'Available on request',
+      onDemandCard: 'Almería, Granada and Málaga · confirmed from 10 participants.',
+      requestOpening: 'Request opening',
       noResultsDesc: 'Try adjusting your search or filters to find what you\'re looking for.',
       city: 'City',
     },
@@ -483,6 +489,15 @@ export const translations: any = {
       save: 'Save changes',
       saved: 'Changes saved',
       addSession: 'Add session',
+      creator: {
+        title: 'Schedule one course in several cities',
+        help: 'Choose the cities, future dates and places once. One independent session will be created for each selected city.',
+        cities: 'Cities to publish',
+        chooseCity: 'Choose at least one city.',
+        futureDate: 'Choose a start date from today onwards.',
+        invalidSeats: 'Available places cannot exceed the total number of places.',
+        create: 'Create and publish sessions'
+      },
       deleteSession: 'Delete session',
       deleteConfirm: 'Delete this course session? This change will be reflected on the public website.',
       deleteFailed: 'The session could not be deleted.',
@@ -521,8 +536,8 @@ export const translations: any = {
       subtitle: 'Plan your professional development. Browse all upcoming course sessions and check real-time seat availability.',
       help: {
         title: "Can't find the dates you need?",
-        desc: 'We can assess a new session in Spain from 10 confirmed participants, subject to trainer, venue and date availability.',
-        cta: 'Contact Our Team'
+        desc: 'Every course can be requested in Almería, Granada and Málaga. We assess a new session from 10 confirmed participants, subject to trainer, venue and date availability.',
+        cta: 'Request a session'
       }
     }
   },
@@ -597,6 +612,7 @@ export const translations: any = {
       search: 'Buscar...',
       details: 'Ver Detalles',
       back: 'Volver',
+      cancel: 'Cancelar',
       loading: 'Cargando...',
       error: 'Algo salió mal',
       seatsLeft: 'plazas libres',
@@ -660,6 +676,8 @@ export const translations: any = {
       customGroup: '¿Necesitas formación para un grupo?',
       customGroupDesc: 'Las sesiones privadas en España requieren normalmente al menos 10 participantes confirmados. Confirmaremos por escrito fechas, sede y condiciones.',
       contactTeam: 'Contactar con el equipo',
+      onDemandTitle: 'Disponible bajo demanda',
+      onDemandDesc: 'Este curso se puede solicitar en Almería, Granada o Málaga. Confirmamos la edición al alcanzar un mínimo de 10 participantes y comprobar la disponibilidad de docente y sede.',
     },
     cities: {
       title: 'Destinos de los cursos',
@@ -674,7 +692,10 @@ export const translations: any = {
     },
     coursesSpain: {
       subtitle: 'Explora seis cursos únicos impartidos en español y diseñados en torno a las prioridades educativas europeas. Las fechas y los destinos aparecen dentro de cada curso.',
-      minimumNote: 'Los cursos programados y privados en España requieren normalmente al menos 10 participantes confirmados. La propuesta final confirma la viabilidad, la sede y los servicios incluidos.',
+      minimumNote: 'Todos los cursos se pueden solicitar en Almería, Granada y Málaga. Las ediciones bajo demanda se confirman al alcanzar un mínimo de 10 participantes y comprobar la disponibilidad de docente y sede. Las fechas y plazas confirmadas se muestran por separado.',
+      onDemandLabel: 'Disponible bajo demanda',
+      onDemandCard: 'Almería, Granada y Málaga · confirmación a partir de 10 participantes.',
+      requestOpening: 'Solicitar apertura',
       noResultsDesc: 'Prueba a ajustar tu búsqueda o los filtros para encontrar lo que buscas.',
       city: 'Ciudad',
     },
@@ -1009,6 +1030,15 @@ export const translations: any = {
       save: 'Guardar cambios',
       saved: 'Cambios guardados',
       addSession: 'Añadir sesión',
+      creator: {
+        title: 'Programar un curso en varias ciudades',
+        help: 'Elige una vez las ciudades, las fechas futuras y las plazas. Se creará una sesión independiente para cada ciudad seleccionada.',
+        cities: 'Ciudades en las que anunciarlo',
+        chooseCity: 'Elige al menos una ciudad.',
+        futureDate: 'Elige una fecha de inicio a partir de hoy.',
+        invalidSeats: 'Las plazas disponibles no pueden superar las plazas totales.',
+        create: 'Crear y publicar sesiones'
+      },
       deleteSession: 'Eliminar sesión',
       deleteConfirm: '¿Eliminar esta sesión? El cambio se reflejará en la web pública.',
       deleteFailed: 'No se ha podido eliminar la sesión.',
@@ -1047,8 +1077,8 @@ export const translations: any = {
       subtitle: 'Planifica tu desarrollo profesional. Consulta todas las próximas sesiones de cursos y comprueba la disponibilidad de plazas en tiempo real.',
       help: {
         title: '¿No encuentras las fechas que necesitas?',
-        desc: 'Podemos estudiar una nueva sesión en España desde 10 participantes confirmados, sujeta a disponibilidad de docente, sede y fechas.',
-        cta: 'Contactar con el Equipo'
+        desc: 'Todos los cursos se pueden solicitar en Almería, Granada y Málaga. Estudiaremos una nueva sesión a partir de 10 participantes confirmados, según disponibilidad de docente, sede y fechas.',
+        cta: 'Solicitar una sesión'
       }
     }
   }

@@ -258,9 +258,13 @@ const CourseDetail = () => {
                 </div>
               ) : (
                 <div className="bg-slate-50 p-8 rounded-2xl text-center border border-dashed border-slate-200">
-                  <p className="text-slate-500 text-sm mb-4">{t('common.noSessions')}</p>
-                  <Link to="/contact">
-                    <Button variant="outline" size="sm">{t('common.requestDate')}</Button>
+                  <h3 className="font-bold text-slate-900">{t('courseDetail.onDemandTitle')}</h3>
+                  <p className="mt-2 text-slate-600 text-sm leading-relaxed">{t('courseDetail.onDemandDesc')}</p>
+                  <div className="mt-4 flex flex-wrap justify-center gap-2">
+                    {CITIES.map((city) => <span key={city.id} className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-slate-700">{city.name}</span>)}
+                  </div>
+                  <Link to={`/enrol?course=${course.id}`} className="mt-5 inline-block">
+                    <Button variant="outline" size="sm">{t('coursesSpain.requestOpening')}</Button>
                   </Link>
                 </div>
               )}

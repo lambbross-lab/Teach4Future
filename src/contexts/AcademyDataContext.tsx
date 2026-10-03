@@ -10,6 +10,7 @@ interface AcademyDataContextValue {
   loading: boolean;
   refreshSessions: () => Promise<void>;
   updateSession: (session: CourseSession) => Promise<void>;
+  upsertSessions: (sessions: CourseSession[]) => Promise<void>;
   deleteSession: (id: string) => Promise<void>;
 }
 
@@ -25,6 +26,18 @@ const mapSession = (row: any): CourseSession => ({
   seatsLeft: row.seats_left,
   status: row.status,
   schedule: row.schedule,
+});
+
+const toSessionRow = (session: CourseSession) => ({
+  id: session.id,
+  course_id: session.courseId,
+  city_id: session.cityId,
+  start_date: session.startDate,
+  end_date: session.endDate,
+  seats_total: session.seatsTotal,
+  seats_left: session.seatsLeft,
+  status: session.status,
+  schedule: session.schedule,
 });
 
 export const AcademyDataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -70,17 +83,15 @@ export const AcademyDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
     if (!supabase) throw new Error('SUPABASE_NOT_CONFIGURED');
     const { error } = await supabase
       .from('course_sessions')
-      .upsert({
-        id: session.id,
-        course_id: session.courseId,
-        city_id: session.cityId,
-        start_date: session.startDate,
-        end_date: session.endDate,
-        seats_total: session.seatsTotal,
-        seats_left: session.seatsLeft,
-        status: session.status,
-        schedule: session.schedule,
-      });
+      .upsert(toSessionRow(session));
+    if (error) throw error;
+  }, []);
+
+  const upsertSessions = useCallback(async (newSessions: CourseSession[]) => {
+    if (!supabase) throw new Error('SUPABASE_NOT_CONFIGURED');
+    const { error } = await supabase
+      .from('course_sessions')
+      .upsert(newSessions.map(toSessionRow));
     if (error) throw error;
   }, []);
 
@@ -97,8 +108,9 @@ export const AcademyDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
     loading,
     refreshSessions,
     updateSession,
+    upsertSessions,
     deleteSession,
-  }), [deleteSession, loading, refreshSessions, sessions, updateSession]);
+  }), [deleteSession, loading, refreshSessions, sessions, updateSession, upsertSessions]);
 
   return <AcademyDataContext.Provider value={value}>{children}</AcademyDataContext.Provider>;
 };

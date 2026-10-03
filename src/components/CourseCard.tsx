@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Calendar, MapPin, Clock, Users, ArrowRight } from 'lucide-react';
+import { Calendar, MapPin, Clock, Users } from 'lucide-react';
 import { Course, CourseSession } from '../types';
 import { cn, formatDate, getText } from '../lib/utils';
 import Button from './ui/Button';
@@ -10,10 +10,11 @@ import { useLanguage } from '../contexts/LanguageContext';
 interface CourseCardProps {
   course: Course;
   session?: CourseSession;
+  demandCityName?: string;
   className?: string;
 }
 
-const CourseCard: React.FC<CourseCardProps> = ({ course, session, className }) => {
+const CourseCard: React.FC<CourseCardProps> = ({ course, session, demandCityName, className }) => {
   const { language, t } = useLanguage();
 
   return (
@@ -76,6 +77,15 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, session, className }) =
               </div>
             </>
           )}
+          {!session && (
+            <div className="rounded-xl border border-blue-100 bg-blue-50 px-3 py-3 text-xs leading-relaxed text-blue-900">
+              <div className="flex items-center font-bold">
+                <MapPin className="mr-2 h-4 w-4 flex-none text-blue-600" />
+                {demandCityName ? `${t('coursesSpain.onDemandLabel')} · ${demandCityName}` : t('coursesSpain.onDemandLabel')}
+              </div>
+              <p className="mt-1 text-blue-700">{t('coursesSpain.onDemandCard')}</p>
+            </div>
+          )}
         </div>
         
         <div className="flex items-center justify-between pt-4 border-t border-slate-50">
@@ -91,7 +101,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, session, className }) =
             </Link>
             <Link to={`/enrol?course=${course.id}${session ? `&session=${session.id}` : ''}`}>
               <Button variant="primary" size="sm">
-                {t('common.enrol')}
+                {session ? t('common.enrol') : t('coursesSpain.requestOpening')}
               </Button>
             </Link>
           </div>
