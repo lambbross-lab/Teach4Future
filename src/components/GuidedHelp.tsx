@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { ArrowRight, MessageCircle, RotateCcw, X } from 'lucide-react';
+import React, { FormEvent, useEffect, useState } from 'react';
+import { ArrowLeft, ArrowRight, MessageCircle, RotateCcw, Send, X } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
+import { ChatMessage, getChatAvailability, getChatMessages, sendChatMessage, startChat } from '../services/chatSupport';
 
 type HelpTopic = 'courses' | 'dates' | 'schools' | 'enrolment';
 
@@ -11,12 +12,38 @@ const GuidedHelp: React.FC = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState<HelpTopic | null>(null);
+  const [available, setAvailable] = useState(false);
+  const [checkingAvailability, setCheckingAvailability] = useState(false);
+  const [conversationId, setConversationId] = useState<string | null>(null);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [draft, setDraft] = useState('');
+  const [chatError, setChatError] = useState('');
+  const [sending, setSending] = useState(false);
 
   const isPrivateArea = location.pathname === '/login' || location.pathname === '/reset-password' || location.pathname.startsWith('/admin');
 
   useEffect(() => {
     setSelectedTopic(null);
   }, [language]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    setCheckingAvailability(true);
+    getChatAvailability()
+      .then((data) => setAvailable(Boolean(data.available)))
+      .catch(() => setAvailable(false))
+      .finally(() => setCheckingAvailability(false));
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!conversationId) return;
+    const refresh = () => getChatMessages(conversationId)
+      .then((data) => setMessages(data.messages ?? []))
+      .catch(() => undefined);
+    refresh();
+    const interval = window.setInterval(refresh, 5000);
+    return () => window.clearInterval(interval);
+  }, [conversationId]);
 
   if (isPrivateArea) return null;
 
@@ -33,6 +60,38 @@ const GuidedHelp: React.FC = () => {
     setIsOpen(false);
     setSelectedTopic(null);
     navigate(route);
+  };
+
+  const openLiveChat = async () => {
+    setChatError('');
+    setSending(true);
+    try {
+      const data = await startChat(language);
+      setConversationId(data.conversationId);
+      setMessages(data.messages ?? []);
+    } catch {
+      setChatError(t('guidedHelp.live.unavailable'));
+      setAvailable(false);
+    } finally {
+      setSending(false);
+    }
+  };
+
+  const submitMessage = async (event: FormEvent) => {
+    event.preventDefault();
+    const message = draft.trim();
+    if (!conversationId || !message || sending) return;
+    setSending(true);
+    setChatError('');
+    try {
+      const data = await sendChatMessage(conversationId, message);
+      setMessages((current) => [...current, data.message]);
+      setDraft('');
+    } catch {
+      setChatError(t('guidedHelp.live.sendError'));
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -58,11 +117,52 @@ const GuidedHelp: React.FC = () => {
           </header>
 
           <div className="max-h-[min(520px,calc(100vh-11rem))] overflow-y-auto p-5">
-            <div className="max-w-[290px] rounded-2xl rounded-tl-md bg-slate-100 px-4 py-3 text-sm leading-relaxed text-slate-700">
-              {selected ? selected.answer : t('guidedHelp.welcome')}
-            </div>
+            {conversationId ? (
+              <div>
+                <div className="mb-4 flex items-center justify-between gap-3">
+                  <div>
+                    <p className="text-sm font-bold text-slate-900">{t('guidedHelp.live.title')}</p>
+                    <p className="text-xs text-emerald-600">{t('guidedHelp.live.status')}</p>
+                  </div>
+                  <button type="button" onClick={() => setConversationId(null)} className="rounded-lg p-2 text-slate-500 hover:bg-slate-100" aria-label={t('guidedHelp.live.back')}>
+                    <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+                  </button>
+                </div>
+                <div className="space-y-3">
+                  {messages.length === 0 ? <p className="rounded-2xl bg-slate-100 px-4 py-3 text-sm text-slate-600">{t('guidedHelp.live.start')}</p> : messages.map((message) => (
+                    <div key={message.id} className={`max-w-[88%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${message.sender === 'team' ? 'rounded-tl-md bg-slate-100 text-slate-700' : 'ml-auto rounded-tr-md bg-blue-600 text-white'}`}>
+                      {message.content}
+                    </div>
+                  ))}
+                </div>
+                <form className="mt-4" onSubmit={submitMessage}>
+                  <div className="flex gap-2">
+                    <input value={draft} onChange={(event) => setDraft(event.target.value)} maxLength={1000} placeholder={t('guidedHelp.live.placeholder')} className="min-w-0 flex-1 rounded-xl border border-slate-200 px-3 py-2.5 text-sm focus:border-blue-500 focus:outline-none" />
+                    <button type="submit" disabled={!draft.trim() || sending} className="rounded-xl bg-blue-600 px-3 text-white disabled:cursor-not-allowed disabled:opacity-50" aria-label={t('guidedHelp.live.send')}>
+                      <Send className="h-4 w-4" aria-hidden="true" />
+                    </button>
+                  </div>
+                </form>
+                <p className="mt-3 text-center text-xs leading-relaxed text-slate-400">{t('guidedHelp.live.privacy')}</p>
+              </div>
+            ) : (
+              <>
+                {available && !checkingAvailability ? (
+                  <div className="rounded-2xl border border-emerald-100 bg-emerald-50 p-4">
+                    <p className="text-sm font-bold text-emerald-900">{t('guidedHelp.live.available')}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-emerald-800">{t('guidedHelp.live.availableDesc')}</p>
+                    <button type="button" onClick={openLiveChat} disabled={sending} className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-emerald-700 disabled:opacity-50">
+                      <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                      {t('guidedHelp.live.startCta')}
+                    </button>
+                  </div>
+                ) : (
+                  <div className="max-w-[290px] rounded-2xl rounded-tl-md bg-slate-100 px-4 py-3 text-sm leading-relaxed text-slate-700">
+                    {selected ? selected.answer : t('guidedHelp.welcome')}
+                  </div>
+                )}
 
-            {selected ? (
+                {!available && selected ? (
               <div className="mt-5 space-y-3">
                 <button
                   type="button"
@@ -81,7 +181,7 @@ const GuidedHelp: React.FC = () => {
                   {t('guidedHelp.anotherQuestion')}
                 </button>
               </div>
-            ) : (
+                ) : !available ? (
               <div className="mt-5 grid gap-2">
                 {topics.map((topic) => (
                   <button
@@ -95,6 +195,10 @@ const GuidedHelp: React.FC = () => {
                   </button>
                 ))}
               </div>
+                ) : null}
+
+                {chatError && <p className="mt-3 text-sm font-semibold text-red-700">{chatError}</p>}
+              </>
             )}
 
             <p className="mt-5 text-center text-xs leading-relaxed text-slate-400">{t('guidedHelp.note')}</p>

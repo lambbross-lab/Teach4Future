@@ -182,3 +182,82 @@ begin
     alter publication supabase_realtime add table public.course_sessions;
   end if;
 end $$;
+
+-- Live support chat. Visitor access is handled only through the chat-support Edge Function.
+create table if not exists public.chat_settings (
+  id boolean primary key default true check (id),
+  is_available boolean not null default false,
+  updated_at timestamptz not null default now()
+);
+
+insert into public.chat_settings (id, is_available)
+values (true, false)
+on conflict (id) do nothing;
+
+create table if not exists public.chat_conversations (
+  id uuid primary key default gen_random_uuid(),
+  visitor_token uuid not null unique,
+  language text not null default 'en' check (language in ('en', 'es')),
+  status text not null default 'open' check (status in ('open', 'closed')),
+  last_message_at timestamptz not null default now(),
+  last_message_from text not null default 'visitor' check (last_message_from in ('visitor', 'team')),
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create table if not exists public.chat_messages (
+  id uuid primary key default gen_random_uuid(),
+  conversation_id uuid not null references public.chat_conversations(id) on delete cascade,
+  sender text not null check (sender in ('visitor', 'team')),
+  content text not null check (char_length(content) between 1 and 1000),
+  created_at timestamptz not null default now()
+);
+
+create index if not exists chat_messages_conversation_created_idx on public.chat_messages(conversation_id, created_at);
+create index if not exists chat_conversations_last_message_idx on public.chat_conversations(last_message_at desc);
+
+alter table public.chat_settings enable row level security;
+alter table public.chat_conversations enable row level security;
+alter table public.chat_messages enable row level security;
+
+revoke all on table public.chat_settings, public.chat_conversations, public.chat_messages from anon, authenticated;
+grant select on table public.chat_settings to anon, authenticated;
+grant select, update on table public.chat_settings to authenticated;
+grant select, update on table public.chat_conversations to authenticated;
+grant select, insert on table public.chat_messages to authenticated;
+
+drop policy if exists "Anyone can read chat availability" on public.chat_settings;
+drop policy if exists "Administrators can update chat availability" on public.chat_settings;
+drop policy if exists "Administrators can read chat conversations" on public.chat_conversations;
+drop policy if exists "Administrators can update chat conversations" on public.chat_conversations;
+drop policy if exists "Administrators can read chat messages" on public.chat_messages;
+drop policy if exists "Administrators can reply in chat" on public.chat_messages;
+
+create policy "Anyone can read chat availability"
+on public.chat_settings for select to anon, authenticated
+using (true);
+
+create policy "Administrators can update chat availability"
+on public.chat_settings for update to authenticated
+using (exists (select 1 from public.admin_users where id = (select auth.uid())))
+with check (exists (select 1 from public.admin_users where id = (select auth.uid())));
+
+create policy "Administrators can read chat conversations"
+on public.chat_conversations for select to authenticated
+using (exists (select 1 from public.admin_users where id = (select auth.uid())));
+
+create policy "Administrators can update chat conversations"
+on public.chat_conversations for update to authenticated
+using (exists (select 1 from public.admin_users where id = (select auth.uid())))
+with check (exists (select 1 from public.admin_users where id = (select auth.uid())));
+
+create policy "Administrators can read chat messages"
+on public.chat_messages for select to authenticated
+using (exists (select 1 from public.admin_users where id = (select auth.uid())));
+
+create policy "Administrators can reply in chat"
+on public.chat_messages for insert to authenticated
+with check (
+  sender = 'team'
+  and exists (select 1 from public.admin_users where id = (select auth.uid()))
+);

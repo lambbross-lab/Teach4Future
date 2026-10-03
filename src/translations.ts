@@ -62,6 +62,12 @@ export const translations: any = {
         point2: 'Topic adapted to your teaching team',
         point3: 'Erasmus+ documentation support',
         cta: 'Plan a course in Europe'
+      },
+      schoolsSupport: {
+        eyebrow: 'For schools and education organisations',
+        title: 'Erasmus+ advice and training for your teaching team.',
+        desc: 'Do you need help getting started, registering your organisation, shaping a mobility idea or choosing training? We can review your case with you.',
+        cta: 'Explore support for schools'
       }
     },
     common: {
@@ -131,6 +137,20 @@ export const translations: any = {
       },
       anotherQuestion: 'Ask another question',
       note: 'This assistant uses the information published on Teach4Future and does not collect messages or personal data.',
+      live: {
+        available: 'The Teach4Future team is available now.',
+        availableDesc: 'Start a direct conversation with our team. We will reply here while we are connected.',
+        startCta: 'Start live conversation',
+        title: 'Teach4Future team',
+        status: 'Connected now',
+        start: 'Write your question and our team will reply here.',
+        placeholder: 'Write a message…',
+        send: 'Send message',
+        back: 'Return to help',
+        privacy: 'Please do not include sensitive or unnecessary personal information in the chat.',
+        unavailable: 'The team is not available at the moment. You can use the information guide or send a request through the form.',
+        sendError: 'We could not send the message. Please try again in a moment.'
+      },
     },
     categories: {
       ai: 'AI',
@@ -330,6 +350,13 @@ export const translations: any = {
         desc: 'Discover the Google Workspace for Education tools available through the Andalusian Department of Educational Development and Vocational Training.',
         moreInfo: 'More information',
         trainingCta: 'Train your teaching team'
+      },
+      advisory: {
+        eyebrow: 'Erasmus+ advisory',
+        title: 'We help your school take the next step with Erasmus+.',
+        desc: 'Request guidance on getting started, organisation registration, mobility ideas, project preparation, training options and the documentation needed at each stage.',
+        note: 'We review each case individually. The school remains responsible for its application and final decisions, and funding cannot be guaranteed.',
+        cta: 'Request Erasmus+ advice'
       },
       services: {
         bookings: {
@@ -627,6 +654,20 @@ export const translations: any = {
           desc: 'Fórmate en Almería, Granada o Málaga—ciudades que inspiran creatividad y bienestar.'
         }
       },
+      chat: {
+        title: 'Live chat',
+        help: 'Switch your availability on only when you can answer. New conversations refresh automatically.',
+        available: 'Team available now',
+        unavailable: 'Team unavailable',
+        empty: 'There are no live conversations yet.',
+        visitor: 'Website visitor',
+        newMessage: 'New visitor message',
+        teamReply: 'Team reply',
+        placeholder: 'Write a reply…',
+        send: 'Send reply',
+        select: 'Choose a conversation to reply.',
+        error: 'We could not load the chat. Refresh the page and try again.'
+      },
       featured: {
         title: 'Cursos prioritarios',
         subtitle: 'Nuestros tres mejores puntos de partida para una formación práctica con perspectiva europea.'
@@ -648,6 +689,12 @@ export const translations: any = {
         point2: 'Tema adaptado a tu equipo docente',
         point3: 'Apoyo con la documentación Erasmus+',
         cta: 'Planificar un curso en Europa'
+      },
+      schoolsSupport: {
+        eyebrow: 'Para centros y entidades educativas',
+        title: 'Asesoramiento Erasmus+ y formación para tu equipo docente.',
+        desc: '¿Necesitáis empezar, dar de alta vuestra organización, plantear una movilidad o elegir formación? Revisamos vuestro caso con vosotros.',
+        cta: 'Ver apoyo para centros'
       }
     },
     common: {
@@ -717,6 +764,20 @@ export const translations: any = {
       },
       anotherQuestion: 'Hacer otra consulta',
       note: 'Este asistente usa la información publicada en Teach4Future y no recoge mensajes ni datos personales.',
+      live: {
+        available: 'El equipo de Teach4Future está disponible ahora.',
+        availableDesc: 'Inicia una conversación directa con nuestro equipo. Te responderemos aquí mientras estemos conectados.',
+        startCta: 'Iniciar conversación en directo',
+        title: 'Equipo Teach4Future',
+        status: 'Conectado ahora',
+        start: 'Escribe tu consulta y el equipo te responderá aquí.',
+        placeholder: 'Escribe un mensaje…',
+        send: 'Enviar mensaje',
+        back: 'Volver a la ayuda',
+        privacy: 'No incluyas información personal sensible ni innecesaria en el chat.',
+        unavailable: 'El equipo no está disponible ahora mismo. Puedes usar la guía de información o enviar una solicitud mediante el formulario.',
+        sendError: 'No hemos podido enviar el mensaje. Inténtalo de nuevo en unos instantes.'
+      },
     },
     categories: {
       ai: 'IA',
@@ -916,6 +977,13 @@ export const translations: any = {
         desc: 'Descubre las herramientas de Google Workspace para Educación disponibles a través de la Consejería de Desarrollo Educativo y Formación Profesional.',
         moreInfo: 'Más información',
         trainingCta: 'Forma a tu equipo docente'
+      },
+      advisory: {
+        eyebrow: 'Asesoramiento Erasmus+',
+        title: 'Ayudamos a tu centro a dar el siguiente paso con Erasmus+.',
+        desc: 'Pide orientación para empezar, dar de alta la organización, plantear movilidades, preparar un proyecto, elegir formación y ordenar la documentación de cada fase.',
+        note: 'Revisamos cada caso de forma individual. El centro sigue siendo responsable de su solicitud y de sus decisiones finales; la financiación no puede garantizarse.',
+        cta: 'Pedir asesoramiento Erasmus+'
       },
       services: {
         bookings: {
@@ -1160,8 +1228,22 @@ export const translations: any = {
         almostFull: 'Casi Lleno',
         waitingList: 'Lista de espera',
         closed: 'Cerrado'
-      }
-    },
+        }
+      },
+      chat: {
+        title: 'Chat en directo',
+        help: 'Activa tu disponibilidad solo cuando puedas responder. Las conversaciones nuevas se actualizan automáticamente.',
+        available: 'Equipo disponible ahora',
+        unavailable: 'Equipo no disponible',
+        empty: 'Todavía no hay conversaciones en directo.',
+        visitor: 'Visitante de la web',
+        newMessage: 'Nuevo mensaje del visitante',
+        teamReply: 'Respuesta del equipo',
+        placeholder: 'Escribe una respuesta…',
+        send: 'Enviar respuesta',
+        select: 'Elige una conversación para responder.',
+        error: 'No hemos podido cargar el chat. Actualiza la página e inténtalo de nuevo.'
+      },
     dates: {
       title: 'Fechas y Disponibilidad',
       subtitle: 'Planifica tu desarrollo profesional. Consulta todas las próximas sesiones de cursos y comprueba la disponibilidad de plazas en tiempo real.',

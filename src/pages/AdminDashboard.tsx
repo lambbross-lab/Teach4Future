@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Calendar, Check, Database, GraduationCap, LogOut, Mail, Plus, Save, Trash2, Users } from 'lucide-react';
+import { Calendar, Check, Database, GraduationCap, LogOut, Mail, MessageCircle, Plus, Save, Send, Trash2, Users } from 'lucide-react';
 import Button from '../components/ui/Button';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAcademyData } from '../contexts/AcademyDataContext';
@@ -24,6 +24,20 @@ type EnquiryRecord = {
   subject: string | null;
   message: string | null;
   status: 'new' | 'contacted' | 'closed';
+  created_at: string;
+};
+type ChatConversation = {
+  id: string;
+  status: 'open' | 'closed';
+  language: 'en' | 'es';
+  last_message_at: string;
+  last_message_from: 'visitor' | 'team';
+  created_at: string;
+};
+type ChatMessageRecord = {
+  id: string;
+  sender: 'visitor' | 'team';
+  content: string;
   created_at: string;
 };
 
@@ -65,6 +79,13 @@ const AdminDashboard = () => {
   const [isCreating, setIsCreating] = useState(false);
   const [enquiries, setEnquiries] = useState<EnquiryRecord[]>([]);
   const [enquiriesError, setEnquiriesError] = useState(false);
+  const [chatAvailable, setChatAvailable] = useState(false);
+  const [chatSaving, setChatSaving] = useState(false);
+  const [conversations, setConversations] = useState<ChatConversation[]>([]);
+  const [selectedConversationId, setSelectedConversationId] = useState<string | null>(null);
+  const [chatMessages, setChatMessages] = useState<ChatMessageRecord[]>([]);
+  const [chatDraft, setChatDraft] = useState('');
+  const [chatError, setChatError] = useState(false);
   const [authChecked, setAuthChecked] = useState(!supabase);
   const navigate = useNavigate();
   const today = useMemo(() => toLocalDate(new Date()), []);
@@ -94,6 +115,49 @@ const AdminDashboard = () => {
         setEnquiries((data ?? []) as EnquiryRecord[]);
       });
   }, []);
+
+  useEffect(() => {
+    if (!supabase) return;
+    const refresh = async () => {
+      const [{ data: settings, error: settingsError }, { data: chats, error: chatsError }] = await Promise.all([
+        supabase.from('chat_settings').select('is_available').eq('id', true).maybeSingle(),
+        supabase.from('chat_conversations').select('id, status, language, last_message_at, last_message_from, created_at').order('last_message_at', { ascending: false }).limit(30),
+      ]);
+      if (settingsError || chatsError) {
+        setChatError(true);
+        return;
+      }
+      setChatAvailable(Boolean(settings?.is_available));
+      const next = (chats ?? []) as ChatConversation[];
+      setConversations(next);
+      setSelectedConversationId((current) => current ?? next[0]?.id ?? null);
+    };
+    refresh();
+    const interval = window.setInterval(refresh, 5000);
+    return () => window.clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (!supabase || !selectedConversationId) {
+      setChatMessages([]);
+      return;
+    }
+    const refresh = async () => {
+      const { data, error } = await supabase
+        .from('chat_messages')
+        .select('id, sender, content, created_at')
+        .eq('conversation_id', selectedConversationId)
+        .order('created_at', { ascending: true });
+      if (error) {
+        setChatError(true);
+        return;
+      }
+      setChatMessages((data ?? []) as ChatMessageRecord[]);
+    };
+    refresh();
+    const interval = window.setInterval(refresh, 3000);
+    return () => window.clearInterval(interval);
+  }, [selectedConversationId]);
 
   const stats = useMemo(() => {
     const upcoming = sessions.filter((session) => isCurrentOrUpcoming(session.endDate));
@@ -201,6 +265,33 @@ const AdminDashboard = () => {
     if (!error) setEnquiries((current) => current.map((enquiry) => enquiry.id === id ? { ...enquiry, status } : enquiry));
   };
 
+  const setAvailability = async (isAvailable: boolean) => {
+    if (!supabase) return;
+    setChatSaving(true);
+    const { error } = await supabase.from('chat_settings').update({ is_available: isAvailable, updated_at: new Date().toISOString() }).eq('id', true);
+    if (!error) setChatAvailable(isAvailable);
+    else setChatError(true);
+    setChatSaving(false);
+  };
+
+  const sendTeamMessage = async () => {
+    const content = chatDraft.trim();
+    if (!supabase || !selectedConversationId || !content) return;
+    setChatDraft('');
+    const { data, error } = await supabase
+      .from('chat_messages')
+      .insert({ conversation_id: selectedConversationId, sender: 'team', content })
+      .select('id, sender, content, created_at')
+      .single();
+    if (error || !data) {
+      setChatError(true);
+      setChatDraft(content);
+      return;
+    }
+    await supabase.from('chat_conversations').update({ last_message_at: new Date().toISOString(), last_message_from: 'team' }).eq('id', selectedConversationId);
+    setChatMessages((current) => [...current, data as ChatMessageRecord]);
+  };
+
   if (!authChecked) return <div className="min-h-screen grid place-items-center text-slate-500">{t('common.loading')}</div>;
 
   return (
@@ -238,6 +329,42 @@ const AdminDashboard = () => {
             </div>
           ))}
         </div>
+
+        <section className="mb-8 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+          <div className="flex flex-col gap-4 border-b border-slate-100 p-6 md:flex-row md:items-center md:justify-between md:p-8">
+            <div>
+              <h2 className="flex items-center gap-2 text-xl font-bold text-slate-900"><MessageCircle className="h-5 w-5 text-blue-600" />{t('admin.chat.title')}</h2>
+              <p className="mt-1 text-sm text-slate-500">{t('admin.chat.help')}</p>
+            </div>
+            <button type="button" disabled={chatSaving || mode !== 'live'} onClick={() => setAvailability(!chatAvailable)} className={`inline-flex items-center justify-center rounded-xl px-4 py-3 text-sm font-bold transition-colors disabled:cursor-not-allowed disabled:opacity-60 ${chatAvailable ? 'bg-emerald-600 text-white hover:bg-emerald-700' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}`}>
+              <span className={`mr-2 h-2.5 w-2.5 rounded-full ${chatAvailable ? 'bg-white' : 'bg-slate-400'}`} />
+              {chatAvailable ? t('admin.chat.available') : t('admin.chat.unavailable')}
+            </button>
+          </div>
+          {chatError ? <p className="p-6 text-sm font-semibold text-red-700">{t('admin.chat.error')}</p> : (
+            <div className="grid min-h-[360px] lg:grid-cols-[300px_1fr]">
+              <div className="border-b border-slate-100 lg:border-b-0 lg:border-r">
+                {conversations.length === 0 ? <p className="p-6 text-sm text-slate-500">{t('admin.chat.empty')}</p> : conversations.map((conversation) => (
+                  <button type="button" key={conversation.id} onClick={() => setSelectedConversationId(conversation.id)} className={`block w-full border-b border-slate-100 px-5 py-4 text-left transition-colors ${selectedConversationId === conversation.id ? 'bg-blue-50' : 'hover:bg-slate-50'}`}>
+                    <div className="flex items-center justify-between gap-3"><span className="font-bold text-slate-800">{t('admin.chat.visitor')}</span><span className="text-xs text-slate-400">{new Intl.DateTimeFormat(language === 'es' ? 'es-ES' : 'en-GB', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(conversation.last_message_at))}</span></div>
+                    <p className="mt-1 text-xs font-semibold text-slate-500">{conversation.last_message_from === 'visitor' ? t('admin.chat.newMessage') : t('admin.chat.teamReply')} · {conversation.language.toUpperCase()}</p>
+                  </button>
+                ))}
+              </div>
+              <div className="flex min-h-[360px] flex-col p-5 md:p-6">
+                {selectedConversationId ? <>
+                  <div className="flex-1 space-y-3 overflow-y-auto">
+                    {chatMessages.map((message) => <div key={message.id} className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${message.sender === 'team' ? 'ml-auto rounded-tr-md bg-blue-600 text-white' : 'rounded-tl-md bg-slate-100 text-slate-700'}`}>{message.content}</div>)}
+                  </div>
+                  <div className="mt-5 flex gap-2 border-t border-slate-100 pt-5">
+                    <input value={chatDraft} onChange={(event) => setChatDraft(event.target.value)} onKeyDown={(event) => { if (event.key === 'Enter') { event.preventDefault(); sendTeamMessage(); } }} maxLength={1000} placeholder={t('admin.chat.placeholder')} className="min-w-0 flex-1 rounded-xl border border-slate-200 px-3 py-2.5 text-sm focus:border-blue-500 focus:outline-none" />
+                    <button type="button" onClick={sendTeamMessage} disabled={!chatDraft.trim()} className="rounded-xl bg-blue-600 px-4 text-white disabled:cursor-not-allowed disabled:opacity-50" aria-label={t('admin.chat.send')}><Send className="h-4 w-4" /></button>
+                  </div>
+                </> : <p className="m-auto text-center text-sm text-slate-500">{t('admin.chat.select')}</p>}
+              </div>
+            </div>
+          )}
+        </section>
 
         <section className="mb-8 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
           <div className="flex items-center justify-between gap-4 border-b border-slate-100 p-6 md:p-8">

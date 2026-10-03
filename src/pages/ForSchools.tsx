@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Users, FileCheck, ShieldCheck, CheckCircle2, ExternalLink, Laptop } from 'lucide-react';
+import { Users, FileCheck, ShieldCheck, CheckCircle2, ExternalLink, Laptop, Compass } from 'lucide-react';
 import Button from '../components/ui/Button';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -77,6 +77,35 @@ const ForSchools = () => {
                 {t('forSchools.educaAndalucia.trainingCta')}
               </Link>
             </div>
+          </div>
+        </section>
+
+        {/* Erasmus+ advisory */}
+        <section className="mb-24 overflow-hidden rounded-3xl border border-indigo-100 bg-indigo-50/70 p-6 md:p-8">
+          <div className="grid gap-6 lg:grid-cols-[auto_1fr_auto] lg:items-center">
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-600 text-white shadow-sm">
+              <Compass className="h-7 w-7" aria-hidden="true" />
+            </div>
+            <div>
+              <p className="mb-1 text-xs font-bold uppercase tracking-[0.14em] text-indigo-700">
+                {t('forSchools.advisory.eyebrow')}
+              </p>
+              <h2 className="text-2xl font-bold text-slate-900">
+                {t('forSchools.advisory.title')}
+              </h2>
+              <p className="mt-2 max-w-4xl leading-relaxed text-slate-600">
+                {t('forSchools.advisory.desc')}
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-slate-500">
+                {t('forSchools.advisory.note')}
+              </p>
+            </div>
+            <Link
+              to="/contact"
+              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-indigo-700"
+            >
+              {t('forSchools.advisory.cta')}
+            </Link>
           </div>
         </section>
 

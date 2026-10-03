@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { ArrowRight, CheckCircle2, Globe, Users, BookOpen, ChevronRight, MapPin } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Globe, Users, BookOpen, ChevronRight, MapPin, Compass } from 'lucide-react';
 import Button from '../components/ui/Button';
 import CourseCard from '../components/CourseCard';
 import { COURSES, CITIES } from '../mockData';
@@ -88,6 +88,31 @@ const Home = () => {
 
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Erasmus+ support for schools */}
+      <section className="bg-white py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Link
+            to="/for-schools"
+            className="group flex flex-col gap-5 rounded-3xl border border-indigo-100 bg-gradient-to-r from-indigo-50 via-white to-blue-50 p-6 shadow-sm transition-shadow hover:shadow-md md:flex-row md:items-center md:justify-between md:px-8"
+          >
+            <div className="flex items-start gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-indigo-600 text-white shadow-sm">
+                <Compass className="h-6 w-6" aria-hidden="true" />
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.14em] text-indigo-700">{t('home.schoolsSupport.eyebrow')}</p>
+                <h2 className="mt-1 text-xl font-bold text-slate-900 md:text-2xl">{t('home.schoolsSupport.title')}</h2>
+                <p className="mt-1 max-w-3xl text-sm leading-relaxed text-slate-600 md:text-base">{t('home.schoolsSupport.desc')}</p>
+              </div>
+            </div>
+            <span className="inline-flex shrink-0 items-center gap-2 font-bold text-indigo-700">
+              {t('home.schoolsSupport.cta')}
+              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+            </span>
+          </Link>
         </div>
       </section>
 
