@@ -14,9 +14,6 @@ const AboutUs = () => {
         {/* Story Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
           <div>
-            <span className="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-widest text-blue-600 uppercase bg-blue-50 rounded-full">
-              {t('about.badge')}
-            </span>
             <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 leading-tight">
               {t('about.title')} <br />
               <span className="text-blue-600">{t('about.titleAccent')}</span>

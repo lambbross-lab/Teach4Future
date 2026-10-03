@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, MapPin, Instagram } from 'lucide-react';
+import { Mail, MapPin, Instagram, LockKeyhole } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const Footer = () => {
@@ -55,6 +55,12 @@ const Footer = () => {
               <li><Link to="/legal-notice" className="hover:text-blue-500 transition-colors">{t('footer.legalNotice')}</Link></li>
               <li><Link to="/privacy" className="hover:text-blue-500 transition-colors">{t('footer.privacy')}</Link></li>
               <li><Link to="/terms" className="hover:text-blue-500 transition-colors">{t('footer.terms')}</Link></li>
+              <li>
+                <Link to="/login" className="inline-flex items-center gap-2 text-slate-400 hover:text-blue-500 transition-colors">
+                  <LockKeyhole className="h-3.5 w-3.5" aria-hidden="true" />
+                  {t('footer.dashboard')}
+                </Link>
+              </li>
             </ul>
           </div>
 

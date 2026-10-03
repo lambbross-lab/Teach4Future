@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { ArrowRight, CheckCircle2, Globe, Users, BookOpen, ChevronRight, Sparkles, MapPin } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Globe, Users, BookOpen, ChevronRight, MapPin } from 'lucide-react';
 import Button from '../components/ui/Button';
 import CourseCard from '../components/CourseCard';
 import { COURSES, CITIES } from '../mockData';
@@ -30,13 +30,6 @@ const Home = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="inline-flex items-center space-x-2 px-4 py-2 mb-8 bg-blue-50 rounded-full border border-blue-100">
-                <Sparkles className="h-4 w-4 text-blue-600" />
-                <span className="text-xs font-bold tracking-wider text-blue-700 uppercase">
-                  {t('hero.badge')}
-                </span>
-              </div>
-              
               <h1 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tight mb-6 leading-[1.05]">
                 {t('hero.title')} <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
