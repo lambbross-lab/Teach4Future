@@ -16,7 +16,7 @@ export const translations: any = {
       badge: 'Erasmus+ Teacher Training Academy',
       title: 'Inspiring Teachers,',
       titleAccent: 'Transforming Classrooms.',
-      subtitle: 'Practical teacher-training courses designed for Erasmus+ mobility projects in Almería, Granada and Málaga. Funding depends on each organisation’s grant.',
+      subtitle: 'Practical courses in Spanish for teachers from across Europe, in Almería (Granada and Málaga coming soon). Designed for Erasmus+ KA1 mobility; funding depends on each organisation’s grant.',
       ctaPrimary: 'Explore Courses',
       ctaSecondary: 'Custom Group Training',
       stats: {
@@ -38,7 +38,7 @@ export const translations: any = {
         },
         locations: {
           title: 'Stunning Locations',
-          desc: 'Train in Almería, Granada, or Málaga—cities that inspire creativity and wellbeing.'
+          desc: 'Train in Almería, with Granada and Málaga coming soon—cities that inspire creativity and wellbeing.'
         }
       },
       featured: {
@@ -55,13 +55,13 @@ export const translations: any = {
         button: 'View All Dates'
       },
       europe: {
-        eyebrow: 'A course in Spanish, anywhere in Europe',
-        title: 'Choose the city. We bring the course.',
-        desc: 'Tell us the preferred European destination, topic and approximate dates. We will assess the venue, host arrangements and viability before preparing a tailored proposal in Spanish.',
+        eyebrow: 'Coming soon: editions in other European cities',
+        title: 'Suggest a city. We will study an open edition.',
+        desc: 'We are preparing Spanish-language editions in other European cities together with local organisations. Tell us which destination, topic and dates interest you: each edition brings together teachers from several schools and countries and is only confirmed in writing once it meets the programme requirements.',
         point1: 'Training delivered in Spanish',
-        point2: 'Topic adapted to your teaching team',
-        point3: 'Erasmus+ documentation support',
-        cta: 'Plan a course in Europe'
+        point2: 'Teachers from several schools and countries',
+        point3: 'Erasmus+ requirements checked before confirming',
+        cta: 'Register your interest'
       },
       schoolsSupport: {
         eyebrow: 'For schools and education organisations',
@@ -98,6 +98,7 @@ export const translations: any = {
       honeypotLabel: 'Leave this field empty',
       fundingSubject: 'Funding subject to your grant',
       finalPrice: 'final price, VAT incl. if applicable',
+      scheduleTbc: 'Morning or afternoon (by demand)',
       askQuestion: 'Ask a question',
       requestDate: 'Request a date',
       noSessions: 'There are no scheduled dates for this course yet.',
@@ -108,7 +109,7 @@ export const translations: any = {
       trainers: 'Connect with expert trainers',
       openMenu: 'Open menu',
       closeMenu: 'Close menu',
-      europeCaption: 'Erasmus+ · Training in Spanish · Teacher groups',
+      europeCaption: 'Erasmus+ · Training in Spanish · Teachers from across Europe',
       priorityCourse: 'Priority course',
       groupsCourse: 'For groups',
     },
@@ -126,8 +127,8 @@ export const translations: any = {
       },
       answers: {
         courses: 'You can explore our practical, five-day teacher-training courses in Spanish. Each course includes its objectives, programme and relevant details.',
-        dates: 'Confirmed dates and available places are shown separately. If a course is available on request, you can ask us to open an edition in Almería, Granada or Málaga.',
-        schools: 'We prepare group-training proposals for schools and Erasmus+ coordinators. In Spain, group editions normally require at least 10 confirmed participants.',
+        dates: 'Confirmed dates and available places are shown separately. If a course is available on request, you can ask us to open an edition in Almería (Granada and Málaga coming soon).',
+        schools: 'We prepare training proposals for schools and Erasmus+ coordinators across Europe. Each edition is confirmed with 10 participants from several schools and countries; with Erasmus+, up to 3 teachers per school.',
         enrolment: 'You can send us your details and preferred course through a short form. Sending the request does not reserve a place or create any payment obligation.',
       },
       actions: {
@@ -175,20 +176,20 @@ export const translations: any = {
       certificateValue: 'Attendance and learning outcomes',
       funding: 'Funding',
       fundingValue: 'Check your grant agreement',
-      priceValue: '5-day course',
+      priceValue: '5-day course (final price)',
       relevance: 'Erasmus+ relevance',
       scheduleDesc: 'The course runs from Monday to Friday with 25 guided learning hours. The exact timetable is confirmed for each session.',
       practicalNote: 'Sessions are practical, interactive and focused on classroom application.',
       fundingNote: '* Erasmus+ funding depends on each organisation’s grant agreement. Teach4Future does not guarantee approval, eligibility or reimbursement.',
-      customGroup: 'Need a custom group training?',
-      customGroupDesc: 'Private sessions in Spain normally require at least 10 confirmed participants. We will confirm dates, venue and conditions in writing.',
+      customGroup: 'Coming with colleagues from your school?',
+      customGroupDesc: 'With Erasmus+ KA1, each school can enrol up to 3 teachers per course (10 for a mobility consortium). We help you coordinate the enrolment and will confirm dates, venue and conditions in writing.',
       contactTeam: 'Contact our team',
       onDemandTitle: 'Available on request',
-      onDemandDesc: 'This course can be requested in Almería, Granada or Málaga. We confirm an edition after reaching a minimum of 10 participants and checking trainer and venue availability.',
+      onDemandDesc: 'This course can be requested in Almería (Granada and Málaga coming soon). We confirm an edition once it reaches 10 participants from several schools and countries and trainer and venue availability is checked.',
     },
     cities: {
       title: 'Course Destinations',
-      subtitle: 'Explore proposed course destinations in Almería, Granada and Málaga. The exact venue is confirmed in writing for each session.',
+      subtitle: 'Explore our course destinations: Almería now, Granada and Málaga coming soon. The exact venue is confirmed in writing for each session.',
       highlights: 'Local Highlights',
       availableCourses: 'Available Courses in',
       badge: 'Proposed destination in Spain',
@@ -199,24 +200,24 @@ export const translations: any = {
     },
     coursesSpain: {
       subtitle: 'Explore six unique teacher-training courses in Spanish, designed around current European educational priorities. Dates and destinations appear inside each course.',
-      minimumNote: 'Every course can be requested in Almería, Granada and Málaga. On-demand editions are confirmed after reaching a minimum of 10 participants and checking trainer and venue availability. Confirmed dates and places are shown separately.',
+      minimumNote: 'Every course can be requested in Almería (Granada and Málaga coming soon). Each edition is confirmed once it reaches 10 participants from several schools and countries and trainer and venue availability is checked. With Erasmus+ KA1, each school can enrol up to 3 teachers per course; Erasmus+ funds these courses for teachers from schools outside Spain. Confirmed dates and places are shown separately.',
       onDemandLabel: 'Available on request',
-      onDemandCard: 'Almería, Granada and Málaga · confirmed from 10 participants.',
+      onDemandCard: 'Almería (Granada and Málaga coming soon) · confirmed from 10 participants from several schools and countries.',
       requestOpening: 'Request opening',
       noResultsDesc: 'Try adjusting your search or filters to find what you\'re looking for.',
       city: 'City',
     },
     coursesEurope: {
-      badge: 'Custom Training for Spanish Schools',
-      title: 'You Choose the City,',
-      titleAccent: 'We Bring the Course.',
-      subtitle: 'Are you a group of teachers from Spain looking for an Erasmus+ experience abroad? Tell us where you want to go and what you want to learn. We organize the full training in your preferred European city, delivered in Spanish.',
-      requestTitle: 'Request a Custom Course',
-      requestSubtitle: 'Fill out the form and we\'ll get back to you with a proposal.',
+      badge: 'European editions in preparation',
+      title: 'Suggest a city,',
+      titleAccent: 'we will study an open edition.',
+      subtitle: 'We want to bring our Spanish-language courses to other European cities, in collaboration with organisations established in each country. Tell us which destination and topic interest you and we will let you know when an edition is confirmed and meets the Erasmus+ requirements.',
+      requestTitle: 'Register your interest',
+      requestSubtitle: 'Fill in the form and we will let you know when there is an edition in that destination.',
       formCity: 'Preferred City',
       formTopic: 'Course Topic',
       formDates: 'Preferred Dates',
-      formSize: 'Group Size',
+      formSize: 'Interested teachers',
       formEmail: 'Contact Email',
       formSchool: 'School / Institution',
       formNotes: 'Additional Notes',
@@ -224,16 +225,16 @@ export const translations: any = {
       successTitle: 'Request Received!',
       successDesc: 'Thank you for your interest. We will review the request and reply by email as soon as possible. This message does not confirm a course.',
       featureCityTitle: 'Your preferred European destination',
-      featureCityDesc: 'Berlin, Rome, Paris, Prague, Helsinki… tell us your preferred destination and we will assess the required local arrangements.',
+      featureCityDesc: 'Berlin, Rome, Lisbon, Prague… tell us your preferred destination. We only confirm editions where a local organisation hosts the course.',
       featureLanguageTitle: 'Delivered in Spanish',
       featureLanguageDesc: 'The learning programme and guided sessions are delivered in Spanish.',
-      featureTailoredTitle: 'Tailored curriculum',
-      featureTailoredDesc: 'We adapt the content to your school’s needs and objectives.',
+      featureTailoredTitle: 'Courses from our catalogue',
+      featureTailoredDesc: 'The same courses as our catalogue, with participants from several schools and countries.',
       topicPlaceholder: 'Select a topic',
       cityPlaceholder: 'e.g. Berlin',
       datesPlaceholder: 'e.g. July 2027',
-      sizePlaceholder: 'Teachers in your group',
-      priceNote: 'Course fee: €480 per participant for 5 days and 25 guided hours. VAT included or exempt, as applicable. An edition outside Spain is normally confirmed from 15 participants in total, who may come from one or several organisations. Smaller groups can register their interest.',
+      sizePlaceholder: 'Number of teachers (max. 3 per school with Erasmus+)',
+      priceNote: 'Course fee: €480 per participant for 5 days and 25 guided hours. VAT included or exempt, as applicable. Each edition is confirmed once it reaches 15 participants from several schools and countries. With Erasmus+ KA1 funding, each school can enrol up to 3 teachers per course (10 for a mobility consortium).',
       schoolPlaceholder: 'Name of your school',
       notesPlaceholder: 'Tell us more about your needs...',
       topics: {
@@ -290,7 +291,7 @@ export const translations: any = {
       dashboard: 'Admin dashboard',
       cities: 'Our Cities',
       location: 'Almería, Spain',
-      legalEntity: 'Registered entity: Asociación para la Innovación Educativa y la Formación Erasmus - Teach4Future · National Register of Associations, Section 1, no. 633044.',
+      legalEntity: 'Registered entity: Asociación para la Innovación Educativa y la Formación Erasmus - Teach4Future · National Register of Associations, Section 1, no. 633044 · Tax ID (NIF) G88720610.',
     },
     cookie: {
       title: 'We value your privacy',
@@ -344,11 +345,11 @@ export const translations: any = {
       subtitle: 'We prepare group-training proposals for schools, Erasmus+ coordinators and educational institutions, adapted to their professional-development objectives.',
       imageAlt: 'Educators participating in group training',
       ctaInfo: 'Request Institutional Info',
-      ctaCustom: 'Custom Group Mobility',
+      ctaCustom: 'European editions',
       educaAndalucia: {
-        eyebrow: 'For schools in Andalusia',
-        title: 'Make the most of Google resources with your Educa Andalucía account.',
-        desc: 'Discover the Google Workspace for Education tools available through the Andalusian Department of Educational Development and Vocational Training.',
+        eyebrow: 'Training at your school',
+        title: 'Digital-competence workshops for your teaching staff.',
+        desc: 'Practical sessions at your school on the tools you already use in class: collaborative environments, digital assessment and responsible AI. We adapt the content to your school’s platform. Teach4Future is an independent organisation and is not part of any education authority.',
         moreInfo: 'More information',
         trainingCta: 'Train your teaching team'
       },
@@ -361,8 +362,8 @@ export const translations: any = {
       },
       services: {
         bookings: {
-          title: 'Group Bookings',
-          desc: 'One coordinated proposal for the group. The working minimum is 10 participants in Spain and 15 in total outside Spain; European editions may bring together several organisations. Final conditions are confirmed in writing.'
+          title: 'Enrolments from several schools',
+          desc: 'We coordinate the enrolment of teachers from your school and other schools. Each edition is confirmed with 10 participants in Spain and 15 outside Spain, from several schools and countries; with Erasmus+ KA1, up to 3 teachers per school (10 per consortium). Final conditions are confirmed in writing.'
         },
         docs: {
           title: 'Erasmus+ Documentation',
@@ -434,11 +435,13 @@ export const translations: any = {
         name: 'ASOCIACIÓN PARA LA INNOVACIÓN EDUCATIVA Y LA FORMACIÓN ERASMUS - TEACH4FUTURE',
         registryLabel: 'Registry',
         registry: 'Spanish National Register of Associations, Section 1, no. 633044',
+        contactLabel: 'Contact',
+        nifLabel: 'Tax ID (NIF)',
+        nif: 'G88720610',
         addressLabel: 'Registered address',
         address: 'Calle Francisco Rabal, Almería (Spain)',
         oidLabel: 'Erasmus+ Organisation ID (OID)',
-        oid: 'E10436537',
-        contactLabel: 'Contact'
+        oid: 'E10436537'
       },
       notice: {
         title: 'Legal Notice',
@@ -496,7 +499,7 @@ export const translations: any = {
         s3Title: '3. Prices and payment',
         s3Content: 'Website prices are indicative unless expressly stated otherwise. The final proposal will specify taxes, included and excluded services and invoicing details. Online payment is not currently enabled.',
         s4Title: '4. Minimum group and changes',
-        s4Content: 'Courses in Spain normally require at least 10 confirmed participants and courses outside Spain at least 15 in total, who may come from several organisations. Smaller groups may register interest without confirming an edition. Venue, travel, accommodation and trainer availability may require a higher threshold, which will be stated in the proposal. If Teach4Future makes a material change to confirmed fees, content, dates, location or schedule, the affected participant may cancel without an additional charge.',
+        s4Content: 'Courses in Spain are normally confirmed once they reach 10 participants and courses outside Spain once they reach 15, from several schools and countries. When a place is funded by Erasmus+ KA1, the sending organisation must respect the limits of its grant agreement (up to 3 teachers from the same organisation per course). Smaller groups may register interest without confirming an edition. Venue, travel, accommodation and trainer availability may require a higher threshold, which will be stated in the proposal. If Teach4Future makes a material change to confirmed fees, content, dates, location or schedule, the affected participant may cancel without an additional charge.',
         s5Title: '5. Erasmus+ funding',
         s5Content: 'Course fees may be relevant to an Erasmus+ mobility budget, but Teach4Future does not guarantee approval, eligibility or full reimbursement. The sending organisation is responsible for checking its grant agreement and the rules of its National Agency.',
         s6Title: '6. Travel, insurance and participant obligations',
@@ -610,10 +613,10 @@ export const translations: any = {
     },
     dates: {
       title: 'Dates & Availability',
-      subtitle: 'Plan your professional development. Browse all upcoming course sessions and check real-time seat availability.',
+      subtitle: 'All courses are offered in the same week. At most two are delivered each week (one in the morning and one in the afternoon): those with the most demand. If your course does not reach the minimum, we will offer you a switch to another course that week; the final schedule is confirmed in writing.',
       help: {
         title: "Can't find the dates you need?",
-        desc: 'Every course can be requested in Almería, Granada and Málaga. We assess a new session from 10 confirmed participants, subject to trainer, venue and date availability.',
+        desc: 'Every course can be requested in Almería (Granada and Málaga coming soon). We assess a new session from 10 confirmed participants from several schools and countries, subject to trainer, venue and date availability.',
         cta: 'Request a session'
       }
     }
@@ -623,24 +626,24 @@ export const translations: any = {
       home: 'Inicio',
       coursesSpain: 'Cursos en España',
       coursesEurope: 'Cursos en Europa',
-      dates: 'Fechas y Disponibilidad',
-      about: 'Sobre Nosotros',
+      dates: 'Fechas y disponibilidad',
+      about: 'Sobre nosotros',
       contact: 'Contacto',
-      forSchools: 'Para Colegios',
-      login: 'Acceso Admin',
+      forSchools: 'Para colegios',
+      login: 'Acceso de administración',
       cities: 'Ciudades',
     },
     hero: {
-      badge: 'Academia de Formación para Profesores Erasmus+',
-      title: 'Inspirando Docentes,',
-      titleAccent: 'Transformando Aulas.',
-      subtitle: 'Cursos prácticos de formación docente diseñados para proyectos de movilidad Erasmus+ en Almería, Granada y Málaga. La financiación depende de la subvención de cada organización.',
-      ctaPrimary: 'Explorar Cursos',
-      ctaSecondary: 'Formación a Medida',
+      badge: 'Academia de formación docente Erasmus+',
+      title: 'Inspirando docentes,',
+      titleAccent: 'transformando aulas.',
+      subtitle: 'Cursos prácticos en español para docentes de toda Europa, en Almería (Granada y Málaga, próximamente). Pensados para movilidades Erasmus+ KA1; la financiación depende de la subvención de cada organización.',
+      ctaPrimary: 'Explorar cursos',
+      ctaSecondary: 'Formación a medida',
       stats: {
-        teachers: 'Profesores Formados',
-        satisfaction: 'Tasa de Satisfacción',
-        countries: 'Países Alcanzados'
+        teachers: 'Docentes formados',
+        satisfaction: 'Tasa de satisfacción',
+        countries: 'Países alcanzados'
       }
     },
     home: {
@@ -655,8 +658,8 @@ export const translations: any = {
           desc: 'Cada propuesta confirmada identifica al docente, los objetivos, la metodología y el horario antes de reservar.'
         },
         locations: {
-          title: 'Ubicaciones Increíbles',
-          desc: 'Fórmate en Almería, Granada o Málaga—ciudades que inspiran creatividad y bienestar.'
+          title: 'Ubicaciones increíbles',
+          desc: 'Fórmate en Almería y, próximamente, en Granada y Málaga: ciudades que inspiran creatividad y bienestar.'
         }
       },
       chat: {
@@ -687,13 +690,13 @@ export const translations: any = {
         button: 'Ver todas las fechas'
       },
       europe: {
-        eyebrow: 'Un curso en español, en cualquier ciudad europea',
-        title: 'Tú eliges la ciudad. Nosotros ponemos el curso.',
-        desc: 'Dinos el destino europeo preferido, el tema y unas fechas aproximadas. Antes de preparar una propuesta en español comprobaremos la sede, la organización anfitriona y la viabilidad.',
+        eyebrow: 'Próximamente: ediciones en otras ciudades europeas',
+        title: 'Propón una ciudad. Estudiamos una edición abierta.',
+        desc: 'Estamos preparando ediciones en español en otras ciudades europeas junto a entidades locales. Cuéntanos qué destino, tema y fechas te interesan: cada edición reúne docentes de varios centros y países y solo se confirma por escrito cuando cumple los requisitos del programa.',
         point1: 'Formación impartida en español',
-        point2: 'Tema adaptado a tu equipo docente',
-        point3: 'Apoyo con la documentación Erasmus+',
-        cta: 'Planificar un curso en Europa'
+        point2: 'Docentes de varios centros y países',
+        point3: 'Requisitos Erasmus+ revisados antes de confirmar',
+        cta: 'Registrar interés'
       },
       schoolsSupport: {
         eyebrow: 'Para centros y entidades educativas',
@@ -707,14 +710,14 @@ export const translations: any = {
       requestInfo: 'Pedir información',
       fromPrice: 'Desde',
       search: 'Buscar...',
-      details: 'Ver Detalles',
+      details: 'Ver detalles',
       back: 'Volver',
       cancel: 'Cancelar',
       loading: 'Cargando...',
       error: 'Algo salió mal',
       seatsLeft: 'plazas libres',
-      morning: 'Horario de Mañana',
-      afternoon: 'Horario de Tarde',
+      morning: 'Horario de mañana',
+      afternoon: 'Horario de tarde',
       allCities: 'Todas las ciudades',
       allCategories: 'Todas las categorías',
       searchPlaceholder: 'Buscar cursos...',
@@ -730,6 +733,7 @@ export const translations: any = {
       honeypotLabel: 'Deja este campo vacío',
       fundingSubject: 'Financiación sujeta a tu subvención',
       finalPrice: 'precio final, IVA incl. si procede',
+      scheduleTbc: 'Mañana o tarde (según demanda)',
       askQuestion: 'Hacer una consulta',
       requestDate: 'Solicitar otra fecha',
       noSessions: 'Todavía no hay fechas programadas para este curso.',
@@ -740,7 +744,7 @@ export const translations: any = {
       trainers: 'Conecta con formadores expertos',
       openMenu: 'Abrir menú',
       closeMenu: 'Cerrar menú',
-      europeCaption: 'Erasmus+ · Formación en español · Grupos de docentes',
+      europeCaption: 'Erasmus+ · Formación en español · Docentes de toda Europa',
       priorityCourse: 'Curso prioritario',
       groupsCourse: 'Para grupos',
     },
@@ -758,8 +762,8 @@ export const translations: any = {
       },
       answers: {
         courses: 'Puedes explorar nuestros cursos prácticos de formación docente en español, de cinco días. Cada curso muestra sus objetivos, programa y datos relevantes.',
-        dates: 'Las fechas y plazas confirmadas se muestran por separado. Si un curso está disponible bajo demanda, puedes solicitar una edición en Almería, Granada o Málaga.',
-        schools: 'Preparamos propuestas de formación para grupos, centros y coordinadores Erasmus+. En España, las ediciones de grupo normalmente requieren al menos 10 participantes confirmados.',
+        dates: 'Las fechas y plazas confirmadas se muestran por separado. Si un curso está disponible bajo demanda, puedes solicitar una edición en Almería (Granada y Málaga, próximamente).',
+        schools: 'Preparamos propuestas de formación para centros y coordinadores Erasmus+ de toda Europa. Cada edición se confirma con 10 participantes de varios centros y países; con Erasmus+, hasta 3 docentes por centro.',
         enrolment: 'Puedes enviarnos tus datos y el curso que te interesa mediante un formulario breve. La solicitud no reserva plaza ni genera ninguna obligación de pago.',
       },
       actions: {
@@ -807,48 +811,48 @@ export const translations: any = {
       certificateValue: 'Asistencia y resultados de aprendizaje',
       funding: 'Financiación',
       fundingValue: 'Consulta tu convenio de subvención',
-      priceValue: 'curso de 5 días',
+      priceValue: 'curso de 5 días (precio final)',
       relevance: 'Relación con Erasmus+',
       scheduleDesc: 'El curso se desarrolla de lunes a viernes con 25 horas lectivas guiadas. El horario exacto se confirma para cada sesión.',
       practicalNote: 'Las sesiones son prácticas, participativas y orientadas a su aplicación en el aula.',
       fundingNote: '* La financiación Erasmus+ depende del convenio de subvención de cada organización. Teach4Future no garantiza su aprobación, elegibilidad ni reembolso.',
-      customGroup: '¿Necesitas formación para un grupo?',
-      customGroupDesc: 'Las sesiones privadas en España requieren normalmente al menos 10 participantes confirmados. Confirmaremos por escrito fechas, sede y condiciones.',
+      customGroup: '¿Vienes con compañeros de tu centro?',
+      customGroupDesc: 'Con Erasmus+ KA1, cada centro puede inscribir hasta 3 docentes por curso (10 si va en consorcio). Os ayudamos a coordinar la inscripción y confirmaremos por escrito fechas, sede y condiciones.',
       contactTeam: 'Contactar con el equipo',
       onDemandTitle: 'Disponible bajo demanda',
-      onDemandDesc: 'Este curso se puede solicitar en Almería, Granada o Málaga. Confirmamos la edición al alcanzar un mínimo de 10 participantes y comprobar la disponibilidad de docente y sede.',
+      onDemandDesc: 'Este curso se puede solicitar en Almería (Granada y Málaga, próximamente). Confirmamos la edición al alcanzar 10 participantes de varios centros y países y tras comprobar la disponibilidad de docente y sede.',
     },
     cities: {
       title: 'Destinos de los cursos',
-      subtitle: 'Consulta los destinos propuestos en Almería, Granada y Málaga. La sede exacta se confirma por escrito para cada sesión.',
+      subtitle: 'Consulta nuestros destinos: Almería ya disponible; Granada y Málaga, próximamente. La sede exacta se confirma por escrito para cada sesión.',
       highlights: 'Lo más destacado',
       availableCourses: 'Cursos disponibles en',
       badge: 'Destino propuesto en España',
-      history: 'Historia Rica',
+      history: 'Historia rica',
       historyDesc: 'Siglos de cultura.',
       gastronomy: 'Gastronomía',
       gastronomyDesc: 'Cocina de clase mundial.',
     },
     coursesSpain: {
       subtitle: 'Explora seis cursos únicos impartidos en español y diseñados en torno a las prioridades educativas europeas. Las fechas y los destinos aparecen dentro de cada curso.',
-      minimumNote: 'Todos los cursos se pueden solicitar en Almería, Granada y Málaga. Las ediciones bajo demanda se confirman al alcanzar un mínimo de 10 participantes y comprobar la disponibilidad de docente y sede. Las fechas y plazas confirmadas se muestran por separado.',
+      minimumNote: 'Todos los cursos se pueden solicitar en Almería (Granada y Málaga, próximamente). Cada edición se confirma al alcanzar 10 participantes de varios centros y países y tras comprobar la disponibilidad de docente y sede. Con Erasmus+ KA1, cada centro puede inscribir hasta 3 docentes por curso; Erasmus+ financia estos cursos para docentes de centros de fuera de España. Las fechas y plazas confirmadas se muestran por separado.',
       onDemandLabel: 'Disponible bajo demanda',
-      onDemandCard: 'Almería, Granada y Málaga · confirmación a partir de 10 participantes.',
+      onDemandCard: 'Almería (Granada y Málaga, próximamente) · se confirma con 10 participantes de varios centros y países.',
       requestOpening: 'Solicitar apertura',
       noResultsDesc: 'Prueba a ajustar tu búsqueda o los filtros para encontrar lo que buscas.',
       city: 'Ciudad',
     },
     coursesEurope: {
-      badge: 'Formación a medida para centros españoles',
-      title: 'Tú eliges la ciudad,',
-      titleAccent: 'nosotros llevamos el curso.',
-      subtitle: '¿Sois un grupo de docentes de España que busca una experiencia Erasmus+ en el extranjero? Cuéntanos a dónde quieres ir y qué quieres aprender. Organizamos la formación completa en tu ciudad europea preferida, impartida en español.',
-      requestTitle: 'Solicitar curso a medida',
-      requestSubtitle: 'Rellena el formulario y te enviaremos una propuesta.',
+      badge: 'Ediciones europeas en preparación',
+      title: 'Propón una ciudad,',
+      titleAccent: 'estudiamos una edición abierta.',
+      subtitle: 'Queremos llevar nuestros cursos en español a otras ciudades europeas, en colaboración con entidades establecidas en cada país. Cuéntanos qué destino y qué tema te interesan y te avisaremos cuando una edición esté confirmada y cumpla los requisitos de Erasmus+.',
+      requestTitle: 'Registrar interés',
+      requestSubtitle: 'Rellena el formulario y te avisaremos cuando haya una edición en ese destino.',
       formCity: 'Ciudad preferida',
       formTopic: 'Tema del curso',
       formDates: 'Fechas preferidas',
-      formSize: 'Tamaño del grupo',
+      formSize: 'Docentes interesados',
       formEmail: 'Email de contacto',
       formSchool: 'Centro / Institución',
       formNotes: 'Notas adicionales',
@@ -856,16 +860,16 @@ export const translations: any = {
       successTitle: '¡Solicitud recibida!',
       successDesc: 'Gracias por tu interés. Revisaremos la solicitud y responderemos por correo lo antes posible. Este mensaje no confirma el curso.',
       featureCityTitle: 'Tu destino europeo preferido',
-      featureCityDesc: 'Berlín, Roma, París, Praga, Helsinki… dinos tu destino preferido y estudiaremos los requisitos locales necesarios.',
+      featureCityDesc: 'Berlín, Roma, Lisboa, Praga… indícanos tu destino preferido. Solo confirmamos ediciones en las que una entidad local acoge el curso.',
       featureLanguageTitle: 'Impartido en español',
       featureLanguageDesc: 'El programa y las sesiones lectivas se imparten en español.',
-      featureTailoredTitle: 'Programa a medida',
-      featureTailoredDesc: 'Adaptamos el contenido a las necesidades y objetivos de tu centro.',
+      featureTailoredTitle: 'Cursos de nuestro catálogo',
+      featureTailoredDesc: 'Los mismos cursos de nuestro catálogo, con participantes de varios centros y países.',
       topicPlaceholder: 'Selecciona un tema',
       cityPlaceholder: 'p. ej., Berlín',
       datesPlaceholder: 'p. ej., julio de 2027',
-      sizePlaceholder: 'Docentes de tu grupo',
-      priceNote: 'Precio del curso: 480 € por participante durante 5 días y 25 horas lectivas guiadas. IVA incluido o exento, según corresponda. Una edición fuera de España se confirma normalmente desde 15 participantes en total, que pueden proceder de uno o varios centros. Los grupos más pequeños pueden registrar su interés.',
+      sizePlaceholder: 'Número de docentes (máx. 3 por centro con Erasmus+)',
+      priceNote: 'Precio del curso: 480 € por participante durante 5 días y 25 horas lectivas guiadas. IVA incluido o exento, según corresponda. Cada edición se confirma al alcanzar 15 participantes de varios centros y países. Con financiación Erasmus+ KA1, cada centro puede inscribir hasta 3 docentes por curso (10 si va en consorcio).',
       schoolPlaceholder: 'Nombre de tu centro',
       notesPlaceholder: 'Cuéntanos qué necesitáis...',
       topics: {
@@ -922,7 +926,7 @@ export const translations: any = {
       dashboard: 'Panel de gestión',
       cities: 'Nuestras ciudades',
       location: 'Almería, España',
-      legalEntity: 'Entidad inscrita: Asociación para la Innovación Educativa y la Formación Erasmus - Teach4Future · Registro Nacional de Asociaciones, Sección 1.ª, nº 633044.',
+      legalEntity: 'Entidad inscrita: Asociación para la Innovación Educativa y la Formación Erasmus - Teach4Future · Registro Nacional de Asociaciones, Sección 1.ª, nº 633044 · NIF G88720610.',
     },
     cookie: {
       title: 'Tu privacidad nos importa',
@@ -936,14 +940,14 @@ export const translations: any = {
       moreDesc: 'Cuéntanos qué necesitas y te responderemos personalmente.',
     },
     about: {
-      badge: 'Nuestra Historia y Misión',
+      badge: 'Nuestra historia y misión',
       title: 'Cerrando la brecha en la',
-      titleAccent: 'Educación Europea.',
+      titleAccent: 'educación europea.',
       p1: 'Teach4Future se constituyó en 2025 con una idea sencilla: la formación docente debe ser tan inspiradora como la educación que queremos para nuestro alumnado.',
       p2: 'Somos una asociación educativa sin ánimo de lucro que promueve la formación del profesorado, la innovación educativa, la cooperación europea y el aprendizaje inclusivo conforme a nuestros fines estatutarios.',
       imageAlt: 'Docentes participando en una sesión de formación colaborativa',
-      ctaTeam: 'Conoce al Equipo',
-      ctaCourses: 'Nuestros Cursos',
+      ctaTeam: 'Conoce al equipo',
+      ctaCourses: 'Nuestros cursos',
       values: {
         excellence: {
           title: 'Excelencia',
@@ -959,30 +963,30 @@ export const translations: any = {
         }
       },
       stats: {
-        teachers: 'Profesores Formados',
-        trainers: 'Formadores Expertos',
-        topics: 'Temas de Cursos',
-        hubs: 'Sedes de Formación'
+        teachers: 'Docentes formados',
+        trainers: 'Formadores expertos',
+        topics: 'Temas de los cursos',
+        hubs: 'Sedes de formación'
       },
-      joinTitle: 'Únete a nuestra Comunidad',
+      joinTitle: 'Únete a nuestra comunidad',
       joinDesc: 'Síguenos en las redes sociales para estar al día de las últimas tendencias en educación y de nuestros próximos cursos.',
       followLinkedIn: 'Seguir en LinkedIn',
       followInstagram: 'Seguir en Instagram'
     },
     forSchools: {
-      badge: 'Apoyo Institucional y Formación de Grupos',
+      badge: 'Apoyo institucional y formación de grupos',
       title: 'Empodera a todo tu',
-      titleAccent: 'Equipo Docente.',
+      titleAccent: 'equipo docente.',
       subtitle: 'Preparamos propuestas de formación para centros educativos, coordinadores Erasmus+ e instituciones, adaptadas a sus objetivos de desarrollo profesional.',
       imageAlt: 'Docentes participando en una formación de grupo',
-      ctaInfo: 'Solicitar Información Institucional',
-      ctaCustom: 'Movilidad de Grupo a Medida',
+      ctaInfo: 'Solicitar información institucional',
+      ctaCustom: 'Ediciones europeas',
       educaAndalucia: {
-        eyebrow: 'Para centros de Andalucía',
-        title: 'Aprovecha todos los recursos de Google con tu cuenta Educa Andalucía de la Junta de Andalucía.',
-        desc: 'Descubre las herramientas de Google Workspace para Educación disponibles a través de la Consejería de Desarrollo Educativo y Formación Profesional.',
+        eyebrow: 'Formación en tu centro',
+        title: 'Talleres de competencia digital docente para tu claustro.',
+        desc: 'Sesiones prácticas en tu centro sobre las herramientas que ya usáis en el aula: entornos colaborativos, evaluación digital e IA responsable. Adaptamos el contenido a la plataforma del centro. Teach4Future es una entidad independiente y no forma parte de la administración educativa.',
         moreInfo: 'Más información',
-        trainingCta: 'Forma a tu equipo docente'
+        trainingCta: 'Pedir una propuesta para mi centro'
       },
       advisory: {
         eyebrow: 'Asesoramiento Erasmus+',
@@ -993,8 +997,8 @@ export const translations: any = {
       },
       services: {
         bookings: {
-          title: 'Reservas de Grupo',
-          desc: 'Una propuesta coordinada para el grupo. El mínimo de trabajo es 10 participantes en España y 15 en total fuera de España; las ediciones europeas pueden reunir varios centros. Las condiciones finales se confirman por escrito.'
+          title: 'Inscripciones de varios centros',
+          desc: 'Coordinamos la inscripción de docentes de tu centro y de otros centros. Cada edición se confirma con 10 participantes en España y 15 fuera, de varios centros y países; con Erasmus+ KA1, hasta 3 docentes por centro (10 por consorcio). Las condiciones finales se confirman por escrito.'
         },
         docs: {
           title: 'Documentación Erasmus+',
@@ -1006,7 +1010,7 @@ export const translations: any = {
         }
       },
       tailored: {
-        title: 'Programas a Medida para tu Institución',
+        title: 'Programas a medida para tu institución',
         desc: '¿Necesitas un tema que no está en el catálogo? Podemos estudiar una propuesta formativa a medida, sujeta a disponibilidad de docente, sede y fechas.',
         points: [
           'Objetivos de aprendizaje personalizados',
@@ -1019,42 +1023,42 @@ export const translations: any = {
         commitmentDesc: 'La propuesta final identifica proveedor, programa, sede, horario, precio, grupo mínimo, servicios incluidos y condiciones de cancelación antes de cualquier reserva o pago.'
       },
       stats: {
-        schools: 'Centros Asociados',
+        schools: 'Centros asociados',
         countries: 'Países',
         satisfaction: 'Satisfacción',
         certificates: 'Certificados'
       }
     },
     contact: {
-      badge: 'Ponte en Contacto',
+      badge: 'Ponte en contacto',
       title: 'Estamos aquí para',
-      titleAccent: 'Ayudarte a Crecer.',
+      titleAccent: 'ayudarte a crecer.',
       subtitle: '¿Tienes preguntas sobre los cursos, la financiación Erasmus+ o una propuesta para grupos? Escríbenos y revisaremos tu solicitud.',
       info: {
-        email: { title: 'Envíanos un Email', desc: 'Respondemos lo antes posible' },
+        email: { title: 'Escríbenos', desc: 'Respondemos lo antes posible' },
         phone: { title: 'Llámanos', desc: 'Lun-Vie, 9:00-18:00' },
         office: { title: 'Sede en', desc: 'Atención online · Sin oficina abierta al público' },
         response: { title: 'Respuesta', value: 'Por correo electrónico', desc: 'Sin plazo garantizado' }
       },
       hubs: 'Destinos de los cursos',
       form: {
-        title: 'Enviar un Mensaje',
+        title: 'Enviar un mensaje',
         subtitle: 'Rellena el formulario y nos pondremos en contacto contigo en breve.',
-        name: 'Nombre Completo',
-        email: 'Correo Electrónico',
+        name: 'Nombre completo',
+        email: 'Correo electrónico',
         subject: 'Asunto',
         subjectPlaceholder: 'Selecciona un asunto',
         subjects: {
-          general: 'Consulta General',
-          enrolment: 'Pregunta sobre Inscripción',
+          general: 'Consulta general',
+          enrolment: 'Pregunta sobre inscripción',
           funding: 'Financiación Erasmus+',
-          custom: 'Formación de Grupo a Medida',
-          partnership: 'Oportunidad de Colaboración'
+          custom: 'Formación de grupo a medida',
+          partnership: 'Oportunidad de colaboración'
         },
         message: 'Mensaje',
         messagePlaceholder: '¿Cómo podemos ayudarte?',
-        submit: 'Enviar Mensaje',
-        successTitle: '¡Mensaje Enviado!',
+        submit: 'Enviar mensaje',
+        successTitle: '¡Mensaje enviado!',
         successDesc: 'Gracias por contactar con nosotros. Hemos recibido tu mensaje y responderemos por correo lo antes posible.',
         another: 'Enviar otro mensaje'
       }
@@ -1066,11 +1070,13 @@ export const translations: any = {
         name: 'ASOCIACIÓN PARA LA INNOVACIÓN EDUCATIVA Y LA FORMACIÓN ERASMUS - TEACH4FUTURE',
         registryLabel: 'Registro',
         registry: 'Registro Nacional de Asociaciones, Sección 1.ª, nº 633044',
+        contactLabel: 'Contacto',
+        nifLabel: 'NIF',
+        nif: 'G88720610',
         addressLabel: 'Domicilio social',
         address: 'Calle Francisco Rabal, Almería',
         oidLabel: 'Identificador de organización Erasmus+ (OID)',
-        oid: 'E10436537',
-        contactLabel: 'Contacto'
+        oid: 'E10436537'
       },
       notice: {
         title: 'Aviso legal',
@@ -1091,7 +1097,7 @@ export const translations: any = {
         s7Content: 'Se aplicará la legislación española, sin limitar los derechos imperativos que correspondan a consumidores o usuarios conforme a la normativa que les resulte aplicable.'
       },
       privacy: {
-        title: 'Política de Privacidad',
+        title: 'Política de privacidad',
         updated: 'Última actualización: octubre de 2026',
         s1Title: '1. Responsable del tratamiento',
         s1Content: 'La asociación identificada arriba es responsable del tratamiento de la información enviada a través de esta web.',
@@ -1109,7 +1115,7 @@ export const translations: any = {
         s7Content: 'Puedes solicitar acceso, rectificación, supresión, limitación, oposición o portabilidad, cuando proceda, escribiendo a teach4futureacademy@gmail.com. También puedes reclamar ante la Agencia Española de Protección de Datos en aepd.es.'
       },
       cookies: {
-        title: 'Política de Cookies',
+        title: 'Política de cookies',
         updated: 'Última actualización: octubre de 2026',
         s1Title: '1. Uso actual',
         s1Content: 'La web pública no utiliza actualmente cookies publicitarias ni analíticas. Guarda localmente en el navegador el idioma elegido para recordar esa preferencia.',
@@ -1128,7 +1134,7 @@ export const translations: any = {
         s3Title: '3. Precios y pago',
         s3Content: 'Los precios de la web son orientativos salvo indicación expresa. La propuesta final detallará impuestos, servicios incluidos y excluidos y datos de facturación. Actualmente no está habilitado el pago en línea.',
         s4Title: '4. Grupo mínimo y modificaciones',
-        s4Content: 'Los cursos en España requieren normalmente al menos 10 participantes confirmados y los cursos fuera de España, al menos 15 en total, que pueden proceder de varios centros. Los grupos más pequeños pueden registrar su interés sin que quede confirmada una edición. La sede, el viaje, el alojamiento y la disponibilidad docente pueden exigir un umbral superior, que se indicará en la propuesta. Si Teach4Future modifica de forma sustancial el precio, contenido, fechas, lugar u horario ya confirmados, la persona afectada podrá cancelar sin un coste adicional.',
+        s4Content: 'Los cursos en España se confirman normalmente al alcanzar 10 participantes y los cursos fuera de España, 15, procedentes de varios centros y países. Cuando la plaza se financie con Erasmus+ KA1, el centro de envío debe respetar los límites de su convenio (hasta 3 docentes de la misma organización por curso). Los grupos más pequeños pueden registrar su interés sin que quede confirmada una edición. La sede, el viaje, el alojamiento y la disponibilidad docente pueden exigir un umbral superior, que se indicará en la propuesta. Si Teach4Future modifica de forma sustancial el precio, contenido, fechas, lugar u horario ya confirmados, la persona afectada podrá cancelar sin un coste adicional.',
         s5Title: '5. Financiación Erasmus+',
         s5Content: 'La cuota del curso puede ser relevante dentro del presupuesto de una movilidad Erasmus+, pero Teach4Future no garantiza su aprobación, elegibilidad ni reembolso íntegro. Corresponde al centro de envío comprobar su convenio de subvención y las reglas de su Agencia Nacional.',
         s6Title: '6. Viaje, seguro y obligaciones de participación',
@@ -1143,7 +1149,7 @@ export const translations: any = {
       subtitle: 'Accede al panel de gestión de la academia.',
       password: 'Contraseña',
       forgot: '¿Olvidaste?',
-      signIn: 'Iniciar Sesión',
+      signIn: 'Iniciar sesión',
       secure: 'Acceso administrativo seguro solamente.',
       back: 'Volver a la web pública',
       error: 'No hemos podido iniciar sesión. Comprueba el correo y la contraseña.',
@@ -1165,18 +1171,18 @@ export const translations: any = {
     },
     admin: {
       nav: {
-        dashboard: 'Panel Control',
+        dashboard: 'Panel de control',
         enrolments: 'Inscripciones',
         courses: 'Cursos',
         sessions: 'Sesiones',
         requests: 'Solicitudes Europa',
         settings: 'Ajustes',
-        logout: 'Cerrar Sesión'
+        logout: 'Cerrar sesión'
       },
       stats: {
         totalEnrolments: 'Total Inscripciones',
-        activeCourses: 'Cursos Activos',
-        upcomingSessions: 'Próximas Sesiones',
+        activeCourses: 'Cursos activos',
+        upcomingSessions: 'Próximas sesiones',
         revenue: 'Ingresos (Mes)'
       },
       recentEnrolments: 'Inscripciones Recientes',
@@ -1216,7 +1222,7 @@ export const translations: any = {
       seats: 'Plazas disponibles',
       last24h: 'Últimas 24 horas',
       filter: 'Filtrar',
-      addNew: 'Añadir Nuevo',
+      addNew: 'Añadir nueva',
       showing: 'Mostrando',
       of: 'de',
       previous: 'Anterior',
@@ -1235,7 +1241,7 @@ export const translations: any = {
         pending: 'Pendiente',
         cancelled: 'Cancelado',
         open: 'Abierto',
-        almostFull: 'Casi Lleno',
+        almostFull: 'Casi completo',
         waitingList: 'Lista de espera',
         closed: 'Cerrado'
         }
@@ -1255,11 +1261,11 @@ export const translations: any = {
         error: 'No hemos podido cargar el chat. Actualiza la página e inténtalo de nuevo.'
       },
     dates: {
-      title: 'Fechas y Disponibilidad',
-      subtitle: 'Planifica tu desarrollo profesional. Consulta todas las próximas sesiones de cursos y comprueba la disponibilidad de plazas en tiempo real.',
+      title: 'Fechas y disponibilidad',
+      subtitle: 'Ofrecemos todos los cursos en la misma semana. Cada semana se imparten como máximo dos (uno de mañana y otro de tarde): los de mayor demanda. Si tu curso no alcanza el mínimo, te ofreceremos cambiar a otro de esa semana; el horario definitivo se confirma por escrito.',
       help: {
         title: '¿No encuentras las fechas que necesitas?',
-        desc: 'Todos los cursos se pueden solicitar en Almería, Granada y Málaga. Estudiaremos una nueva sesión a partir de 10 participantes confirmados, según disponibilidad de docente, sede y fechas.',
+        desc: 'Todos los cursos se pueden solicitar en Almería (Granada y Málaga, próximamente). Estudiaremos una nueva sesión a partir de 10 participantes confirmados de varios centros y países, según disponibilidad de docente, sede y fechas.',
         cta: 'Solicitar una sesión'
       }
     }

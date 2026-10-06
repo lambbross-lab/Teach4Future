@@ -22,6 +22,7 @@ const IdentityBlock = () => {
       <h2>{t('legal.identity.title')}</h2>
       <p><strong>{t('legal.identity.nameLabel')}:</strong> {t('legal.identity.name')}</p>
       <p><strong>{t('legal.identity.registryLabel')}:</strong> {t('legal.identity.registry')}</p>
+      <p><strong>{t('legal.identity.nifLabel')}:</strong> {t('legal.identity.nif')}</p>
       <p><strong>{t('legal.identity.addressLabel')}:</strong> {t('legal.identity.address')}</p>
       <p><strong>{t('legal.identity.oidLabel')}:</strong> {t('legal.identity.oid')}</p>
       <p><strong>{t('legal.identity.contactLabel')}:</strong> <a href="mailto:teach4futureacademy@gmail.com">teach4futureacademy@gmail.com</a> · {t('footer.location')}</p>

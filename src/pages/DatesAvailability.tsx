@@ -97,8 +97,10 @@ const DatesAvailability = () => {
                           <p className="text-[10px] text-slate-400 font-bold uppercase mt-1 flex items-center">
                             {session.schedule === 'morning' ? (
                               <><Sun className="h-3 w-3 mr-1 text-orange-400" /> {t('common.morning')}</>
-                            ) : (
+                            ) : session.schedule === 'afternoon' ? (
                               <><Clock className="h-3 w-3 mr-1 text-indigo-400" /> {t('common.afternoon')}</>
+                            ) : (
+                              <><Clock className="h-3 w-3 mr-1 text-blue-400" /> {t('common.scheduleTbc')}</>
                             )}
                           </p>
                         </div>
@@ -169,7 +171,7 @@ const DatesAvailability = () => {
                   </div>
                   <div className="flex items-center text-xs text-slate-500">
                     <Calendar className="h-4 w-4 mr-2 text-blue-500" />
-                    <span>{formatDate(session.startDate, language)} – {formatDate(session.endDate, language)} ({session.schedule === 'morning' ? t('common.morning') : t('common.afternoon')})</span>
+                    <span>{formatDate(session.startDate, language)} – {formatDate(session.endDate, language)} ({session.schedule === 'morning' ? t('common.morning') : session.schedule === 'afternoon' ? t('common.afternoon') : t('common.scheduleTbc')})</span>
                   </div>
                   <div className="flex items-center text-xs text-slate-500">
                     <Users className="h-4 w-4 mr-2 text-blue-500" />

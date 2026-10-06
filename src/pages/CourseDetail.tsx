@@ -214,8 +214,10 @@ const CourseDetail = () => {
                             <div className="flex items-center mt-1 text-[10px] font-medium text-slate-400 uppercase tracking-wider">
                               {session.schedule === 'morning' ? (
                                 <><Sun className="h-3 w-3 mr-1 text-orange-400" /> {t('common.morning')}</>
-                              ) : (
+                              ) : session.schedule === 'afternoon' ? (
                                 <><Clock className="h-3 w-3 mr-1 text-indigo-400" /> {t('common.afternoon')}</>
+                              ) : (
+                                <><Clock className="h-3 w-3 mr-1 text-blue-400" /> {t('common.scheduleTbc')}</>
                               )}
                             </div>
                           </div>

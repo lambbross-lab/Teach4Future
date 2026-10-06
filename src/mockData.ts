@@ -296,10 +296,10 @@ export const FAQS: FAQItem[] = [
   },
   {
     id: 'f4',
-    question: { en: 'How can I request a custom course in Europe?', es: '¿Cómo puedo solicitar un curso a medida en Europa?' },
+    question: { en: 'Will there be courses in other European cities?', es: '¿Habrá cursos en otras ciudades europeas?' },
     answer: {
-      en: 'Tell us the preferred European city, topic, dates and approximate group size. Every course has the same €480 fee per participant. Editions outside Spain are normally confirmed from 15 participants in total, who may come from several organisations; smaller groups can register their interest. The written proposal will confirm the local host or venue and any exceptional destination costs before booking.',
-      es: 'Indícanos la ciudad europea preferida, el tema, las fechas y el tamaño aproximado del grupo. Todos los cursos tienen el mismo precio de 480 € por participante. Las ediciones fuera de España se confirman normalmente desde 15 participantes en total, que pueden proceder de varios centros; los grupos más pequeños pueden registrar su interés. La propuesta escrita confirmará la organización anfitriona o sede y cualquier coste extraordinario del destino antes de reservar.'
+      en: 'European editions are in preparation. Tell us the city, topic and dates that interest you and we will notify you when an edition is confirmed. Each edition is hosted by an organisation established in that country, is confirmed from 15 participants from several schools and countries, and costs €480 per participant. With Erasmus+ KA1, each school can enrol up to 3 teachers per course.',
+      es: 'Las ediciones europeas están en preparación. Indícanos la ciudad, el tema y las fechas que te interesan y te avisaremos cuando una edición esté confirmada. Cada edición la acoge una entidad establecida en ese país, se confirma a partir de 15 participantes de varios centros y países y cuesta 480 € por participante. Con Erasmus+ KA1, cada centro puede inscribir hasta 3 docentes por curso.'
     },
     category: { en: 'Custom Courses', es: 'Cursos a Medida' }
   }

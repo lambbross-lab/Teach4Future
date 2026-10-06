@@ -63,7 +63,7 @@ const createSessionDraft = (): SessionCreatorDraft => {
     seatsTotal: 20,
     seatsLeft: 20,
     status: 'Open',
-    schedule: 'morning',
+    schedule: 'tbc',
   };
 };
 

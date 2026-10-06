@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Users, FileCheck, ShieldCheck, CheckCircle2, ExternalLink, Laptop, Compass } from 'lucide-react';
+import { Users, FileCheck, ShieldCheck, CheckCircle2, Laptop, Compass } from 'lucide-react';
 import Button from '../components/ui/Button';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -41,7 +41,7 @@ const ForSchools = () => {
           </div>
         </div>
 
-        {/* Educa Andalucía resource */}
+        {/* In-school training */}
         <section className="mb-24 rounded-3xl border border-blue-100 bg-gradient-to-r from-blue-50 via-white to-cyan-50 p-6 md:p-8">
           <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
             <div className="flex gap-4 md:gap-5">
@@ -61,15 +61,6 @@ const ForSchools = () => {
               </div>
             </div>
             <div className="flex shrink-0 flex-col gap-2 sm:flex-row lg:flex-col xl:flex-row">
-              <a
-                href="https://www.juntadeandalucia.es/educacion/eaprendizajeservicios-educativos-digitales-2/workspace/"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-blue-200 bg-white px-5 py-3 text-sm font-bold text-blue-700 shadow-sm transition-colors hover:border-blue-300 hover:bg-blue-50"
-              >
-                {t('forSchools.educaAndalucia.moreInfo')}
-                <ExternalLink className="h-4 w-4" aria-hidden="true" />
-              </a>
               <Link
                 to="/contact"
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-blue-700"

@@ -40,7 +40,7 @@ export interface CourseSession {
   seatsTotal: number;
   seatsLeft: number;
   status: 'Open' | 'Almost Full' | 'Waiting List' | 'Closed';
-  schedule: 'morning' | 'afternoon';
+  schedule: 'morning' | 'afternoon' | 'tbc';
 }
 
 export interface FAQItem {
