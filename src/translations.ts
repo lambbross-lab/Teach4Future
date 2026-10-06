@@ -97,6 +97,7 @@ export const translations: any = {
       privacyConsentSuffix: ' and understand how my data will be used to answer this request.',
       honeypotLabel: 'Leave this field empty',
       fundingSubject: 'Funding subject to your grant',
+      finalPrice: 'final price, VAT incl. if applicable',
       askQuestion: 'Ask a question',
       requestDate: 'Request a date',
       noSessions: 'There are no scheduled dates for this course yet.',
@@ -433,6 +434,10 @@ export const translations: any = {
         name: 'ASOCIACIÓN PARA LA INNOVACIÓN EDUCATIVA Y LA FORMACIÓN ERASMUS - TEACH4FUTURE',
         registryLabel: 'Registry',
         registry: 'Spanish National Register of Associations, Section 1, no. 633044',
+        addressLabel: 'Registered address',
+        address: 'Calle Francisco Rabal, Almería (Spain)',
+        oidLabel: 'Erasmus+ Organisation ID (OID)',
+        oid: 'E10436537',
         contactLabel: 'Contact'
       },
       notice: {
@@ -724,6 +729,7 @@ export const translations: any = {
       privacyConsentSuffix: ' y comprendo cómo se usarán mis datos para responder a esta solicitud.',
       honeypotLabel: 'Deja este campo vacío',
       fundingSubject: 'Financiación sujeta a tu subvención',
+      finalPrice: 'precio final, IVA incl. si procede',
       askQuestion: 'Hacer una consulta',
       requestDate: 'Solicitar otra fecha',
       noSessions: 'Todavía no hay fechas programadas para este curso.',
@@ -1060,6 +1066,10 @@ export const translations: any = {
         name: 'ASOCIACIÓN PARA LA INNOVACIÓN EDUCATIVA Y LA FORMACIÓN ERASMUS - TEACH4FUTURE',
         registryLabel: 'Registro',
         registry: 'Registro Nacional de Asociaciones, Sección 1.ª, nº 633044',
+        addressLabel: 'Domicilio social',
+        address: 'Calle Francisco Rabal, Almería',
+        oidLabel: 'Identificador de organización Erasmus+ (OID)',
+        oid: 'E10436537',
         contactLabel: 'Contacto'
       },
       notice: {

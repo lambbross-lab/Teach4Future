@@ -244,7 +244,7 @@ const CourseDetail = () => {
                           </div>
                           <div className="text-right">
                             <span className="text-xl font-bold text-slate-900">{course.price}€</span>
-                            <p className="text-[10px] text-slate-400 font-medium">{t('common.intensive')}</p>
+                            <p className="text-[10px] text-slate-400 font-medium">{t('common.intensive')} · {t('common.finalPrice')}</p>
                           </div>
                         </div>
                         <Link to={`/enrol?course=${course.id}&session=${session.id}`}>

@@ -77,7 +77,7 @@ export const COURSES: Course[] = [
       { en: 'Privacy, ethics and classroom action plan', es: 'Privacidad, ética y plan de aplicación al aula' }
     ],
     targetAudience: { en: 'Primary and Secondary Teachers, School Leaders, ICT Coordinators', es: 'Profesores de Primaria y Secundaria, Directivos, Coordinadores TIC' },
-    duration: { en: '5 Days (25 hours)', es: '5 Días (25 horas)' },
+    duration: { en: '5 Days (25 hours)', es: '5 días (25 horas)' },
     price: 480,
     language: 'Spanish',
     includes: [
@@ -112,7 +112,7 @@ export const COURSES: Course[] = [
       { en: 'Classroom casework and action plan', es: 'Casos de aula y plan de aplicación' }
     ],
     targetAudience: { en: 'Teachers, inclusion coordinators and school leaders', es: 'Docentes, coordinadores de inclusión y equipos directivos' },
-    duration: { en: '5 Days (25 hours)', es: '5 Días (25 horas)' },
+    duration: { en: '5 Days (25 hours)', es: '5 días (25 horas)' },
     price: 480,
     language: 'Spanish',
     includes: [
@@ -147,7 +147,7 @@ export const COURSES: Course[] = [
       { en: 'Classroom project and shared European practices', es: 'Proyecto de aula e intercambio de prácticas europeas' }
     ],
     targetAudience: { en: 'Teachers, digital coordinators and school leadership teams', es: 'Docentes, coordinadores digitales y equipos directivos' },
-    duration: { en: '5 Days (25 hours)', es: '5 Días (25 horas)' },
+    duration: { en: '5 Days (25 hours)', es: '5 días (25 horas)' },
     price: 480,
     language: 'Spanish',
     includes: [
@@ -182,7 +182,7 @@ export const COURSES: Course[] = [
       { en: 'European classroom project', es: 'Proyecto europeo para el aula' }
     ],
     targetAudience: { en: 'Teachers, Erasmus+ coordinators and internationalisation teams', es: 'Docentes, coordinadores Erasmus+ y equipos de internacionalización' },
-    duration: { en: '5 Days (25 hours)', es: '5 Días (25 horas)' },
+    duration: { en: '5 Days (25 hours)', es: '5 días (25 horas)' },
     price: 480,
     language: 'Spanish',
     includes: [
@@ -217,7 +217,7 @@ export const COURSES: Course[] = [
       { en: 'Green action plan for the classroom', es: 'Plan de acción verde para el aula' }
     ],
     targetAudience: { en: 'Primary, secondary and adult-education teachers', es: 'Docentes de primaria, secundaria y educación de personas adultas' },
-    duration: { en: '5 Days (25 hours)', es: '5 Días (25 horas)' },
+    duration: { en: '5 Days (25 hours)', es: '5 días (25 horas)' },
     price: 480,
     language: 'Spanish',
     includes: [
@@ -252,7 +252,7 @@ export const COURSES: Course[] = [
       { en: 'Sustainable action plan', es: 'Plan de acción sostenible' }
     ],
     targetAudience: { en: 'Teachers, tutors and school leadership teams', es: 'Docentes, tutores y equipos directivos' },
-    duration: { en: '5 Days (25 hours)', es: '5 Días (25 horas)' },
+    duration: { en: '5 Days (25 hours)', es: '5 días (25 horas)' },
     price: 480,
     language: 'Spanish',
     includes: [

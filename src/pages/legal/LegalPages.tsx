@@ -7,7 +7,7 @@ const LegalLayout = ({ title, children }: { title: string, children: React.React
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="bg-white p-8 md:p-16 rounded-[2.5rem] shadow-xl border border-slate-100">
         <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-10 tracking-tight">{title}</h1>
-        <div className="prose prose-slate max-w-none prose-headings:text-slate-900 prose-headings:font-bold prose-p:text-slate-600 prose-p:leading-relaxed prose-li:text-slate-600">
+        <div className="max-w-none text-slate-600 leading-relaxed [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-slate-900 [&_h2]:mt-10 [&_h2]:mb-3 [&_p]:mb-3 [&_a]:text-blue-600 [&_a]:underline">
           {children}
         </div>
       </div>
@@ -22,6 +22,8 @@ const IdentityBlock = () => {
       <h2>{t('legal.identity.title')}</h2>
       <p><strong>{t('legal.identity.nameLabel')}:</strong> {t('legal.identity.name')}</p>
       <p><strong>{t('legal.identity.registryLabel')}:</strong> {t('legal.identity.registry')}</p>
+      <p><strong>{t('legal.identity.addressLabel')}:</strong> {t('legal.identity.address')}</p>
+      <p><strong>{t('legal.identity.oidLabel')}:</strong> {t('legal.identity.oid')}</p>
       <p><strong>{t('legal.identity.contactLabel')}:</strong> <a href="mailto:teach4futureacademy@gmail.com">teach4futureacademy@gmail.com</a> · {t('footer.location')}</p>
     </>
   );
