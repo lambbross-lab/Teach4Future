@@ -1,4 +1,4 @@
 
 import React from 'react';
-import { RefundPolicy as Content } from './LegalPages';
+import { TermsConditions as Content } from './LegalPages';
 export default Content;
