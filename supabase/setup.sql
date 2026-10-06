@@ -15,7 +15,7 @@ create table if not exists public.course_sessions (
   seats_total integer not null check (seats_total > 0),
   seats_left integer not null check (seats_left between 0 and seats_total),
   status text not null check (status in ('Open', 'Almost Full', 'Waiting List', 'Closed')),
-  schedule text not null check (schedule in ('morning', 'afternoon')),
+  schedule text not null check (schedule in ('morning', 'afternoon', 'tbc')),
   updated_at timestamptz not null default now()
 );
 
