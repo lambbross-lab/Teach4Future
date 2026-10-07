@@ -23,7 +23,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   useEffect(() => {
     const key = PAGE_TITLES[pathname];
-    const base = language === 'es' ? 'Teach4Future Academy · Cursos Erasmus+ en español para docentes' : 'Teach4Future Academy · Erasmus+ courses in Spanish for teachers';
+    const base = language === 'es' ? 'Teach4Future Academy · Cursos Erasmus+ para docentes' : 'Teach4Future Academy · Erasmus+ courses for teachers';
     const label = key ? t(key) : '';
     document.title = label && label !== key ? `${label} · Teach4Future Academy` : base;
   }, [pathname, language, t]);

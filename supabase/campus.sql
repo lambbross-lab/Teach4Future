@@ -115,7 +115,7 @@ begin
     raise exception 'enrollment_not_found';
   end if;
   update public.course_sessions
-  set seats_left = seats_left + 1, updated_at = now()
+  set seats_left = least(seats_left + 1, seats_total), updated_at = now()
   where id = v_enrollment.session_id;
   return true;
 end;

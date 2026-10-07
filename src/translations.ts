@@ -17,7 +17,7 @@ export const translations: any = {
       badge: 'Erasmus+ Teacher Training Academy',
       title: 'Inspiring Teachers,',
       titleAccent: 'Transforming Classrooms.',
-      subtitle: 'Practical courses in Spanish for teachers from across Europe, in Almería (Granada and Málaga coming soon). Designed for Erasmus+ KA1 mobility; funding depends on each organisation’s grant.',
+      subtitle: 'Practical courses in English for teachers from across Europe, in Almería (Granada and Málaga coming soon). Designed for Erasmus+ KA1 mobility; funding depends on each organisation’s grant.',
       ctaPrimary: 'Explore Courses',
       ctaSecondary: 'Custom Group Training',
       stats: {
@@ -127,7 +127,7 @@ export const translations: any = {
         enrolment: 'I want to request information',
       },
       answers: {
-        courses: 'You can explore our practical, five-day teacher-training courses in Spanish. Each course includes its objectives, programme and relevant details.',
+        courses: 'You can explore our practical, five-day teacher-training courses in English in Spain. Each course includes its objectives, programme and relevant details.',
         dates: 'Confirmed dates and available places are shown separately. If a course is available on request, you can ask us to open an edition in Almería (Granada and Málaga coming soon).',
         schools: 'We prepare training proposals for schools and Erasmus+ coordinators across Europe. Each edition is confirmed with 6 participants from several schools and countries; with Erasmus+, up to 3 teachers per school.',
         enrolment: 'You can send us your details and preferred course through a short form. Sending the request does not reserve a place or create any payment obligation.',
@@ -200,7 +200,7 @@ export const translations: any = {
       gastronomyDesc: 'World-class dining.',
     },
     coursesSpain: {
-      subtitle: 'Explore six unique teacher-training courses in Spanish, designed around current European educational priorities. Dates and destinations appear inside each course.',
+      subtitle: 'Explore six unique teacher-training courses delivered in English, designed around current European educational priorities. Dates and destinations appear inside each course.',
       minimumNote: 'Every course can be requested in Almería (Granada and Málaga coming soon). Each edition is confirmed once it reaches 6 participants from several schools and countries and trainer and venue availability is checked. With Erasmus+ KA1, each school can enrol up to 3 teachers per course; schools outside Spain may include these courses in their own Erasmus+ KA1 mobility projects, subject to their grant agreement. Confirmed dates and places are shown separately.',
       onDemandLabel: 'Available on request',
       onDemandCard: 'Almería (Granada and Málaga coming soon) · confirmed from 6 participants from several schools and countries.',
@@ -648,7 +648,7 @@ export const translations: any = {
       badge: 'Academia de formación docente Erasmus+',
       title: 'Inspirando docentes,',
       titleAccent: 'transformando aulas.',
-      subtitle: 'Cursos prácticos en español para docentes de toda Europa, en Almería (Granada y Málaga, próximamente). Pensados para movilidades Erasmus+ KA1; la financiación depende de la subvención de cada organización.',
+      subtitle: 'Cursos prácticos en inglés para docentes de toda Europa, en Almería (Granada y Málaga, próximamente). Pensados para movilidades Erasmus+ KA1; la financiación depende de la subvención de cada organización.',
       ctaPrimary: 'Explorar cursos',
       ctaSecondary: 'Formación a medida',
       stats: {
@@ -772,7 +772,7 @@ export const translations: any = {
         enrolment: 'Quiero pedir información',
       },
       answers: {
-        courses: 'Puedes explorar nuestros cursos prácticos de formación docente en español, de cinco días. Cada curso muestra sus objetivos, programa y datos relevantes.',
+        courses: 'Puedes explorar nuestros cursos prácticos de formación docente en inglés, de cinco días, en España. Cada curso muestra sus objetivos, programa y datos relevantes.',
         dates: 'Las fechas y plazas confirmadas se muestran por separado. Si un curso está disponible bajo demanda, puedes solicitar una edición en Almería (Granada y Málaga, próximamente).',
         schools: 'Preparamos propuestas de formación para centros y coordinadores Erasmus+ de toda Europa. Cada edición se confirma con 6 participantes de varios centros y países; con Erasmus+, hasta 3 docentes por centro.',
         enrolment: 'Puedes enviarnos tus datos y el curso que te interesa mediante un formulario breve. La solicitud no reserva plaza ni genera ninguna obligación de pago.',
@@ -845,7 +845,7 @@ export const translations: any = {
       gastronomyDesc: 'Cocina de clase mundial.',
     },
     coursesSpain: {
-      subtitle: 'Explora seis cursos únicos impartidos en español y diseñados en torno a las prioridades educativas europeas. Las fechas y los destinos aparecen dentro de cada curso.',
+      subtitle: 'Explora seis cursos únicos impartidos en inglés y diseñados en torno a las prioridades educativas europeas. Las fechas y los destinos aparecen dentro de cada curso.',
       minimumNote: 'Todos los cursos se pueden solicitar en Almería (Granada y Málaga, próximamente). Cada edición se confirma al alcanzar 6 participantes de varios centros y países y tras comprobar la disponibilidad de docente y sede. Con Erasmus+ KA1, cada centro puede inscribir hasta 3 docentes por curso; los centros de fuera de España pueden incluir estos cursos en sus propios proyectos de movilidad Erasmus+ KA1, según su convenio de subvención. Las fechas y plazas confirmadas se muestran por separado.',
       onDemandLabel: 'Disponible bajo demanda',
       onDemandCard: 'Almería (Granada y Málaga, próximamente) · se confirma con 6 participantes de varios centros y países.',

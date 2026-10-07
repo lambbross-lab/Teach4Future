@@ -79,7 +79,7 @@ export const COURSES: Course[] = [
     targetAudience: { en: 'Primary and Secondary Teachers, School Leaders, ICT Coordinators', es: 'Profesores de Primaria y Secundaria, Directivos, Coordinadores TIC' },
     duration: { en: '5 Days (25 hours)', es: '5 días (25 horas)' },
     price: 480,
-    language: 'Spanish',
+    language: 'English',
     includes: [
       { en: '25 guided learning hours', es: '25 horas lectivas guiadas' },
       { en: 'Certificate of attendance', es: 'Certificado de asistencia' },
@@ -114,7 +114,7 @@ export const COURSES: Course[] = [
     targetAudience: { en: 'Teachers, inclusion coordinators and school leaders', es: 'Docentes, coordinadores de inclusión y equipos directivos' },
     duration: { en: '5 Days (25 hours)', es: '5 días (25 horas)' },
     price: 480,
-    language: 'Spanish',
+    language: 'English',
     includes: [
       { en: '25 guided learning hours', es: '25 horas lectivas guiadas' },
       { en: 'Certificate of attendance', es: 'Certificado de asistencia' },
@@ -149,7 +149,7 @@ export const COURSES: Course[] = [
     targetAudience: { en: 'Teachers, digital coordinators and school leadership teams', es: 'Docentes, coordinadores digitales y equipos directivos' },
     duration: { en: '5 Days (25 hours)', es: '5 días (25 horas)' },
     price: 480,
-    language: 'Spanish',
+    language: 'English',
     includes: [
       { en: '25 guided learning hours', es: '25 horas lectivas guiadas' },
       { en: 'Certificate of attendance', es: 'Certificado de asistencia' },
@@ -184,7 +184,7 @@ export const COURSES: Course[] = [
     targetAudience: { en: 'Teachers, Erasmus+ coordinators and internationalisation teams', es: 'Docentes, coordinadores Erasmus+ y equipos de internacionalización' },
     duration: { en: '5 Days (25 hours)', es: '5 días (25 horas)' },
     price: 480,
-    language: 'Spanish',
+    language: 'English',
     includes: [
       { en: '25 guided learning hours', es: '25 horas lectivas guiadas' },
       { en: 'Certificate of attendance', es: 'Certificado de asistencia' },
@@ -219,7 +219,7 @@ export const COURSES: Course[] = [
     targetAudience: { en: 'Primary, secondary and adult-education teachers', es: 'Docentes de primaria, secundaria y educación de personas adultas' },
     duration: { en: '5 Days (25 hours)', es: '5 días (25 horas)' },
     price: 480,
-    language: 'Spanish',
+    language: 'English',
     includes: [
       { en: '25 guided learning hours', es: '25 horas lectivas guiadas' },
       { en: 'Certificate of attendance', es: 'Certificado de asistencia' },
@@ -254,7 +254,7 @@ export const COURSES: Course[] = [
     targetAudience: { en: 'Teachers, tutors and school leadership teams', es: 'Docentes, tutores y equipos directivos' },
     duration: { en: '5 Days (25 hours)', es: '5 días (25 horas)' },
     price: 480,
-    language: 'Spanish',
+    language: 'English',
     includes: [
       { en: '25 guided learning hours', es: '25 horas lectivas guiadas' },
       { en: 'Certificate of attendance', es: 'Certificado de asistencia' },

@@ -62,7 +62,7 @@ const CourseDetail = () => {
                 </h3>
                 <ul className="space-y-4">
                   {[
-                    { label: t('courseDetail.language'), value: language === 'es' ? 'Español' : course.language, icon: Globe },
+                    { label: t('courseDetail.language'), value: language === 'es' ? 'Inglés' : course.language, icon: Globe },
                     { label: t('courseDetail.price'), value: `${course.price}€ / ${t('courseDetail.priceValue')}`, icon: Award },
                     { label: t('courseDetail.certificate'), value: t('courseDetail.certificateValue'), icon: FileText },
                     { label: t('courseDetail.funding'), value: t('courseDetail.fundingValue'), icon: CheckCircle2 }
