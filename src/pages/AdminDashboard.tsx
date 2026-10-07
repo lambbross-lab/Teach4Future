@@ -79,6 +79,7 @@ const AdminDashboard = () => {
   const [isCreating, setIsCreating] = useState(false);
   const [enquiries, setEnquiries] = useState<EnquiryRecord[]>([]);
   const [enquiriesError, setEnquiriesError] = useState(false);
+  const [deletingEnquiryId, setDeletingEnquiryId] = useState<string | null>(null);
   const [chatAvailable, setChatAvailable] = useState(false);
   const [chatSaving, setChatSaving] = useState(false);
   const [conversations, setConversations] = useState<ChatConversation[]>([]);
@@ -273,6 +274,15 @@ const AdminDashboard = () => {
     if (!error) setEnquiries((current) => current.map((enquiry) => enquiry.id === id ? { ...enquiry, status } : enquiry));
   };
 
+  const deleteEnquiry = async (enquiry: EnquiryRecord) => {
+    if (!supabase || !window.confirm(t('admin.enquiries.deleteConfirm'))) return;
+    setDeletingEnquiryId(enquiry.id);
+    const { error } = await supabase.from('enquiries').delete().eq('id', enquiry.id);
+    if (!error) setEnquiries((current) => current.filter((item) => item.id !== enquiry.id));
+    else setEnquiriesError(true);
+    setDeletingEnquiryId(null);
+  };
+
   const setAvailability = async (isAvailable: boolean) => {
     if (!supabase) return;
     setChatSaving(true);
@@ -400,16 +410,25 @@ const AdminDashboard = () => {
                         <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-bold text-slate-600">{t(`admin.enquiries.kinds.${enquiry.kind}`)}</span>
                         <span className={`rounded-full px-2.5 py-1 text-xs font-bold ${enquiry.status === 'new' ? 'bg-blue-50 text-blue-700' : enquiry.status === 'contacted' ? 'bg-amber-50 text-amber-700' : 'bg-slate-100 text-slate-600'}`}>{t(`admin.enquiries.status.${enquiry.status}`)}</span>
                       </div>
-                      <a className="mt-1 inline-block text-sm font-semibold text-blue-600 hover:underline" href={`mailto:${enquiry.email}`}>{enquiry.email}</a>
+                      <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
+                        <a className="text-sm font-semibold text-blue-600 hover:underline" href={`mailto:${encodeURIComponent(enquiry.email)}?subject=${encodeURIComponent(`${t('admin.enquiries.replySubject')} ${enquiry.full_name}`)}`}>{enquiry.email}</a>
+                        <a className="text-xs font-bold text-slate-500 hover:text-blue-600 hover:underline" href={`mailto:${encodeURIComponent(enquiry.email)}?subject=${encodeURIComponent(`${t('admin.enquiries.replySubject')} ${enquiry.full_name}`)}`}>{t('admin.enquiries.reply')}</a>
+                        <button type="button" onClick={() => navigator.clipboard?.writeText(enquiry.email)} className="text-xs font-bold text-slate-500 hover:text-blue-600 hover:underline">{t('admin.enquiries.copyEmail')}</button>
+                      </div>
                       <p className="mt-2 text-sm text-slate-600">{[enquiry.institution, enquiry.course_id, enquiry.city, enquiry.topic, enquiry.preferred_dates, enquiry.group_size ? `${enquiry.group_size} ${t('admin.enquiries.people')}` : null].filter(Boolean).join(' · ')}</p>
                       {(enquiry.subject || enquiry.message) && <p className="mt-3 whitespace-pre-wrap rounded-xl bg-slate-50 p-3 text-sm leading-relaxed text-slate-700">{enquiry.subject && <strong>{enquiry.subject}{enquiry.message ? ': ' : ''}</strong>}{enquiry.message}</p>}
                       <p className="mt-3 text-xs text-slate-400">{new Intl.DateTimeFormat(language === 'es' ? 'es-ES' : 'en-GB', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(enquiry.created_at))}</p>
                     </div>
-                    <select aria-label={t('admin.enquiries.statusLabel')} value={enquiry.status} onChange={(event) => setEnquiryStatus(enquiry.id, event.target.value as EnquiryRecord['status'])} className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700">
-                      <option value="new">{t('admin.enquiries.status.new')}</option>
-                      <option value="contacted">{t('admin.enquiries.status.contacted')}</option>
-                      <option value="closed">{t('admin.enquiries.status.closed')}</option>
-                    </select>
+                    <div className="flex shrink-0 items-center gap-2">
+                      <select aria-label={t('admin.enquiries.statusLabel')} value={enquiry.status} onChange={(event) => setEnquiryStatus(enquiry.id, event.target.value as EnquiryRecord['status'])} className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700">
+                        <option value="new">{t('admin.enquiries.status.new')}</option>
+                        <option value="contacted">{t('admin.enquiries.status.contacted')}</option>
+                        <option value="closed">{t('admin.enquiries.status.closed')}</option>
+                      </select>
+                      <button type="button" onClick={() => deleteEnquiry(enquiry)} disabled={deletingEnquiryId === enquiry.id} aria-label={t('admin.enquiries.delete')} title={t('admin.enquiries.delete')} className="rounded-lg border border-slate-200 p-2.5 text-slate-500 transition-colors hover:border-red-200 hover:bg-red-50 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-50">
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    </div>
                   </div>
                 </article>
               ))}

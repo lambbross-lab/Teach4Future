@@ -569,6 +569,11 @@ export const translations: any = {
         loadError: 'Requests could not be loaded. Check that this user is an administrator in Supabase.',
         people: 'people',
         statusLabel: 'Request status',
+        reply: 'Reply by email',
+        replySubject: 'Teach4Future · Your information request',
+        copyEmail: 'Copy email',
+        delete: 'Delete request',
+        deleteConfirm: 'Delete this request permanently? This cannot be undone.',
         kinds: { course: 'Course', europe: 'Europe', contact: 'Contact' },
         status: { new: 'New', contacted: 'Contacted', closed: 'Closed' }
       },
@@ -1214,6 +1219,11 @@ export const translations: any = {
         loadError: 'No se han podido cargar las solicitudes. Comprueba que este usuario sea administrador en Supabase.',
         people: 'personas',
         statusLabel: 'Estado de la solicitud',
+        reply: 'Responder por correo',
+        replySubject: 'Teach4Future · Tu solicitud de información',
+        copyEmail: 'Copiar correo',
+        delete: 'Eliminar solicitud',
+        deleteConfirm: '¿Eliminar esta solicitud definitivamente? Esta acción no se puede deshacer.',
         kinds: { course: 'Curso', europe: 'Europa', contact: 'Contacto' },
         status: { new: 'Nueva', contacted: 'Contactada', closed: 'Cerrada' }
       },

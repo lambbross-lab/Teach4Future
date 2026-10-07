@@ -132,7 +132,7 @@ grant select on table public.course_sessions to anon, authenticated;
 revoke insert on table public.enquiries from anon, authenticated;
 grant select on table public.admin_users to authenticated;
 grant insert, update, delete on table public.course_sessions to authenticated;
-grant select, update on table public.enquiries to authenticated;
+grant select, update, delete on table public.enquiries to authenticated;
 
 drop policy if exists "Administrators can read their role" on public.admin_users;
 drop policy if exists "Course sessions are public" on public.course_sessions;
@@ -142,6 +142,7 @@ drop policy if exists "Administrators can delete sessions" on public.course_sess
 drop policy if exists "Visitors can send enquiries" on public.enquiries;
 drop policy if exists "Administrators can read enquiries" on public.enquiries;
 drop policy if exists "Administrators can update enquiries" on public.enquiries;
+drop policy if exists "Administrators can delete enquiries" on public.enquiries;
 
 create policy "Administrators can read their role"
 on public.admin_users for select to authenticated
@@ -172,6 +173,10 @@ create policy "Administrators can update enquiries"
 on public.enquiries for update to authenticated
 using (exists (select 1 from public.admin_users where id = (select auth.uid())))
 with check (exists (select 1 from public.admin_users where id = (select auth.uid())));
+
+create policy "Administrators can delete enquiries"
+on public.enquiries for delete to authenticated
+using (exists (select 1 from public.admin_users where id = (select auth.uid())));
 
 do $$
 begin
