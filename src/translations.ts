@@ -14,10 +14,10 @@ export const translations: any = {
       cities: 'Cities',
     },
     hero: {
-      badge: 'Teacher Training Academy',
+      badge: 'Courses for Erasmus+ mobility',
       title: 'Inspiring Teachers,',
       titleAccent: 'Transforming Classrooms.',
-      subtitle: 'Practical courses in English for teachers from across Europe, in Almería (Granada and Málaga coming soon). Book directly with Teach4Future.',
+      subtitle: 'Practical courses in English for teachers from across Europe, designed for international professional development and Erasmus+ staff mobility. Book directly with Teach4Future.',
       ctaPrimary: 'Explore Courses',
       ctaSecondary: 'Custom Group Training',
       stats: {
@@ -51,7 +51,7 @@ export const translations: any = {
         subtitle: 'Feedback from verified participants will appear here after the first courses.'
       },
       cta: {
-        title: 'Ready to develop your teaching practice?',
+        title: 'Planning an Erasmus+ mobility?',
         subtitle: 'Join our next session and bring innovation back to your school.',
         button: 'View All Dates'
       },
@@ -61,7 +61,7 @@ export const translations: any = {
         desc: 'We are preparing Spanish-language editions in other European cities together with local organisations. Tell us which destination, topic and dates interest you: each edition brings together teachers from several schools and countries and is only confirmed in writing once it meets the programme requirements.',
         point1: 'Training delivered in Spanish',
         point2: 'Teachers from several schools and countries',
-        point3: 'Conditions confirmed in writing before booking',
+        point3: 'Designed around KA1 course quality standards',
         cta: 'Register your interest'
       },
       schoolsSupport: {
@@ -110,7 +110,7 @@ export const translations: any = {
       trainers: 'Connect with expert trainers',
       openMenu: 'Open menu',
       closeMenu: 'Close menu',
-      europeCaption: 'Training in Spanish · Teachers from across Europe',
+      europeCaption: 'Erasmus+ mobility · Training in Spanish · Teachers from across Europe',
       priorityCourse: 'Priority course',
       groupsCourse: 'For groups',
     },
@@ -129,7 +129,7 @@ export const translations: any = {
       answers: {
         courses: 'You can explore our practical, five-day teacher-training courses in English in Spain. Each course includes its objectives, programme and relevant details.',
         dates: 'Confirmed dates and available places are shown separately. If a course is available on request, you can ask us to open an edition in Almería (Granada and Málaga coming soon).',
-        schools: 'We prepare training proposals for schools and international coordinators across Europe. Each edition is confirmed with participants from several schools and countries.',
+        schools: 'We prepare training proposals for schools planning Erasmus+ mobility. Each edition brings together teachers from several schools and countries. For KA1 funding, the 2026 Programme Guide limits funding to 3 participants from the same sending organisation, or 10 from the same mobility consortium, on the same course.',
         enrolment: 'You can send us your details and preferred course through a short form. Sending the request does not reserve a place or create any payment obligation.',
       },
       actions: {
@@ -212,7 +212,7 @@ export const translations: any = {
       badge: 'European editions in preparation',
       title: 'Suggest a city,',
       titleAccent: 'we will study an open edition.',
-      subtitle: 'We want to bring our Spanish-language courses to other European cities, in collaboration with organisations established in each country. Tell us which destination and topic interest you and we will let you know when an edition is confirmed.',
+      subtitle: 'We want to bring our Spanish-language courses to other European cities, in collaboration with organisations established in each country. Tell us which destination and topic interest you and we will let you know when an international edition suitable for Erasmus+ mobility is confirmed.',
       requestTitle: 'Register your interest',
       requestSubtitle: 'Fill in the form and we will let you know when there is an edition in that destination.',
       formCity: 'Preferred City',
@@ -234,8 +234,8 @@ export const translations: any = {
       topicPlaceholder: 'Select a topic',
       cityPlaceholder: 'e.g. Berlin',
       datesPlaceholder: 'e.g. July 2027',
-      sizePlaceholder: 'Number of interested teachers',
-      priceNote: 'Course fee: €480 per participant for 5 days and 25 guided hours. VAT included or exempt, as applicable. Each edition is confirmed once it reaches 15 participants from several schools and countries.',
+      sizePlaceholder: 'Number of teachers interested in mobility',
+      priceNote: 'Course fee: €480 per participant for 5 days and 25 guided hours. VAT included or exempt, as applicable. Each edition is confirmed once it reaches 15 participants from several schools and countries. The school or participant contracts directly with Teach4Future; any Erasmus+ eligibility or grant is decided separately by the beneficiary organisation and the competent authority.',
       schoolPlaceholder: 'Name of your school',
       notesPlaceholder: 'Tell us more about your needs...',
       topics: {
@@ -261,7 +261,7 @@ export const translations: any = {
       school: 'School / institution name',
       participants: 'Approximate number of participants',
       invoice: 'I would like information about invoicing for my school',
-      letter: 'I would like information about course documentation',
+      letter: 'I would like an Erasmus+ mobility pre-enrolment or acceptance letter',
       notes: 'Questions or additional information',
       notesPlaceholder: 'Preferred dates, accessibility needs or any question...',
       submit: 'Send information request',
@@ -274,10 +274,10 @@ export const translations: any = {
       successTitle: 'Request sent',
       successDesc: 'Thank you. We have received your details and will contact you to confirm availability. Your place is not reserved until our team confirms it.',
       emailNote: 'Check your inbox for our reply.',
-      letterNote: 'If requested, we will explain the acceptance-letter process.',
+      letterNote: 'If requested, we will explain the pre-enrolment or acceptance-letter process and its conditions.',
     },
     footer: {
-      about: 'Practical teacher training in Spain and tailor-made courses across Europe.',
+      about: 'Practical teacher training for Erasmus+ mobility in Spain and tailor-made courses across Europe.',
       explore: 'Explore',
       support: 'Support',
       contact: 'Contact',
@@ -355,11 +355,11 @@ export const translations: any = {
         trainingCta: 'Train your teaching team'
       },
       advisory: {
-        eyebrow: 'Training planning',
-        title: 'We help your school choose and organise training.',
-        desc: 'Request help identifying the most suitable course, coordinating a group and preparing a clear proposal.',
-        note: 'Teach4Future is an independent course provider. The school or participant contracts the course directly with us.',
-        cta: 'Request planning support'
+        eyebrow: 'Erasmus+ mobility planning',
+        title: 'We help your school choose and organise training for mobility.',
+        desc: 'Request help identifying the most suitable course, coordinating a group and preparing a clear proposal and course documentation.',
+        note: 'Teach4Future is an independent course provider. The school or participant contracts the course directly with us; Erasmus+ grant and eligibility decisions belong to the beneficiary organisation and the competent authority.',
+        cta: 'Request Erasmus+ mobility support'
       },
       services: {
         bookings: {
@@ -367,8 +367,8 @@ export const translations: any = {
           desc: 'We coordinate the enrolment of teachers from your school and other schools. Each edition is confirmed with 6 participants in Spain and 15 outside Spain, from several schools and countries. Final conditions are confirmed in writing.'
         },
         docs: {
-          title: 'Course documentation',
-          desc: 'When a course is confirmed, we can provide the programme, proposal, attendance records and the agreed certificate. Any additional document must be confirmed in writing.'
+          title: 'Mobility documentation',
+          desc: 'We can provide the programme, course proposal and, where appropriate, a pre-enrolment or acceptance letter. Once completed, participants receive attendance records and the agreed certificate. Any document is subject to its written conditions.'
         },
         quality: {
           title: 'Quality Approach',
@@ -399,7 +399,7 @@ export const translations: any = {
       badge: 'Get in Touch',
       title: "We're Here to",
       titleAccent: 'Help You Grow.',
-      subtitle: 'Have questions about our courses, booking or a custom group proposal? Write to us and we will review your request.',
+      subtitle: 'Have questions about our courses, Erasmus+ mobility, booking or a custom group proposal? Write to us and we will review your request.',
       info: {
         email: { title: 'Email Us', desc: 'We reply as soon as possible' },
         phone: { title: 'Call Us', desc: 'Mon-Fri, 9:00-18:00' },
@@ -417,7 +417,7 @@ export const translations: any = {
         subjects: {
           general: 'General Inquiry',
           enrolment: 'Enrolment Question',
-          funding: 'Booking and payment',
+          funding: 'Erasmus+ mobility and documentation',
           custom: 'Custom Group Training',
           partnership: 'Partnership Opportunity'
         },
@@ -645,10 +645,10 @@ export const translations: any = {
       cities: 'Ciudades',
     },
     hero: {
-      badge: 'Academia de formación docente',
+      badge: 'Cursos para movilidad Erasmus+',
       title: 'Inspirando docentes,',
       titleAccent: 'transformando aulas.',
-      subtitle: 'Cursos prácticos en inglés para docentes de toda Europa, en Almería (Granada y Málaga, próximamente). Contratación directa con Teach4Future.',
+      subtitle: 'Cursos prácticos en inglés para docentes de toda Europa, diseñados para el desarrollo profesional internacional y la movilidad de personal Erasmus+. Contratación directa con Teach4Future.',
       ctaPrimary: 'Explorar cursos',
       ctaSecondary: 'Formación a medida',
       stats: {
@@ -696,7 +696,7 @@ export const translations: any = {
         subtitle: 'Publicaremos opiniones de participantes verificadas después de los primeros cursos.'
       },
       cta: {
-        title: '¿Listo para desarrollar tu práctica docente?',
+        title: '¿Preparas una movilidad Erasmus+?',
         subtitle: 'Únete a nuestra próxima sesión y lleva la innovación a tu centro.',
         button: 'Ver todas las fechas'
       },
@@ -706,7 +706,7 @@ export const translations: any = {
         desc: 'Estamos preparando ediciones en español en otras ciudades europeas junto a entidades locales. Cuéntanos qué destino, tema y fechas te interesan: cada edición reúne docentes de varios centros y países y solo se confirma por escrito cuando cumple los requisitos del programa.',
         point1: 'Formación impartida en español',
         point2: 'Docentes de varios centros y países',
-        point3: 'Condiciones confirmadas por escrito antes de reservar',
+        point3: 'Diseñados según los estándares de calidad de cursos KA1',
         cta: 'Registrar interés'
       },
       schoolsSupport: {
@@ -755,7 +755,7 @@ export const translations: any = {
       trainers: 'Conecta con formadores expertos',
       openMenu: 'Abrir menú',
       closeMenu: 'Cerrar menú',
-      europeCaption: 'Formación en español · Docentes de toda Europa',
+      europeCaption: 'Movilidad Erasmus+ · Formación en español · Docentes de toda Europa',
       priorityCourse: 'Curso prioritario',
       groupsCourse: 'Para grupos',
     },
@@ -774,7 +774,7 @@ export const translations: any = {
       answers: {
         courses: 'Puedes explorar nuestros cursos prácticos de formación docente en inglés, de cinco días, en España. Cada curso muestra sus objetivos, programa y datos relevantes.',
         dates: 'Las fechas y plazas confirmadas se muestran por separado. Si un curso está disponible bajo demanda, puedes solicitar una edición en Almería (Granada y Málaga, próximamente).',
-        schools: 'Preparamos propuestas de formación para centros y coordinadores internacionales de toda Europa. Cada edición se confirma con participantes de varios centros y países.',
+        schools: 'Preparamos propuestas de formación para centros que preparan movilidad Erasmus+. Cada edición reúne a docentes de varios centros y países. Para la financiación KA1, la Guía del Programa 2026 limita la ayuda a 3 participantes de la misma organización de envío, o 10 del mismo consorcio de movilidad, en un mismo curso.',
         enrolment: 'Puedes enviarnos tus datos y el curso que te interesa mediante un formulario breve. La solicitud no reserva plaza ni genera ninguna obligación de pago.',
       },
       actions: {
@@ -857,7 +857,7 @@ export const translations: any = {
       badge: 'Ediciones europeas en preparación',
       title: 'Propón una ciudad,',
       titleAccent: 'estudiamos una edición abierta.',
-      subtitle: 'Queremos llevar nuestros cursos en español a otras ciudades europeas, en colaboración con entidades establecidas en cada país. Cuéntanos qué destino y qué tema te interesan y te avisaremos cuando una edición esté confirmada.',
+      subtitle: 'Queremos llevar nuestros cursos en español a otras ciudades europeas, en colaboración con entidades establecidas en cada país. Cuéntanos qué destino y qué tema te interesan y te avisaremos cuando una edición internacional adecuada para movilidad Erasmus+ esté confirmada.',
       requestTitle: 'Registrar interés',
       requestSubtitle: 'Rellena el formulario y te avisaremos cuando haya una edición en ese destino.',
       formCity: 'Ciudad preferida',
@@ -879,8 +879,8 @@ export const translations: any = {
       topicPlaceholder: 'Selecciona un tema',
       cityPlaceholder: 'p. ej., Berlín',
       datesPlaceholder: 'p. ej., julio de 2027',
-      sizePlaceholder: 'Número de docentes interesados',
-      priceNote: 'Precio del curso: 480 € por participante durante 5 días y 25 horas lectivas guiadas. IVA incluido o exento, según corresponda. Cada edición se confirma al alcanzar 15 participantes de varios centros y países.',
+      sizePlaceholder: 'Número de docentes interesados en la movilidad',
+      priceNote: 'Precio del curso: 480 € por participante durante 5 días y 25 horas lectivas guiadas. IVA incluido o exento, según corresponda. Cada edición se confirma al alcanzar 15 participantes de varios centros y países. El centro o participante contrata directamente con Teach4Future; la elegibilidad o ayuda Erasmus+ se decide de forma independiente por la organización beneficiaria y la autoridad competente.',
       schoolPlaceholder: 'Nombre de tu centro',
       notesPlaceholder: 'Cuéntanos qué necesitáis...',
       topics: {
@@ -906,7 +906,7 @@ export const translations: any = {
       school: 'Nombre del centro / institución',
       participants: 'Número aproximado de participantes',
       invoice: 'Quiero información sobre la facturación para mi centro',
-      letter: 'Quiero información sobre la documentación del curso',
+      letter: 'Quiero una carta de preinscripción o aceptación para movilidad Erasmus+',
       notes: 'Preguntas o información adicional',
       notesPlaceholder: 'Fechas preferidas, necesidades de accesibilidad o cualquier duda...',
       submit: 'Enviar solicitud de información',
@@ -919,10 +919,10 @@ export const translations: any = {
       successTitle: 'Solicitud enviada',
       successDesc: 'Gracias. Hemos recibido tus datos y contactaremos contigo para confirmar disponibilidad. La plaza no queda reservada hasta que nuestro equipo lo confirme.',
       emailNote: 'Revisa tu bandeja de entrada para recibir nuestra respuesta.',
-      letterNote: 'Si la has solicitado, te explicaremos el proceso de la carta de aceptación.',
+      letterNote: 'Si la has solicitado, te explicaremos el proceso y las condiciones de la carta de preinscripción o aceptación.',
     },
     footer: {
-      about: 'Formación docente práctica en España y cursos a medida por toda Europa.',
+      about: 'Formación docente práctica para movilidad Erasmus+ en España y cursos a medida por toda Europa.',
       explore: 'Explorar',
       support: 'Ayuda',
       contact: 'Contacto',
@@ -1000,11 +1000,11 @@ export const translations: any = {
         trainingCta: 'Pedir una propuesta para mi centro'
       },
       advisory: {
-        eyebrow: 'Planificación de formación',
-        title: 'Ayudamos a tu centro a elegir y organizar formación.',
-        desc: 'Pide ayuda para identificar el curso más adecuado, coordinar un grupo y preparar una propuesta clara.',
-        note: 'Teach4Future es un proveedor de cursos independiente. El centro o la persona participante contrata el curso directamente con nosotros.',
-        cta: 'Pedir apoyo de planificación'
+        eyebrow: 'Planificación de movilidad Erasmus+',
+        title: 'Ayudamos a tu centro a elegir y organizar formación para su movilidad.',
+        desc: 'Pide ayuda para identificar el curso más adecuado, coordinar un grupo y preparar una propuesta y la documentación del curso.',
+        note: 'Teach4Future es un proveedor de cursos independiente. El centro o la persona participante contrata el curso directamente con nosotros; las decisiones sobre ayuda y elegibilidad Erasmus+ corresponden a la organización beneficiaria y a la autoridad competente.',
+        cta: 'Pedir apoyo para movilidad Erasmus+'
       },
       services: {
         bookings: {
@@ -1012,8 +1012,8 @@ export const translations: any = {
           desc: 'Coordinamos la inscripción de docentes de tu centro y de otros centros. Cada edición se confirma con 6 participantes en España y 15 fuera, de varios centros y países. Las condiciones finales se confirman por escrito.'
         },
         docs: {
-          title: 'Documentación del curso',
-          desc: 'Cuando el curso esté confirmado, podremos facilitar el programa, la propuesta, el control de asistencia y el certificado acordado. Cualquier documento adicional se confirmará por escrito.'
+          title: 'Documentación para movilidad',
+          desc: 'Podemos facilitar el programa, la propuesta del curso y, cuando corresponda, una carta de preinscripción o aceptación. Tras finalizar, las personas participantes reciben el control de asistencia y el certificado acordado. Cada documento queda sujeto a sus condiciones por escrito.'
         },
         quality: {
           title: 'Enfoque de calidad',
@@ -1044,7 +1044,7 @@ export const translations: any = {
       badge: 'Ponte en contacto',
       title: 'Estamos aquí para',
       titleAccent: 'ayudarte a crecer.',
-      subtitle: '¿Tienes preguntas sobre los cursos, la contratación o una propuesta para grupos? Escríbenos y revisaremos tu solicitud.',
+      subtitle: '¿Tienes preguntas sobre los cursos, la movilidad Erasmus+, la contratación o una propuesta para grupos? Escríbenos y revisaremos tu solicitud.',
       info: {
         email: { title: 'Escríbenos', desc: 'Respondemos lo antes posible' },
         phone: { title: 'Llámanos', desc: 'Lun-Vie, 9:00-18:00' },
@@ -1062,7 +1062,7 @@ export const translations: any = {
         subjects: {
           general: 'Consulta general',
           enrolment: 'Pregunta sobre inscripción',
-          funding: 'Contratación y pago',
+          funding: 'Movilidad Erasmus+ y documentación',
           custom: 'Formación de grupo a medida',
           partnership: 'Oportunidad de colaboración'
         },
