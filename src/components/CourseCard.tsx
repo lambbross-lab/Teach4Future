@@ -90,18 +90,16 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, session, demandCityName
         
         <div className="flex items-center justify-between pt-4 border-t border-slate-50">
           <div className="flex flex-col">
-            <span className="text-lg font-bold text-slate-900">{course.price}€</span>
-            <span className="text-[10px] font-medium text-slate-500">{t('common.finalPrice')}</span>
             <span className="text-[10px] text-slate-400 font-medium tracking-wide uppercase">{t('common.fundingSubject')}</span>
           </div>
           <div className="flex items-center space-x-2">
             <Link to={`/course/${course.id}`}>
-              <Button variant="outline" size="sm">
+              <Button variant="primary" size="sm">
                 {t('common.details')}
               </Button>
             </Link>
             <Link to={`/enrol?course=${course.id}${session ? `&session=${session.id}` : ''}`}>
-              <Button variant="primary" size="sm">
+              <Button variant="outline" size="sm">
                 {session ? t('common.enrol') : t('coursesSpain.requestOpening')}
               </Button>
             </Link>

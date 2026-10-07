@@ -75,7 +75,7 @@ export const TermsConditions = () => {
   return (
     <LegalLayout title={t('legal.terms.title')}>
       <p>{t('legal.terms.updated')}</p>
-      <Sections prefix="legal.terms" count={8} />
+      <Sections prefix="legal.terms" count={12} />
     </LegalLayout>
   );
 };

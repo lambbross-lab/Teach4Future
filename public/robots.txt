@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /campus
+Disallow: /login
+Disallow: /reset-password
+
+Sitemap: https://www.teach4future.eu/sitemap.xml

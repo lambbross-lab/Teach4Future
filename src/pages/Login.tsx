@@ -29,7 +29,11 @@ const Login = () => {
       setIsLoading(false);
       return;
     }
-    navigate('/admin');
+    const { data: auth } = await supabase.auth.getUser();
+    const { data: adminRow } = auth.user
+      ? await supabase.from('admin_users').select('id').eq('id', auth.user.id).maybeSingle()
+      : { data: null };
+    navigate(adminRow ? '/admin' : '/campus');
   };
 
   const handleForgotPassword = async () => {
@@ -83,7 +87,7 @@ const Login = () => {
                   required 
                   type="email" 
                   className="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
-                  placeholder="admin@teach4future.eu"
+                  placeholder="you@school.eu"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />

@@ -98,7 +98,7 @@ export const translations: any = {
       honeypotLabel: 'Leave this field empty',
       fundingSubject: 'Funding subject to your grant',
       finalPrice: 'final price, VAT incl. if applicable',
-      scheduleTbc: 'Morning or afternoon (by demand)',
+      scheduleTbc: 'morning or afternoon, depending on demand',
       askQuestion: 'Ask a question',
       requestDate: 'Request a date',
       noSessions: 'There are no scheduled dates for this course yet.',
@@ -128,7 +128,7 @@ export const translations: any = {
       answers: {
         courses: 'You can explore our practical, five-day teacher-training courses in Spanish. Each course includes its objectives, programme and relevant details.',
         dates: 'Confirmed dates and available places are shown separately. If a course is available on request, you can ask us to open an edition in Almería (Granada and Málaga coming soon).',
-        schools: 'We prepare training proposals for schools and Erasmus+ coordinators across Europe. Each edition is confirmed with 10 participants from several schools and countries; with Erasmus+, up to 3 teachers per school.',
+        schools: 'We prepare training proposals for schools and Erasmus+ coordinators across Europe. Each edition is confirmed with 6 participants from several schools and countries; with Erasmus+, up to 3 teachers per school.',
         enrolment: 'You can send us your details and preferred course through a short form. Sending the request does not reserve a place or create any payment obligation.',
       },
       actions: {
@@ -171,7 +171,7 @@ export const translations: any = {
       sessions: 'Available Sessions',
       quickFacts: 'Course Quick Facts',
       language: 'Language',
-      price: 'Indicative fee',
+      price: 'Price',
       certificate: 'Certificate',
       certificateValue: 'Attendance and learning outcomes',
       funding: 'Funding',
@@ -185,7 +185,7 @@ export const translations: any = {
       customGroupDesc: 'With Erasmus+ KA1, each school can enrol up to 3 teachers per course (10 for a mobility consortium). We help you coordinate the enrolment and will confirm dates, venue and conditions in writing.',
       contactTeam: 'Contact our team',
       onDemandTitle: 'Available on request',
-      onDemandDesc: 'This course can be requested in Almería (Granada and Málaga coming soon). We confirm an edition once it reaches 10 participants from several schools and countries and trainer and venue availability is checked.',
+      onDemandDesc: 'This course can be requested in Almería (Granada and Málaga coming soon). We confirm an edition once it reaches 6 participants from several schools and countries and trainer and venue availability is checked.',
     },
     cities: {
       title: 'Course Destinations',
@@ -200,9 +200,9 @@ export const translations: any = {
     },
     coursesSpain: {
       subtitle: 'Explore six unique teacher-training courses in Spanish, designed around current European educational priorities. Dates and destinations appear inside each course.',
-      minimumNote: 'Every course can be requested in Almería (Granada and Málaga coming soon). Each edition is confirmed once it reaches 10 participants from several schools and countries and trainer and venue availability is checked. With Erasmus+ KA1, each school can enrol up to 3 teachers per course; Erasmus+ funds these courses for teachers from schools outside Spain. Confirmed dates and places are shown separately.',
+      minimumNote: 'Every course can be requested in Almería (Granada and Málaga coming soon). Each edition is confirmed once it reaches 6 participants from several schools and countries and trainer and venue availability is checked. With Erasmus+ KA1, each school can enrol up to 3 teachers per course; schools outside Spain may include these courses in their own Erasmus+ KA1 mobility projects, subject to their grant agreement. Confirmed dates and places are shown separately.',
       onDemandLabel: 'Available on request',
-      onDemandCard: 'Almería (Granada and Málaga coming soon) · confirmed from 10 participants from several schools and countries.',
+      onDemandCard: 'Almería (Granada and Málaga coming soon) · confirmed from 6 participants from several schools and countries.',
       requestOpening: 'Request opening',
       noResultsDesc: 'Try adjusting your search or filters to find what you\'re looking for.',
       city: 'City',
@@ -234,7 +234,7 @@ export const translations: any = {
       cityPlaceholder: 'e.g. Berlin',
       datesPlaceholder: 'e.g. July 2027',
       sizePlaceholder: 'Number of teachers (max. 3 per school with Erasmus+)',
-      priceNote: 'Course fee: €480 per participant for 5 days and 25 guided hours. VAT included or exempt, as applicable. Each edition is confirmed once it reaches 15 participants from several schools and countries. With Erasmus+ KA1 funding, each school can enrol up to 3 teachers per course (10 for a mobility consortium).',
+      priceNote: 'Course fee: €480 per participant for 5 days and 25 guided hours. VAT included or exempt, as applicable. Each edition is confirmed once it reaches 15 participants from several schools and countries. When places are part of an Erasmus+ KA1 project, each school can enrol up to 3 teachers per course (10 for a mobility consortium).',
       schoolPlaceholder: 'Name of your school',
       notesPlaceholder: 'Tell us more about your needs...',
       topics: {
@@ -269,7 +269,7 @@ export const translations: any = {
       course: 'Course',
       location: 'Location',
       dates: 'Dates',
-      fee: 'Indicative course fee',
+      fee: 'Course fee',
       successTitle: 'Request sent',
       successDesc: 'Thank you. We have received your details and will contact you to confirm availability. Your place is not reserved until our team confirms it.',
       emailNote: 'Check your inbox for our reply.',
@@ -285,10 +285,10 @@ export const translations: any = {
       join: 'Join',
       rights: 'All rights reserved.',
       privacy: 'Privacy Policy',
-      terms: 'Terms & Conditions',
+      terms: 'Booking conditions',
       cookies: 'Cookie Policy',
       legalNotice: 'Legal Notice',
-      dashboard: 'Admin dashboard',
+      dashboard: 'Campus / sign in',
       cities: 'Our Cities',
       location: 'Almería, Spain',
       legalEntity: 'Registered entity: Asociación para la Innovación Educativa y la Formación Erasmus - Teach4Future · National Register of Associations, Section 1, no. 633044 · Tax ID (NIF) G88720610.',
@@ -363,7 +363,7 @@ export const translations: any = {
       services: {
         bookings: {
           title: 'Enrolments from several schools',
-          desc: 'We coordinate the enrolment of teachers from your school and other schools. Each edition is confirmed with 10 participants in Spain and 15 outside Spain, from several schools and countries; with Erasmus+ KA1, up to 3 teachers per school (10 per consortium). Final conditions are confirmed in writing.'
+          desc: 'We coordinate the enrolment of teachers from your school and other schools. Each edition is confirmed with 6 participants in Spain and 15 outside Spain, from several schools and countries; with Erasmus+ KA1, up to 3 teachers per school (10 per consortium). Final conditions are confirmed in writing.'
         },
         docs: {
           title: 'Erasmus+ Documentation',
@@ -490,28 +490,36 @@ export const translations: any = {
         s3Content: 'If optional analytics or marketing technologies are added later, they will remain disabled until the relevant information and consent controls are implemented.'
       },
       terms: {
-        title: 'Information Requests and Booking Conditions',
-        updated: 'Last updated: October 2026',
-        s1Title: '1. Scope',
-        s1Content: 'This website provides information and allows you to send an enquiry. Sending a form does not confirm a place or create a payment obligation.',
-        s2Title: '2. Written confirmation',
-        s2Content: 'A booking exists only after Teach4Future issues a written confirmation identifying the course, participant or group, dates, venue, price, included services, payment schedule and applicable cancellation terms.',
-        s3Title: '3. Prices and payment',
-        s3Content: 'Website prices are indicative unless expressly stated otherwise. The final proposal will specify taxes, included and excluded services and invoicing details. Online payment is not currently enabled.',
-        s4Title: '4. Minimum group and changes',
-        s4Content: 'Courses in Spain are normally confirmed once they reach 10 participants and courses outside Spain once they reach 15, from several schools and countries. When a place is funded by Erasmus+ KA1, the sending organisation must respect the limits of its grant agreement (up to 3 teachers from the same organisation per course). Smaller groups may register interest without confirming an edition. Venue, travel, accommodation and trainer availability may require a higher threshold, which will be stated in the proposal. If Teach4Future makes a material change to confirmed fees, content, dates, location or schedule, the affected participant may cancel without an additional charge.',
-        s5Title: '5. Erasmus+ funding',
-        s5Content: 'Course fees may be relevant to an Erasmus+ mobility budget, but Teach4Future does not guarantee approval, eligibility or full reimbursement. The sending organisation is responsible for checking its grant agreement and the rules of its National Agency.',
-        s6Title: '6. Travel, insurance and participant obligations',
-        s6Content: 'Unless the written proposal says otherwise, participants or their organisation arrange and pay for travel, accommodation, visas and insurance. Participants must follow venue, safety, accessibility and respectful-conduct requirements communicated before the course.',
-        s7Title: '7. Materials and certification',
-        s7Content: 'Materials are supplied for the educational use described in the proposal. A certificate of attendance and learning outcomes may be issued when the participant meets the stated attendance and participation requirements; no specific European recognition instrument is guaranteed unless confirmed in writing.',
-        s8Title: '8. Cancellation, liability and mandatory rights',
-        s8Content: 'The written proposal will contain the cancellation, substitution, force-majeure and refund rules for that course. Nothing in these conditions excludes liability that cannot lawfully be excluded or limits mandatory consumer and user rights.'
+        title: "Booking and Cancellation Conditions",
+        updated: "Last updated: October 2026",
+        s1Title: "1. Scope",
+        s1Content: "These conditions apply to bookings for Teach4Future courses made by schools or other organisations (sending organisation). Sending a form on this website is a pre-registration: it does not confirm a place or create a payment obligation.",
+        s2Title: "2. Registration and written confirmation",
+        s2Content: "A place is reserved once Teach4Future sends a written confirmation stating the course, participants, dates, venue, schedule, price and these conditions. By accepting the confirmation, the organisation declares that it has read and accepted these conditions.",
+        s3Title: "3. Course confirmation",
+        s3Content: "Each edition is confirmed once it reaches the minimum number of participants (6 in Spain and 15 outside Spain, from several schools and countries). We confirm the edition as soon as the minimum is reached and no later than 8 weeks before the start date. If the minimum has not been reached by then, we will inform each organisation and offer another edition or cancellation at no cost: nothing has been paid up to that point. We recommend booking travel and accommodation only after receiving the course confirmation.",
+        s4Title: "4. Price and payment",
+        s4Content: "The price is €480 per participant per course, final price, VAT included where applicable. It includes 25 teaching hours over 5 days, materials and certificate. It does not include travel, accommodation, meals, insurance or visas. Once the edition is confirmed we invoice the organisation, which pays by bank transfer within 15 days and always before the first day of the course. Registrations made after confirmation are paid within 7 days.",
+        s5Title: "5. Cancellation by the organisation",
+        s5Content: "Cancellations must be sent in writing to teach4futureacademy@gmail.com. 4 weeks or more before the start: we refund 75% of the price (25% is retained as an administration charge) or, if the organisation prefers, move the place free of charge to another edition within the following 12 months. Less than 4 weeks before the start or no-show: no refund, but the place may be used by another person from the organisation or moved to another edition within the following 12 months for an administration fee of €50 per participant. Absences, late arrivals or early departures do not give a right to a refund.",
+        s6Title: "6. Substitution of participants",
+        s6Content: "The organisation may replace a participant with another person at any time before the start, free of charge, by notifying us in writing with the new participant's details. For places funded by Erasmus+ KA1 the limit of 3 teachers from the same organisation per course still applies.",
+        s7Title: "7. Force majeure",
+        s7Content: "If a participant cannot attend due to a serious and unforeseeable cause that is duly documented (for example serious illness, death of a close relative, transport cancellation or natural disaster), the place may be moved free of charge to another edition within the following 12 months or, if this is not possible, refunded minus any costs already incurred by Teach4Future.",
+        s8Title: "8. Cancellation or changes by Teach4Future",
+        s8Content: "If, exceptionally, Teach4Future has to cancel a confirmed edition, it will refund 100% of the amount paid within 14 days or, at the organisation's choice, move the place to another edition. If the confirmed price, content, dates, location or schedule change substantially, the organisation may cancel at no cost with a full refund. If the trainer is unable to deliver the course, alternative dates or a refund will be offered. Teach4Future is not liable for travel or accommodation costs, except where required by law.",
+        s9Title: "9. Erasmus+ funding",
+        s9Content: "The course fee may be included in an Erasmus+ mobility budget, but Teach4Future does not guarantee its approval, eligibility or reimbursement. The sending organisation is responsible for checking its grant agreement and the rules of its National Agency.",
+        s10Title: "10. Travel, insurance and participation rules",
+        s10Content: "Participants or their organisation arrange and pay for travel, accommodation, visas and insurance. Participants must follow the venue, safety and conduct rules communicated before the course. Inappropriate behaviour may lead to exclusion from the course, with the sending organisation being informed.",
+        s11Title: "11. Attendance and certificate",
+        s11Content: "Attendance is recorded daily on a signed attendance sheet. Participants who attend at least 80% of the hours receive a certificate of attendance stating their name, the course description, learning outcomes, dates, venue, course provider and trainer. The certificate is issued once full payment has been received.",
+        s12Title: "12. Complaints and applicable law",
+        s12Content: "Any complaint can be raised with the trainer during the course or in writing to teach4futureacademy@gmail.com; we will review it and reply as soon as possible. These conditions are governed by Spanish law. Nothing in them limits mandatory legal rights, including those of consumers when contracting as private individuals."
       }
     },
     login: {
-      subtitle: 'Access the academy management dashboard.',
+      subtitle: 'Sign in to your course campus or the management dashboard.',
       password: 'Password',
       forgot: 'Forgot?',
       signIn: 'Sign In',
@@ -616,7 +624,7 @@ export const translations: any = {
       subtitle: 'All courses are offered in the same week. At most two are delivered each week (one in the morning and one in the afternoon): those with the most demand. If your course does not reach the minimum, we will offer you a switch to another course that week; the final schedule is confirmed in writing.',
       help: {
         title: "Can't find the dates you need?",
-        desc: 'Every course can be requested in Almería (Granada and Málaga coming soon). We assess a new session from 10 confirmed participants from several schools and countries, subject to trainer, venue and date availability.',
+        desc: 'Every course can be requested in Almería (Granada and Málaga coming soon). We assess a new session from 6 confirmed participants from several schools and countries, subject to trainer, venue and date availability.',
         cta: 'Request a session'
       }
     }
@@ -733,7 +741,7 @@ export const translations: any = {
       honeypotLabel: 'Deja este campo vacío',
       fundingSubject: 'Financiación sujeta a tu subvención',
       finalPrice: 'precio final, IVA incl. si procede',
-      scheduleTbc: 'Mañana o tarde (según demanda)',
+      scheduleTbc: 'mañana o tarde, según demanda',
       askQuestion: 'Hacer una consulta',
       requestDate: 'Solicitar otra fecha',
       noSessions: 'Todavía no hay fechas programadas para este curso.',
@@ -763,7 +771,7 @@ export const translations: any = {
       answers: {
         courses: 'Puedes explorar nuestros cursos prácticos de formación docente en español, de cinco días. Cada curso muestra sus objetivos, programa y datos relevantes.',
         dates: 'Las fechas y plazas confirmadas se muestran por separado. Si un curso está disponible bajo demanda, puedes solicitar una edición en Almería (Granada y Málaga, próximamente).',
-        schools: 'Preparamos propuestas de formación para centros y coordinadores Erasmus+ de toda Europa. Cada edición se confirma con 10 participantes de varios centros y países; con Erasmus+, hasta 3 docentes por centro.',
+        schools: 'Preparamos propuestas de formación para centros y coordinadores Erasmus+ de toda Europa. Cada edición se confirma con 6 participantes de varios centros y países; con Erasmus+, hasta 3 docentes por centro.',
         enrolment: 'Puedes enviarnos tus datos y el curso que te interesa mediante un formulario breve. La solicitud no reserva plaza ni genera ninguna obligación de pago.',
       },
       actions: {
@@ -806,7 +814,7 @@ export const translations: any = {
       sessions: 'Sesiones disponibles',
       quickFacts: 'Datos rápidos',
       language: 'Idioma',
-      price: 'Precio orientativo',
+      price: 'Precio',
       certificate: 'Certificado',
       certificateValue: 'Asistencia y resultados de aprendizaje',
       funding: 'Financiación',
@@ -820,7 +828,7 @@ export const translations: any = {
       customGroupDesc: 'Con Erasmus+ KA1, cada centro puede inscribir hasta 3 docentes por curso (10 si va en consorcio). Os ayudamos a coordinar la inscripción y confirmaremos por escrito fechas, sede y condiciones.',
       contactTeam: 'Contactar con el equipo',
       onDemandTitle: 'Disponible bajo demanda',
-      onDemandDesc: 'Este curso se puede solicitar en Almería (Granada y Málaga, próximamente). Confirmamos la edición al alcanzar 10 participantes de varios centros y países y tras comprobar la disponibilidad de docente y sede.',
+      onDemandDesc: 'Este curso se puede solicitar en Almería (Granada y Málaga, próximamente). Confirmamos la edición al alcanzar 6 participantes de varios centros y países y tras comprobar la disponibilidad de docente y sede.',
     },
     cities: {
       title: 'Destinos de los cursos',
@@ -835,9 +843,9 @@ export const translations: any = {
     },
     coursesSpain: {
       subtitle: 'Explora seis cursos únicos impartidos en español y diseñados en torno a las prioridades educativas europeas. Las fechas y los destinos aparecen dentro de cada curso.',
-      minimumNote: 'Todos los cursos se pueden solicitar en Almería (Granada y Málaga, próximamente). Cada edición se confirma al alcanzar 10 participantes de varios centros y países y tras comprobar la disponibilidad de docente y sede. Con Erasmus+ KA1, cada centro puede inscribir hasta 3 docentes por curso; Erasmus+ financia estos cursos para docentes de centros de fuera de España. Las fechas y plazas confirmadas se muestran por separado.',
+      minimumNote: 'Todos los cursos se pueden solicitar en Almería (Granada y Málaga, próximamente). Cada edición se confirma al alcanzar 6 participantes de varios centros y países y tras comprobar la disponibilidad de docente y sede. Con Erasmus+ KA1, cada centro puede inscribir hasta 3 docentes por curso; los centros de fuera de España pueden incluir estos cursos en sus propios proyectos de movilidad Erasmus+ KA1, según su convenio de subvención. Las fechas y plazas confirmadas se muestran por separado.',
       onDemandLabel: 'Disponible bajo demanda',
-      onDemandCard: 'Almería (Granada y Málaga, próximamente) · se confirma con 10 participantes de varios centros y países.',
+      onDemandCard: 'Almería (Granada y Málaga, próximamente) · se confirma con 6 participantes de varios centros y países.',
       requestOpening: 'Solicitar apertura',
       noResultsDesc: 'Prueba a ajustar tu búsqueda o los filtros para encontrar lo que buscas.',
       city: 'Ciudad',
@@ -869,7 +877,7 @@ export const translations: any = {
       cityPlaceholder: 'p. ej., Berlín',
       datesPlaceholder: 'p. ej., julio de 2027',
       sizePlaceholder: 'Número de docentes (máx. 3 por centro con Erasmus+)',
-      priceNote: 'Precio del curso: 480 € por participante durante 5 días y 25 horas lectivas guiadas. IVA incluido o exento, según corresponda. Cada edición se confirma al alcanzar 15 participantes de varios centros y países. Con financiación Erasmus+ KA1, cada centro puede inscribir hasta 3 docentes por curso (10 si va en consorcio).',
+      priceNote: 'Precio del curso: 480 € por participante durante 5 días y 25 horas lectivas guiadas. IVA incluido o exento, según corresponda. Cada edición se confirma al alcanzar 15 participantes de varios centros y países. Cuando las plazas forman parte de un proyecto Erasmus+ KA1, cada centro puede inscribir hasta 3 docentes por curso (10 si va en consorcio).',
       schoolPlaceholder: 'Nombre de tu centro',
       notesPlaceholder: 'Cuéntanos qué necesitáis...',
       topics: {
@@ -904,7 +912,7 @@ export const translations: any = {
       course: 'Curso',
       location: 'Lugar',
       dates: 'Fechas',
-      fee: 'Precio orientativo del curso',
+      fee: 'Precio del curso',
       successTitle: 'Solicitud enviada',
       successDesc: 'Gracias. Hemos recibido tus datos y contactaremos contigo para confirmar disponibilidad. La plaza no queda reservada hasta que nuestro equipo lo confirme.',
       emailNote: 'Revisa tu bandeja de entrada para recibir nuestra respuesta.',
@@ -920,10 +928,10 @@ export const translations: any = {
       join: 'Apuntarme',
       rights: 'Todos los derechos reservados.',
       privacy: 'Política de privacidad',
-      terms: 'Términos y condiciones',
+      terms: 'Condiciones de inscripción',
       cookies: 'Política de cookies',
       legalNotice: 'Aviso legal',
-      dashboard: 'Panel de gestión',
+      dashboard: 'Campus / acceso',
       cities: 'Nuestras ciudades',
       location: 'Almería, España',
       legalEntity: 'Entidad inscrita: Asociación para la Innovación Educativa y la Formación Erasmus - Teach4Future · Registro Nacional de Asociaciones, Sección 1.ª, nº 633044 · NIF G88720610.',
@@ -998,7 +1006,7 @@ export const translations: any = {
       services: {
         bookings: {
           title: 'Inscripciones de varios centros',
-          desc: 'Coordinamos la inscripción de docentes de tu centro y de otros centros. Cada edición se confirma con 10 participantes en España y 15 fuera, de varios centros y países; con Erasmus+ KA1, hasta 3 docentes por centro (10 por consorcio). Las condiciones finales se confirman por escrito.'
+          desc: 'Coordinamos la inscripción de docentes de tu centro y de otros centros. Cada edición se confirma con 6 participantes en España y 15 fuera, de varios centros y países; con Erasmus+ KA1, hasta 3 docentes por centro (10 por consorcio). Las condiciones finales se confirman por escrito.'
         },
         docs: {
           title: 'Documentación Erasmus+',
@@ -1125,28 +1133,36 @@ export const translations: any = {
         s3Content: 'Si en el futuro se incorporan tecnologías opcionales de analítica o marketing, permanecerán desactivadas hasta que se implanten la información y los controles de consentimiento correspondientes.'
       },
       terms: {
-        title: 'Condiciones de solicitud y futura contratación',
-        updated: 'Última actualización: octubre de 2026',
-        s1Title: '1. Alcance',
-        s1Content: 'Esta web ofrece información y permite enviar una solicitud. Enviar un formulario no confirma una plaza ni genera una obligación de pago.',
-        s2Title: '2. Confirmación escrita',
-        s2Content: 'Solo existe reserva cuando Teach4Future emite una confirmación escrita que identifica el curso, participante o grupo, fechas, sede, precio, servicios incluidos, calendario de pago y condiciones de cancelación aplicables.',
-        s3Title: '3. Precios y pago',
-        s3Content: 'Los precios de la web son orientativos salvo indicación expresa. La propuesta final detallará impuestos, servicios incluidos y excluidos y datos de facturación. Actualmente no está habilitado el pago en línea.',
-        s4Title: '4. Grupo mínimo y modificaciones',
-        s4Content: 'Los cursos en España se confirman normalmente al alcanzar 10 participantes y los cursos fuera de España, 15, procedentes de varios centros y países. Cuando la plaza se financie con Erasmus+ KA1, el centro de envío debe respetar los límites de su convenio (hasta 3 docentes de la misma organización por curso). Los grupos más pequeños pueden registrar su interés sin que quede confirmada una edición. La sede, el viaje, el alojamiento y la disponibilidad docente pueden exigir un umbral superior, que se indicará en la propuesta. Si Teach4Future modifica de forma sustancial el precio, contenido, fechas, lugar u horario ya confirmados, la persona afectada podrá cancelar sin un coste adicional.',
-        s5Title: '5. Financiación Erasmus+',
-        s5Content: 'La cuota del curso puede ser relevante dentro del presupuesto de una movilidad Erasmus+, pero Teach4Future no garantiza su aprobación, elegibilidad ni reembolso íntegro. Corresponde al centro de envío comprobar su convenio de subvención y las reglas de su Agencia Nacional.',
-        s6Title: '6. Viaje, seguro y obligaciones de participación',
-        s6Content: 'Salvo que la propuesta escrita disponga otra cosa, las personas participantes o su organización gestionan y pagan viaje, alojamiento, visados y seguros. Deberán respetar las normas de sede, seguridad, accesibilidad y convivencia comunicadas antes del curso.',
-        s7Title: '7. Materiales y certificación',
-        s7Content: 'Los materiales se facilitan para el uso educativo descrito en la propuesta. Podrá emitirse un certificado de asistencia y resultados de aprendizaje cuando se cumplan los requisitos indicados de asistencia y participación; no se garantiza un instrumento europeo específico salvo confirmación escrita.',
-        s8Title: '8. Cancelación, responsabilidad y derechos imperativos',
-        s8Content: 'La propuesta escrita contendrá las reglas de cancelación, sustitución, fuerza mayor y devolución aplicables a ese curso. Nada de lo previsto excluye responsabilidades que legalmente no puedan excluirse ni limita los derechos imperativos de consumidores y usuarios.'
+        title: "Condiciones de inscripción y cancelación",
+        updated: "Última actualización: octubre de 2026",
+        s1Title: "1. Alcance",
+        s1Content: "Estas condiciones se aplican a las inscripciones en cursos de Teach4Future realizadas por centros educativos u otras organizaciones (organización de envío). Enviar un formulario de la web es una preinscripción: no confirma una plaza ni genera obligación de pago.",
+        s2Title: "2. Inscripción y confirmación escrita",
+        s2Content: "La plaza queda reservada cuando Teach4Future envía una confirmación escrita con el curso, participantes, fechas, sede, horario, precio y estas condiciones. Al aceptar la confirmación, la organización declara haber leído y aceptado estas condiciones.",
+        s3Title: "3. Confirmación del curso",
+        s3Content: "Cada edición se confirma al alcanzar el mínimo de participantes (6 en España y 15 fuera de España, de varios centros y países). Confirmamos la edición en cuanto se alcanza ese mínimo y, como muy tarde, 8 semanas antes del inicio. Si en esa fecha no se ha alcanzado, avisaremos a cada organización y le ofreceremos otra edición o la anulación sin ningún coste: hasta ese momento no se ha pagado nada. Recomendamos reservar viaje y alojamiento solo después de recibir la confirmación del curso.",
+        s4Title: "4. Precio y pago",
+        s4Content: "El precio es de 480 € por participante y curso, precio final, IVA incluido si procede. Incluye 25 horas lectivas en 5 días, materiales y certificado. No incluye viaje, alojamiento, manutención, seguros ni visados. Tras confirmar la edición emitimos factura a la organización, que se paga por transferencia bancaria en un plazo de 15 días y siempre antes del primer día del curso. Las inscripciones posteriores a la confirmación se pagan en un plazo de 7 días.",
+        s5Title: "5. Cancelación por la organización",
+        s5Content: "Las cancelaciones deben comunicarse por escrito a teach4futureacademy@gmail.com. Con 4 semanas o más de antelación al inicio: devolvemos el 75 % del precio (se retiene un 25 % en concepto de gestión) o, si la organización lo prefiere, trasladamos la plaza sin coste a otra edición en los 12 meses siguientes. Con menos de 4 semanas o en caso de no presentarse: no hay devolución, pero la plaza puede usarla otra persona de la organización o trasladarse a otra edición en los 12 meses siguientes con un cargo de gestión de 50 € por participante. Las ausencias, llegadas tardías o salidas anticipadas no dan derecho a devolución.",
+        s6Title: "6. Sustitución de participantes",
+        s6Content: "La organización puede sustituir a un participante por otra persona en cualquier momento antes del inicio, sin coste, comunicándolo por escrito con los datos de la nueva persona. En plazas financiadas con Erasmus+ KA1 se mantiene el límite de 3 docentes de la misma organización por curso.",
+        s7Title: "7. Fuerza mayor",
+        s7Content: "Si un participante no puede asistir por una causa grave e imprevisible debidamente justificada (por ejemplo, enfermedad grave, fallecimiento de un familiar cercano, cancelación de transportes o desastre natural), podrá trasladar la plaza sin coste a otra edición en los 12 meses siguientes o, si no es posible, recibir la devolución descontando los gastos ya realizados por Teach4Future.",
+        s8Title: "8. Cancelación o cambios por Teach4Future",
+        s8Content: "Si, de forma excepcional, Teach4Future tuviera que cancelar una edición ya confirmada, devolverá el 100 % de lo pagado en un plazo de 14 días o, a elección de la organización, trasladará la plaza a otra edición. Si se modifican de forma sustancial el precio, el contenido, las fechas, el lugar o el horario confirmados, la organización podrá cancelar sin coste con devolución íntegra. Si el formador no pudiera impartir el curso, se ofrecerán fechas alternativas o la devolución. Teach4Future no responde de gastos de viaje o alojamiento, salvo en los casos en que la ley lo imponga.",
+        s9Title: "9. Financiación Erasmus+",
+        s9Content: "El precio del curso puede incluirse en el presupuesto de una movilidad Erasmus+, pero Teach4Future no garantiza su aprobación, elegibilidad ni reembolso. Corresponde a la organización de envío comprobar su convenio de subvención y las reglas de su Agencia Nacional.",
+        s10Title: "10. Viaje, seguro y normas de participación",
+        s10Content: "Las personas participantes o su organización gestionan y pagan viaje, alojamiento, visados y seguros. Deberán respetar las normas de la sede, de seguridad y de convivencia comunicadas antes del curso. Las conductas inapropiadas podrán suponer la exclusión del curso, informando a la organización de envío.",
+        s11Title: "11. Asistencia y certificado",
+        s11Content: "La asistencia se registra diariamente con hoja de firmas. Quien asista al menos al 80 % de las horas recibirá un certificado de asistencia con su nombre, la descripción del curso, los resultados de aprendizaje, las fechas, la sede, la entidad organizadora y el formador. El certificado se entrega una vez recibido el pago completo.",
+        s12Title: "12. Reclamaciones y legislación aplicable",
+        s12Content: "Cualquier queja puede comunicarse al formador durante el curso o por escrito a teach4futureacademy@gmail.com; la estudiaremos y responderemos lo antes posible. Estas condiciones se rigen por la legislación española. Nada de lo previsto limita los derechos que la ley reconozca con carácter imperativo, incluidos los de las personas consumidoras cuando contraten a título particular."
       }
     },
     login: {
-      subtitle: 'Accede al panel de gestión de la academia.',
+      subtitle: 'Accede al campus de tu curso o al panel de gestión.',
       password: 'Contraseña',
       forgot: '¿Olvidaste?',
       signIn: 'Iniciar sesión',
@@ -1265,7 +1281,7 @@ export const translations: any = {
       subtitle: 'Ofrecemos todos los cursos en la misma semana. Cada semana se imparten como máximo dos (uno de mañana y otro de tarde): los de mayor demanda. Si tu curso no alcanza el mínimo, te ofreceremos cambiar a otro de esa semana; el horario definitivo se confirma por escrito.',
       help: {
         title: '¿No encuentras las fechas que necesitas?',
-        desc: 'Todos los cursos se pueden solicitar en Almería (Granada y Málaga, próximamente). Estudiaremos una nueva sesión a partir de 10 participantes confirmados de varios centros y países, según disponibilidad de docente, sede y fechas.',
+        desc: 'Todos los cursos se pueden solicitar en Almería (Granada y Málaga, próximamente). Estudiaremos una nueva sesión a partir de 6 participantes confirmados de varios centros y países, según disponibilidad de docente, sede y fechas.',
         cta: 'Solicitar una sesión'
       }
     }

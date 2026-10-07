@@ -24,6 +24,8 @@ import PrivacyPolicy from './pages/legal/PrivacyPolicy';
 import CookiePolicy from './pages/legal/CookiePolicy';
 import TermsConditions from './pages/legal/TermsConditions';
 import LegalNotice from './pages/legal/LegalNotice';
+import Campus from './pages/Campus';
+import AdminCampus from './pages/AdminCampus';
 
 export default function App() {
   return (
@@ -46,6 +48,8 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/campus" element={<AdminCampus />} />
+            <Route path="/campus" element={<Campus />} />
             
             {/* Legal */}
             <Route path="/legal-notice" element={<LegalNotice />} />

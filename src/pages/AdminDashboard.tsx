@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Calendar, Check, Database, GraduationCap, LogOut, Mail, MessageCircle, Plus, Save, Send, Trash2, Users } from 'lucide-react';
+import { BookOpen, Calendar, Check, Database, GraduationCap, LogOut, Mail, MessageCircle, Plus, Save, Send, Trash2, Users } from 'lucide-react';
 import Button from '../components/ui/Button';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAcademyData } from '../contexts/AcademyDataContext';
@@ -94,8 +94,16 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     if (!supabase) return;
-    supabase.auth.getUser().then(({ data }) => {
-      if (!data.user) navigate('/login', { replace: true });
+    supabase.auth.getUser().then(async ({ data }) => {
+      if (!data.user) {
+        navigate('/login', { replace: true });
+        return;
+      }
+      const { data: adminRow } = await supabase!.from('admin_users').select('id').eq('id', data.user.id).maybeSingle();
+      if (!adminRow) {
+        navigate('/campus', { replace: true });
+        return;
+      }
       setAuthChecked(true);
     });
   }, [navigate]);
@@ -305,7 +313,10 @@ const AdminDashboard = () => {
             <h1 className="text-3xl font-black text-slate-900">{t('admin.nav.dashboard')}</h1>
             <p className="text-slate-500 mt-2">{t('admin.sessionsHelp')}</p>
           </div>
-          {supabase && <Button variant="outline" onClick={logout}><LogOut className="h-4 w-4 mr-2" />{t('admin.nav.logout')}</Button>}
+          <div className="flex flex-wrap gap-3">
+            <Link to="/admin/campus"><Button variant="primary"><BookOpen className="h-4 w-4 mr-2" />{language === 'es' ? 'Campus: alumnos y materiales' : 'Campus: participants and materials'}</Button></Link>
+            {supabase && <Button variant="outline" onClick={logout}><LogOut className="h-4 w-4 mr-2" />{t('admin.nav.logout')}</Button>}
+          </div>
         </div>
 
         <div className={`mb-8 rounded-2xl border p-4 flex items-center gap-3 ${mode === 'live' ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-amber-50 border-amber-200 text-amber-900'}`}>
