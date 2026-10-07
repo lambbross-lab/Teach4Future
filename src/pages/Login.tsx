@@ -73,7 +73,7 @@ const Login = () => {
               Teach4Future <span className="text-blue-600">Academy</span>
             </span>
           </Link>
-          <h1 className="text-3xl font-bold text-slate-900 mb-2">{t('nav.login')}</h1>
+          <h1 className="text-3xl font-bold text-slate-900 mb-2">{t('login.title')}</h1>
           <p className="text-slate-500">{t('login.subtitle')}</p>
         </div>
 

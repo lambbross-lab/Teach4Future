@@ -520,11 +520,12 @@ export const translations: any = {
       }
     },
     login: {
+      title: 'Campus and administration access',
       subtitle: 'Sign in to your course campus or the management dashboard.',
       password: 'Password',
       forgot: 'Forgot?',
       signIn: 'Sign In',
-      secure: 'Secure administrative access only.',
+      secure: 'Secure access for course participants and administration.',
       back: 'Back to public website',
       error: 'We could not sign you in. Check your email and password.',
       notConfigured: 'The secure dashboard will be available after the data service is connected.',
@@ -1164,11 +1165,12 @@ export const translations: any = {
       }
     },
     login: {
+      title: 'Acceso al Campus y administración',
       subtitle: 'Accede al campus de tu curso o al panel de gestión.',
       password: 'Contraseña',
       forgot: '¿Olvidaste?',
       signIn: 'Iniciar sesión',
-      secure: 'Acceso administrativo seguro solamente.',
+      secure: 'Acceso seguro para participantes y administración.',
       back: 'Volver a la web pública',
       error: 'No hemos podido iniciar sesión. Comprueba el correo y la contraseña.',
       notConfigured: 'El panel seguro estará disponible cuando se conecte el servicio de datos.',
