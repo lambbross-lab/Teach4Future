@@ -18,13 +18,13 @@ const Home = () => {
   return (
     <div className="overflow-hidden">
       {/* Hero Section - Split Layout */}
-      <section className="relative min-h-[78vh] flex items-center bg-white pt-20 pb-12">
+      <section className="relative min-h-[82vh] flex items-center bg-white pt-20 pb-12">
         <div className="absolute inset-0 z-0 opacity-30">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-blue-50/50 skew-x-[-12deg] translate-x-1/4" />
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[.92fr_1.08fr] lg:gap-12">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -61,9 +61,9 @@ const Home = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative hidden lg:block max-w-md justify-self-end w-full"
+              className="relative hidden w-full max-w-[30rem] justify-self-center lg:block"
             >
-              <div className="relative z-10 rounded-[2rem] overflow-hidden shadow-xl shadow-blue-200 aspect-[5/6]">
+              <div className="relative z-10 aspect-[4/5] overflow-hidden rounded-[2.25rem] shadow-2xl shadow-blue-200">
                 <img 
                   src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1000&q=80" 
                   alt="Teacher Training" 
@@ -74,7 +74,7 @@ const Home = () => {
               </div>
               
               {/* Floating Elements */}
-              <div className="absolute -top-4 -right-5 bg-white p-4 rounded-2xl shadow-xl z-20 animate-bounce-slow">
+              <div className="absolute -top-5 -right-5 z-20 rounded-2xl bg-white p-4 shadow-xl animate-bounce-slow">
                 <div className="flex items-center space-x-3">
                   <div className="bg-green-100 p-2 rounded-full">
                     <CheckCircle2 className="h-5 w-5 text-green-600" />
@@ -155,52 +155,51 @@ const Home = () => {
       </section>
 
       {/* Spanish-language courses across Europe */}
-      <section className="py-20 bg-blue-50/60">
+      <section className="bg-blue-50/60 py-12 md:py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-[1.1fr_.9fr] overflow-hidden rounded-[2.5rem] bg-slate-950 shadow-2xl">
-            <div className="p-10 md:p-16">
-              <p className="text-sm font-bold uppercase tracking-[0.2em] text-cyan-300 mb-5">{t('home.europe.eyebrow')}</p>
-              <h2 className="text-3xl md:text-5xl font-black text-white leading-tight mb-6">{t('home.europe.title')}</h2>
-              <p className="text-lg text-slate-300 leading-relaxed mb-9 max-w-2xl">{t('home.europe.desc')}</p>
-              <div className="space-y-4 mb-10">
+          <div className="grid overflow-hidden rounded-[2rem] bg-slate-950 shadow-xl lg:grid-cols-[1.35fr_.65fr]">
+            <div className="p-8 md:p-10">
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">{t('home.europe.eyebrow')}</p>
+              <h2 className="mb-4 text-3xl font-black leading-tight text-white md:text-4xl">{t('home.europe.title')}</h2>
+              <p className="mb-6 max-w-2xl text-base leading-relaxed text-slate-300">{t('home.europe.desc')}</p>
+              <div className="mb-7 grid gap-2 sm:grid-cols-3">
                 {['point1', 'point2', 'point3'].map((point) => (
-                  <div key={point} className="flex items-center gap-3 text-white">
-                    <CheckCircle2 className="h-5 w-5 text-cyan-300 flex-none" />
+                  <div key={point} className="flex items-center gap-2 text-sm text-white">
+                    <CheckCircle2 className="h-4 w-4 text-cyan-300 flex-none" />
                     <span>{t(`home.europe.${point}`)}</span>
                   </div>
                 ))}
               </div>
               <Link to="/courses-europe">
-                <Button size="lg" className="bg-cyan-400 text-slate-950 hover:bg-cyan-300 px-8">
+                <Button size="sm" className="bg-cyan-400 px-6 text-slate-950 hover:bg-cyan-300">
                   {t('home.europe.cta')}
                 </Button>
               </Link>
             </div>
-            <div className="relative min-h-[340px] overflow-hidden bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-500 p-8 md:p-10">
-              <div className="absolute -right-14 -top-14 h-48 w-48 rounded-full border-[22px] border-white/10" />
-              <div className="absolute -bottom-24 -left-24 h-56 w-56 rounded-full border-[30px] border-white/10" />
-              <div className="relative z-10 flex h-full flex-col">
+            <div className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-500 p-7 md:p-8">
+              <div className="absolute -right-12 -top-12 h-36 w-36 rounded-full border-[18px] border-white/10" />
+              <div className="relative z-10">
                 <div className="flex items-center justify-between gap-4">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/25 bg-white/15 text-white backdrop-blur-sm">
-                    <Globe className="h-8 w-8" strokeWidth={1.5} />
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/25 bg-white/15 text-white backdrop-blur-sm">
+                    <Globe className="h-6 w-6" strokeWidth={1.5} />
                   </div>
-                  <span className="rounded-full border border-white/25 bg-slate-950/15 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-white backdrop-blur-sm">
+                  <span className="rounded-full border border-white/25 bg-slate-950/15 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-white backdrop-blur-sm">
                     {t('home.europe.citiesLabel')}
                   </span>
                 </div>
 
-                <div className="mt-7 grid grid-cols-2 gap-3">
+                <div className="mt-5 grid grid-cols-2 gap-2">
                   {['Lisboa', 'Roma', 'Berlín', 'Praga'].map((city) => (
-                    <div key={city} className="flex items-center gap-2 rounded-2xl bg-white/15 px-4 py-3 text-white backdrop-blur-sm border border-white/20">
-                      <MapPin className="h-4 w-4 flex-none" />
+                    <div key={city} className="flex items-center gap-2 rounded-xl border border-white/20 bg-white/15 px-3 py-2 text-sm text-white backdrop-blur-sm">
+                      <MapPin className="h-3.5 w-3.5 flex-none" />
                       <span className="font-semibold">{city}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="mt-auto rounded-2xl border border-white/25 bg-slate-950/20 p-4 text-white backdrop-blur-sm">
-                  <p className="text-sm font-bold">{t('home.europe.citiesPrompt')}</p>
-                  <p className="mt-1 text-xs leading-relaxed text-white/80">{t('common.europeCaption')}</p>
+                <div className="mt-5 rounded-xl border border-white/25 bg-slate-950/20 p-3 text-white backdrop-blur-sm">
+                  <p className="text-xs font-bold leading-relaxed">{t('home.europe.citiesPrompt')}</p>
+                  <p className="mt-1 text-[11px] leading-relaxed text-white/80">{t('common.europeCaption')}</p>
                 </div>
               </div>
             </div>

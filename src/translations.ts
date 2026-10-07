@@ -631,6 +631,20 @@ export const translations: any = {
         almostFull: 'Almost Full',
         waitingList: 'Waiting List',
         closed: 'Closed'
+      },
+      chat: {
+        title: 'Live chat',
+        help: 'Turn availability on only when you can reply. New conversations refresh automatically.',
+        available: 'Team available now',
+        unavailable: 'Team unavailable',
+        empty: 'There are no live conversations yet.',
+        visitor: 'Website visitor',
+        newMessage: 'New visitor message',
+        teamReply: 'Team reply',
+        placeholder: 'Write a reply…',
+        send: 'Send reply',
+        select: 'Choose a conversation to reply.',
+        error: 'We could not load the chat. Refresh the page and try again.'
       }
     },
     dates: {
@@ -1288,7 +1302,6 @@ export const translations: any = {
         almostFull: 'Casi completo',
         waitingList: 'Lista de espera',
         closed: 'Cerrado'
-        }
       },
       chat: {
         title: 'Chat en directo',
@@ -1304,6 +1317,7 @@ export const translations: any = {
         select: 'Elige una conversación para responder.',
         error: 'No hemos podido cargar el chat. Actualiza la página e inténtalo de nuevo.'
       },
+    },
     dates: {
       title: 'Fechas y disponibilidad',
       subtitle: 'Ofrecemos todos los cursos en la misma semana. Cada semana se imparten como máximo dos (uno de mañana y otro de tarde): los de mayor demanda. Si tu curso no alcanza el mínimo, te ofreceremos cambiar a otro de esa semana; el horario definitivo se confirma por escrito.',

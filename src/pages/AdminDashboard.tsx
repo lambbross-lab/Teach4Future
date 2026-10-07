@@ -367,8 +367,8 @@ const AdminDashboard = () => {
           ))}
         </div>
 
-        <div className="grid gap-8 xl:grid-cols-[minmax(0,1.45fr)_minmax(340px,.8fr)]">
-        <section className="order-2 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm xl:sticky xl:top-24">
+        <div className="grid gap-8 xl:grid-cols-2">
+        <section className="order-2 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
           <div className="flex flex-col gap-4 border-b border-slate-100 p-6 md:flex-row md:items-center md:justify-between md:p-8">
             <div>
               <h2 className="flex items-center gap-2 text-xl font-bold text-slate-900"><MessageCircle className="h-5 w-5 text-blue-600" />{t('admin.chat.title')}</h2>
@@ -380,8 +380,8 @@ const AdminDashboard = () => {
             </button>
           </div>
           {chatError ? <p className="p-6 text-sm font-semibold text-red-700">{t('admin.chat.error')}</p> : (
-            <div className="grid min-h-[360px] lg:grid-cols-[300px_1fr]">
-              <div className="border-b border-slate-100 lg:border-b-0 lg:border-r">
+            <div className="grid min-h-[320px] xl:grid-cols-[180px_1fr]">
+              <div className="border-b border-slate-100 xl:border-b-0 xl:border-r">
                 {conversations.length === 0 ? <p className="p-6 text-sm text-slate-500">{t('admin.chat.empty')}</p> : conversations.map((conversation) => (
                   <button type="button" key={conversation.id} onClick={() => setSelectedConversationId(conversation.id)} className={`block w-full border-b border-slate-100 px-5 py-4 text-left transition-colors ${selectedConversationId === conversation.id ? 'bg-blue-50' : 'hover:bg-slate-50'}`}>
                     <div className="flex items-center justify-between gap-3"><span className="font-bold text-slate-800">{t('admin.chat.visitor')}</span><span className="text-xs text-slate-400">{new Intl.DateTimeFormat(language === 'es' ? 'es-ES' : 'en-GB', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(conversation.last_message_at))}</span></div>
@@ -389,7 +389,7 @@ const AdminDashboard = () => {
                   </button>
                 ))}
               </div>
-              <div className="flex min-h-[360px] flex-col p-5 md:p-6">
+              <div className="flex min-h-[320px] flex-col p-5 md:p-6">
                 {selectedConversationId ? <>
                   <div className="flex-1 space-y-3 overflow-y-auto">
                     {chatMessages.map((message) => <div key={message.id} className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${message.sender === 'team' ? 'ml-auto rounded-tr-md bg-blue-600 text-white' : 'rounded-tl-md bg-slate-100 text-slate-700'}`}>{message.content}</div>)}
@@ -405,7 +405,7 @@ const AdminDashboard = () => {
           {enquiryActionError && <p role="alert" className="border-t border-red-100 bg-red-50 px-6 py-4 text-sm font-semibold text-red-700">{enquiryActionError}</p>}
         </section>
 
-        <section className="order-3 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm xl:col-span-2">
+        <section className="order-3 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
           <div className="flex items-center justify-between gap-4 border-b border-slate-100 p-6 md:p-8">
             <div>
               <h2 className="flex items-center gap-2 text-xl font-bold text-slate-900"><Mail className="h-5 w-5 text-blue-600" />{t('admin.enquiries.title')}</h2>
@@ -454,7 +454,7 @@ const AdminDashboard = () => {
           )}
         </section>
 
-        <section className="order-1 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+        <section className="order-1 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm xl:col-span-2">
           <div className="p-6 md:p-8 border-b border-slate-100 flex items-center justify-between gap-4">
             <h2 className="text-xl font-bold text-slate-900">{t('admin.sessionsTitle')}</h2>
             <Button size="sm" disabled={mode !== 'live'} onClick={() => setIsCreatorOpen((open) => !open)}><Plus className="h-4 w-4 mr-2" />{t('admin.addSession')}</Button>
