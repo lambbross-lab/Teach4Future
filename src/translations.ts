@@ -51,7 +51,7 @@ export const translations: any = {
         subtitle: 'Feedback from verified participants will appear here after the first courses.'
       },
       cta: {
-        title: 'Ready to start your Erasmus+ journey?',
+        title: 'Ready to develop your teaching practice?',
         subtitle: 'Join our next session and bring innovation back to your school.',
         button: 'View All Dates'
       },
@@ -61,7 +61,7 @@ export const translations: any = {
         desc: 'We are preparing Spanish-language editions in other European cities together with local organisations. Tell us which destination, topic and dates interest you: each edition brings together teachers from several schools and countries and is only confirmed in writing once it meets the programme requirements.',
         point1: 'Training delivered in Spanish',
         point2: 'Teachers from several schools and countries',
-        point3: 'Erasmus+ requirements checked before confirming',
+        point3: 'Conditions confirmed in writing before booking',
         cta: 'Register your interest'
       },
       schoolsSupport: {
@@ -110,7 +110,7 @@ export const translations: any = {
       trainers: 'Connect with expert trainers',
       openMenu: 'Open menu',
       closeMenu: 'Close menu',
-      europeCaption: 'Erasmus+ · Training in Spanish · Teachers from across Europe',
+      europeCaption: 'Training in Spanish · Teachers from across Europe',
       priorityCourse: 'Priority course',
       groupsCourse: 'For groups',
     },
@@ -129,7 +129,7 @@ export const translations: any = {
       answers: {
         courses: 'You can explore our practical, five-day teacher-training courses in English in Spain. Each course includes its objectives, programme and relevant details.',
         dates: 'Confirmed dates and available places are shown separately. If a course is available on request, you can ask us to open an edition in Almería (Granada and Málaga coming soon).',
-        schools: 'We prepare training proposals for schools and Erasmus+ coordinators across Europe. Each edition is confirmed with 6 participants from several schools and countries; with Erasmus+, up to 3 teachers per school.',
+        schools: 'We prepare training proposals for schools and international coordinators across Europe. Each edition is confirmed with participants from several schools and countries.',
         enrolment: 'You can send us your details and preferred course through a short form. Sending the request does not reserve a place or create any payment obligation.',
       },
       actions: {
@@ -212,7 +212,7 @@ export const translations: any = {
       badge: 'European editions in preparation',
       title: 'Suggest a city,',
       titleAccent: 'we will study an open edition.',
-      subtitle: 'We want to bring our Spanish-language courses to other European cities, in collaboration with organisations established in each country. Tell us which destination and topic interest you and we will let you know when an edition is confirmed and meets the Erasmus+ requirements.',
+      subtitle: 'We want to bring our Spanish-language courses to other European cities, in collaboration with organisations established in each country. Tell us which destination and topic interest you and we will let you know when an edition is confirmed.',
       requestTitle: 'Register your interest',
       requestSubtitle: 'Fill in the form and we will let you know when there is an edition in that destination.',
       formCity: 'Preferred City',
@@ -234,8 +234,8 @@ export const translations: any = {
       topicPlaceholder: 'Select a topic',
       cityPlaceholder: 'e.g. Berlin',
       datesPlaceholder: 'e.g. July 2027',
-      sizePlaceholder: 'Number of teachers (max. 3 per school with Erasmus+)',
-      priceNote: 'Course fee: €480 per participant for 5 days and 25 guided hours. VAT included or exempt, as applicable. Each edition is confirmed once it reaches 15 participants from several schools and countries. When places are part of an Erasmus+ KA1 project, each school can enrol up to 3 teachers per course (10 for a mobility consortium).',
+      sizePlaceholder: 'Number of interested teachers',
+      priceNote: 'Course fee: €480 per participant for 5 days and 25 guided hours. VAT included or exempt, as applicable. Each edition is confirmed once it reaches 15 participants from several schools and countries.',
       schoolPlaceholder: 'Name of your school',
       notesPlaceholder: 'Tell us more about your needs...',
       topics: {
@@ -261,7 +261,7 @@ export const translations: any = {
       school: 'School / institution name',
       participants: 'Approximate number of participants',
       invoice: 'I would like information about invoicing for my school',
-      letter: 'I would like information about an Erasmus+ acceptance letter',
+      letter: 'I would like information about course documentation',
       notes: 'Questions or additional information',
       notesPlaceholder: 'Preferred dates, accessibility needs or any question...',
       submit: 'Send information request',
@@ -277,7 +277,7 @@ export const translations: any = {
       letterNote: 'If requested, we will explain the acceptance-letter process.',
     },
     footer: {
-      about: 'Practical Erasmus+ training for educators in Spain and tailor-made courses across Europe.',
+      about: 'Practical teacher training in Spain and tailor-made courses across Europe.',
       explore: 'Explore',
       support: 'Support',
       contact: 'Contact',
@@ -399,7 +399,7 @@ export const translations: any = {
       badge: 'Get in Touch',
       title: "We're Here to",
       titleAccent: 'Help You Grow.',
-      subtitle: 'Have questions about our courses, Erasmus+ funding or a custom group proposal? Write to us and we will review your request.',
+      subtitle: 'Have questions about our courses, booking or a custom group proposal? Write to us and we will review your request.',
       info: {
         email: { title: 'Email Us', desc: 'We reply as soon as possible' },
         phone: { title: 'Call Us', desc: 'Mon-Fri, 9:00-18:00' },
@@ -417,7 +417,7 @@ export const translations: any = {
         subjects: {
           general: 'General Inquiry',
           enrolment: 'Enrolment Question',
-          funding: 'Erasmus+ Funding',
+          funding: 'Booking and payment',
           custom: 'Custom Group Training',
           partnership: 'Partnership Opportunity'
         },
@@ -696,7 +696,7 @@ export const translations: any = {
         subtitle: 'Publicaremos opiniones de participantes verificadas después de los primeros cursos.'
       },
       cta: {
-        title: '¿Listo para empezar tu viaje Erasmus+?',
+        title: '¿Listo para desarrollar tu práctica docente?',
         subtitle: 'Únete a nuestra próxima sesión y lleva la innovación a tu centro.',
         button: 'Ver todas las fechas'
       },
@@ -706,7 +706,7 @@ export const translations: any = {
         desc: 'Estamos preparando ediciones en español en otras ciudades europeas junto a entidades locales. Cuéntanos qué destino, tema y fechas te interesan: cada edición reúne docentes de varios centros y países y solo se confirma por escrito cuando cumple los requisitos del programa.',
         point1: 'Formación impartida en español',
         point2: 'Docentes de varios centros y países',
-        point3: 'Requisitos Erasmus+ revisados antes de confirmar',
+        point3: 'Condiciones confirmadas por escrito antes de reservar',
         cta: 'Registrar interés'
       },
       schoolsSupport: {
@@ -755,7 +755,7 @@ export const translations: any = {
       trainers: 'Conecta con formadores expertos',
       openMenu: 'Abrir menú',
       closeMenu: 'Cerrar menú',
-      europeCaption: 'Erasmus+ · Formación en español · Docentes de toda Europa',
+      europeCaption: 'Formación en español · Docentes de toda Europa',
       priorityCourse: 'Curso prioritario',
       groupsCourse: 'Para grupos',
     },
@@ -774,7 +774,7 @@ export const translations: any = {
       answers: {
         courses: 'Puedes explorar nuestros cursos prácticos de formación docente en inglés, de cinco días, en España. Cada curso muestra sus objetivos, programa y datos relevantes.',
         dates: 'Las fechas y plazas confirmadas se muestran por separado. Si un curso está disponible bajo demanda, puedes solicitar una edición en Almería (Granada y Málaga, próximamente).',
-        schools: 'Preparamos propuestas de formación para centros y coordinadores Erasmus+ de toda Europa. Cada edición se confirma con 6 participantes de varios centros y países; con Erasmus+, hasta 3 docentes por centro.',
+        schools: 'Preparamos propuestas de formación para centros y coordinadores internacionales de toda Europa. Cada edición se confirma con participantes de varios centros y países.',
         enrolment: 'Puedes enviarnos tus datos y el curso que te interesa mediante un formulario breve. La solicitud no reserva plaza ni genera ninguna obligación de pago.',
       },
       actions: {
@@ -857,7 +857,7 @@ export const translations: any = {
       badge: 'Ediciones europeas en preparación',
       title: 'Propón una ciudad,',
       titleAccent: 'estudiamos una edición abierta.',
-      subtitle: 'Queremos llevar nuestros cursos en español a otras ciudades europeas, en colaboración con entidades establecidas en cada país. Cuéntanos qué destino y qué tema te interesan y te avisaremos cuando una edición esté confirmada y cumpla los requisitos de Erasmus+.',
+      subtitle: 'Queremos llevar nuestros cursos en español a otras ciudades europeas, en colaboración con entidades establecidas en cada país. Cuéntanos qué destino y qué tema te interesan y te avisaremos cuando una edición esté confirmada.',
       requestTitle: 'Registrar interés',
       requestSubtitle: 'Rellena el formulario y te avisaremos cuando haya una edición en ese destino.',
       formCity: 'Ciudad preferida',
@@ -879,8 +879,8 @@ export const translations: any = {
       topicPlaceholder: 'Selecciona un tema',
       cityPlaceholder: 'p. ej., Berlín',
       datesPlaceholder: 'p. ej., julio de 2027',
-      sizePlaceholder: 'Número de docentes (máx. 3 por centro con Erasmus+)',
-      priceNote: 'Precio del curso: 480 € por participante durante 5 días y 25 horas lectivas guiadas. IVA incluido o exento, según corresponda. Cada edición se confirma al alcanzar 15 participantes de varios centros y países. Cuando las plazas forman parte de un proyecto Erasmus+ KA1, cada centro puede inscribir hasta 3 docentes por curso (10 si va en consorcio).',
+      sizePlaceholder: 'Número de docentes interesados',
+      priceNote: 'Precio del curso: 480 € por participante durante 5 días y 25 horas lectivas guiadas. IVA incluido o exento, según corresponda. Cada edición se confirma al alcanzar 15 participantes de varios centros y países.',
       schoolPlaceholder: 'Nombre de tu centro',
       notesPlaceholder: 'Cuéntanos qué necesitáis...',
       topics: {
@@ -906,7 +906,7 @@ export const translations: any = {
       school: 'Nombre del centro / institución',
       participants: 'Número aproximado de participantes',
       invoice: 'Quiero información sobre la facturación para mi centro',
-      letter: 'Quiero información sobre la carta de aceptación Erasmus+',
+      letter: 'Quiero información sobre la documentación del curso',
       notes: 'Preguntas o información adicional',
       notesPlaceholder: 'Fechas preferidas, necesidades de accesibilidad o cualquier duda...',
       submit: 'Enviar solicitud de información',
@@ -922,7 +922,7 @@ export const translations: any = {
       letterNote: 'Si la has solicitado, te explicaremos el proceso de la carta de aceptación.',
     },
     footer: {
-      about: 'Formación Erasmus+ práctica para docentes en España y cursos a medida por toda Europa.',
+      about: 'Formación docente práctica en España y cursos a medida por toda Europa.',
       explore: 'Explorar',
       support: 'Ayuda',
       contact: 'Contacto',
@@ -1044,7 +1044,7 @@ export const translations: any = {
       badge: 'Ponte en contacto',
       title: 'Estamos aquí para',
       titleAccent: 'ayudarte a crecer.',
-      subtitle: '¿Tienes preguntas sobre los cursos, la financiación Erasmus+ o una propuesta para grupos? Escríbenos y revisaremos tu solicitud.',
+      subtitle: '¿Tienes preguntas sobre los cursos, la contratación o una propuesta para grupos? Escríbenos y revisaremos tu solicitud.',
       info: {
         email: { title: 'Escríbenos', desc: 'Respondemos lo antes posible' },
         phone: { title: 'Llámanos', desc: 'Lun-Vie, 9:00-18:00' },
@@ -1062,7 +1062,7 @@ export const translations: any = {
         subjects: {
           general: 'Consulta general',
           enrolment: 'Pregunta sobre inscripción',
-          funding: 'Financiación Erasmus+',
+          funding: 'Contratación y pago',
           custom: 'Formación de grupo a medida',
           partnership: 'Oportunidad de colaboración'
         },
