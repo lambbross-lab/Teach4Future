@@ -25,7 +25,31 @@ const CoursesInSpain = () => {
       const matchesCategory = selectedCategory === 'all' || course.category === selectedCategory;
       return matchesSearch && matchesCategory;
     }).sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)));
-  }, [searchQuery, selectedCity, selectedCategory, language, sessions]);
+  }, [searchQuery, selectedCategory, language]);
+
+  const courseCards = useMemo(() => {
+    const matchingCourseIds = new Set(filteredCourses.map((course) => course.id));
+    const activeSessions = sessions
+      .filter((session) => (
+        matchingCourseIds.has(session.courseId)
+        && isCurrentOrUpcoming(session.endDate)
+        && (selectedCity === 'all' || session.cityId === selectedCity)
+      ))
+      .sort((a, b) => a.startDate.localeCompare(b.startDate));
+
+    const courseById = new Map(COURSES.map((course) => [course.id, course]));
+    const scheduledCards = activeSessions.flatMap((session) => {
+      const course = courseById.get(session.courseId);
+      return course ? [{ course, session }] : [];
+    });
+    const scheduledCourseIds = new Set(activeSessions.map((session) => session.courseId));
+    const demandCityName = selectedCity === 'all' ? undefined : CITIES.find((city) => city.id === selectedCity)?.name;
+    const onDemandCards = filteredCourses
+      .filter((course) => !scheduledCourseIds.has(course.id))
+      .map((course) => ({ course, session: undefined, demandCityName }));
+
+    return [...scheduledCards, ...onDemandCards];
+  }, [filteredCourses, selectedCity, sessions]);
 
   const categories = Array.from(new Set(COURSES.map(c => c.category)));
 
@@ -153,15 +177,11 @@ const CoursesInSpain = () => {
         </div>
 
         {/* Results */}
-        {filteredCourses.length > 0 ? (
+        {courseCards.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredCourses.map((course) => {
-              const nextSession = sessions
-                .filter(session => session.courseId === course.id && isCurrentOrUpcoming(session.endDate) && (selectedCity === 'all' || session.cityId === selectedCity))
-                .sort((a, b) => a.startDate.localeCompare(b.startDate))[0];
-              const selectedCityName = selectedCity === 'all' ? undefined : CITIES.find((city) => city.id === selectedCity)?.name;
-              return <CourseCard key={course.id} course={course} session={nextSession} demandCityName={selectedCityName} />;
-            })}
+            {courseCards.map(({ course, session, demandCityName }) => (
+              <CourseCard key={session ? session.id : `demand-${course.id}`} course={course} session={session} demandCityName={demandCityName} />
+            ))}
           </div>
         ) : (
           <div className="text-center py-20 bg-white rounded-3xl border border-dashed border-slate-200">
