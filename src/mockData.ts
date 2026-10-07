@@ -191,7 +191,7 @@ export const COURSES: Course[] = [
       { en: 'Digital course materials', es: 'Materiales digitales del curso' },
     ],
     erasmusRelevance: { en: 'Strengthens the European dimension, transnational exchange and participation in common European values.', es: 'Refuerza la dimensión europea, el intercambio transnacional y la participación en valores europeos comunes.' },
-    courseImage: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80',
+    courseImage: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80',
     featured: true
   },
   {

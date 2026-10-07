@@ -62,6 +62,8 @@ export const translations: any = {
         point1: 'Training delivered in Spanish',
         point2: 'Teachers from several schools and countries',
         point3: 'Designed around KA1 course quality standards',
+        citiesLabel: 'European cities',
+        citiesPrompt: 'Is your city not listed? Tell us where you would like to learn.',
         cta: 'Register your interest'
       },
       schoolsSupport: {
@@ -717,6 +719,8 @@ export const translations: any = {
         point1: 'Formación impartida en español',
         point2: 'Docentes de varios centros y países',
         point3: 'Diseñados según los estándares de calidad de cursos KA1',
+        citiesLabel: 'Ciudades europeas',
+        citiesPrompt: '¿No ves tu ciudad? Cuéntanos dónde te gustaría formarte.',
         cta: 'Registrar interés'
       },
       schoolsSupport: {

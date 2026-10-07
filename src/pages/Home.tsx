@@ -18,19 +18,19 @@ const Home = () => {
   return (
     <div className="overflow-hidden">
       {/* Hero Section - Split Layout */}
-      <section className="relative min-h-[90vh] flex items-center bg-white pt-20">
+      <section className="relative min-h-[78vh] flex items-center bg-white pt-20 pb-12">
         <div className="absolute inset-0 z-0 opacity-30">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-blue-50/50 skew-x-[-12deg] translate-x-1/4" />
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tight mb-6 leading-[1.05]">
+              <h1 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tight mb-6 leading-[1.05]">
                 {t('hero.title')} <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
                   {t('hero.titleAccent')}
@@ -61,9 +61,9 @@ const Home = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative hidden lg:block"
+              className="relative hidden lg:block max-w-md justify-self-end w-full"
             >
-              <div className="relative z-10 rounded-[2.5rem] overflow-hidden shadow-2xl shadow-blue-200 aspect-[4/5]">
+              <div className="relative z-10 rounded-[2rem] overflow-hidden shadow-xl shadow-blue-200 aspect-[5/6]">
                 <img 
                   src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1000&q=80" 
                   alt="Teacher Training" 
@@ -74,7 +74,7 @@ const Home = () => {
               </div>
               
               {/* Floating Elements */}
-              <div className="absolute -top-6 -right-6 bg-white p-6 rounded-3xl shadow-xl z-20 animate-bounce-slow">
+              <div className="absolute -top-4 -right-5 bg-white p-4 rounded-2xl shadow-xl z-20 animate-bounce-slow">
                 <div className="flex items-center space-x-3">
                   <div className="bg-green-100 p-2 rounded-full">
                     <CheckCircle2 className="h-5 w-5 text-green-600" />
@@ -176,18 +176,32 @@ const Home = () => {
                 </Button>
               </Link>
             </div>
-            <div className="relative min-h-[340px] bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-500 p-10 md:p-14 flex flex-col justify-between">
-              <Globe className="h-24 w-24 text-white/90" strokeWidth={1.25} />
-              <div>
-                <div className="grid grid-cols-2 gap-3 mb-8">
+            <div className="relative min-h-[340px] overflow-hidden bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-500 p-8 md:p-10">
+              <div className="absolute -right-14 -top-14 h-48 w-48 rounded-full border-[22px] border-white/10" />
+              <div className="absolute -bottom-24 -left-24 h-56 w-56 rounded-full border-[30px] border-white/10" />
+              <div className="relative z-10 flex h-full flex-col">
+                <div className="flex items-center justify-between gap-4">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/25 bg-white/15 text-white backdrop-blur-sm">
+                    <Globe className="h-8 w-8" strokeWidth={1.5} />
+                  </div>
+                  <span className="rounded-full border border-white/25 bg-slate-950/15 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-white backdrop-blur-sm">
+                    {t('home.europe.citiesLabel')}
+                  </span>
+                </div>
+
+                <div className="mt-7 grid grid-cols-2 gap-3">
                   {['Lisboa', 'Roma', 'Berlín', 'Praga'].map((city) => (
                     <div key={city} className="flex items-center gap-2 rounded-2xl bg-white/15 px-4 py-3 text-white backdrop-blur-sm border border-white/20">
-                      <MapPin className="h-4 w-4" />
+                      <MapPin className="h-4 w-4 flex-none" />
                       <span className="font-semibold">{city}</span>
                     </div>
                   ))}
                 </div>
-                <p className="text-white/80 text-sm">{t('common.europeCaption')}</p>
+
+                <div className="mt-auto rounded-2xl border border-white/25 bg-slate-950/20 p-4 text-white backdrop-blur-sm">
+                  <p className="text-sm font-bold">{t('home.europe.citiesPrompt')}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-white/80">{t('common.europeCaption')}</p>
+                </div>
               </div>
             </div>
           </div>
