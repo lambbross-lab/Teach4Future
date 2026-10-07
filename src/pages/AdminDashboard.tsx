@@ -367,7 +367,8 @@ const AdminDashboard = () => {
           ))}
         </div>
 
-        <section className="mb-8 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+        <div className="grid gap-8 xl:grid-cols-[minmax(0,1.45fr)_minmax(340px,.8fr)]">
+        <section className="order-2 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm xl:sticky xl:top-24">
           <div className="flex flex-col gap-4 border-b border-slate-100 p-6 md:flex-row md:items-center md:justify-between md:p-8">
             <div>
               <h2 className="flex items-center gap-2 text-xl font-bold text-slate-900"><MessageCircle className="h-5 w-5 text-blue-600" />{t('admin.chat.title')}</h2>
@@ -404,7 +405,7 @@ const AdminDashboard = () => {
           {enquiryActionError && <p role="alert" className="border-t border-red-100 bg-red-50 px-6 py-4 text-sm font-semibold text-red-700">{enquiryActionError}</p>}
         </section>
 
-        <section className="mb-8 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+        <section className="order-3 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm xl:col-span-2">
           <div className="flex items-center justify-between gap-4 border-b border-slate-100 p-6 md:p-8">
             <div>
               <h2 className="flex items-center gap-2 text-xl font-bold text-slate-900"><Mail className="h-5 w-5 text-blue-600" />{t('admin.enquiries.title')}</h2>
@@ -453,7 +454,7 @@ const AdminDashboard = () => {
           )}
         </section>
 
-        <section className="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
+        <section className="order-1 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
           <div className="p-6 md:p-8 border-b border-slate-100 flex items-center justify-between gap-4">
             <h2 className="text-xl font-bold text-slate-900">{t('admin.sessionsTitle')}</h2>
             <Button size="sm" disabled={mode !== 'live'} onClick={() => setIsCreatorOpen((open) => !open)}><Plus className="h-4 w-4 mr-2" />{t('admin.addSession')}</Button>
@@ -494,28 +495,46 @@ const AdminDashboard = () => {
               <button type="button" className="text-sm font-semibold text-slate-500 hover:text-slate-700" onClick={() => setIsCreatorOpen(false)}>{t('common.cancel')}</button>
             </div>
           </div>}
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[1080px] text-left">
-              <thead className="bg-slate-50 text-xs uppercase tracking-wider text-slate-500"><tr>
-                <th className="px-6 py-4">{t('admin.table.course')}</th><th className="px-6 py-4">{t('coursesSpain.city')}</th><th className="px-6 py-4">{t('admin.table.startDate')}</th><th className="px-6 py-4">{t('admin.table.endDate')}</th><th className="px-6 py-4">{t('admin.totalSeats')}</th><th className="px-6 py-4">{t('admin.table.status')}</th><th className="px-6 py-4 text-right">{t('admin.table.actions')}</th>
-              </tr></thead>
-              <tbody className="divide-y divide-slate-100">
-                {drafts.map((session) => {
-                  return <tr key={session.id}>
-                    <td className="px-6 py-5 font-semibold text-slate-900"><select value={session.courseId} onChange={(event) => patchDraft(session.id, { courseId: event.target.value })} className="max-w-64 rounded-lg border border-slate-200 px-3 py-2 bg-white">{COURSES.map((item) => <option key={item.id} value={item.id}>{getText(item.title, language)}</option>)}</select></td>
-                    <td className="px-6 py-5 text-slate-600"><select value={session.cityId} onChange={(event) => patchDraft(session.id, { cityId: event.target.value })} className="rounded-lg border border-slate-200 px-3 py-2 bg-white">{CITIES.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}</select></td>
-                    <td className="px-6 py-5"><input aria-label={t('admin.table.startDate')} type="date" min={today} value={session.startDate} onChange={(event) => patchDraft(session.id, { startDate: event.target.value, endDate: session.endDate < event.target.value ? addDays(event.target.value, 4) : session.endDate })} className="rounded-lg border border-slate-200 px-3 py-2" /></td>
-                    <td className="px-6 py-5"><input aria-label={t('admin.table.endDate')} type="date" min={session.startDate > today ? session.startDate : today} value={session.endDate} onChange={(event) => patchDraft(session.id, { endDate: event.target.value })} className="rounded-lg border border-slate-200 px-3 py-2" /></td>
-                    <td className="px-6 py-5"><input aria-label={t('admin.totalSeats')} type="number" min="1" value={session.seatsTotal} onChange={(event) => patchDraft(session.id, { seatsTotal: Number(event.target.value) })} className="w-20 rounded-lg border border-slate-200 px-3 py-2" /><p className="mt-1 text-xs text-slate-500">{session.seatsLeft} {t('common.seatsLeft')}</p></td>
-                    <td className="px-6 py-5"><span className="text-sm font-semibold text-slate-700">{automaticSessionStatus(session) === 'Open' ? t('admin.status.open') : automaticSessionStatus(session) === 'Almost Full' ? t('admin.status.almostFull') : automaticSessionStatus(session) === 'Waiting List' ? t('admin.status.waitingList') : t('admin.status.closed')}</span><p className="mt-1 text-xs text-slate-500">{t('admin.automatic')}</p></td>
-                    <td className="px-6 py-5 text-right"><div className="flex justify-end gap-2"><Button size="sm" disabled={mode !== 'live' || savingId === session.id} onClick={() => saveSession(session)}>{savedId === session.id ? <Check className="h-4 w-4 mr-2" /> : <Save className="h-4 w-4 mr-2" />}{savedId === session.id ? t('admin.saved') : t('admin.save')}</Button><Button variant="outline" size="sm" disabled={mode !== 'live'} onClick={() => removeSession(session.id)} aria-label={t('admin.deleteSession')}><Trash2 className="h-4 w-4" /></Button></div></td>
-                  </tr>;
-                })}
-              </tbody>
-            </table>
+          <div className="grid gap-4 bg-slate-50/70 p-4 md:grid-cols-2 md:p-6">
+            {drafts.map((session) => {
+              const autoStatus = automaticSessionStatus(session);
+              const statusLabel = autoStatus === 'Open' ? t('admin.status.open') : autoStatus === 'Almost Full' ? t('admin.status.almostFull') : autoStatus === 'Waiting List' ? t('admin.status.waitingList') : t('admin.status.closed');
+              const statusClass = autoStatus === 'Open' ? 'bg-emerald-50 text-emerald-700' : autoStatus === 'Almost Full' ? 'bg-amber-50 text-amber-700' : autoStatus === 'Waiting List' ? 'bg-violet-50 text-violet-700' : 'bg-slate-100 text-slate-600';
+              return <article key={session.id} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0 flex-1">
+                    <label className="text-xs font-bold uppercase tracking-wide text-slate-500">{t('admin.table.course')}</label>
+                    <select value={session.courseId} onChange={(event) => patchDraft(session.id, { courseId: event.target.value })} className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-900">{COURSES.map((item) => <option key={item.id} value={item.id}>{getText(item.title, language)}</option>)}</select>
+                  </div>
+                  <span className={`mt-5 shrink-0 rounded-full px-2.5 py-1 text-xs font-bold ${statusClass}`}>{statusLabel}</span>
+                </div>
+                <div className="mt-4 grid grid-cols-2 gap-3">
+                  <label className="text-xs font-bold uppercase tracking-wide text-slate-500">{t('coursesSpain.city')}
+                    <select value={session.cityId} onChange={(event) => patchDraft(session.id, { cityId: event.target.value })} className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold normal-case text-slate-800">{CITIES.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}</select>
+                  </label>
+                  <label className="text-xs font-bold uppercase tracking-wide text-slate-500">{t('admin.totalSeats')}
+                    <div className="mt-1 flex items-center gap-2">
+                      <input aria-label={t('admin.totalSeats')} type="number" min="1" value={session.seatsTotal} onChange={(event) => patchDraft(session.id, { seatsTotal: Number(event.target.value) })} className="min-w-0 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-800" />
+                      <span className="whitespace-nowrap text-xs font-semibold text-slate-500">{session.seatsLeft} {t('common.seatsLeft')}</span>
+                    </div>
+                  </label>
+                  <label className="text-xs font-bold uppercase tracking-wide text-slate-500">{t('admin.table.startDate')}
+                    <input aria-label={t('admin.table.startDate')} type="date" min={today} value={session.startDate} onChange={(event) => patchDraft(session.id, { startDate: event.target.value, endDate: session.endDate < event.target.value ? addDays(event.target.value, 4) : session.endDate })} className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm font-semibold normal-case text-slate-800" />
+                  </label>
+                  <label className="text-xs font-bold uppercase tracking-wide text-slate-500">{t('admin.table.endDate')}
+                    <input aria-label={t('admin.table.endDate')} type="date" min={session.startDate > today ? session.startDate : today} value={session.endDate} onChange={(event) => patchDraft(session.id, { endDate: event.target.value })} className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm font-semibold normal-case text-slate-800" />
+                  </label>
+                </div>
+                <div className="mt-5 flex items-center justify-between gap-3 border-t border-slate-100 pt-4">
+                  <p className="text-xs text-slate-500">{t('admin.automatic')}</p>
+                  <div className="flex gap-2"><Button size="sm" disabled={mode !== 'live' || savingId === session.id} onClick={() => saveSession(session)}>{savedId === session.id ? <Check className="mr-2 h-4 w-4" /> : <Save className="mr-2 h-4 w-4" />}{savedId === session.id ? t('admin.saved') : t('admin.save')}</Button><Button variant="outline" size="sm" disabled={mode !== 'live'} onClick={() => removeSession(session.id)} aria-label={t('admin.deleteSession')}><Trash2 className="h-4 w-4" /></Button></div>
+                </div>
+              </article>;
+            })}
           </div>
           {saveError && <p role="alert" className="border-t border-red-100 bg-red-50 px-6 py-4 text-sm font-semibold text-red-700">{saveError}</p>}
         </section>
+        </div>
       </div>
     </div>
   );
