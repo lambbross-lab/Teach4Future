@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, MapPin, Instagram, LockKeyhole } from 'lucide-react';
+import { Mail, MapPin, Instagram, Facebook, Linkedin, LockKeyhole } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const Footer = () => {
@@ -30,6 +30,8 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a href="https://www.instagram.com/teach4future_academy/" target="_blank" rel="noreferrer" aria-label="Instagram: teach4future_academy" className="hover:text-blue-500 transition-colors"><Instagram className="h-5 w-5" /></a>
+              <a href="https://www.facebook.com/profile.php?id=61594788587365" target="_blank" rel="noreferrer" aria-label="Facebook: Teach4Future Academy" className="hover:text-blue-500 transition-colors"><Facebook className="h-5 w-5" /></a>
+              <a href="https://www.linkedin.com/company/teach4future-academy/" target="_blank" rel="noreferrer" aria-label="LinkedIn: Teach4Future Academy" className="hover:text-blue-500 transition-colors"><Linkedin className="h-5 w-5" /></a>
             </div>
           </div>
 

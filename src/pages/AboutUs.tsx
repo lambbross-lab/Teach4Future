@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Award, Heart, Globe } from 'lucide-react';
+import { Award, Heart, Globe, Facebook, Instagram, Linkedin } from 'lucide-react';
 import Button from '../components/ui/Button';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -79,9 +79,17 @@ const AboutUs = () => {
           <p className="text-slate-600 max-w-2xl mx-auto mb-10">
             {t('about.joinDesc')}
           </p>
-          <a href="https://www.instagram.com/teach4future_academy/" target="_blank" rel="noreferrer">
-            <Button variant="outline">{t('about.followInstagram')}</Button>
-          </a>
+          <div className="flex flex-wrap justify-center gap-3">
+            <a href="https://www.instagram.com/teach4future_academy/" target="_blank" rel="noreferrer">
+              <Button variant="outline" className="inline-flex items-center gap-2"><Instagram className="h-4 w-4" />{t('about.followInstagram')}</Button>
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61594788587365" target="_blank" rel="noreferrer">
+              <Button variant="outline" className="inline-flex items-center gap-2"><Facebook className="h-4 w-4" />Facebook</Button>
+            </a>
+            <a href="https://www.linkedin.com/company/teach4future-academy/" target="_blank" rel="noreferrer">
+              <Button variant="outline" className="inline-flex items-center gap-2"><Linkedin className="h-4 w-4" />{t('about.followLinkedIn')}</Button>
+            </a>
+          </div>
         </div>
       </div>
     </div>
