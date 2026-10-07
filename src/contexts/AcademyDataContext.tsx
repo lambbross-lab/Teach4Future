@@ -1,6 +1,7 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import type { CourseSession } from '../types';
 import { isSupabaseConfigured, supabase } from '../lib/supabase';
+import { automaticSessionStatus } from '../lib/utils';
 
 type DataMode = 'live' | 'preview';
 
@@ -24,7 +25,7 @@ const mapSession = (row: any): CourseSession => ({
   endDate: row.end_date,
   seatsTotal: row.seats_total,
   seatsLeft: row.seats_left,
-  status: row.status,
+  status: automaticSessionStatus({ endDate: row.end_date, seatsLeft: row.seats_left }),
   schedule: row.schedule,
 });
 
@@ -36,7 +37,7 @@ const toSessionRow = (session: CourseSession) => ({
   end_date: session.endDate,
   seats_total: session.seatsTotal,
   seats_left: session.seatsLeft,
-  status: session.status,
+  status: automaticSessionStatus(session),
   schedule: session.schedule,
 });
 

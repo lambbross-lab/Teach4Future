@@ -123,3 +123,28 @@ $$;
 
 revoke all on function public.remove_campus_enrollment(uuid) from public, anon, authenticated;
 grant execute on function public.remove_campus_enrollment(uuid) to service_role;
+
+-- Availability is always derived from confirmed enrolments and course dates.
+create or replace function public.set_course_session_status()
+returns trigger
+language plpgsql
+set search_path = public, pg_temp
+as $$
+begin
+  if new.end_date < current_date then
+    new.status := 'Closed';
+  elsif new.seats_left <= 0 then
+    new.status := 'Waiting List';
+  elsif new.seats_left <= 3 then
+    new.status := 'Almost Full';
+  else
+    new.status := 'Open';
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists set_course_session_status_before_write on public.course_sessions;
+create trigger set_course_session_status_before_write
+before insert or update of seats_left, seats_total, start_date, end_date on public.course_sessions
+for each row execute function public.set_course_session_status();
