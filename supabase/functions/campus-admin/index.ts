@@ -41,6 +41,8 @@ const temporaryPassword = () => {
   return `${randomFrom(upper, 1)}${randomFrom(lower, 3)}-${randomFrom(digits, 1)}${randomFrom(mixed, 3)}-${randomFrom(mixed, 4)}${randomFrom('!?#*', 1)}`;
 };
 
+const campusPasswordRedirect = () => Deno.env.get('CAMPUS_PASSWORD_REDIRECT') ?? 'https://www.teach4future.eu/reset-password';
+
 const addMonths = (isoDate: string, months: number) => {
   const [year, month, day] = isoDate.split('-').map(Number);
   const date = new Date(Date.UTC(year, month - 1 + months, day));
@@ -94,6 +96,7 @@ Deno.serve(async (request) => {
     }
 
     let tempPassword: string | null = null;
+    let createdUserId: string | null = null;
     if (!userId) {
       tempPassword = temporaryPassword();
       const { data: created, error: createError } = await admin.auth.admin.createUser({
@@ -104,22 +107,32 @@ Deno.serve(async (request) => {
       });
       if (createError || !created.user) return json({ error: 'create_failed', detail: createError?.message }, 500, origin);
       userId = created.user.id;
+      createdUserId = created.user.id;
     }
 
-    const { data: enrollment, error: enrollError } = await admin
-      .from('campus_enrollments')
-      .upsert({
-        session_id: sessionId,
-        user_id: userId,
-        full_name: fullName,
-        email,
-        access_until: addMonths(session.end_date, 12),
-      }, { onConflict: 'session_id,user_id' })
-      .select('id, session_id, user_id, full_name, email, access_until, created_at')
-      .single();
-    if (enrollError) return json({ error: 'enroll_failed' }, 500, origin);
+    // The SQL function locks the edition row and decrements seats_left only for a new enrolment.
+    // This avoids overbooking when two administrators add participants at the same time.
+    const { data: enrollment, error: enrollError } = await admin.rpc('confirm_campus_enrollment', {
+      p_session_id: sessionId,
+      p_user_id: userId,
+      p_full_name: fullName,
+      p_email: email,
+      p_access_until: addMonths(session.end_date, 12),
+    }).single();
+    if (enrollError) {
+      if (createdUserId) await admin.auth.admin.deleteUser(createdUserId);
+      const code = enrollError.message.includes('no_seats_left') ? 'no_seats_left' : 'enroll_failed';
+      return json({ error: code }, code === 'no_seats_left' ? 409 : 500, origin);
+    }
 
-    return json({ enrollment, tempPassword, existingAccount: tempPassword === null }, 200, origin);
+    let emailSent = false;
+    if (createdUserId) {
+      const { error: emailError } = await admin.auth.resetPasswordForEmail(email, { redirectTo: campusPasswordRedirect() });
+      // A temporary password is only a delivery fallback, shown once to the administrator.
+      emailSent = !emailError;
+    }
+
+    return json({ enrollment, tempPassword: emailSent ? null : tempPassword, emailSent, existingAccount: !createdUserId }, 200, origin);
   }
 
   if (action === 'reset_password') {
@@ -127,12 +140,19 @@ Deno.serve(async (request) => {
     if (!userId) return json({ error: 'invalid_input' }, 400, origin);
     const { data: isAdminTarget } = await admin.from('admin_users').select('id').eq('id', userId).maybeSingle();
     if (isAdminTarget) return json({ error: 'forbidden' }, 403, origin);
-    const { data: enrolled } = await admin.from('campus_enrollments').select('id').eq('user_id', userId).limit(1);
-    if (!enrolled?.length) return json({ error: 'not_participant' }, 404, origin);
-    const tempPassword = temporaryPassword();
-    const { error } = await admin.auth.admin.updateUserById(userId, { password: tempPassword });
+    const { data: enrolled } = await admin.from('campus_enrollments').select('id, email').eq('user_id', userId).limit(1).maybeSingle();
+    if (!enrolled) return json({ error: 'not_participant' }, 404, origin);
+    const { error } = await admin.auth.resetPasswordForEmail(enrolled.email, { redirectTo: campusPasswordRedirect() });
     if (error) return json({ error: 'reset_failed' }, 500, origin);
-    return json({ tempPassword }, 200, origin);
+    return json({ emailSent: true }, 200, origin);
+  }
+
+  if (action === 'remove_enrollment') {
+    const enrollmentId = clean(body.enrollmentId, 64);
+    if (!enrollmentId) return json({ error: 'invalid_input' }, 400, origin);
+    const { error } = await admin.rpc('remove_campus_enrollment', { p_enrollment_id: enrollmentId });
+    if (error) return json({ error: 'remove_failed' }, 500, origin);
+    return json({ removed: true }, 200, origin);
   }
 
   return json({ error: 'unknown_action' }, 400, origin);

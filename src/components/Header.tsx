@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { GraduationCap, Menu, X } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -78,6 +78,16 @@ const Header = () => {
                 {link.name}
               </Link>
             ))}
+            <Link
+              to="/campus"
+              className={cn(
+                "inline-flex items-center gap-1.5 text-sm font-semibold transition-colors hover:text-blue-600",
+                location.pathname === '/campus' ? "text-blue-600" : "text-slate-600"
+              )}
+            >
+              <GraduationCap className="h-4 w-4" aria-hidden="true" />
+              {t('nav.campus')}
+            </Link>
             
             {/* Language Switcher */}
             <div className="flex items-center space-x-2 border-l border-slate-200 pl-6 ml-2">
@@ -163,6 +173,14 @@ const Header = () => {
                 {link.name}
               </Link>
             ))}
+            <Link
+              to="/campus"
+              className="flex items-center gap-2 px-3 py-4 text-base font-semibold text-slate-700 hover:bg-slate-50 rounded-lg"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <GraduationCap className="h-5 w-5 text-blue-600" aria-hidden="true" />
+              {t('nav.campus')}
+            </Link>
             <div className="pt-4 flex flex-col space-y-3">
               <Link
                 to="/enrol"

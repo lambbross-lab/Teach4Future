@@ -43,4 +43,83 @@ $$;
 
 -- RLS: participants read their own enrollments and their courses' materials; only admins write.
 -- Storage bucket "campus" (private, 50 MB per file). Files are stored as <course_id>/<uuid>-<name>.
--- Accounts are created by the edge function campus-admin (admin only) with a temporary password.
+-- Accounts and password-setup links are created by the edge function campus-admin (admin only).
+
+-- Called only by the Edge Function's service role. Locking the edition row makes the
+-- enrolment and seat change atomic, so public availability cannot be oversold.
+create or replace function public.confirm_campus_enrollment(
+  p_session_id text,
+  p_user_id uuid,
+  p_full_name text,
+  p_email text,
+  p_access_until date
+) returns public.campus_enrollments
+language plpgsql
+set search_path = public, pg_temp
+as $$
+declare
+  v_session public.course_sessions%rowtype;
+  v_enrollment public.campus_enrollments%rowtype;
+begin
+  select * into v_session from public.course_sessions where id = p_session_id for update;
+  if not found then
+    raise exception 'session_not_found';
+  end if;
+
+  select * into v_enrollment from public.campus_enrollments
+  where session_id = p_session_id and user_id = p_user_id;
+
+  if found then
+    update public.campus_enrollments
+    set full_name = p_full_name, email = p_email, access_until = p_access_until
+    where id = v_enrollment.id
+    returning * into v_enrollment;
+    return v_enrollment;
+  end if;
+
+  if v_session.seats_left <= 0 then
+    raise exception 'no_seats_left';
+  end if;
+
+  insert into public.campus_enrollments (session_id, user_id, full_name, email, access_until)
+  values (p_session_id, p_user_id, p_full_name, p_email, p_access_until)
+  returning * into v_enrollment;
+
+  update public.course_sessions
+  set seats_left = seats_left - 1, updated_at = now()
+  where id = p_session_id;
+
+  return v_enrollment;
+end;
+$$;
+
+revoke all on function public.confirm_campus_enrollment(text, uuid, text, text, date) from public, anon, authenticated;
+grant execute on function public.confirm_campus_enrollment(text, uuid, text, text, date) to service_role;
+
+create or replace function public.remove_campus_enrollment(p_enrollment_id uuid)
+returns boolean
+language plpgsql
+set search_path = public, pg_temp
+as $$
+declare
+  v_enrollment public.campus_enrollments%rowtype;
+begin
+  select * into v_enrollment from public.campus_enrollments where id = p_enrollment_id;
+  if not found then
+    raise exception 'enrollment_not_found';
+  end if;
+
+  perform 1 from public.course_sessions where id = v_enrollment.session_id for update;
+  delete from public.campus_enrollments where id = p_enrollment_id returning * into v_enrollment;
+  if not found then
+    raise exception 'enrollment_not_found';
+  end if;
+  update public.course_sessions
+  set seats_left = seats_left + 1, updated_at = now()
+  where id = v_enrollment.session_id;
+  return true;
+end;
+$$;
+
+revoke all on function public.remove_campus_enrollment(uuid) from public, anon, authenticated;
+grant execute on function public.remove_campus_enrollment(uuid) to service_role;

@@ -22,7 +22,7 @@ import {
 const CAMPUS_LOGIN_URL = 'https://www.teach4future.eu/login';
 const inputClass = 'w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none bg-white';
 
-type Credential = { name: string; email: string; password: string | null; existing: boolean };
+type Credential = { name: string; email: string; password: string | null; existing: boolean; emailSent: boolean };
 
 const AdminCampus = () => {
   const { language } = useLanguage();
@@ -103,6 +103,7 @@ const AdminCampus = () => {
     const map: Record<string, [string, string]> = {
       invalid_input: ['Revisa el nombre y el correo.', 'Check the name and e-mail.'],
       create_failed: ['No se pudo crear la cuenta.', 'The account could not be created.'],
+      no_seats_left: ['No quedan plazas disponibles en esta edición.', 'There are no seats left in this edition.'],
       forbidden: ['No tienes permiso para esta acción.', 'You are not allowed to do this.'],
       unauthorized: ['Tu sesión ha caducado. Vuelve a entrar.', 'Your session has expired. Please sign in again.'],
     };
@@ -117,10 +118,10 @@ const AdminCampus = () => {
     setCopied(false);
     setEnrolling(true);
     try {
-      const result = await callCampusAdmin<{ enrollment: CampusEnrollment; tempPassword: string | null; existingAccount: boolean }>({
+      const result = await callCampusAdmin<{ enrollment: CampusEnrollment; tempPassword: string | null; existingAccount: boolean; emailSent: boolean }>({
         action: 'enroll', sessionId, fullName, email,
       });
-      setCredential({ name: result.enrollment.full_name, email: result.enrollment.email, password: result.tempPassword, existing: result.existingAccount });
+      setCredential({ name: result.enrollment.full_name, email: result.enrollment.email, password: result.tempPassword, existing: result.existingAccount, emailSent: result.emailSent });
       setFullName('');
       setEmail('');
       await loadEnrollments(sessionId);
@@ -132,29 +133,33 @@ const AdminCampus = () => {
   };
 
   const resetPassword = async (enrollment: CampusEnrollment) => {
-    if (!window.confirm(L(`¿Generar una nueva contraseña temporal para ${enrollment.full_name}?`, `Generate a new temporary password for ${enrollment.full_name}?`))) return;
+    if (!window.confirm(L(`¿Enviar un enlace para crear o cambiar la contraseña a ${enrollment.full_name}?`, `Send a link to create or change the password to ${enrollment.full_name}?`))) return;
     setParticipantError('');
     setCopied(false);
     try {
-      const result = await callCampusAdmin<{ tempPassword: string }>({ action: 'reset_password', userId: enrollment.user_id });
-      setCredential({ name: enrollment.full_name, email: enrollment.email, password: result.tempPassword, existing: false });
+      await callCampusAdmin<{ emailSent: boolean }>({ action: 'reset_password', userId: enrollment.user_id });
+      setCredential({ name: enrollment.full_name, email: enrollment.email, password: null, existing: false, emailSent: true });
     } catch (error) {
       setParticipantError(errorText((error as Error).message));
     }
   };
 
   const removeEnrollment = async (enrollment: CampusEnrollment) => {
-    if (!supabase || !window.confirm(L(`¿Quitar el acceso de ${enrollment.full_name} a este curso?`, `Remove ${enrollment.full_name}'s access to this course?`))) return;
-    const { error } = await supabase.from('campus_enrollments').delete().eq('id', enrollment.id);
-    if (error) setParticipantError(errorText('request_failed'));
-    else setEnrollments((list) => list.filter((item) => item.id !== enrollment.id));
+    if (!window.confirm(L(`¿Quitar el acceso de ${enrollment.full_name} a este curso y liberar su plaza?`, `Remove ${enrollment.full_name}'s access to this course and release their seat?`))) return;
+    setParticipantError('');
+    try {
+      await callCampusAdmin({ action: 'remove_enrollment', enrollmentId: enrollment.id });
+      setEnrollments((list) => list.filter((item) => item.id !== enrollment.id));
+    } catch (error) {
+      setParticipantError(errorText((error as Error).message));
+    }
   };
 
   const credentialText = credential ? [
     'Campus Teach4Future',
     `${L('Acceso', 'Sign in')}: ${CAMPUS_LOGIN_URL}`,
     `${L('Usuario', 'User')}: ${credential.email}`,
-    credential.password ? `${L('Contraseña temporal', 'Temporary password')}: ${credential.password}` : L('Contraseña: la misma que ya usabas', 'Password: the one you already use'),
+    credential.password ? `${L('Contraseña temporal', 'Temporary password')}: ${credential.password}` : credential.emailSent ? L('Contraseña: crea una mediante el enlace enviado por correo', 'Password: create one with the link sent by e-mail') : L('Contraseña: la misma que ya usabas', 'Password: the one you already use'),
   ].join('\n') : '';
 
   const copyCredential = async () => {
@@ -278,9 +283,9 @@ const AdminCampus = () => {
 
                 {credential && (
                   <div className="rounded-2xl border border-green-200 bg-green-50 p-4 mb-5">
-                    <p className="font-semibold text-green-900 mb-2">{credential.existing ? L(`${credential.name} ya tenía cuenta: se le ha añadido este curso.`, `${credential.name} already had an account: this course has been added.`) : L(`Datos de acceso de ${credential.name}`, `Sign-in details for ${credential.name}`)}</p>
+                    <p className="font-semibold text-green-900 mb-2">{credential.existing ? L(`${credential.name} ya tenía cuenta: se le ha añadido este curso.`, `${credential.name} already had an account: this course has been added.`) : credential.emailSent ? L(`Se ha enviado a ${credential.name} un enlace para crear su contraseña.`, `A password-setup link has been sent to ${credential.name}.`) : L(`Datos de acceso de ${credential.name}`, `Sign-in details for ${credential.name}`)}</p>
                     <pre className="whitespace-pre-wrap break-all text-sm text-green-900 bg-white/70 rounded-xl p-3 mb-3">{credentialText}</pre>
-                    {credential.password && <p className="text-xs text-green-800 mb-3">{L('La contraseña solo se muestra ahora. Cópiala y dásela en mano o por correo; podrá cambiarla dentro del campus.', 'The password is only shown now. Copy it and hand it over or e-mail it; they can change it inside the campus.')}</p>}
+                    {credential.password && <p className="text-xs text-green-800 mb-3">{L('El enlace no se pudo enviar. La contraseña solo se muestra ahora: cópiala y comunícasela de forma segura; podrá cambiarla dentro del campus.', 'The link could not be sent. The password is shown only now: copy it and share it securely; it can be changed inside the campus.')}</p>}
                     <Button size="sm" variant="outline" onClick={copyCredential}><Copy className="h-4 w-4 mr-1.5" />{copied ? L('Copiado', 'Copied') : L('Copiar', 'Copy')}</Button>
                   </div>
                 )}
@@ -296,7 +301,7 @@ const AdminCampus = () => {
                           <p className="text-sm text-slate-500 break-all">{enrollment.email} · {L('hasta', 'until')} {formatDate(enrollment.access_until, language)}</p>
                         </div>
                         <div className="flex gap-2 shrink-0">
-                          <Button size="sm" variant="ghost" onClick={() => resetPassword(enrollment)} title={L('Nueva contraseña', 'New password')}><KeyRound className="h-4 w-4" /></Button>
+                          <Button size="sm" variant="ghost" onClick={() => resetPassword(enrollment)} title={L('Enviar enlace de contraseña', 'Send password link')}><KeyRound className="h-4 w-4" /></Button>
                           <Button size="sm" variant="ghost" onClick={() => removeEnrollment(enrollment)} title={L('Quitar acceso', 'Remove access')}><Trash2 className="h-4 w-4 text-red-500" /></Button>
                         </div>
                       </li>
