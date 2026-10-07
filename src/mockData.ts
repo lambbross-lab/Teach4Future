@@ -120,7 +120,7 @@ export const COURSES: Course[] = [
       { en: 'Certificate of attendance', es: 'Certificado de asistencia' },
       { en: 'Digital course materials', es: 'Materiales digitales del curso' },
     ],
-    erasmusRelevance: { en: 'Directly supports the Erasmus+ priority of inclusion and diversity.', es: 'Contribuye directamente a la prioridad Erasmus+ de inclusión y diversidad.' },
+    erasmusRelevance: { en: 'Supports inclusive practice and diversity in the classroom.', es: 'Refuerza la práctica inclusiva y la diversidad en el aula.' },
     courseImage: 'https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=800&q=80',
     featured: false
   },
@@ -181,7 +181,7 @@ export const COURSES: Course[] = [
       { en: 'Exchange of practices between schools', es: 'Intercambio de prácticas entre centros' },
       { en: 'European classroom project', es: 'Proyecto europeo para el aula' }
     ],
-    targetAudience: { en: 'Teachers, Erasmus+ coordinators and internationalisation teams', es: 'Docentes, coordinadores Erasmus+ y equipos de internacionalización' },
+    targetAudience: { en: 'Teachers and internationalisation teams', es: 'Docentes y equipos de internacionalización' },
     duration: { en: '5 Days (25 hours)', es: '5 días (25 horas)' },
     price: 480,
     language: 'English',
@@ -225,7 +225,7 @@ export const COURSES: Course[] = [
       { en: 'Certificate of attendance', es: 'Certificado de asistencia' },
       { en: 'Digital course materials', es: 'Materiales digitales del curso' },
     ],
-    erasmusRelevance: { en: 'Addresses the Erasmus+ priority on environment and the fight against climate change.', es: 'Aborda la prioridad Erasmus+ de medio ambiente y lucha contra el cambio climático.' },
+    erasmusRelevance: { en: 'Addresses education for sustainability and action on climate challenges.', es: 'Aborda la educación para la sostenibilidad y la acción ante los retos climáticos.' },
     courseImage: 'https://upload.wikimedia.org/wikipedia/commons/d/d5/Playa_de_M%C3%B3nsul%2C_San_Jos%C3%A9%2C_Almer%C3%ADa.jpg',
     featured: false
   },
@@ -269,10 +269,10 @@ export const COURSES: Course[] = [
 export const FAQS: FAQItem[] = [
   {
     id: 'f1',
-    question: { en: 'How do I pay for the course with Erasmus+ funds?', es: '¿Cómo pago el curso con fondos Erasmus+?' },
+    question: { en: 'How do I book and pay for a course?', es: '¿Cómo reservo y pago un curso?' },
     answer: {
-      en: 'After the course is confirmed in writing, the proposal will state the invoicing details and agreed documents. Your school must check whether and how the fee can be charged to its own Erasmus+ grant.',
-      es: 'Cuando el curso esté confirmado por escrito, la propuesta indicará los datos de facturación y los documentos acordados. Tu centro debe comprobar si la cuota puede imputarse a su propia subvención Erasmus+ y de qué forma.'
+      en: 'After the course is confirmed in writing, the proposal will state the invoicing details and agreed documents. Your school or participant contracts and pays Teach4Future directly.',
+      es: 'Cuando el curso esté confirmado por escrito, la propuesta indicará los datos de facturación y los documentos acordados. El centro o la persona participante contrata y paga directamente a Teach4Future.'
     },
     category: { en: 'Payment', es: 'Pago' }
   },
@@ -298,8 +298,8 @@ export const FAQS: FAQItem[] = [
     id: 'f4',
     question: { en: 'Will there be courses in other European cities?', es: '¿Habrá cursos en otras ciudades europeas?' },
     answer: {
-      en: 'European editions are in preparation. Tell us the city, topic and dates that interest you and we will notify you when an edition is confirmed. Each edition is hosted by an organisation established in that country, is confirmed from 15 participants from several schools and countries, and costs €480 per participant. With Erasmus+ KA1, each school can enrol up to 3 teachers per course.',
-      es: 'Las ediciones europeas están en preparación. Indícanos la ciudad, el tema y las fechas que te interesan y te avisaremos cuando una edición esté confirmada. Cada edición la acoge una entidad establecida en ese país, se confirma a partir de 15 participantes de varios centros y países y cuesta 480 € por participante. Con Erasmus+ KA1, cada centro puede inscribir hasta 3 docentes por curso.'
+      en: 'European editions are in preparation. Tell us the city, topic and dates that interest you and we will notify you when an edition is confirmed. Each edition is hosted by an organisation established in that country, is confirmed from 15 participants from several schools and countries, and costs €480 per participant.',
+      es: 'Las ediciones europeas están en preparación. Indícanos la ciudad, el tema y las fechas que te interesan y te avisaremos cuando una edición esté confirmada. Cada edición la acoge una entidad establecida en ese país, se confirma a partir de 15 participantes de varios centros y países y cuesta 480 € por participante.'
     },
     category: { en: 'Custom Courses', es: 'Cursos a Medida' }
   }
