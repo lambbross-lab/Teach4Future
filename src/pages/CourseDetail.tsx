@@ -1,13 +1,10 @@
-
-import React from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
-import { 
-  Calendar, MapPin, Clock, Users, CheckCircle2, 
-  Globe, Award, Lightbulb, FileText, ChevronRight,
-  MessageCircle, Info, Sun
+import { Link, Navigate, useParams } from 'react-router-dom';
+import {
+  ArrowDown, Calendar, CheckCircle2, ChevronRight, Clock, Globe, Info,
+  Lightbulb, MapPin, MessageCircle, Users
 } from 'lucide-react';
 import { COURSES, CITIES } from '../mockData';
-import { formatDate, cn, getText, isCurrentOrUpcoming } from '../lib/utils';
+import { cn, formatDate, getText, isCurrentOrUpcoming } from '../lib/utils';
 import Button from '../components/ui/Button';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAcademyData } from '../contexts/AcademyDataContext';
@@ -16,278 +13,101 @@ const CourseDetail = () => {
   const { id } = useParams<{ id: string }>();
   const { language, t } = useLanguage();
   const { sessions } = useAcademyData();
-  const course = COURSES.find(c => c.id === id);
-  
+  const course = COURSES.find((item) => item.id === id);
+
   if (!course) return <Navigate to="/courses-spain" replace />;
 
-  const courseSessions = sessions.filter(s => s.courseId === course.id && isCurrentOrUpcoming(s.endDate));
+  const courseSessions = sessions
+    .filter((session) => session.courseId === course.id && isCurrentOrUpcoming(session.endDate))
+    .sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+  const nextSession = courseSessions.find((session) => session.status !== 'Closed') ?? courseSessions[0];
+
+  const getScheduleLabel = (schedule: string) => {
+    if (schedule === 'morning') return t('common.morning');
+    if (schedule === 'afternoon') return t('common.afternoon');
+    return t('common.scheduleTbc');
+  };
+
+  const getStatusLabel = (status: string) => {
+    if (status === 'Open') return t('admin.status.open');
+    if (status === 'Almost Full') return t('admin.status.almostFull');
+    if (status === 'Waiting List') return t('admin.status.waitingList');
+    return t('admin.status.closed');
+  };
 
   return (
-    <div className="pt-24 pb-20 bg-white">
-      {/* Hero Header */}
-      <section className="bg-slate-50 py-16 md:py-24 border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row gap-12 items-start">
-            <div className="lg:w-2/3">
-              <div className="flex items-center space-x-3 mb-6">
-                <span className="bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full">
-                  {t(`categories.${course.category.toLowerCase()}`)}
-                </span>
-                <span className="text-slate-400 text-sm">•</span>
-                <span className="text-slate-500 text-sm font-medium flex items-center">
-                  <Clock className="h-4 w-4 mr-1.5" />
-                  {getText(course.duration, language)}
-                </span>
+    <div className="bg-white pt-24 pb-20">
+      <section className="border-b border-slate-100 bg-slate-50 py-14 md:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_23rem]">
+            <div>
+              <div className="mb-5 flex flex-wrap items-center gap-2 text-sm">
+                <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-bold uppercase tracking-widest text-blue-700">{t(`categories.${course.category.toLowerCase()}`)}</span>
+                <span className="text-slate-300">•</span>
+                <span className="flex items-center font-medium text-slate-500"><Clock className="mr-1.5 h-4 w-4" />{getText(course.duration, language)}</span>
+                <span className="text-slate-300">•</span>
+                <span className="flex items-center font-medium text-slate-500"><Globe className="mr-1.5 h-4 w-4" />{language === 'es' ? 'Inglés' : course.language}</span>
               </div>
-              <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight leading-tight">
-                {getText(course.title, language)}
-              </h1>
-              <p className="text-xl text-slate-600 mb-8 leading-relaxed">
-                {getText(course.subtitle, language)}
-              </p>
-              
-              <div className="flex flex-wrap gap-4">
-                <a href="#sessions">
-                  <Button size="lg">{t('hero.ctaPrimary')}</Button>
-                </a>
-                <Link to="/contact"><Button variant="outline" size="lg">{t('common.askQuestion')}</Button></Link>
+              <h1 className="max-w-4xl text-4xl font-extrabold leading-tight tracking-tight text-slate-950 md:text-5xl">{getText(course.title, language)}</h1>
+              <p className="mt-5 max-w-3xl text-lg leading-relaxed text-slate-600 md:text-xl">{getText(course.subtitle, language)}</p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a href="#sessions"><Button size="lg">{t('courseDetail.chooseSession')} <ArrowDown className="ml-2 h-4 w-4" /></Button></a>
+                <Link to={`/contact?course=${course.id}`}><Button size="lg" variant="outline">{t('courseDetail.askAboutCourse')}</Button></Link>
               </div>
+              <nav aria-label={t('courseDetail.pageNavigation')} className="mt-10 flex flex-wrap gap-x-5 gap-y-3 text-sm font-semibold text-slate-500">
+                <a className="transition hover:text-blue-600" href="#about">{t('courseDetail.about')}</a>
+                <a className="transition hover:text-blue-600" href="#programme">{t('courseDetail.programme')}</a>
+                <a className="transition hover:text-blue-600" href="#sessions">{t('courseDetail.sessions')}</a>
+                <a className="transition hover:text-blue-600" href="#practical">{t('courseDetail.practicalInfo')}</a>
+                <a className="transition hover:text-blue-600" href="#questions">{t('courseDetail.questions')}</a>
+              </nav>
             </div>
-            
-            <div className="lg:w-1/3 w-full">
-              <div className="bg-white p-8 rounded-3xl shadow-xl border border-slate-100">
-                <h3 className="text-lg font-bold text-slate-900 mb-6 flex items-center">
-                  <Info className="h-5 w-5 mr-2 text-blue-600" />
-                  {t('courseDetail.quickFacts')}
-                </h3>
-                <ul className="space-y-4">
-                  {[
-                    { label: t('courseDetail.language'), value: language === 'es' ? 'Inglés' : course.language, icon: Globe },
-                    { label: t('courseDetail.price'), value: `${course.price}€ / ${t('courseDetail.priceValue')}`, icon: Award },
-                    { label: t('courseDetail.certificate'), value: t('courseDetail.certificateValue'), icon: FileText },
-                    { label: t('courseDetail.funding'), value: t('courseDetail.fundingValue'), icon: CheckCircle2 }
-                  ].map((fact, idx) => (
-                    <li key={idx} className="flex items-center justify-between text-sm">
-                      <div className="flex items-center text-slate-500">
-                        <fact.icon className="h-4 w-4 mr-2 text-blue-500" />
-                        {fact.label}
-                      </div>
-                      <span className="font-bold text-slate-900">{fact.value}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-8 pt-6 border-t border-slate-50">
-                  <p className="text-xs text-slate-400 leading-relaxed italic">
-                    {t('courseDetail.fundingNote')}
-                  </p>
-                </div>
+
+            <aside className="rounded-3xl border border-slate-100 bg-white p-6 shadow-xl shadow-slate-200/50">
+              <div className="flex items-center justify-between gap-3">
+                <h2 className="flex items-center text-base font-bold text-slate-900"><Calendar className="mr-2 h-5 w-5 text-blue-600" />{t('courseDetail.nextEdition')}</h2>
+                {nextSession && <span className="rounded-full bg-green-50 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-green-700">{getStatusLabel(nextSession.status)}</span>}
               </div>
-            </div>
+              {nextSession ? <div className="mt-5 space-y-4">
+                <div><p className="text-lg font-extrabold text-slate-900">{CITIES.find((city) => city.id === nextSession.cityId)?.name}</p><p className="mt-1 text-sm font-medium leading-relaxed text-slate-600">{formatDate(nextSession.startDate, language)} — {formatDate(nextSession.endDate, language)}</p></div>
+                <div className="grid grid-cols-2 gap-3 border-y border-slate-100 py-4 text-sm"><div><p className="text-xs text-slate-500">{t('courseDetail.schedule')}</p><p className="mt-1 font-bold text-slate-900">{getScheduleLabel(nextSession.schedule)}</p></div><div><p className="text-xs text-slate-500">{t('courseDetail.availability')}</p><p className="mt-1 font-bold text-slate-900">{nextSession.seatsLeft} {t('common.seatsLeft')}</p></div></div>
+                <a href="#sessions" className="block"><Button className="w-full">{t('courseDetail.viewAllSessions')}</Button></a>
+              </div> : <div className="mt-5 rounded-2xl bg-slate-50 p-4"><p className="text-sm leading-relaxed text-slate-600">{t('courseDetail.onDemandDesc')}</p><Link className="mt-4 inline-flex items-center text-sm font-bold text-blue-600 hover:text-blue-700" to={`/enrol?course=${course.id}`}>{t('coursesSpain.requestOpening')} <ChevronRight className="ml-1 h-4 w-4" /></Link></div>}
+              <p className="mt-5 text-xs leading-relaxed text-slate-500">{t('courseDetail.contractNote')}</p>
+            </aside>
           </div>
         </div>
       </section>
 
-      {/* Main Content */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-            {/* Left Column: Details */}
-            <div className="lg:col-span-2 space-y-16">
-              {/* Description */}
-              <div>
-                <h2 className="text-2xl font-bold text-slate-900 mb-6">{t('courseDetail.about')}</h2>
-                <div className="relative rounded-3xl overflow-hidden mb-8 aspect-video">
-                  <img 
-                    src={course.courseImage} 
-                    alt={getText(course.title, language)}
-                    className="w-full h-full object-cover"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-                <p className="text-slate-600 leading-relaxed mb-6">
-                  {getText(course.description, language)}
-                </p>
-                <div className="bg-blue-50 p-6 rounded-2xl border border-blue-100">
-                  <h4 className="font-bold text-blue-900 mb-3 flex items-center">
-                    <Lightbulb className="h-5 w-5 mr-2" />
-                    {t('courseDetail.relevance')}
-                  </h4>
-                  <p className="text-sm text-blue-800 leading-relaxed">
-                    {getText(course.erasmusRelevance, language)}
-                  </p>
-                </div>
-              </div>
-
-              {/* Learning Outcomes */}
-              <div>
-                <h2 className="text-2xl font-bold text-slate-900 mb-6">{t('courseDetail.outcomes')}</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {course.learningOutcomes.map((outcome, idx) => (
-                    <div key={idx} className="flex items-start space-x-3">
-                      <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                      <span className="text-slate-600 text-sm leading-relaxed">{getText(outcome, language)}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Programme Overview */}
-              <div>
-                <h2 className="text-2xl font-bold text-slate-900 mb-6">{t('courseDetail.programme')}</h2>
-                <div className="space-y-4">
-                  {course.programmeOverview.map((day, idx) => (
-                    <div key={idx} className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-100">
-                      <span className="w-12 h-12 bg-white rounded-lg flex items-center justify-center font-bold text-blue-600 shadow-sm mr-4 flex-shrink-0">
-                        {idx + 1}
-                      </span>
-                      <span className="text-slate-700 font-medium">{getText(day, language)}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Course Schedule */}
-              <div>
-                <h2 className="text-2xl font-bold text-slate-900 mb-6">{t('courseDetail.schedule')}</h2>
-                <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100">
-                  <p className="text-slate-600 mb-8 leading-relaxed">
-                    {t('courseDetail.scheduleDesc')}
-                  </p>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                      <div className="flex items-center space-x-3 mb-4">
-                        <div className="bg-orange-50 p-2 rounded-lg">
-                          <Sun className="h-5 w-5 text-orange-600" />
-                        </div>
-                        <h4 className="font-bold text-slate-900">{t('common.morning')}</h4>
-                      </div>
-                      <p className="text-2xl font-bold text-slate-900 mb-1">09:00 – 14:00</p>
-                      <p className="text-xs text-slate-500">{t('common.morning')}</p>
-                    </div>
-                    
-                    <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                      <div className="flex items-center space-x-3 mb-4">
-                        <div className="bg-indigo-50 p-2 rounded-lg">
-                          <Clock className="h-5 w-5 text-indigo-600" />
-                        </div>
-                        <h4 className="font-bold text-slate-900">{t('common.afternoon')}</h4>
-                      </div>
-                      <p className="text-2xl font-bold text-slate-900 mb-1">15:30 – 20:30</p>
-                      <p className="text-xs text-slate-500">{t('common.afternoon')}</p>
-                    </div>
-                  </div>
-                  
-                  <p className="mt-8 text-sm text-slate-500 italic flex items-center">
-                    <Info className="h-4 w-4 mr-2 text-blue-500" />
-                    {t('courseDetail.practicalNote')}
-                  </p>
-                </div>
-              </div>
-
-              {/* What's Included */}
-              <div>
-                <h2 className="text-2xl font-bold text-slate-900 mb-6">{t('courseDetail.included')}</h2>
-                <div className="flex flex-wrap gap-3">
-                  {course.includes.map((item, idx) => (
-                    <span key={idx} className="bg-slate-100 text-slate-700 px-4 py-2 rounded-full text-sm font-medium">
-                      {getText(item, language)}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column: Sessions & Enrol */}
-            <div id="sessions" className="space-y-8">
-              <h2 className="text-2xl font-bold text-slate-900 mb-6">{t('courseDetail.sessions')}</h2>
-              {courseSessions.length > 0 ? (
-                <div className="space-y-4">
-                  {courseSessions.map((session) => {
-                    const city = CITIES.find(c => c.id === session.cityId);
-                    return (
-                      <div key={session.id} className="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all">
-                        <div className="flex justify-between items-start mb-4">
-                          <div>
-                            <h4 className="font-bold text-slate-900 capitalize">{city?.name}</h4>
-                            <p className="text-xs text-slate-500">{formatDate(session.startDate, language)} - {formatDate(session.endDate, language)}</p>
-                            <div className="flex items-center mt-1 text-[10px] font-medium text-slate-400 uppercase tracking-wider">
-                              {session.schedule === 'morning' ? (
-                                <><Sun className="h-3 w-3 mr-1 text-orange-400" /> {t('common.morning')}</>
-                              ) : session.schedule === 'afternoon' ? (
-                                <><Clock className="h-3 w-3 mr-1 text-indigo-400" /> {t('common.afternoon')}</>
-                              ) : (
-                                <><Clock className="h-3 w-3 mr-1 text-blue-400" /> {t('common.scheduleTbc')}</>
-                              )}
-                            </div>
-                          </div>
-                          <span className={cn(
-                            "text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-md",
-                            session.status === 'Open' ? "bg-green-100 text-green-700" : 
-                            session.status === 'Almost Full' ? "bg-orange-100 text-orange-700" : 
-                            "bg-red-100 text-red-700"
-                          )}>
-                            {session.status === 'Open' ? t('admin.status.open') :
-                             session.status === 'Almost Full' ? t('admin.status.almostFull') :
-                             session.status === 'Waiting List' ? t('admin.status.waitingList') :
-                             t('admin.status.closed')}
-                          </span>
-                        </div>
-                        <div className="flex items-center justify-between mb-6">
-                          <div className="flex flex-col">
-                            <div className="flex items-center text-xs text-slate-600 mb-1">
-                              <Users className="h-4 w-4 mr-2 text-blue-500" />
-                              <span>{session.seatsLeft} {t('common.seatsLeft')}</span>
-                            </div>
-                            <div className="flex items-center text-[10px] text-green-600 font-bold">
-                              <CheckCircle2 className="h-3 w-3 mr-1" />
-                              {t('common.fundingSubject')}
-                            </div>
-                          </div>
-                          <div className="text-right">
-                            <span className="text-xl font-bold text-slate-900">{course.price}€</span>
-                            <p className="text-[10px] text-slate-400 font-medium">{t('common.intensive')} · {t('common.finalPrice')}</p>
-                          </div>
-                        </div>
-                        <Link to={`/enrol?course=${course.id}&session=${session.id}`}>
-                          <Button className="w-full" disabled={session.status === 'Closed'}>
-                            {t('common.enrol')}
-                          </Button>
-                        </Link>
-                      </div>
-                    );
-                  })}
-                </div>
-              ) : (
-                <div className="bg-slate-50 p-8 rounded-2xl text-center border border-dashed border-slate-200">
-                  <h3 className="font-bold text-slate-900">{t('courseDetail.onDemandTitle')}</h3>
-                  <p className="mt-2 text-slate-600 text-sm leading-relaxed">{t('courseDetail.onDemandDesc')}</p>
-                  <div className="mt-4 flex flex-wrap justify-center gap-2">
-                    {CITIES.map((city) => <span key={city.id} className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-slate-700">{city.name}</span>)}
-                  </div>
-                  <Link to={`/enrol?course=${course.id}`} className="mt-5 inline-block">
-                    <Button variant="outline" size="sm">{t('coursesSpain.requestOpening')}</Button>
-                  </Link>
-                </div>
-              )}
-
-              {/* Help Box */}
-              <div className="bg-slate-900 rounded-3xl p-8 text-white relative overflow-hidden">
-                <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-600 rounded-full blur-3xl opacity-20" />
-                <h3 className="text-xl font-bold mb-4 relative z-10">{t('courseDetail.customGroup')}</h3>
-                <p className="text-slate-400 text-sm mb-6 leading-relaxed relative z-10">
-                  {t('courseDetail.customGroupDesc')}
-                </p>
-                <Link to="/contact">
-                  <Button variant="primary" className="w-full bg-white text-slate-900 hover:bg-slate-100">
-                    {t('courseDetail.contactTeam')}
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
+      <section id="sessions" className="scroll-mt-28 border-b border-slate-100 bg-white py-12">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-7 flex flex-col justify-between gap-3 md:flex-row md:items-end"><div><p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-600">{t('courseDetail.bookingEyebrow')}</p><h2 className="mt-2 text-3xl font-extrabold tracking-tight text-slate-950">{t('courseDetail.sessions')}</h2></div><p className="max-w-md text-sm leading-relaxed text-slate-500">{t('courseDetail.sessionsHelp')}</p></div>
+          {courseSessions.length ? <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">{courseSessions.map((session) => {
+            const city = CITIES.find((item) => item.id === session.cityId);
+            return <article key={session.id} className="rounded-2xl border border-slate-200 bg-white p-5 transition-shadow hover:shadow-lg hover:shadow-slate-200/60">
+              <div className="flex items-start justify-between gap-4"><div><p className="flex items-center text-sm font-bold text-slate-900"><MapPin className="mr-1.5 h-4 w-4 text-blue-600" />{city?.name}</p><p className="mt-2 text-sm leading-relaxed text-slate-600">{formatDate(session.startDate, language)} — {formatDate(session.endDate, language)}</p></div><span className={cn('shrink-0 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider', session.status === 'Open' ? 'bg-green-50 text-green-700' : session.status === 'Almost Full' ? 'bg-orange-50 text-orange-700' : 'bg-red-50 text-red-700')}>{getStatusLabel(session.status)}</span></div>
+              <div className="mt-5 grid grid-cols-2 gap-3 border-y border-slate-100 py-4 text-sm"><div className="flex items-start gap-2"><Clock className="mt-0.5 h-4 w-4 shrink-0 text-blue-500" /><span className="font-medium text-slate-700">{getScheduleLabel(session.schedule)}</span></div><div className="flex items-start gap-2"><Users className="mt-0.5 h-4 w-4 shrink-0 text-blue-500" /><span className="font-medium text-slate-700">{session.seatsLeft} {t('common.seatsLeft')}</span></div></div>
+              <div className="mt-5 flex items-center justify-between gap-4"><div><p className="text-xl font-extrabold text-slate-950">{course.price}€</p><p className="text-[11px] font-medium text-slate-500">{t('common.finalPrice')}</p></div><Link to={`/enrol?course=${course.id}&session=${session.id}`}><Button size="sm" disabled={session.status === 'Closed'}>{t('common.enrol')}</Button></Link></div>
+            </article>;
+          })}</div> : <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-6 py-8 text-center"><p className="font-bold text-slate-900">{t('courseDetail.onDemandTitle')}</p><p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-slate-600">{t('courseDetail.onDemandDesc')}</p></div>}
         </div>
       </section>
+
+      <section className="py-16 md:py-20">
+        <div className="mx-auto grid max-w-7xl gap-14 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:px-8">
+          <main className="space-y-16">
+            <section id="about" className="scroll-mt-28"><div className="grid gap-8 md:grid-cols-[1.1fr_.9fr] md:items-start"><div><p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-600">{t('courseDetail.aboutEyebrow')}</p><h2 className="mt-2 text-3xl font-extrabold tracking-tight text-slate-950">{t('courseDetail.about')}</h2><p className="mt-6 leading-relaxed text-slate-600">{getText(course.description, language)}</p></div><div className="aspect-[4/3] overflow-hidden rounded-3xl"><img src={course.courseImage} alt={getText(course.title, language)} className="h-full w-full object-cover" referrerPolicy="no-referrer" /></div></div><div className="mt-8 rounded-2xl border border-blue-100 bg-blue-50 p-5"><h3 className="flex items-center font-bold text-blue-950"><Lightbulb className="mr-2 h-5 w-5 text-blue-600" />{t('courseDetail.relevance')}</h3><p className="mt-3 text-sm leading-relaxed text-blue-900">{getText(course.erasmusRelevance, language)}</p></div></section>
+
+            <section id="programme" className="scroll-mt-28"><p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-600">{t('courseDetail.programmeEyebrow')}</p><h2 className="mt-2 text-3xl font-extrabold tracking-tight text-slate-950">{t('courseDetail.programme')}</h2><p className="mt-3 max-w-2xl text-slate-600">{t('courseDetail.programmeIntro')}</p><ol className="mt-8 divide-y divide-slate-100 rounded-3xl border border-slate-200 bg-white px-5 md:px-7">{course.programmeOverview.map((day, index) => <li key={index} className="grid gap-3 py-5 sm:grid-cols-[4.5rem_1fr] sm:items-center"><span className="w-fit rounded-full bg-blue-50 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-blue-700">{t('courseDetail.day')} {index + 1}</span><p className="font-semibold leading-relaxed text-slate-800">{getText(day, language)}</p></li>)}</ol></section>
+
+            <section id="outcomes" className="scroll-mt-28"><p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-600">{t('courseDetail.takeAwayEyebrow')}</p><h2 className="mt-2 text-3xl font-extrabold tracking-tight text-slate-950">{t('courseDetail.outcomes')}</h2><div className="mt-7 grid gap-3 sm:grid-cols-2">{course.learningOutcomes.map((outcome, index) => <div key={index} className="flex gap-3 rounded-2xl border border-slate-100 bg-slate-50 p-4"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-green-500" /><p className="text-sm leading-relaxed text-slate-700">{getText(outcome, language)}</p></div>)}</div></section>
+          </main>
+
+          <aside id="practical" className="scroll-mt-28 space-y-5 lg:sticky lg:top-28 lg:self-start"><div className="rounded-3xl border border-slate-200 bg-white p-6"><h2 className="flex items-center text-lg font-bold text-slate-950"><Info className="mr-2 h-5 w-5 text-blue-600" />{t('courseDetail.practicalInfo')}</h2><dl className="mt-5 space-y-4 text-sm"><div><dt className="text-slate-500">{t('courseDetail.language')}</dt><dd className="mt-1 font-bold text-slate-900">{language === 'es' ? 'Inglés' : course.language}</dd></div><div><dt className="text-slate-500">{t('courseDetail.duration')}</dt><dd className="mt-1 font-bold text-slate-900">{getText(course.duration, language)} · 25h</dd></div><div><dt className="text-slate-500">{t('courseDetail.price')}</dt><dd className="mt-1 font-bold text-slate-900">{course.price}€ · {t('courseDetail.priceValue')}</dd></div><div><dt className="text-slate-500">{t('courseDetail.certificate')}</dt><dd className="mt-1 font-bold text-slate-900">{t('courseDetail.certificateValue')}</dd></div></dl></div><div className="rounded-3xl bg-slate-950 p-6 text-white"><h2 className="text-lg font-bold">{t('courseDetail.included')}</h2><ul className="mt-4 space-y-3">{course.includes.map((item, index) => <li key={index} className="flex gap-2 text-sm leading-relaxed text-slate-200"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300" />{getText(item, language)}</li>)}</ul></div></aside>
+        </div>
+      </section>
+
+      <section id="questions" className="scroll-mt-28 border-t border-slate-100 bg-slate-50 py-16"><div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8"><p className="text-center text-xs font-bold uppercase tracking-[0.18em] text-blue-600">{t('courseDetail.questionsEyebrow')}</p><h2 className="mt-2 text-center text-3xl font-extrabold tracking-tight text-slate-950">{t('courseDetail.questions')}</h2><div className="mt-8 grid gap-4 md:grid-cols-3">{['questionOne', 'questionTwo', 'questionThree'].map((key) => <div key={key} className="rounded-2xl bg-white p-5 shadow-sm"><h3 className="font-bold text-slate-900">{t(`courseDetail.${key}Title`)}</h3><p className="mt-3 text-sm leading-relaxed text-slate-600">{t(`courseDetail.${key}Text`)}</p></div>)}</div><div className="mt-8 flex flex-col items-center justify-between gap-5 rounded-3xl bg-blue-600 p-6 text-white sm:flex-row"><div><h3 className="font-bold">{t('courseDetail.customGroup')}</h3><p className="mt-1 text-sm text-blue-100">{t('courseDetail.customGroupDesc')}</p></div><Link to={`/contact?course=${course.id}`}><Button className="bg-white text-slate-950 hover:bg-slate-100"><MessageCircle className="mr-2 h-4 w-4" />{t('courseDetail.contactTeam')}</Button></Link></div></div></section>
     </div>
   );
 };
