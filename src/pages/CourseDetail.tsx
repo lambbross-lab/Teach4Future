@@ -1,6 +1,6 @@
 import { Link, Navigate, useParams } from 'react-router-dom';
 import {
-  ArrowDown, CheckCircle2, Clock, Globe, Info,
+  ArrowDown, Calendar, CheckCircle2, Clock, Globe, Info,
   Lightbulb, MapPin, MessageCircle, Users
 } from 'lucide-react';
 import { COURSES, CITIES } from '../mockData';
@@ -78,20 +78,6 @@ const CourseDetail = () => {
         </div>
       </section>
 
-      <section id="sessions" className="scroll-mt-28 border-b border-slate-100 bg-white py-12">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-7 flex flex-col justify-between gap-3 md:flex-row md:items-end"><div><p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-600">{t('courseDetail.bookingEyebrow')}</p><h2 className="mt-2 text-3xl font-extrabold tracking-tight text-slate-950">{t('courseDetail.sessions')}</h2></div><p className="max-w-md text-sm leading-relaxed text-slate-500">{t('courseDetail.sessionsHelp')}</p></div>
-          {courseSessions.length ? <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">{courseSessions.map((session) => {
-            const city = CITIES.find((item) => item.id === session.cityId);
-            return <article key={session.id} className="rounded-2xl border border-slate-200 bg-white p-5 transition-shadow hover:shadow-lg hover:shadow-slate-200/60">
-              <div className="flex items-start justify-between gap-4"><div><p className="flex items-center text-sm font-bold text-slate-900"><MapPin className="mr-1.5 h-4 w-4 text-blue-600" />{city?.name}</p><p className="mt-2 text-sm leading-relaxed text-slate-600">{formatDate(session.startDate, language)} — {formatDate(session.endDate, language)}</p></div><span className={cn('shrink-0 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider', session.status === 'Open' ? 'bg-green-50 text-green-700' : session.status === 'Almost Full' ? 'bg-orange-50 text-orange-700' : 'bg-red-50 text-red-700')}>{getStatusLabel(session.status)}</span></div>
-              <div className="mt-5 grid grid-cols-2 gap-3 border-y border-slate-100 py-4 text-sm"><div className="flex items-start gap-2"><Clock className="mt-0.5 h-4 w-4 shrink-0 text-blue-500" /><span className="font-medium text-slate-700">{getScheduleLabel(session.schedule)}</span></div><div className="flex items-start gap-2"><Users className="mt-0.5 h-4 w-4 shrink-0 text-blue-500" /><span className="font-medium text-slate-700">{session.seatsLeft} {t('common.seatsLeft')}</span></div></div>
-              <div className="mt-5 flex items-center justify-between gap-4"><div><p className="text-xl font-extrabold text-slate-950">{course.price}€</p><p className="text-[11px] font-medium text-slate-500">{t('common.finalPrice')}</p></div><Link to={`/enrol?course=${course.id}&session=${session.id}`}><Button size="sm" disabled={session.status === 'Closed'}>{t('common.enrol')}</Button></Link></div>
-            </article>;
-          })}</div> : <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-6 py-8 text-center"><p className="font-bold text-slate-900">{t('courseDetail.onDemandTitle')}</p><p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-slate-600">{t('courseDetail.onDemandDesc')}</p></div>}
-        </div>
-      </section>
-
       <section className="py-16 md:py-20">
         <div className="mx-auto grid max-w-7xl gap-14 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:px-8">
           <main className="space-y-16">
@@ -105,6 +91,22 @@ const CourseDetail = () => {
           </main>
 
           <aside id="practical" className="scroll-mt-28 lg:sticky lg:top-28 lg:self-start"><div className="rounded-3xl bg-slate-950 p-6 text-white"><h2 className="text-lg font-bold">{t('courseDetail.included')}</h2><ul className="mt-4 space-y-3">{course.includes.map((item, index) => <li key={index} className="flex gap-2 text-sm leading-relaxed text-slate-200"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300" />{getText(item, language)}</li>)}</ul><div className="mt-5 border-t border-white/10 pt-5 text-sm leading-relaxed text-slate-300"><p className="font-bold text-white">{t('courseDetail.certificate')}</p><p className="mt-1">{t('courseDetail.certificateValue')}</p></div></div></aside>
+        </div>
+      </section>
+
+      <section id="sessions" className="scroll-mt-28 border-t border-slate-100 bg-slate-50 py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-8 flex flex-col justify-between gap-3 md:flex-row md:items-end"><div><p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-600">{t('courseDetail.bookingEyebrow')}</p><h2 className="mt-2 text-3xl font-extrabold tracking-tight text-slate-950">{t('courseDetail.sessions')}</h2></div><p className="max-w-md text-sm leading-relaxed text-slate-500">{t('courseDetail.sessionsHelp')}</p></div>
+          {courseSessions.length ? <div className="space-y-3">{courseSessions.map((session) => {
+            const city = CITIES.find((item) => item.id === session.cityId);
+            return <article key={session.id} className="grid gap-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-lg hover:shadow-slate-200/60 md:grid-cols-[1.05fr_1.55fr_1.15fr_1fr_auto] md:items-center md:p-6">
+              <div><p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{t('courseDetail.sessionCity')}</p><p className="mt-1 flex items-center font-bold text-slate-950"><MapPin className="mr-1.5 h-4 w-4 text-blue-600" />{city?.name}</p></div>
+              <div><p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{t('courseDetail.sessionDates')}</p><p className="mt-1 flex items-start text-sm font-semibold leading-relaxed text-slate-800"><Calendar className="mr-1.5 mt-0.5 h-4 w-4 shrink-0 text-blue-500" />{formatDate(session.startDate, language)} — {formatDate(session.endDate, language)}</p></div>
+              <div><p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{t('courseDetail.schedule')}</p><p className="mt-1 flex items-center text-sm font-semibold text-slate-800"><Clock className="mr-1.5 h-4 w-4 text-blue-500" />{getScheduleLabel(session.schedule)}</p></div>
+              <div><p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{t('courseDetail.availability')}</p><div className="mt-1 flex flex-wrap items-center gap-2"><span className={cn('rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider', session.status === 'Open' ? 'bg-green-50 text-green-700' : session.status === 'Almost Full' ? 'bg-orange-50 text-orange-700' : 'bg-red-50 text-red-700')}>{getStatusLabel(session.status)}</span><span className="text-xs font-semibold text-slate-600">{session.seatsLeft} {t('common.seatsLeft')}</span></div></div>
+              <div className="flex items-center justify-between gap-4 border-t border-slate-100 pt-4 md:block md:border-0 md:pt-0"><div className="mb-0 md:mb-3"><p className="text-xl font-extrabold text-slate-950">{course.price}€</p><p className="text-[11px] font-medium text-slate-500">{t('common.finalPrice')}</p></div><Link to={`/enrol?course=${course.id}&session=${session.id}`}><Button size="sm" disabled={session.status === 'Closed'}>{t('common.enrol')}</Button></Link></div>
+            </article>;
+          })}</div> : <div className="rounded-2xl border border-dashed border-slate-200 bg-white px-6 py-8 text-center"><p className="font-bold text-slate-900">{t('courseDetail.onDemandTitle')}</p><p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-slate-600">{t('courseDetail.onDemandDesc')}</p></div>}
         </div>
       </section>
 
