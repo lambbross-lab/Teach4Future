@@ -1,7 +1,8 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import type { SiteLanguage } from '../lib/localizedPaths';
 
-type Language = 'en' | 'es';
+type Language = SiteLanguage;
 
 interface LanguageContextType {
   language: Language;
@@ -24,12 +25,13 @@ import { translations } from '../translations';
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [language, setLanguage] = useState<Language>(() => {
     const savedPreference = localStorage.getItem('languagePreference');
-    if (savedPreference === 'en' || savedPreference === 'es') {
+    if (savedPreference === 'en' || savedPreference === 'es' || savedPreference === 'fr' || savedPreference === 'de' || savedPreference === 'it') {
       return savedPreference;
     }
 
     const browserLanguage = navigator.languages?.[0] || navigator.language || 'en';
-    return browserLanguage.toLowerCase().startsWith('es') ? 'es' : 'en';
+    const prefix = browserLanguage.toLowerCase().slice(0, 2);
+    return prefix === 'es' || prefix === 'fr' || prefix === 'de' || prefix === 'it' ? prefix : 'en';
   });
 
   useEffect(() => {

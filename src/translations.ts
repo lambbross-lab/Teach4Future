@@ -1401,3 +1401,38 @@ export const translations: any = {
     }
   }
 };
+
+// French, German and Italian share the complete English fallback while the
+// visitor-facing navigation and conversion copy is translated here. Course
+// names intentionally remain in English where that is the teaching language.
+const extraTranslations = {
+  fr: {
+    nav: { home: 'Accueil', coursesSpain: 'Cours en Espagne', coursesEurope: 'Cours en Europe', dates: 'Dates et disponibilités', about: 'À propos', contact: 'Contact', forSchools: 'Pour les établissements', campus: 'Campus', login: 'Accès administrateur', cities: 'Villes' },
+    hero: { badge: 'Cours pour la mobilité Erasmus+', title: 'Inspirer les enseignants,', titleAccent: 'transformer les classes.', subtitle: 'Des cours pratiques en anglais pour des enseignants de toute l’Europe, conçus pour le développement professionnel international et la mobilité du personnel Erasmus+. Inscription directe auprès de Teach4Future.', ctaPrimary: 'Découvrir les cours', ctaSecondary: 'Formation sur mesure' },
+    common: { enrol: 'Demander des informations', requestInfo: 'Demander des informations', search: 'Rechercher...', closeMenu: 'Fermer le menu', openMenu: 'Ouvrir le menu', viewDetails: 'Voir le cours', availablePlaces: 'places disponibles', finalPrice: 'prix final, TVA incluse si applicable' },
+    dates: { title: 'Dates et disponibilités', subtitle: 'Consultez les prochaines sessions, les lieux, les horaires et les places disponibles.', openSession: 'session ouverte aux inscriptions', openSessions: 'sessions ouvertes aux inscriptions' },
+  },
+  de: {
+    nav: { home: 'Startseite', coursesSpain: 'Kurse in Spanien', coursesEurope: 'Kurse in Europa', dates: 'Termine und Verfügbarkeit', about: 'Über uns', contact: 'Kontakt', forSchools: 'Für Schulen', campus: 'Campus', login: 'Admin-Anmeldung', cities: 'Städte' },
+    hero: { badge: 'Kurse für Erasmus+-Mobilität', title: 'Lehrkräfte inspirieren,', titleAccent: 'Unterricht gestalten.', subtitle: 'Praxisorientierte Kurse auf Englisch für Lehrkräfte aus ganz Europa – für internationale Fortbildung und Erasmus+-Personalmobilität. Direkte Buchung bei Teach4Future.', ctaPrimary: 'Kurse entdecken', ctaSecondary: 'Maßgeschneiderte Fortbildung' },
+    common: { enrol: 'Informationen anfragen', requestInfo: 'Informationen anfragen', search: 'Suchen...', closeMenu: 'Menü schließen', openMenu: 'Menü öffnen', viewDetails: 'Kurs ansehen', availablePlaces: 'freie Plätze', finalPrice: 'Endpreis, inkl. MwSt. falls zutreffend' },
+    dates: { title: 'Termine und Verfügbarkeit', subtitle: 'Informieren Sie sich über kommende Termine, Orte, Zeiten und freie Plätze.', openSession: 'Anmeldung geöffnet', openSessions: 'Anmeldung geöffnet' },
+  },
+  it: {
+    nav: { home: 'Home', coursesSpain: 'Corsi in Spagna', coursesEurope: 'Corsi in Europa', dates: 'Date e disponibilità', about: 'Chi siamo', contact: 'Contatti', forSchools: 'Per le scuole', campus: 'Campus', login: 'Accesso amministratore', cities: 'Città' },
+    hero: { badge: 'Corsi per la mobilità Erasmus+', title: 'Ispirare gli insegnanti,', titleAccent: 'trasformare le aule.', subtitle: 'Corsi pratici in inglese per insegnanti da tutta Europa, pensati per lo sviluppo professionale internazionale e la mobilità del personale Erasmus+. Iscrizione diretta con Teach4Future.', ctaPrimary: 'Scopri i corsi', ctaSecondary: 'Formazione su misura' },
+    common: { enrol: 'Richiedi informazioni', requestInfo: 'Richiedi informazioni', search: 'Cerca...', closeMenu: 'Chiudi menu', openMenu: 'Apri menu', viewDetails: 'Vedi il corso', availablePlaces: 'posti disponibili', finalPrice: 'prezzo finale, IVA inclusa se applicabile' },
+    dates: { title: 'Date e disponibilità', subtitle: 'Consulta le prossime sessioni, sedi, orari e posti disponibili.', openSession: 'iscrizioni aperte', openSessions: 'iscrizioni aperte' },
+  },
+};
+
+for (const [language, copy] of Object.entries(extraTranslations)) {
+  translations[language] = {
+    ...translations.en,
+    ...copy,
+    nav: { ...translations.en.nav, ...copy.nav },
+    hero: { ...translations.en.hero, ...copy.hero },
+    common: { ...translations.en.common, ...copy.common },
+    dates: { ...translations.en.dates, ...copy.dates },
+  };
+}

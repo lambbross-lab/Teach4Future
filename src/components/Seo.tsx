@@ -3,10 +3,11 @@ import { useLocation } from 'react-router-dom';
 import { COURSES } from '../mockData';
 import { useLanguage } from '../contexts/LanguageContext';
 import { getText } from '../lib/utils';
+import { getRouteLanguage, localizePath, normalizeLocalizedPath, type SiteLanguage } from '../lib/localizedPaths';
 
 const SITE_URL = 'https://www.teach4future.eu';
 
-const PAGE_SEO: Record<string, { en: { title: string; description: string }; es: { title: string; description: string } }> = {
+const PAGE_SEO: Record<string, Partial<Record<SiteLanguage, { title: string; description: string }>>> = {
   '/': {
     en: { title: 'Teacher training courses in Almería, Spain', description: 'Practical 5-day teacher training courses in English in Almería, Spain. Explore responsible AI, inclusion, digital citizenship, sustainability and European classroom practice.' },
     es: { title: 'Cursos para docentes en Almería', description: 'Cursos prácticos de 5 días en inglés para docentes en Almería. Explora IA responsable, inclusión, ciudadanía digital, sostenibilidad y dimensión europea.' },
@@ -45,6 +46,14 @@ const PAGE_SEO: Record<string, { en: { title: string; description: string }; es:
   },
 };
 
+const LOCALE_DETAILS: Record<SiteLanguage, { locale: string; courseSuffix: string; courseDescription: string; catalogue: string }> = {
+  en: { locale: 'en_GB', courseSuffix: 'Teacher training course in Almería', courseDescription: 'A 5-day course taught in English in Almería, Spain.', catalogue: 'Courses in Spain' },
+  es: { locale: 'es_ES', courseSuffix: 'Curso para docentes en Almería', courseDescription: 'Curso de 5 días impartido en inglés en Almería, España.', catalogue: 'Cursos en España' },
+  fr: { locale: 'fr_FR', courseSuffix: 'Formation pour enseignants à Almería', courseDescription: 'Une formation de 5 jours dispensée en anglais à Almería, en Espagne.', catalogue: 'Formations en Espagne' },
+  de: { locale: 'de_DE', courseSuffix: 'Fortbildung für Lehrkräfte in Almería', courseDescription: 'Ein fünftägiger, englischsprachiger Kurs in Almería, Spanien.', catalogue: 'Kurse in Spanien' },
+  it: { locale: 'it_IT', courseSuffix: 'Corso per docenti ad Almería', courseDescription: 'Un corso di 5 giorni in inglese ad Almería, in Spagna.', catalogue: 'Corsi in Spagna' },
+};
+
 function setMeta(attribute: 'name' | 'property', key: string, content: string) {
   let element = document.head.querySelector<HTMLMetaElement>(`meta[${attribute}="${key}"]`);
   if (!element) {
@@ -60,26 +69,30 @@ const Seo = () => {
   const { language } = useLanguage();
 
   useEffect(() => {
-    const courseId = pathname.match(/^\/course\/([^/]+)$/)?.[1];
+    const routeLanguage = getRouteLanguage(pathname) ?? language;
+    const normalPath = normalizeLocalizedPath(pathname);
+    const courseId = normalPath.match(/^\/course\/([^/]+)$/)?.[1];
     const course = courseId ? COURSES.find((item) => item.id === courseId) : undefined;
+    const details = LOCALE_DETAILS[routeLanguage];
     const page = course
       ? {
-          title: `${getText(course.title, language)} | ${language === 'es' ? 'Curso para docentes en Almería' : 'Teacher training course in Almería'}`,
-          description: `${getText(course.subtitle, language)} ${language === 'es' ? 'Curso de 5 días impartido en inglés en Almería, España.' : 'A 5-day course taught in English in Almería, Spain.'}`,
+          title: `${getText(course.title, routeLanguage)} | ${details.courseSuffix}`,
+          description: `${getText(course.subtitle, routeLanguage)} ${details.courseDescription}`,
         }
-      : PAGE_SEO[pathname]?.[language] ?? PAGE_SEO['/'][language];
-    const canonical = `${SITE_URL}${pathname === '/' ? '/' : pathname}`;
+      : PAGE_SEO[normalPath]?.[routeLanguage] ?? PAGE_SEO[normalPath]?.en ?? PAGE_SEO['/'].en!;
+    const localizedPath = getRouteLanguage(pathname) ? pathname : localizePath(normalPath, routeLanguage);
+    const canonical = `${SITE_URL}${localizedPath}`;
 
     document.title = `${page.title} | Teach4Future Academy`;
     setMeta('name', 'description', page.description);
     setMeta('property', 'og:title', page.title);
     setMeta('property', 'og:description', page.description);
     setMeta('property', 'og:url', canonical);
-    setMeta('property', 'og:locale', language === 'es' ? 'es_ES' : 'en_GB');
+    setMeta('property', 'og:locale', details.locale);
     setMeta('name', 'twitter:title', page.title);
     setMeta('name', 'twitter:description', page.description);
 
-    const privateRoute = ['/admin', '/login', '/reset-password', '/campus', '/enrol'].some((route) => pathname === route || pathname.startsWith(`${route}/`));
+    const privateRoute = ['/admin', '/login', '/reset-password', '/campus', '/enrol'].some((route) => normalPath === route || normalPath.startsWith(`${route}/`));
     setMeta('name', 'robots', privateRoute ? 'noindex, nofollow' : 'index, follow');
 
     let canonicalElement = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
@@ -95,12 +108,12 @@ const Seo = () => {
     const breadcrumbItems = course
       ? [
           { name: 'Teach4Future Academy', item: SITE_URL },
-          { name: language === 'es' ? 'Cursos en España' : 'Courses in Spain', item: `${SITE_URL}/courses-spain` },
-          { name: getText(course.title, language), item: canonical },
+          { name: details.catalogue, item: `${SITE_URL}${localizePath('/courses-spain', routeLanguage)}` },
+          { name: getText(course.title, routeLanguage), item: canonical },
         ]
       : [
           { name: 'Teach4Future Academy', item: SITE_URL },
-          ...(pathname === '/' ? [] : [{ name: page.title, item: canonical }]),
+          ...(normalPath === '/' ? [] : [{ name: page.title, item: canonical }]),
         ];
     const structuredData = [
       {
@@ -116,8 +129,8 @@ const Seo = () => {
       ...(course ? [{
         '@context': 'https://schema.org',
         '@type': 'Course',
-        name: getText(course.title, language),
-        description: getText(course.description, language),
+        name: getText(course.title, routeLanguage),
+        description: getText(course.description, routeLanguage),
         url: canonical,
         image: course.courseImage,
         inLanguage: 'en',

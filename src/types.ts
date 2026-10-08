@@ -2,6 +2,9 @@
 export type BilingualText = string | {
   en: string;
   es: string;
+  fr?: string;
+  de?: string;
+  it?: string;
 };
 
 export interface Course {
