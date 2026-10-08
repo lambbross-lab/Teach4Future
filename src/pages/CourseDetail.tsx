@@ -1,6 +1,6 @@
 import { Link, Navigate, useParams } from 'react-router-dom';
 import {
-  ArrowDown, Calendar, CheckCircle2, ChevronRight, Clock, Globe, Info,
+  ArrowDown, CheckCircle2, Clock, Globe, Info,
   Lightbulb, MapPin, MessageCircle, Users
 } from 'lucide-react';
 import { COURSES, CITIES } from '../mockData';
@@ -21,7 +21,6 @@ const CourseDetail = () => {
   const courseSessions = sessions
     .filter((session) => session.courseId === course.id && isCurrentOrUpcoming(session.endDate))
     .sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
-  const nextSession = courseSessions.find((session) => session.status !== 'Closed') ?? courseSessions[0];
   const curriculum = COURSE_CURRICULA[course.id];
 
   const getScheduleLabel = (schedule: string) => {
@@ -66,15 +65,13 @@ const CourseDetail = () => {
             </div>
 
             <aside className="rounded-3xl border border-slate-100 bg-white p-6 shadow-xl shadow-slate-200/50">
-              <div className="flex items-center justify-between gap-3">
-                <h2 className="flex items-center text-base font-bold text-slate-900"><Calendar className="mr-2 h-5 w-5 text-blue-600" />{t('courseDetail.nextEdition')}</h2>
-                {nextSession && <span className="rounded-full bg-green-50 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-green-700">{getStatusLabel(nextSession.status)}</span>}
-              </div>
-              {nextSession ? <div className="mt-5 space-y-4">
-                <div><p className="text-lg font-extrabold text-slate-900">{CITIES.find((city) => city.id === nextSession.cityId)?.name}</p><p className="mt-1 text-sm font-medium leading-relaxed text-slate-600">{formatDate(nextSession.startDate, language)} — {formatDate(nextSession.endDate, language)}</p></div>
-                <div className="grid grid-cols-2 gap-3 border-y border-slate-100 py-4 text-sm"><div><p className="text-xs text-slate-500">{t('courseDetail.schedule')}</p><p className="mt-1 font-bold text-slate-900">{getScheduleLabel(nextSession.schedule)}</p></div><div><p className="text-xs text-slate-500">{t('courseDetail.availability')}</p><p className="mt-1 font-bold text-slate-900">{nextSession.seatsLeft} {t('common.seatsLeft')}</p></div></div>
-                <a href="#sessions" className="block"><Button className="w-full">{t('courseDetail.viewAllSessions')}</Button></a>
-              </div> : <div className="mt-5 rounded-2xl bg-slate-50 p-4"><p className="text-sm leading-relaxed text-slate-600">{t('courseDetail.onDemandDesc')}</p><Link className="mt-4 inline-flex items-center text-sm font-bold text-blue-600 hover:text-blue-700" to={`/enrol?course=${course.id}`}>{t('coursesSpain.requestOpening')} <ChevronRight className="ml-1 h-4 w-4" /></Link></div>}
+              <h2 className="flex items-center text-base font-bold text-slate-900"><Info className="mr-2 h-5 w-5 text-blue-600" />{t('courseDetail.heroSnapshot')}</h2>
+              <dl className="mt-5 space-y-4 text-sm">
+                <div><dt className="text-slate-500">{t('courseDetail.audience')}</dt><dd className="mt-1 font-bold leading-relaxed text-slate-900">{getText(course.targetAudience, language)}</dd></div>
+                <div className="grid grid-cols-2 gap-4 border-y border-slate-100 py-4"><div><dt className="text-xs text-slate-500">{t('courseDetail.duration')}</dt><dd className="mt-1 font-bold text-slate-900">{getText(course.duration, language)}</dd></div><div><dt className="text-xs text-slate-500">{t('courseDetail.language')}</dt><dd className="mt-1 font-bold text-slate-900">{language === 'es' ? 'Inglés' : course.language}</dd></div></div>
+                <div><dt className="text-slate-500">{t('courseDetail.price')}</dt><dd className="mt-1 text-lg font-extrabold text-slate-950">{course.price}€ <span className="text-xs font-medium text-slate-500">· {t('common.finalPrice')}</span></dd></div>
+              </dl>
+              <a href="#sessions" className="mt-6 block"><Button className="w-full">{t('courseDetail.viewAllSessions')}</Button></a>
               <p className="mt-5 text-xs leading-relaxed text-slate-500">{t('courseDetail.contractNote')}</p>
             </aside>
           </div>
@@ -107,7 +104,7 @@ const CourseDetail = () => {
             <section id="methodology" className="scroll-mt-28 rounded-3xl bg-slate-950 p-6 text-white md:p-8"><p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">{t('courseDetail.methodologyEyebrow')}</p><h2 className="mt-2 text-3xl font-extrabold tracking-tight">{t('courseDetail.methodology')}</h2><ul className="mt-6 grid gap-4 md:grid-cols-3">{curriculum.methodology.map((item, index) => <li key={index} className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm leading-relaxed text-slate-200"><span className="mb-3 flex h-7 w-7 items-center justify-center rounded-lg bg-cyan-300 font-extrabold text-slate-950">{index + 1}</span>{getText(item, language)}</li>)}</ul></section>
           </main>
 
-          <aside id="practical" className="scroll-mt-28 space-y-5 lg:sticky lg:top-28 lg:self-start"><div className="rounded-3xl border border-slate-200 bg-white p-6"><h2 className="flex items-center text-lg font-bold text-slate-950"><Info className="mr-2 h-5 w-5 text-blue-600" />{t('courseDetail.practicalInfo')}</h2><dl className="mt-5 space-y-4 text-sm"><div><dt className="text-slate-500">{t('courseDetail.audience')}</dt><dd className="mt-1 font-bold leading-relaxed text-slate-900">{getText(course.targetAudience, language)}</dd></div><div><dt className="text-slate-500">{t('courseDetail.language')}</dt><dd className="mt-1 font-bold text-slate-900">{language === 'es' ? 'Inglés' : course.language}</dd></div><div><dt className="text-slate-500">{t('courseDetail.duration')}</dt><dd className="mt-1 font-bold text-slate-900">{getText(course.duration, language)} · 25h</dd></div><div><dt className="text-slate-500">{t('courseDetail.price')}</dt><dd className="mt-1 font-bold text-slate-900">{course.price}€ · {t('courseDetail.priceValue')}</dd></div><div><dt className="text-slate-500">{t('courseDetail.certificate')}</dt><dd className="mt-1 font-bold text-slate-900">{t('courseDetail.certificateValue')}</dd></div></dl></div><div className="rounded-3xl bg-slate-950 p-6 text-white"><h2 className="text-lg font-bold">{t('courseDetail.included')}</h2><ul className="mt-4 space-y-3">{course.includes.map((item, index) => <li key={index} className="flex gap-2 text-sm leading-relaxed text-slate-200"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300" />{getText(item, language)}</li>)}</ul></div></aside>
+          <aside id="practical" className="scroll-mt-28 lg:sticky lg:top-28 lg:self-start"><div className="rounded-3xl bg-slate-950 p-6 text-white"><h2 className="text-lg font-bold">{t('courseDetail.included')}</h2><ul className="mt-4 space-y-3">{course.includes.map((item, index) => <li key={index} className="flex gap-2 text-sm leading-relaxed text-slate-200"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300" />{getText(item, language)}</li>)}</ul><div className="mt-5 border-t border-white/10 pt-5 text-sm leading-relaxed text-slate-300"><p className="font-bold text-white">{t('courseDetail.certificate')}</p><p className="mt-1">{t('courseDetail.certificateValue')}</p></div></div></aside>
         </div>
       </section>
 
