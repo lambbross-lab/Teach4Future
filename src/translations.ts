@@ -220,6 +220,9 @@ export const translations: any = {
       questionTwoText: 'The exact timetable is confirmed for each edition. Where demand decides the slot, it is confirmed in writing before the course.',
       questionThreeTitle: 'Can my school request its own edition?',
       questionThreeText: 'Yes. Tell us your preferred dates and needs. We assess the group, trainer and venue availability before confirming anything.',
+      moreCoursesEyebrow: 'Continue exploring',
+      moreCourses: 'More courses for teachers',
+      viewCourse: 'View course',
     },
     cities: {
       title: 'Course Destinations',
@@ -924,6 +927,9 @@ export const translations: any = {
       questionTwoText: 'El horario exacto se confirma para cada edición. Si depende de la demanda, lo confirmamos por escrito antes del curso.',
       questionThreeTitle: '¿Puede mi centro solicitar su propia edición?',
       questionThreeText: 'Sí. Cuéntanos las fechas y necesidades preferidas. Valoramos grupo, docente y sede antes de confirmar nada.',
+      moreCoursesEyebrow: 'Sigue explorando',
+      moreCourses: 'Más cursos para docentes',
+      viewCourse: 'Ver curso',
     },
     cities: {
       title: 'Destinos de los cursos',

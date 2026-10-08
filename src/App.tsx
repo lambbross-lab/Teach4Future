@@ -1,39 +1,41 @@
 
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
+import Seo from './components/Seo';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { AcademyDataProvider } from './contexts/AcademyDataContext';
 
-// Pages
-import Home from './pages/Home';
-import CoursesInSpain from './pages/CoursesInSpain';
-import CoursesInEurope from './pages/CoursesInEurope';
-import CourseDetail from './pages/CourseDetail';
-import Cities from './pages/Cities';
-import DatesAvailability from './pages/DatesAvailability';
-import ForSchools from './pages/ForSchools';
-import AboutUs from './pages/AboutUs';
-import FAQ from './pages/FAQ';
-import Contact from './pages/Contact';
-import Enrolment from './pages/Enrolment';
-import Login from './pages/Login';
-import ResetPassword from './pages/ResetPassword';
-import AdminDashboard from './pages/AdminDashboard';
-import PrivacyPolicy from './pages/legal/PrivacyPolicy';
-import CookiePolicy from './pages/legal/CookiePolicy';
-import TermsConditions from './pages/legal/TermsConditions';
-import LegalNotice from './pages/legal/LegalNotice';
-import Campus from './pages/Campus';
-import AdminCampus from './pages/AdminCampus';
+const Home = lazy(() => import('./pages/Home'));
+const CoursesInSpain = lazy(() => import('./pages/CoursesInSpain'));
+const CoursesInEurope = lazy(() => import('./pages/CoursesInEurope'));
+const CourseDetail = lazy(() => import('./pages/CourseDetail'));
+const Cities = lazy(() => import('./pages/Cities'));
+const DatesAvailability = lazy(() => import('./pages/DatesAvailability'));
+const ForSchools = lazy(() => import('./pages/ForSchools'));
+const AboutUs = lazy(() => import('./pages/AboutUs'));
+const FAQ = lazy(() => import('./pages/FAQ'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Enrolment = lazy(() => import('./pages/Enrolment'));
+const Login = lazy(() => import('./pages/Login'));
+const ResetPassword = lazy(() => import('./pages/ResetPassword'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
+const PrivacyPolicy = lazy(() => import('./pages/legal/PrivacyPolicy'));
+const CookiePolicy = lazy(() => import('./pages/legal/CookiePolicy'));
+const TermsConditions = lazy(() => import('./pages/legal/TermsConditions'));
+const LegalNotice = lazy(() => import('./pages/legal/LegalNotice'));
+const Campus = lazy(() => import('./pages/Campus'));
+const AdminCampus = lazy(() => import('./pages/AdminCampus'));
 
 export default function App() {
   return (
     <LanguageProvider>
       <AcademyDataProvider>
         <Router>
+          <Seo />
           <Layout>
-          <Routes>
+          <Suspense fallback={<div className="min-h-[50vh]" aria-busy="true" />}>
+            <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/courses-spain" element={<CoursesInSpain />} />
             <Route path="/courses-europe" element={<CoursesInEurope />} />
@@ -59,7 +61,8 @@ export default function App() {
             
             {/* Fallback */}
             <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+            </Routes>
+          </Suspense>
           </Layout>
         </Router>
       </AcademyDataProvider>

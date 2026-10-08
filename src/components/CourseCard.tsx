@@ -28,6 +28,8 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, session, demandCityName
           alt={getText(course.title, language)}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           referrerPolicy="no-referrer"
+          loading="lazy"
+          decoding="async"
         />
         <div className="absolute top-4 left-4">
           <span className="bg-white/90 backdrop-blur-sm text-blue-600 text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">

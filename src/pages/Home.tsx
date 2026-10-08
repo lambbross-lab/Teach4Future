@@ -66,9 +66,11 @@ const Home = () => {
               <div className="relative z-10 aspect-[4/5] overflow-hidden rounded-[2.25rem] shadow-2xl shadow-blue-200">
                 <img 
                   src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1000&q=80" 
-                  alt="Teacher Training" 
+                  alt={language === 'es' ? 'Docentes participando en una formación práctica' : 'Teachers taking part in practical professional development'}
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
+                  fetchPriority="high"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent" />
               </div>
@@ -259,6 +261,8 @@ const Home = () => {
                   alt={city.imageAlt} 
                   className="absolute inset-0 w-full h-full object-cover brightness-105 contrast-105 group-hover:scale-110 transition-transform duration-1000"
                   referrerPolicy="no-referrer"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                 <div className="relative z-10 h-full flex flex-col justify-end p-8">
