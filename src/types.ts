@@ -22,6 +22,18 @@ export interface Course {
   featured?: boolean;
 }
 
+export interface CourseDay {
+  title: BilingualText;
+  focus: BilingualText;
+  activities: BilingualText[];
+  takeaway: BilingualText;
+}
+
+export interface CourseCurriculum {
+  methodology: BilingualText[];
+  dailyProgramme: CourseDay[];
+}
+
 export interface City {
   id: string;
   name: string;
