@@ -1,15 +1,28 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { GraduationCap, Menu, X } from 'lucide-react';
+import { ChevronDown, GraduationCap, Menu, X } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { useLanguage } from '../contexts/LanguageContext';
 import LocalizedLink from './LocalizedLink';
 import { localizePath, normalizeLocalizedPath, type SiteLanguage } from '../lib/localizedPaths';
 
+const Flag = ({ language }: { language: SiteLanguage }) => language === 'es' ? (
+  <svg aria-hidden="true" viewBox="0 0 30 20" className="h-4 w-6 rounded-[2px] shadow-sm"><rect width="30" height="20" fill="#AA151B" /><rect y="5" width="30" height="10" fill="#F1BF00" /></svg>
+) : language === 'fr' ? (
+  <svg aria-hidden="true" viewBox="0 0 30 20" className="h-4 w-6 rounded-[2px] shadow-sm"><rect width="10" height="20" fill="#002395" /><rect x="10" width="10" height="20" fill="#fff" /><rect x="20" width="10" height="20" fill="#ED2939" /></svg>
+) : language === 'de' ? (
+  <svg aria-hidden="true" viewBox="0 0 30 20" className="h-4 w-6 rounded-[2px] shadow-sm"><rect width="30" height="6.67" fill="#000" /><rect y="6.67" width="30" height="6.67" fill="#DD0000" /><rect y="13.33" width="30" height="6.67" fill="#FFCE00" /></svg>
+) : language === 'it' ? (
+  <svg aria-hidden="true" viewBox="0 0 30 20" className="h-4 w-6 rounded-[2px] shadow-sm"><rect width="10" height="20" fill="#009246" /><rect x="10" width="10" height="20" fill="#fff" /><rect x="20" width="10" height="20" fill="#CE2B37" /></svg>
+) : (
+  <svg aria-hidden="true" viewBox="0 0 60 40" className="h-4 w-6 rounded-[2px] shadow-sm"><rect width="60" height="40" fill="#012169" /><path d="M0 0L60 40M60 0L0 40" stroke="#fff" strokeWidth="8" /><path d="M0 0L60 40M60 0L0 40" stroke="#C8102E" strokeWidth="3" /><path d="M30 0V40M0 20H60" stroke="#fff" strokeWidth="13" /><path d="M30 0V40M0 20H60" stroke="#C8102E" strokeWidth="7" /></svg>
+);
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const { language, t } = useLanguage();
@@ -32,26 +45,33 @@ const Header = () => {
   ];
 
   const chooseLanguage = (nextLanguage: SiteLanguage) => {
+    setIsLanguageMenuOpen(false);
     navigate(localizePath(`${location.pathname}${location.search}${location.hash}`, nextLanguage));
   };
 
-  const languageOptions: Array<{ code: SiteLanguage; name: string; flag: string }> = [
-    { code: 'en', name: 'English', flag: '🇬🇧' },
-    { code: 'es', name: 'Español', flag: '🇪🇸' },
-    { code: 'fr', name: 'Français', flag: '🇫🇷' },
-    { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
-    { code: 'it', name: 'Italiano', flag: '🇮🇹' },
+  const languageOptions: Array<{ code: SiteLanguage; name: string }> = [
+    { code: 'en', name: 'English' },
+    { code: 'es', name: 'Español' },
+    { code: 'fr', name: 'Français' },
+    { code: 'de', name: 'Deutsch' },
+    { code: 'it', name: 'Italiano' },
   ];
 
   const languageSelector = (
-    <select
-      value={language}
-      onChange={(event) => chooseLanguage(event.target.value as SiteLanguage)}
-      aria-label="Choose website language"
-      className="h-9 min-w-[4.75rem] cursor-pointer rounded-full border border-slate-200 bg-white px-2 text-xs font-bold text-slate-700 shadow-sm outline-none transition-colors hover:border-blue-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-    >
-      {languageOptions.map(({ code, name, flag }) => <option key={code} value={code} title={name}>{flag} {code.toUpperCase()}</option>)}
-    </select>
+    <div className="relative">
+      <button type="button" onClick={() => setIsLanguageMenuOpen((open) => !open)} aria-label="Choose website language" aria-expanded={isLanguageMenuOpen} className="inline-flex h-9 items-center gap-1.5 rounded-full border border-slate-200 bg-white px-2.5 text-xs font-bold text-slate-700 shadow-sm transition-colors hover:border-blue-200 hover:text-blue-700">
+        <Flag language={language} /><span>{language.toUpperCase()}</span><ChevronDown className={cn('h-3.5 w-3.5 transition-transform', isLanguageMenuOpen && 'rotate-180')} aria-hidden="true" />
+      </button>
+      {isLanguageMenuOpen && (
+        <div className="absolute right-0 top-11 z-50 w-36 rounded-xl border border-slate-100 bg-white p-1.5 shadow-xl">
+          {languageOptions.map(({ code, name }) => (
+            <button key={code} type="button" onClick={() => chooseLanguage(code)} className={cn('flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-left text-sm font-semibold transition-colors hover:bg-blue-50', language === code ? 'bg-blue-50 text-blue-700' : 'text-slate-700')}>
+              <Flag language={code} /><span>{name}</span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   );
 
   return (
