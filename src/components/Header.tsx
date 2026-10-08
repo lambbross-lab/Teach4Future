@@ -35,12 +35,12 @@ const Header = () => {
     navigate(localizePath(`${location.pathname}${location.search}${location.hash}`, nextLanguage));
   };
 
-  const languageOptions: Array<{ code: SiteLanguage; name: string }> = [
-    { code: 'en', name: 'English' },
-    { code: 'es', name: 'Español' },
-    { code: 'fr', name: 'Français' },
-    { code: 'de', name: 'Deutsch' },
-    { code: 'it', name: 'Italiano' },
+  const languageOptions: Array<{ code: SiteLanguage; name: string; flag: string }> = [
+    { code: 'en', name: 'English', flag: '🇬🇧' },
+    { code: 'es', name: 'Español', flag: '🇪🇸' },
+    { code: 'fr', name: 'Français', flag: '🇫🇷' },
+    { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+    { code: 'it', name: 'Italiano', flag: '🇮🇹' },
   ];
 
   const languageSelector = (
@@ -48,9 +48,9 @@ const Header = () => {
       value={language}
       onChange={(event) => chooseLanguage(event.target.value as SiteLanguage)}
       aria-label="Choose website language"
-      className="h-9 min-w-[3.75rem] cursor-pointer rounded-full border border-slate-200 bg-white px-2 text-xs font-bold text-slate-700 shadow-sm outline-none transition-colors hover:border-blue-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+      className="h-9 min-w-[4.75rem] cursor-pointer rounded-full border border-slate-200 bg-white px-2 text-xs font-bold text-slate-700 shadow-sm outline-none transition-colors hover:border-blue-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
     >
-      {languageOptions.map(({ code, name }) => <option key={code} value={code} title={name}>{code.toUpperCase()}</option>)}
+      {languageOptions.map(({ code, name, flag }) => <option key={code} value={code} title={name}>{flag} {code.toUpperCase()}</option>)}
     </select>
   );
 
