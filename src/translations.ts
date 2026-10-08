@@ -681,6 +681,8 @@ export const translations: any = {
     dates: {
       title: 'Dates & Availability',
       subtitle: 'All courses are offered in the same week. At most two are delivered each week (one in the morning and one in the afternoon): those with the most demand. If your course does not reach the minimum, we will offer you a switch to another course that week; the final schedule is confirmed in writing.',
+      openSession: 'open session',
+      openSessions: 'open sessions',
       help: {
         title: "Can't find the dates you need?",
         desc: 'Every course can be requested in Almería (Granada and Málaga coming soon). We assess a new session from 6 confirmed participants from several schools and countries, subject to trainer, venue and date availability.',
@@ -1383,6 +1385,8 @@ export const translations: any = {
     dates: {
       title: 'Fechas y disponibilidad',
       subtitle: 'Ofrecemos todos los cursos en la misma semana. Cada semana se imparten como máximo dos (uno de mañana y otro de tarde): los de mayor demanda. Si tu curso no alcanza el mínimo, te ofreceremos cambiar a otro de esa semana; el horario definitivo se confirma por escrito.',
+      openSession: 'sesión con inscripción abierta',
+      openSessions: 'sesiones con inscripción abierta',
       help: {
         title: '¿No encuentras las fechas que necesitas?',
         desc: 'Todos los cursos se pueden solicitar en Almería (Granada y Málaga, próximamente). Estudiaremos una nueva sesión a partir de 6 participantes confirmados de varios centros y países, según disponibilidad de docente, sede y fechas.',
