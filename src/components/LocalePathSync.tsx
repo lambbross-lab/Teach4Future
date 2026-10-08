@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { getRouteLanguage, localizePath } from '../lib/localizedPaths';
@@ -9,7 +9,7 @@ const LocalePathSync = () => {
   const { language, setLanguage } = useLanguage();
   const routeLanguage = getRouteLanguage(pathname);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (routeLanguage && routeLanguage !== language) {
       setLanguage(routeLanguage);
       return;

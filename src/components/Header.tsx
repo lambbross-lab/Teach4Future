@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Globe2, GraduationCap, Menu, X } from 'lucide-react';
+import { ChevronDown, GraduationCap, Menu, X } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { useLanguage } from '../contexts/LanguageContext';
 import LocalizedLink from './LocalizedLink';
@@ -34,7 +34,7 @@ const Header = () => {
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { language, setLanguage, t } = useLanguage();
+  const { language, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,33 +54,36 @@ const Header = () => {
   ];
 
   const chooseLanguage = (nextLanguage: SiteLanguage) => {
-    setLanguage(nextLanguage);
     setIsLanguageMenuOpen(false);
     navigate(localizePath(`${location.pathname}${location.search}${location.hash}`, nextLanguage));
   };
 
-  const extraLanguages: Array<{ code: SiteLanguage; name: string }> = [
+  const languageOptions: Array<{ code: SiteLanguage; name: string }> = [
+    { code: 'en', name: 'English' },
+    { code: 'es', name: 'Español' },
     { code: 'fr', name: 'Français' },
     { code: 'de', name: 'Deutsch' },
     { code: 'it', name: 'Italiano' },
   ];
 
-  const moreLanguageMenu = (
+  const languageSelector = (
     <div className="relative">
       <button
         type="button"
         onClick={() => setIsLanguageMenuOpen((open) => !open)}
-        aria-label="Choose another language"
+        aria-label="Choose website language"
         aria-expanded={isLanguageMenuOpen}
-        className={cn('inline-flex h-8 w-8 items-center justify-center rounded-lg transition-all', extraLanguages.some(({ code }) => code === language) ? 'bg-blue-50 text-blue-600 ring-2 ring-blue-600' : 'text-slate-500 hover:bg-slate-100 hover:text-blue-600')}
+        className="inline-flex h-9 items-center gap-1.5 rounded-full border border-slate-200 bg-white px-2.5 text-xs font-bold text-slate-700 shadow-sm transition-all hover:border-blue-200 hover:text-blue-700"
       >
-        <Globe2 className="h-4 w-4" aria-hidden="true" />
+        <Flag language={language} />
+        <span>{language.toUpperCase()}</span>
+        <ChevronDown className={cn('h-3.5 w-3.5 transition-transform', isLanguageMenuOpen && 'rotate-180')} aria-hidden="true" />
       </button>
       {isLanguageMenuOpen && (
-        <div className="absolute right-0 top-10 z-50 w-36 rounded-xl border border-slate-100 bg-white p-1.5 shadow-xl">
-          {extraLanguages.map(({ code, name }) => (
-            <button key={code} type="button" onClick={() => chooseLanguage(code)} className={cn('flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-left text-sm font-semibold transition-colors hover:bg-blue-50', language === code ? 'bg-blue-50 text-blue-700' : 'text-slate-700')}>
-              <Flag language={code} />{name}
+        <div className="absolute right-0 top-11 z-50 grid grid-cols-5 gap-1 rounded-2xl border border-slate-100 bg-white p-2 shadow-xl">
+          {languageOptions.map(({ code, name }) => (
+            <button key={code} type="button" onClick={() => chooseLanguage(code)} aria-label={name} title={name} className={cn('flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:bg-blue-50', language === code && 'bg-blue-50 ring-1 ring-blue-500')}>
+              <Flag language={code} />
             </button>
           ))}
         </div>
@@ -135,30 +138,8 @@ const Header = () => {
             </Link>
             
             {/* Language Switcher */}
-            <div className="flex items-center space-x-2 border-l border-slate-200 pl-6 ml-2">
-              <button
-                onClick={() => chooseLanguage('en')}
-                aria-label="View website in English"
-                title="English"
-                className={cn(
-                  "leading-none transition-all px-2 py-2 rounded-lg",
-                  language === 'en' ? "bg-blue-50 ring-2 ring-blue-600" : "opacity-60 hover:opacity-100"
-                )}
-              >
-                <Flag language="en" />
-              </button>
-              <button 
-                onClick={() => chooseLanguage('es')}
-                aria-label="Ver la web en español"
-                title="Español"
-                className={cn(
-                  "leading-none transition-all px-2 py-2 rounded-lg",
-                  language === 'es' ? "bg-blue-50 ring-2 ring-blue-600" : "opacity-60 hover:opacity-100"
-                )}
-              >
-                <Flag language="es" />
-              </button>
-              {moreLanguageMenu}
+            <div className="border-l border-slate-200 pl-5 ml-1">
+              {languageSelector}
             </div>
 
             <Link
@@ -171,29 +152,7 @@ const Header = () => {
 
           {/* Mobile Menu Toggle */}
           <div className="flex items-center space-x-4 lg:hidden">
-            <div className="flex items-center space-x-1 bg-slate-100 rounded-lg p-1">
-              <button
-                onClick={() => chooseLanguage('en')}
-                aria-label="View website in English"
-                className={cn(
-                  "leading-none px-2 py-2 rounded",
-                  language === 'en' ? "bg-white shadow-sm ring-1 ring-blue-500" : "opacity-60"
-                )}
-              >
-                <Flag language="en" />
-              </button>
-              <button 
-                onClick={() => chooseLanguage('es')}
-                aria-label="Ver la web en español"
-                className={cn(
-                  "leading-none px-2 py-2 rounded",
-                  language === 'es' ? "bg-white shadow-sm ring-1 ring-blue-500" : "opacity-60"
-                )}
-              >
-                <Flag language="es" />
-              </button>
-              {moreLanguageMenu}
-            </div>
+            {languageSelector}
             <button
               className="p-2 text-slate-600"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
